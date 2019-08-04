@@ -1,3 +1,10 @@
-<div class="container">
-    Olympic sports
+<div class="container" fxLayout="row wrap" fxLayoutGap="10px" fxLayoutAlign="space-around space-around">
+    <div *ngFor="let sport of sports">
+        <mat-card class="sportsname-card" routerLink="">
+    <img src="assets/Olympic_icons/{{sport}}.png" class="sports-icons">
+        </mat-card>
+        <mat-card-content fxLayoutAlign="center">
+                {{sport}}
+        </mat-card-content>
+    </div>
 </div>
