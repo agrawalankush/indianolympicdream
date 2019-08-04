@@ -2,7 +2,7 @@
 <!-- <div class="app-container" fxLayout="column"> -->
 
     <mat-sidenav-container class="sidenav-container">
-      <mat-sidenav #drawer class="sidenav" mode="over" opened>
+      <mat-sidenav #drawer class="sidenav" mode="over">
         <mat-toolbar>Menu</mat-toolbar>  
         <mat-nav-list>
               <a mat-list-item routerLink="" routerLinkActive="active">
@@ -28,6 +28,7 @@
        <button fxHide.lt-sm="true" mat-button>Blogs</button>
        <button fxHide.lt-sm="true" mat-button>Feedback</button>
        <button fxHide.lt-sm="true" mat-button>About</button>
+       <button fxHide.lt-sm="true" mat-button>Shows you'll love</button>
      </mat-toolbar>
   <router-outlet></router-outlet>
 </mat-sidenav-content>

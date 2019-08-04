@@ -1,7 +1,11 @@
-<div class="container" fxLayout="row wrap" fxLayoutGap="10px" fxLayoutAlign="space-around space-around">
+<div class="container" fxLayout="row wrap" fxLayoutGap="20px" fxLayoutAlign="start space-around">
     <div *ngFor="let sport of sports">
-        <mat-card class="sportsname-card" routerLink="">
-    <img src="assets/Olympic_icons/{{sport}}.png" class="sports-icons">
+        <mat-card ngClas="sportsname-card sportsname-card-2"
+                  [ngClass.lt-sm]="{'sportsname-card':true,'sportsname-card-2':flase}"
+                  [ngClass.gt-xs]="{'sportsname-card':false,'sportsname-card-2':true}" 
+                  routerLink="">
+        <img src="assets/Olympic_icons/{{sport}}.png" 
+            class="sports-icons">
         </mat-card>
         <mat-card-content fxLayoutAlign="center">
                 {{sport}}
