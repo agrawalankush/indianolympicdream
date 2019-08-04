@@ -1,9 +1,34 @@
 
 <!-- <div class="app-container" fxLayout="column"> -->
-<mat-toolbar color="basic">
-   <button mat-button class="logo-button" routerLink="">Indian
-    <img src="../assets/logo.png" class="olympic-logo">Dream
-  </button>
-  
-</mat-toolbar>
-<router-outlet></router-outlet>
+
+    <mat-sidenav-container class="sidenav-container">
+      <mat-sidenav #drawer class="sidenav" mode="over" opened>
+        <mat-toolbar>Menu</mat-toolbar>  
+        <mat-nav-list>
+              <a mat-list-item routerLink="" routerLinkActive="active">
+                  <mat-icon>description</mat-icon>
+                  Blogs</a>
+              <a mat-list-item routerLink="" routerLinkActive="active">
+                <mat-icon>feedback</mat-icon>
+                Feedback</a>
+              <a mat-list-item routerLink="" routerLinkActive="active">
+                  <mat-icon>info</mat-icon>
+                  About</a>
+            </mat-nav-list>
+      </mat-sidenav>
+<mat-sidenav-content>
+    <mat-toolbar color="basic">
+       <button fxHide fxHide.lt-sm="false" mat-icon-button (click)="drawer.toggle()" aria-label="Side nav toggle icon">
+        <mat-icon>menu</mat-icon>
+       </button>
+        <button mat-button class="logo-button" routerLink="">Indian
+         <img src="assets/logo.png" class="olympic-logo">
+         Dream
+       </button>
+       <button fxHide.lt-sm="true" mat-button>Blogs</button>
+       <button fxHide.lt-sm="true" mat-button>Feedback</button>
+       <button fxHide.lt-sm="true" mat-button>About</button>
+     </mat-toolbar>
+  <router-outlet></router-outlet>
+</mat-sidenav-content>
+</mat-sidenav-container>

@@ -5,6 +5,9 @@
     height: 100px;
     width: 100px;
 }
-.sportsname-card{
+ .sportsname-card{
+    max-width: 100px;
+    max-height: 100px;
+    border-radius: 50%;
     background-color: #eee;
-}
+ }
