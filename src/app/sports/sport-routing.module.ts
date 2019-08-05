@@ -10,8 +10,13 @@ import { SportHistoryComponent } from './sport-history/sport-history.component';
 import { SportHomeComponent } from './sport-home/sport-home.component';
 
 const routes: Routes = [
+
   { path: 'sports/:sportname',  component: SportHomeComponent },
-  { path: 'qualifying/:name',  component: SportQualifyingSysystemComponent },
+  { path: 'qualifying/:sportname',  component: SportQualifyingSysystemComponent },
+  { path: 'calendar/:sportname',  component: SportQualifyingCalenderComponent },
+  { path: 'qualified/:sportname',  component: QualifiedAthletesComponent },
+  { path: 'potential/:sportname',  component: PotentialtAthletesComponent },
+  { path: 'history/:sportname',  component: SportHistoryComponent }
 ];
 
 @NgModule({

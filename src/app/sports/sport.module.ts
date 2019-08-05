@@ -10,10 +10,20 @@ import { QualifiedAthletesComponent } from './qualified-athletes/qualified-athle
 import { PotentialtAthletesComponent } from './potentialt-athletes/potentialt-athletes.component';
 import { SportHistoryComponent } from './sport-history/sport-history.component';
 import { SportHomeComponent } from './sport-home/sport-home.component';
+import { MatTreeModule } from '@angular/material/tree';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 
 @NgModule({
-  declarations: [SportQualifyingSysystemComponent, SportQualifyingCalenderComponent, QualifiedAthletesComponent, PotentialtAthletesComponent, SportHistoryComponent, SportHomeComponent],
+  declarations: [
+    SportQualifyingSysystemComponent, 
+    SportQualifyingCalenderComponent, 
+    QualifiedAthletesComponent, 
+    PotentialtAthletesComponent, 
+    SportHistoryComponent, 
+    SportHomeComponent
+  ],
   imports: [
     CommonModule,
     MaterialModule,
