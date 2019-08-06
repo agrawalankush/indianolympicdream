@@ -11,12 +11,15 @@ import { SportHomeComponent } from './sport-home/sport-home.component';
 
 const routes: Routes = [
 
-  { path: 'sports/:sportname',  component: SportHomeComponent },
-  { path: 'qualifying/:sportname',  component: SportQualifyingSysystemComponent },
-  { path: 'calendar/:sportname',  component: SportQualifyingCalenderComponent },
-  { path: 'qualified/:sportname',  component: QualifiedAthletesComponent },
-  { path: 'potential/:sportname',  component: PotentialtAthletesComponent },
-  { path: 'history/:sportname',  component: SportHistoryComponent }
+  { path: 'sports/:sportname', 
+    component: SportHomeComponent,
+    children:[
+      { path: 'qualifying',  component: SportQualifyingSysystemComponent },
+      { path: 'calendar',  component: SportQualifyingCalenderComponent },
+      { path: 'athletes',  component: QualifiedAthletesComponent },
+      { path: 'history',  component: SportHistoryComponent }
+    ]
+   }  
 ];
 
 @NgModule({

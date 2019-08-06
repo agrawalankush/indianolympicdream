@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {NestedTreeControl} from '@angular/cdk/tree';
-import {MatTreeNestedDataSource} from '@angular/material/tree';
+
 
 // const ATHLETICS_DATA = [
 //   {
@@ -56,7 +55,12 @@ import {MatTreeNestedDataSource} from '@angular/material/tree';
   styleUrls: ['./sport-home.component.scss']
 })
 export class SportHomeComponent implements OnInit {
-  
+  navLinks = [
+    {path:'qualifying',label:'Qualifying'},
+    {path:'calendar',label:'Calendar'},
+    {path:'athletes',label:'Athletes'},
+    {path:'history',label:'History'}];
+  activeLink = this.navLinks[0].path;
   constructor() {
   }
   ngOnInit() {
