@@ -7,7 +7,7 @@ export class SportsService {
 
   constructor(private http: HttpClient) { }
 
-  public getsports() {
-    return this.http.get('/api/sports');
+  public getsports(sportname: string) {
+    return this.http.get(`/api/sports/${sportname}`);
   }
 }
