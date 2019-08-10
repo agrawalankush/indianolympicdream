@@ -30,10 +30,11 @@ let response = {
 };
 
 // Get users
-router.get('/sports', (req, res) => {
+router.get('/sports/:sportname', (req, res) => {
+    sportname=req.params.sportname;
     connection((db) => {
         db.collection('sports')
-            .find()
+            .find({"sportname":sportname})
             .toArray()
             .then((sports) => {
                 response.data = sports;
