@@ -23,6 +23,7 @@ export class SportHomeComponent implements OnInit {
  public eventstablewomen:any;
  public selecteddatasource:any;
  public displayedColumns: string[] = ['Event', 'EntryStandard', 'NR', 'WR'];
+ public displayedcalendarColumns: string[] = ['EventDate', 'EventName','Result']
   constructor(
     private route:ActivatedRoute,
     private sportservice:SportsService

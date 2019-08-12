@@ -3,17 +3,23 @@
     margin: 24px;
 }
 .sports-icons{
-    margin-left: 16px;
-    height: 48px;
-    width: 48px;
+    text-align: center;
+    margin-left: 0px;
+    height: 16px;
+    width: 24px;
 }
 .cards-container{
     margin-top: 20px;
 }
 .athletes-card {
-    max-width: 300px;
+    width:300px;
+    min-width: 300px;
+    margin-bottom: 10px;
   }
-.table-container{
+  .sportsdetails{
+      margin-top:20px;
+  }  
+// .table-container{
     
-    // float: right;
-}
+//     // float: right;
+// }
