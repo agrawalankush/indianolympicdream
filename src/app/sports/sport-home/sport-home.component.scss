@@ -14,11 +14,19 @@
 .athletes-card {
     width:300px;
     min-width: 300px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
+    height: 360px;
   }
   .sportsdetails{
       margin-top:20px;
-  }  
+  }
+   .mat-card-image {
+       height:200px;
+     object-fit: cover;
+ }
+ .mat-card-header{
+     height:80px;
+ }  
 // .table-container{
     
 //     // float: right;

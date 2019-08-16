@@ -78,9 +78,16 @@
                                 </div>
                         </div>
                 </mat-tab>
-                <mat-tab label="Calendar" *ngIf="sportname !== 'Athletics'">
-                                <div *ngIf="sportsdetails"> 
-                                <table mat-table style="width: 100%" [dataSource]="sportsdetails.calendar"
+                <mat-tab label="Calendar">
+                                <div *ngIf="sportsdetails">
+                                        <div class="foot-note" *ngIf="sportsdetails.calendar_link">
+                                                <i>Please
+                                                <a mat-button target="_blank" href="{{sportsdetails.calendar_link}}" color="primary">
+                                                        click here
+                                                </a>to find list of tournaments.
+                                                </i>
+                                        </div>
+                                <table *ngIf="!sportsdetails.calendar_link" mat-table style="width: 100%" [dataSource]="sportsdetails.calendar"
                                 class="mat-elevation-z8">
                                 <ng-container matColumnDef="EventDate">
                                         <th mat-header-cell *matHeaderCellDef>Event Date</th>
@@ -96,6 +103,7 @@
                                         <th mat-header-cell *matHeaderCellDef>Results</th>
                                         <td mat-cell *matCellDef="let element">
                                         <a mat-raised-button *ngIf="element.results" target="_blank" href="{{element.results}}" color="primary">Results wiki</a>
+                                        <span *ngIf="element.no_results_link">{{element.no_results_link}}</span>
                                         </td>
                                 </ng-container>
                                 <tr mat-header-row *matHeaderRowDef="displayedcalendarColumns"></tr>
@@ -113,7 +121,7 @@
                                                 <mat-card-title>{{ athlete.name }}</mat-card-title>
                                                 <mat-card-subtitle>{{ athlete.event }}</mat-card-subtitle>
                                         </mat-card-header>
-                                        <img mat-card-image src="../../../{{ athlete.image }}" alt="{{ athlete.name }} photo" height="200px" width="300px" />
+                                        <img mat-card-image src="../../../{{ athlete.image }}" alt="{{ athlete.name }} photo" />
                                         <mat-card-content>
                                            <strong>Qualification Event:</strong>&nbsp;{{athlete.qualificationEvent}}
                                         </mat-card-content>
