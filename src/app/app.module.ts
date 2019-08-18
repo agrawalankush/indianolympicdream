@@ -13,6 +13,7 @@ import { HomeComponent} from './home/home.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { ShowsComponent } from './shows/shows.component';
 import { SafePipe } from './safepipe';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { SafePipe } from './safepipe';
     HomeComponent,
     PagenotfoundComponent,
     ShowsComponent,
-    SafePipe
+    SafePipe,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

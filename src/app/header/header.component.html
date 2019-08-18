@@ -1,0 +1,43 @@
+<mat-toolbar color="" class="mat-elevation-z4">
+    <button mat-icon-button (click)="drawer.toggle()" aria-label="Side nav toggle icon">
+     <mat-icon>menu</mat-icon>
+    </button>
+     <button mat-raised-button  class="logo-button" routerLink="">Indian
+      <img src="assets/logo.png" class="olympic-logo">
+      Dream
+    </button>
+    <!-- <button fxHide.lt-sm="true" mat-button>Blogs</button> -->
+    <button fxHide.lt-sm="true" routerLink="/feedback" mat-button>Feedback</button>
+    <button fxHide.lt-sm="true" outerLink="/about"  mat-button>About</button>
+    <button fxHide.lt-sm="true" routerLink="/shows" mat-button>Shows you'll love</button>
+  </mat-toolbar>
+  <mat-sidenav-container class="sidenav-container">
+        <mat-sidenav #drawer class="sidenav" mode="over">
+          <mat-toolbar>Menu</mat-toolbar>  
+          <mat-nav-list>
+                <a mat-list-item routerLink="" routerLinkActive="active">
+                  <mat-icon>home</mat-icon>
+                  <span class="sidenav-menu">Home</span>
+                </a>
+                <a mat-list-item routerLink="" routerLinkActive="active">
+                  <mat-icon>description</mat-icon>
+                  <span class="sidenav-menu">Blogs</span>
+                </a>
+                <a mat-list-item routerLink="" routerLinkActive="active">
+                  <mat-icon>feedback</mat-icon>
+                  <span class="sidenav-menu">Feedback</span>
+                </a>
+                <a mat-list-item routerLink="" routerLinkActive="active">
+                    <mat-icon>info</mat-icon>
+                    <span class="sidenav-menu">About</span></a>
+                <a mat-list-item routerLink="/shows" routerLinkActive="active">
+                    <mat-icon>movie</mat-icon>
+                    <span class="sidenav-menu">Shows you'll love</span>
+                </a>    
+              </mat-nav-list>
+        </mat-sidenav>
+  <mat-sidenav-content>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+  </mat-sidenav-container>
+  

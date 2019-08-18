@@ -5,14 +5,16 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { SportHistoryComponent } from './sport-history/sport-history.component';
 import { SportHomeComponent } from './sport-home/sport-home.component';
+import { EventsComponent } from './events/events.component';
 
 const routes: Routes = [
 
   { path: 'sports/:sportname', 
-    component: SportHomeComponent
-    // children:[
-    //   { path: 'history',  component: SportHistoryComponent }
-    // ]
+    component: SportHomeComponent,
+     children:[
+       { path: 'history',  component: SportHistoryComponent },
+       { path: 'events', component: EventsComponent}
+     ]
    }  
 ];
 

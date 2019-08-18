@@ -1,0 +1,50 @@
+<mat-toolbar>
+        <div class="mat-toolbar-row-content">
+                {{sportsdetails.sportname}}&nbsp;
+                <!-- <img  src="assets/icon_medal.png" 
+                class="sports-icons"> -->
+                <span *ngIf="sportsdetails">{{sportsdetails.Medals}}
+                        <img  src="assets/icon_medal.png" class="sports-icons">
+                </span>            
+        </div>
+</mat-toolbar>
+<mat-toolbar>
+        <button mat-button>Calendar</button>
+        <button mat-button>Athletes</button>
+</mat-toolbar>
+<div class="table-container" *ngIf="sportname === 'Athletics'">
+        <div class="datasource-selector">
+                <button mat-button color="primary" (click)="setdatasource('Men')">Men</button>
+                <button mat-button color="primary" (click)="setdatasource('Women')">Women</button>
+        </div>
+        <table mat-table style="width: 100%" [dataSource]="selecteddatasource"
+                class="mat-elevation-z8">
+                <ng-container matColumnDef="Event">
+                        <th mat-header-cell *matHeaderCellDef>Event</th>
+                        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+                </ng-container>
+                <ng-container matColumnDef="EntryStandard">
+                        <th mat-header-cell *matHeaderCellDef>Entry Standard</th>
+                        <td mat-cell *matCellDef="let element">
+                                {{ element.qualificationstandard }}
+                        </td>
+                </ng-container>
+                <ng-container matColumnDef="NR">
+                        <th mat-header-cell *matHeaderCellDef>NR</th>
+                        <td mat-cell *matCellDef="let element">{{ element.NR }}</td>
+                </ng-container>
+                <ng-container matColumnDef="WR">
+                        <th mat-header-cell *matHeaderCellDef>WR</th>
+                        <td mat-cell *matCellDef="let element">{{ element.WR }}</td>
+                </ng-container>
+                <!-- <ng-container matColumnDef="TotalEntries">
+                        <th mat-header-cell *matHeaderCellDef>Total Entries</th>
+                        <td mat-cell *matCellDef="let element">
+                                {{ element.totalentries }}
+                        </td>
+                </ng-container> 
+                -->
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+        </div>

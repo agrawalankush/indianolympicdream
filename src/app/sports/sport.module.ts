@@ -8,13 +8,14 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 
  import { SportHistoryComponent } from './sport-history/sport-history.component';
 import { SportHomeComponent } from './sport-home/sport-home.component';
+import { EventsComponent } from './events/events.component';
 
 
 
 @NgModule({
   declarations: [
     SportHistoryComponent, 
-    SportHomeComponent
+    SportHomeComponent, EventsComponent
   ],
   imports: [
     CommonModule,

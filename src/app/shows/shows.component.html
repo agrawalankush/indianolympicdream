@@ -1,7 +1,8 @@
-<div *ngIf="errmsg">
-    {{errmsg}}
-</div>
+
 <div class="container" *ngIf="showsdata">
+    <div *ngIf="errmsg">
+        {{errmsg}}
+    </div>
     <!-- <pre>{{showsdata}}</pre> -->
     <div class="cards-container" fxLayout="row wrap" fxLayoutGap="16px" fxLayoutAlign="start start">
         <mat-card color="primary" class="movies-card" *ngFor="let showcontent of showsdata">
