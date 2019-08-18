@@ -16,6 +16,7 @@ export class SportHomeComponent implements OnInit {
     {path:'history',label:'History'}];
   activeLink = this.navLinks[0].path;
   */
+ public errmsg: string;
  public sportname:string;
  public pdfSrc:string;
  public sportsdetails:any;
@@ -38,13 +39,14 @@ export class SportHomeComponent implements OnInit {
     this.sportservice.getsports(sportname)
     .subscribe(
       (sportsdata:any) =>{
-        console.log(sportsdata.data[0]);
+        //console.log(sportsdata.data[0]);
         this.sportsdetails = sportsdata.data[0];
         this.eventstablemen = sportsdata.data[0].events.men;
         this.eventstablewomen = sportsdata.data[0].events.women;
         this.selecteddatasource = this.eventstablemen;
       },
       (error) =>{
+        this.errmsg = error.error;
         console.log(error);
       }
     )

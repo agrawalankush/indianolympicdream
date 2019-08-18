@@ -4,14 +4,14 @@
     <button fxHide fxHide.lt-sm="false" mat-icon-button (click)="drawer.toggle()" aria-label="Side nav toggle icon">
      <mat-icon>menu</mat-icon>
     </button>
-     <button mat-flat-button  class="class=logo-button" routerLink="">Indian
+     <button mat-flat-button  class="logo-button" routerLink="">Indian
       <img src="assets/logo.png" class="olympic-logo">
       Dream
     </button>
     <button fxHide.lt-sm="true" mat-button>Blogs</button>
     <button fxHide.lt-sm="true" mat-button>Feedback</button>
     <button fxHide.lt-sm="true" mat-button>About</button>
-    <button fxHide.lt-sm="true" mat-button>Shows you'll love</button>
+    <button fxHide.lt-sm="true" routerLink="/shows" mat-button>Shows you'll love</button>
   </mat-toolbar>
     <mat-sidenav-container class="sidenav-container">
       <mat-sidenav #drawer class="sidenav" mode="over">
@@ -29,7 +29,7 @@
               <a mat-list-item routerLink="" routerLinkActive="active">
                   <mat-icon>info</mat-icon>
                   About</a>
-              <a mat-list-item routerLink="" routerLinkActive="active">
+              <a mat-list-item routerLink="/shows" routerLinkActive="active">
                   <mat-icon>movie</mat-icon>
                   Shows you'll love</a>    
             </mat-nav-list>

@@ -45,5 +45,19 @@ router.get('/sports/:sportname', (req, res) => {
             });
     });
 });
-
+router.get('/shows', (req, res) => {
+    //sportname=req.params.sportname;
+    connection((db) => {
+        db.collection('shows_data')
+            .find({})
+            .toArray()
+            .then((sports) => {
+                response.data = sports;
+                res.json(response);
+            })
+            .catch((err) => {
+                sendError(err, res);
+            });
+    });
+});
 module.exports = router;

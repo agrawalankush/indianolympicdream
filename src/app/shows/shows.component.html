@@ -1,0 +1,25 @@
+<div *ngIf="errmsg">
+    {{errmsg}}
+</div>
+<div class="container" *ngIf="showsdata">
+    <!-- <pre>{{showsdata}}</pre> -->
+    <div class="cards-container" fxLayout="row wrap" fxLayoutGap="16px" fxLayoutAlign="start start">
+        <mat-card color="primary" class="movies-card" *ngFor="let showcontent of showsdata">
+             <mat-card-header>
+                <mat-card-title>{{showcontent.name}}</mat-card-title>
+                <!-- <mat-card-subtitle>{{ athlete.event }}</mat-card-subtitle> -->
+            </mat-card-header>
+
+            <iframe class="mat-elevation-z24" mat-card-image height="250px" *ngIf="showcontent.youtube_id"[src]="videoyoutube + showcontent.youtube_id | safe" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <!-- <img mat-card-image src="../../../{{ athlete.image }}" alt="{{ athlete.name }} photo" /> -->
+            <mat-card-content >
+                {{showcontent.description}}
+            </mat-card-content>
+        <!-- <mat-card-actions>
+                <button mat-button>LIKE</button>
+                <button mat-button>SHARE</button>
+                </mat-card-actions> 
+        -->
+        </mat-card>
+    </div>
+</div>
