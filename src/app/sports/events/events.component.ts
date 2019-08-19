@@ -15,6 +15,7 @@ export class EventsComponent implements OnInit {
   public eventstablemen:any;
   public eventstablewomen:any;
   public selecteddatasource:any;
+  public eventscatagories = ['women','men','mixed']
   public displayedColumns: string[] = ['Event', 'EntryStandard', 'NR', 'WR'];
   public displayedcalendarColumns: string[] = ['EventDate', 'EventName','Result']
   constructor(

@@ -1,5 +1,5 @@
 <mat-toolbar>
-        <div class="mat-toolbar-row-content">
+        <div class="mat-toolbar-row-content" *ngIf="sportsdetails">
                 {{sportsdetails.sportname}}&nbsp;
                 <!-- <img  src="assets/icon_medal.png" 
                 class="sports-icons"> -->
@@ -12,39 +12,67 @@
         <button mat-button>Calendar</button>
         <button mat-button>Athletes</button>
 </mat-toolbar>
-<div class="table-container" *ngIf="sportname === 'Athletics'">
-        <div class="datasource-selector">
-                <button mat-button color="primary" (click)="setdatasource('Men')">Men</button>
-                <button mat-button color="primary" (click)="setdatasource('Women')">Women</button>
-        </div>
-        <table mat-table style="width: 100%" [dataSource]="selecteddatasource"
-                class="mat-elevation-z8">
-                <ng-container matColumnDef="Event">
-                        <th mat-header-cell *matHeaderCellDef>Event</th>
-                        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
-                </ng-container>
-                <ng-container matColumnDef="EntryStandard">
-                        <th mat-header-cell *matHeaderCellDef>Entry Standard</th>
-                        <td mat-cell *matCellDef="let element">
-                                {{ element.qualificationstandard }}
-                        </td>
-                </ng-container>
-                <ng-container matColumnDef="NR">
-                        <th mat-header-cell *matHeaderCellDef>NR</th>
-                        <td mat-cell *matCellDef="let element">{{ element.NR }}</td>
-                </ng-container>
-                <ng-container matColumnDef="WR">
-                        <th mat-header-cell *matHeaderCellDef>WR</th>
-                        <td mat-cell *matCellDef="let element">{{ element.WR }}</td>
-                </ng-container>
-                <!-- <ng-container matColumnDef="TotalEntries">
-                        <th mat-header-cell *matHeaderCellDef>Total Entries</th>
-                        <td mat-cell *matCellDef="let element">
-                                {{ element.totalentries }}
-                        </td>
-                </ng-container> 
-                -->
-                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-        </table>
-        </div>
+<div *ngIf="sportsdetails">
+    <mat-accordion multi="true">
+            <h2>Events</h2>
+            <mat-expansion-panel *ngFor="let eventscatagory of sportsdetails.events | keyvalue" class="event-header" hideToggle="true" #eventpanel>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            <mat-icon color="primary" *ngIf="!eventpanel.expanded">chevron_right</mat-icon>
+                            <mat-icon color="primary" *ngIf="eventpanel.expanded">expand_more</mat-icon>
+                            {{eventscatagory.key}}
+                        </mat-panel-title>
+                    </mat-expansion-panel-header>
+            
+                    <table *ngIf="sportsdetails.sportname === 'Athletics'; else othersports" mat-table style="width: 100%" [dataSource]="eventscatagory.value"
+                    class="mat-elevation-z8">
+                        <ng-container matColumnDef="Event">
+                                <th mat-header-cell *matHeaderCellDef>Event</th>
+                                <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+                        </ng-container>
+                        <ng-container matColumnDef="EntryStandard">
+                                <th mat-header-cell *matHeaderCellDef>Entry Standard</th>
+                                <td mat-cell *matCellDef="let element">
+                                        {{ element.qualificationstandard }}
+                                </td>
+                        </ng-container>
+                        <ng-container matColumnDef="NR">
+                                <th mat-header-cell *matHeaderCellDef>NR</th>
+                                <td mat-cell *matCellDef="let element">{{ element.NR }}</td>
+                        </ng-container>
+                        <ng-container matColumnDef="WR">
+                                <th mat-header-cell *matHeaderCellDef>WR</th>
+                                <td mat-cell *matCellDef="let element">{{ element.WR }}</td>
+                        </ng-container>
+                        <!-- <ng-container matColumnDef="TotalEntries">
+                                <th mat-header-cell *matHeaderCellDef>Total Entries</th>
+                                <td mat-cell *matCellDef="let element">
+                                        {{ element.totalentries }}
+                                </td>
+                        </ng-container> 
+                        -->
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+                    </table>
+                    <ng-template #othersports> 
+                    <mat-expansion-panel  *ngFor="let events of eventscatagory.value" class="lesson-header" hideToggle="true" #lessonpanel>
+                            <mat-expansion-panel-header collapsedHeight="auto">
+                            <mat-panel-title class="lesson-title">
+                                <mat-icon color="primary" *ngIf="!lessonpanel.expanded">chevron_right</mat-icon>
+                                <mat-icon color="primary" *ngIf="lessonpanel.expanded">expand_more</mat-icon>
+                                {{events.name}}
+                            </mat-panel-title>
+                            <mat-panel-description>
+                                    {{events.category}}
+                            </mat-panel-description>
+                            </mat-expansion-panel-header>
+                            <div *ngIf="sportsdetails.sportname === 'Judo'">
+                                <p>Men-{{events.men}}</p>
+                                <p>Women-{{events.women}}</p>
+                            </div>
+                    </mat-expansion-panel>
+                </ng-template>  
+            </mat-expansion-panel>       
+    </mat-accordion>
+</div>
+        
