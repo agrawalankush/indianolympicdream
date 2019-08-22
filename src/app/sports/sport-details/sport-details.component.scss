@@ -20,3 +20,33 @@
     justify-content: flex-end;
 }
 mat-expansion-panel-header[collapsedHeight="auto"]:not(.mat-expanded) { padding:10px; }
+.sports-icons{
+    height: 24px;
+    width: 24px;
+}
+.heading-events-title{
+    margin-top: 16px;
+    font-size: 24px;
+}
+.events-container{
+    margin-top: 20px;
+}
+.cards-container{
+    margin-top: 20px;
+}
+.athletes-card {
+    width:300px;
+    min-width: 300px;
+    margin-bottom: 20px;
+    height: 360px;
+  }
+  .sportsdetails{
+      margin-top:20px;
+  }
+   .mat-card-image {
+     height:200px;
+     object-fit: cover;
+ }
+ .mat-card-header{
+     height:80px;
+ } 

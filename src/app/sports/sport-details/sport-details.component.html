@@ -1,0 +1,103 @@
+<mat-toolbar>
+        <div fxLayout="row" class="mat-toolbar-row-content" *ngIf="sportsdetails">
+                {{sportsdetails.sportname}}&nbsp;{{sportsdetails.Medals}}
+                <img src="assets/icon_medal.png" 
+                class="sports-icons">
+                <span *ngIf="sportsdetails" fxFlexAlign="end">
+                        <!-- <img  src="assets/icon_medal.png" class="sports-icons"> -->
+                        <a mat-button target="_blank" href="{{sportsdetails.doc_pdf}}"><mat-icon>picture_as_pdf</mat-icon>Qualification Road</a>
+                </span>            
+        </div>
+</mat-toolbar>
+<!-- <mat-toolbar>
+    <span class="sports-nav-buttons">
+        <button mat-button><mat-icon>calendar_today</mat-icon>Calendar</button>
+        <button mat-button><mat-icon>directions_run</mat-icon>Athletes</button>
+    </span>    
+</mat-toolbar> -->
+<mat-tab-group mat-align-tabs="center">
+        <mat-tab label="Events">
+                <div class="events-container" *ngIf="sportsdetails">
+                        <mat-accordion multi="true">
+                                <!-- <h2>Events({{sportsdetails.Medals}})</h2> -->
+                                <mat-expansion-panel *ngFor="let eventscatagory of sportsdetails.events | keyvalue" class="event-header" hideToggle="true" #eventpanel>
+                                        <mat-expansion-panel-header>
+                                            <mat-panel-title>
+                                                <mat-icon color="primary" *ngIf="!eventpanel.expanded">chevron_right</mat-icon>
+                                                <mat-icon color="primary" *ngIf="eventpanel.expanded">expand_more</mat-icon>
+                                                {{eventscatagory.key}}
+                                            </mat-panel-title>
+                                        </mat-expansion-panel-header>
+                                
+                                        <table *ngIf="sportsdetails.sportname === 'Athletics'; else othersports" mat-table style="width: 100%" [dataSource]="eventscatagory.value"
+                                        class="mat-elevation-z8">
+                                            <ng-container matColumnDef="Event">
+                                                    <th mat-header-cell *matHeaderCellDef>Event</th>
+                                                    <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+                                            </ng-container>
+                                            <ng-container matColumnDef="EntryStandard">
+                                                    <th mat-header-cell *matHeaderCellDef>Entry Standard</th>
+                                                    <td mat-cell *matCellDef="let element">
+                                                            {{ element.qualificationstandard }}
+                                                    </td>
+                                            </ng-container>
+                                            <ng-container matColumnDef="NR">
+                                                    <th mat-header-cell *matHeaderCellDef>NR</th>
+                                                    <td mat-cell *matCellDef="let element">{{ element.NR }}</td>
+                                            </ng-container>
+                                            <ng-container matColumnDef="WR">
+                                                    <th mat-header-cell *matHeaderCellDef>WR</th>
+                                                    <td mat-cell *matCellDef="let element">{{ element.WR }}</td>
+                                            </ng-container>
+                                            <!-- <ng-container matColumnDef="TotalEntries">
+                                                    <th mat-header-cell *matHeaderCellDef>Total Entries</th>
+                                                    <td mat-cell *matCellDef="let element">
+                                                            {{ element.totalentries }}
+                                                    </td>
+                                            </ng-container> 
+                                            -->
+                                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+                                        </table>
+                                        <ng-template #othersports> 
+                                        <mat-expansion-panel  *ngFor="let events of eventscatagory.value" class="lesson-header" hideToggle="true" #lessonpanel>
+                                                <mat-expansion-panel-header collapsedHeight="auto">
+                                                <mat-panel-title class="lesson-title">
+                                                    <mat-icon color="primary" *ngIf="!lessonpanel.expanded">chevron_right</mat-icon>
+                                                    <mat-icon color="primary" *ngIf="lessonpanel.expanded">expand_more</mat-icon>
+                                                    {{events.name}}
+                                                </mat-panel-title>
+                                                <mat-panel-description>
+                                                        {{events.category}}
+                                                </mat-panel-description>
+                                                </mat-expansion-panel-header>
+                                                <div *ngIf="sportsdetails.sportname === 'Judo'">
+                                                    <p>Men-{{events.men}}</p>
+                                                    <p>Women-{{events.women}}</p>
+                                                </div>
+                                        </mat-expansion-panel>
+                                    </ng-template>  
+                                </mat-expansion-panel>       
+                        </mat-accordion>
+                    </div>
+        </mat-tab>
+        <mat-tab label="Qualified Athletes">
+                <div *ngIf="sportsdetails" class="cards-container" fxLayout="row wrap" fxLayoutGap="16px"
+                fxLayoutAlign="start start">
+                <mat-card color="primary" class="athletes-card"
+                        *ngFor="let athlete of sportsdetails.athletes">
+                        <mat-card-header>
+                                <img mat-card-avatar src="assets/Olympic_icons/{{ sportname }}.png" />
+                                <mat-card-title>{{ athlete.name }}</mat-card-title>
+                                <mat-card-subtitle>{{ athlete.event }}</mat-card-subtitle>
+                        </mat-card-header>
+                        <img mat-card-image src="../../../{{ athlete.image }}" alt="{{ athlete.name }} photo" />
+                        <mat-card-content>
+                           <strong>Qualification Event:</strong>&nbsp;{{athlete.qualificationEvent}}
+                        </mat-card-content>
+                </mat-card>
+        </div>
+        </mat-tab>
+      </mat-tab-group>
+
+        

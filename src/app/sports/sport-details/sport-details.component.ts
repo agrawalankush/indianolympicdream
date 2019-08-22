@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { SportsService } from '../sports.service';
-import { error } from '@angular/compiler/src/util';
 @Component({
-  selector: 'app-events',
-  templateUrl: './events.component.html',
-  styleUrls: ['./events.component.scss']
+  selector: 'app-sport-details',
+  templateUrl: './sport-details.component.html',
+  styleUrls: ['./sport-details.component.scss']
 })
-export class EventsComponent implements OnInit {
+export class SportDetailsComponent implements OnInit {
   public errmsg: string;
   public sportname:string;
   public pdfSrc:string;
