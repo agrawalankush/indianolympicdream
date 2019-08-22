@@ -1,4 +1,4 @@
-<div class="container" fxLayout="row wrap" fxLayoutGap="20px" fxLayoutAlign="start space-around">
+<div class="container" fxLayout="row wrap" fxLayoutGap="20px" fxLayoutAlign="center center">
     <div *ngFor="let sport of sports">
         <mat-card ngClas="sportsname-card sportsname-card-2"
                   [ngClass.lt-sm]="{'sportsname-card':true,'sportsname-card-2':flase}"
@@ -11,4 +11,8 @@
                 {{sport}}
         </mat-card-content>
     </div>
+    <div fxLayoutAlign="start start">
+            <p>All the pictograms used are owened by the IOC.The Tokyo 2020 pictograms are designed by Masaaki Hiromura.</p>
+    </div>
 </div>
+
