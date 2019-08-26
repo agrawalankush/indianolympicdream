@@ -1,14 +1,22 @@
-<mat-toolbar>
-        <div fxLayout="row" class="mat-toolbar-row-content" *ngIf="sportsdetails">
-                {{sportsdetails.sportname}}&nbsp;{{sportsdetails.Medals}}
-                <img src="assets/icon_medal.png" 
-                class="sports-icons">
-                <span *ngIf="sportsdetails" fxFlexAlign="end">
-                        <!-- <img  src="assets/icon_medal.png" class="sports-icons"> -->
-                        <a mat-button target="_blank" href="{{sportsdetails.doc_pdf}}"><mat-icon>picture_as_pdf</mat-icon>Qualification Road</a>
-                </span>            
-        </div>
-</mat-toolbar>
+
+<mat-card class="sport-card" *ngIf="sportsdetails">
+        
+        <img fxHide.xs="false" fxHide.lg="true" src="http://localhost:3000/{{sportsdetails.sportname}}.jpeg" 
+        mat-card-image>
+        <mat-card-content fxLayout="row wrap" class="mat-toolbar-row-content">
+                        <span>
+                        {{sportsdetails.sportname}}&nbsp;{{sportsdetails.Medals}}
+                        <img src="assets/icon_medal.png" 
+                        class="sports-icons">
+                        
+                <a mat-button target="_blank" href="{{sportsdetails.doc_pdf}}">
+                <mat-icon>picture_as_pdf</mat-icon>Qualification Road</a>
+        </span> 
+        </mat-card-content>
+</mat-card> 
+        
+        
+
 <!-- <mat-toolbar>
     <span class="sports-nav-buttons">
         <button mat-button><mat-icon>calendar_today</mat-icon>Calendar</button>
@@ -25,11 +33,11 @@
                                             <mat-panel-title>
                                                 <mat-icon color="primary" *ngIf="!eventpanel.expanded">chevron_right</mat-icon>
                                                 <mat-icon color="primary" *ngIf="eventpanel.expanded">expand_more</mat-icon>
-                                                {{eventscatagory.key}}
+                                                {{eventscatagory.key | titlecase}}
                                             </mat-panel-title>
                                         </mat-expansion-panel-header>
                                 
-                                        <table *ngIf="sportsdetails.sportname === 'Athletics'; else othersports" mat-table style="width: 100%" [dataSource]="eventscatagory.value"
+                                        <table mat-table *ngIf="sportsdetails.sportname === 'Athletics'; else othersports"  [dataSource]="eventscatagory.value"
                                         class="mat-elevation-z8">
                                             <ng-container matColumnDef="Event">
                                                     <th mat-header-cell *matHeaderCellDef>Event</th>
@@ -60,18 +68,18 @@
                                             <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
                                         </table>
                                         <ng-template #othersports> 
-                                        <mat-expansion-panel  *ngFor="let events of eventscatagory.value" class="lesson-header" hideToggle="true" #lessonpanel>
+                                        <mat-expansion-panel *ngFor="let events of eventscatagory.value" class="lesson-header" hideToggle="true" #lessonpanel>
                                                 <mat-expansion-panel-header collapsedHeight="auto">
                                                 <mat-panel-title class="lesson-title">
-                                                    <mat-icon color="primary" *ngIf="!lessonpanel.expanded">chevron_right</mat-icon>
-                                                    <mat-icon color="primary" *ngIf="lessonpanel.expanded">expand_more</mat-icon>
+                                                    <!-- <mat-icon color="primary" *ngIf="!lessonpanel.expanded">chevron_right</mat-icon>
+                                                    <mat-icon color="primary" *ngIf="lessonpanel.expanded">expand_more</mat-icon> -->
                                                     {{events.name}}
                                                 </mat-panel-title>
                                                 <mat-panel-description>
                                                         {{events.category}}
                                                 </mat-panel-description>
                                                 </mat-expansion-panel-header>
-                                                <div *ngIf="sportsdetails.sportname === 'Judo'">
+                                                <div *ngIf="sportsdetails.sportname === 'Judo' && eventscatagory.key === 'mixed'">
                                                     <p>Men-{{events.men}}</p>
                                                     <p>Women-{{events.women}}</p>
                                                 </div>

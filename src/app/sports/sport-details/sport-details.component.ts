@@ -9,14 +9,8 @@ import { SportsService } from '../sports.service';
 export class SportDetailsComponent implements OnInit {
   public errmsg: string;
   public sportname:string;
-  public pdfSrc:string;
   public sportsdetails:any;
-  public eventstablemen:any;
-  public eventstablewomen:any;
-  public selecteddatasource:any;
-  public eventscatagories = ['women','men','mixed']
   public displayedColumns: string[] = ['Event', 'EntryStandard', 'NR', 'WR'];
-  public displayedcalendarColumns: string[] = ['EventDate', 'EventName','Result']
   constructor(
     private route:ActivatedRoute,
     private sportservice:SportsService
@@ -30,23 +24,13 @@ export class SportDetailsComponent implements OnInit {
     this.sportservice.getsports(sportname)
     .subscribe(
       (sportsdata:any) =>{
-        console.log(sportsdata.data[0]);
+        // console.log(sportsdata.data[0]);
         this.sportsdetails = sportsdata.data[0];
-        this.eventstablemen = sportsdata.data[0].events.men;
-        this.eventstablewomen = sportsdata.data[0].events.women;
-        this.selecteddatasource = this.eventstablemen;
       },
       (error) =>{
         this.errmsg = error.error;
         console.log(error);
       }
     )
-  }
-  public setdatasource(selectedvalue) {
-if(selectedvalue === 'Men'){
-this.selecteddatasource = this.eventstablemen;
-} else {
-this.selecteddatasource = this.eventstablewomen;
-}
   }
 }

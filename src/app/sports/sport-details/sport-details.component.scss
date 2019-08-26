@@ -50,3 +50,19 @@ mat-expansion-panel-header[collapsedHeight="auto"]:not(.mat-expanded) { padding:
  .mat-card-header{
      height:80px;
  } 
+ table{
+  width: 100%
+ }
+ .mat-card{
+   padding-top: 0px;
+ }
+ .mat-card-image{
+  border-radius: 4px;
+ }
+ .mat-button{
+   padding-left:8px;
+   padding-right:0px; 
+ }
+//  .sport-card{
+//    max-width: 600px;
+//  }
