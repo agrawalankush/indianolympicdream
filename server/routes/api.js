@@ -46,13 +46,29 @@ router.get('/sports/:sportname', (req, res) => {
     });
 });
 router.get('/shows', (req, res) => {
-    //sportname=req.params.sportname;
     connection((db) => {
         db.collection('shows_data')
             .find({})
             .toArray()
             .then((sports) => {
                 response.data = sports;
+                res.json(response);
+            })
+            .catch((err) => {
+                sendError(err, res);
+            });
+    });
+});
+router.get('/calendar', (req, res) => {
+    //sportname=req.params.sportname;
+    console.log(req.query);
+    connection((db) => {
+        db.collection('calendar_new')
+            .find({})
+            .sort({startdate: 1})
+            .toArray()
+            .then((calendar) => {
+                response.data = calendar;
                 res.json(response);
             })
             .catch((err) => {

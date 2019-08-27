@@ -1,68 +1,48 @@
-.event-header .mat-expansion-panel-header-title, 
-.event-header .mat-expansion-panel-header-description {
-  flex-basis: 0;
-}
-.event-header .mat-expansion-panel-header-title {
+  .container{
+    margin: 0 auto;
+    max-width:1050px;
+  }
+  .event-header .mat-expansion-panel-header-title {
+    flex-basis: 0;
     align-items: center;
   }
-
-.lesson-header .mat-expansion-panel-header-title, 
-.lesson-header .mat-expansion-panel-header-description {
-  flex-basis: 0;
-}
-.lesson-header .mat-expansion-panel-header-title {
-    align-items: center;
+  .sports-icons{
+      height: 24px;
+      width: 24px;
   }
-  .mat-expansion-panel-header-description {
-    display: flex;
-    align-items: center;
-    align-content: space-around;  
-    justify-content: flex-end;
-}
-mat-expansion-panel-header[collapsedHeight="auto"]:not(.mat-expanded) { padding:10px; }
-.sports-icons{
-    height: 24px;
-    width: 24px;
-}
-.heading-events-title{
-    margin-top: 16px;
-    font-size: 24px;
-}
-.events-container{
-    margin-top: 20px;
-}
-.cards-container{
-    margin-top: 20px;
-}
-.athletes-card {
-    width:300px;
-    min-width: 300px;
-    margin-bottom: 20px;
-    height: 360px;
+  .events-container{
+      margin-top: 20px;
   }
-  .sportsdetails{
-      margin-top:20px;
+  .cards-container{
+      margin-top: 20px;
   }
-   .mat-card-image {
-     height:200px;
-     object-fit: cover;
- }
- .mat-card-header{
-     height:80px;
- } 
- table{
-  width: 100%
- }
- .mat-card{
-   padding-top: 0px;
- }
- .mat-card-image{
-  border-radius: 4px;
- }
- .mat-button{
-   padding-left:8px;
-   padding-right:0px; 
- }
-//  .sport-card{
-//    max-width: 600px;
-//  }
+  .athletes-card {
+      width:300px;
+      min-width: 300px;
+      margin-bottom: 20px;
+      height: 360px;
+    }
+    .mat-card-header{
+      height:80px;
+  } 
+  .athlete-image {
+      height:200px;
+      padding:0px;
+      object-fit: cover;
+    }
+  table{
+    width: 100%
+  }
+  .sport-card{
+    padding-top: 0px;
+  }
+  .sport-card-title{
+    font-size: 20px;
+  }
+  .sport-card-image{
+    border-radius: 4px;
+  }
+  .mat-button{
+    padding-left:8px;
+    padding-right:0px; 
+  }
