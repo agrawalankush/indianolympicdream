@@ -25,7 +25,9 @@ const sendError = (err, res) => {
 // Response handling
 let response = {
     status: 200,
-    data: [],
+    data: {
+        requesteddata:[]
+    },
     message: null
 };
 
@@ -60,20 +62,39 @@ router.get('/shows', (req, res) => {
     });
 });
 router.get('/calendar', (req, res) => {
-    //sportname=req.params.sportname;
-    console.log(req.query);
+     console.log(req.query);
+   let searchterm = req.query.searchterm; 
+   let pageoffset = parseInt(req.query.pageIndex, 10);
+   let pagesize = parseInt(req.query.pageSize,10);
+    
     connection((db) => {
-        db.collection('calendar_new')
-            .find({})
-            .sort({startdate: 1})
+
+    let curFind = db.collection('calendar_new')
+            .find({}); //$text: { $search: searchterm }
+    curFind.count(function (e, count) {
+        let doccount = count;
+        // console.log(count);
+            curFind
+            .sort({startdate:1})
+            .skip(pageoffset)
+            .limit(pagesize)
             .toArray()
             .then((calendar) => {
-                response.data = calendar;
-                res.json(response);
-            })
-            .catch((err) => {
-                sendError(err, res);
-            });
+                let response = {
+                    status: 200,
+                    data: {
+                        calendar:calendar,
+                        total:doccount
+                    },
+                    message: null
+                };
+                    res.json(response);
+                })
+                .catch((err) => {
+                    sendError(err, res);
+                });
+        });       
+            
     });
 });
 module.exports = router;

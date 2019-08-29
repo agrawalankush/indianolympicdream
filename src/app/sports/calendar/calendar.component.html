@@ -1,8 +1,13 @@
 <div class="container">
-        <mat-form-field>
+            <div class="spinner-container" *ngIf="dataSource.loading$ | async">
+                <mat-progress-bar mode="indeterminate" color="warn"></mat-progress-bar>
+            </div>
+            <mat-paginator #paginator [length]="dataSource.length" [pageIndex]="0" [pageSize]="10" [pageSizeOptions]="[5,10,25]">
+            </mat-paginator>
+        <!-- <mat-form-field>
                 <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search for specific sport">
-        </mat-form-field>
-    <mat-table [dataSource]="calendar" class="mat-elevation-z8">
+        </mat-form-field> -->
+    <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
             <ng-container matColumnDef="EventName">
                     <mat-header-cell *matHeaderCellDef>Event Name</mat-header-cell>
                     <mat-cell *matCellDef="let element">
