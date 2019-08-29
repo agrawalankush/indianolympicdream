@@ -1,0 +1,37 @@
+.container{
+    margin: 24px auto;
+    max-width: 1060px;
+}
+.mat-table {
+    width:100%;
+  }
+.mat-form-field{
+    width: 100%;
+}  
+// By default, the mobile label shouldn't show
+.mobile-label {
+    display: none;
+  }
+  
+  @media(max-width: 600px) {
+    // Custom header label that shows in each column, with a set width and bold font
+    .mobile-label {
+      width: 80px;
+      display: inline-block;
+      font-weight: bold;
+    }
+  
+    // Remove the header row altogether
+    .mat-header-row {
+      display: none;
+    }
+    .mat-cell {
+      padding: 0px 8px 0px 0px;
+    }
+    // The row cells should display as a column, justified left, with a bit of extra padding
+    .mat-row { 
+      flex-direction: column;
+      align-items: start;
+      padding: 8px 24px;
+    }
+  }

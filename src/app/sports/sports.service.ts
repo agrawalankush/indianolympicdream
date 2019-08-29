@@ -10,4 +10,7 @@ export class SportsService {
   public getsports(sportname: string) {
     return this.http.get(`/api/sports/${sportname}`);
   }
+  public getcalendar() {
+    return this.http.get(`/api/calendar`);
+  }
 }
