@@ -10,12 +10,12 @@ import { tap } from 'rxjs/operators';
   styleUrls: ['./calendar.component.scss']
 })
 export class CalendarComponent implements OnInit,AfterViewInit {
-  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
   public errmsg:string;
   public calendar: any;
   public searchquery = '';
-  dataSource: CalendarDataSource;
+  public dataSource: CalendarDataSource;
   public displayedColumns: string[] = ['EventName','Sport', 'StartDate', 'EndDate', 'Venue'];
+  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
   constructor(
     private route:ActivatedRoute,
     private router: Router,

@@ -9,6 +9,7 @@
     <!-- <button fxHide.lt-sm="true" mat-button>Blogs</button> -->
     <nav>
     <button fxHide.lt-sm="true" routerLink="/calendar" mat-button routerLinkActive="active">Calendar</button>
+    <button fxHide.lt-sm="true" routerLink="/athletes" mat-button routerLinkActive="active">Qualified Athletes</button>
     <button fxHide.lt-sm="true" routerLink="/shows" mat-button routerLinkActive="active">Shows I love</button>
     <button fxHide.lt-sm="true" routerLink="/about"  mat-button routerLinkActive="active">About</button>
     <button fxHide.lt-sm="true" routerLink="/feedback" mat-button routerLinkActive="active">Feedback</button>
@@ -30,6 +31,10 @@
                   <mat-icon>description</mat-icon>
                   <span class="sidenav-menu">Blogs</span>
                 </a> -->
+                <a mat-list-item routerLink="/athletes" routerLinkActive="active">
+                  <mat-icon>directions_run</mat-icon>
+                  <span class="sidenav-menu">Qualified Athletes</span>
+                </a> 
                 <a mat-list-item routerLink="/shows" routerLinkActive="active">
                   <mat-icon>movie</mat-icon>
                   <span class="sidenav-menu">Shows I love</span>

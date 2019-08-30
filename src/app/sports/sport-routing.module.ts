@@ -5,6 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { SportHomeComponent } from './sport-home/sport-home.component';
 import { SportDetailsComponent } from './sport-details/sport-details.component';
 import { CalendarComponent } from './calendar/calendar.component';
+import { AthletesComponent } from './athletes/athletes.component';
 const routes: Routes = [
 
   { path: 'sports/:sportname', 
@@ -13,7 +14,8 @@ const routes: Routes = [
        { path: '', component: SportDetailsComponent}
      ]
   },
-  { path: 'calendar', component: CalendarComponent}  
+  { path: 'calendar', component: CalendarComponent},
+  { path: 'athletes', component: AthletesComponent}  
 ];
 
 @NgModule({
