@@ -1,13 +1,14 @@
 .cards-container{
-    margin-top: 20px;
+  margin:24px 0px 24px 24px;
 }
 .athletes-card {
     width:300px;
     min-width: 300px;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
+    margin-right: 16px;
     height: 360px;
   }
-  .mat-card-header{
+.mat-card-header{
     height:80px;
 } 
 .athlete-image {

@@ -1,26 +1,25 @@
 
-<div class="container" *ngIf="showsdata">
-    <div *ngIf="errmsg">
+
+
+    <mat-error *ngIf="errmsg">
         {{errmsg}}
-    </div>
+    </mat-error>
     <!-- <pre>{{showsdata}}</pre> -->
-    <div class="cards-container" fxLayout="row wrap" fxLayoutGap="16px" fxLayoutAlign="center center">
+    <div *ngIf="showsdata" class="cards-container" fxLayout="row wrap" fxLayoutAlign="center center">
         <mat-card color="primary" class="movies-card" *ngFor="let showcontent of showsdata">
              <mat-card-header>
                 <mat-card-title>{{showcontent.name}}</mat-card-title>
-                <!-- <mat-card-subtitle>{{ athlete.event }}</mat-card-subtitle> -->
             </mat-card-header>
 
-            <iframe class="mat-elevation-z24" mat-card-image height="250px" *ngIf="showcontent.youtube_id"[src]="videoyoutube + showcontent.youtube_id | safe" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            <!-- <img mat-card-image src="../../../{{ athlete.image }}" alt="{{ athlete.name }} photo" /> -->
+            <iframe class="mat-elevation-z24" mat-card-image height="250px" [src]="videoyoutube + showcontent.youtube_id | safe" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             <mat-card-content >
                 {{showcontent.description}}
             </mat-card-content>
         <!-- <mat-card-actions>
                 <button mat-button>LIKE</button>
                 <button mat-button>SHARE</button>
-                </mat-card-actions> 
+            </mat-card-actions> 
         -->
         </mat-card>
     </div>
-</div>
+
