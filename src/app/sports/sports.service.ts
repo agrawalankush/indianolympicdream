@@ -17,11 +17,11 @@ export class SportsService {
     .set('pageSize', pageSize.toString());
     return this.http.get(`/api/calendar`, {params: params});
   }
-  public getathletes(filter: string, pageIndex: number, pageSize: number) {
-    let params = new HttpParams()
-    .set('searchterm', filter)
-    .set('pageIndex', pageIndex.toString())
-    .set('pageSize', pageSize.toString());
-    return this.http.get(`/api/athletes`, {params: params});
+  public getathletes() {
+    // let params = new HttpParams()
+    // .set('searchterm', filter)
+    // .set('pageIndex', pageIndex.toString())
+    // .set('pageSize', pageSize.toString());
+    return this.http.get(`/api/athletes`);
   }
 }

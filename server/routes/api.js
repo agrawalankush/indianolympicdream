@@ -113,22 +113,22 @@ router.get('/calendar', (req, res) => {
     
 });
 router.get('/athletes', (req, res) => {
-  //console.log(req.query);
+  // console.log(req);
   // let searchterm = req.query.searchterm; 
-  let pageoffset = parseInt(req.query.pageIndex, 10);
-  let pagesize = parseInt(req.query.pageSize,10);
+  // let pageoffset = parseInt(req.query.pageIndex, 10);
+  // let pagesize = parseInt(req.query.pageSize,10);
    
    connection((db) => {
 
-   let curFind = db.collection('athletes')
+   let curFind = db.collection('qualified_athletes')
            .find({}); //$text: { $search: searchterm }
    curFind.count(function (e, count) {
        let doccount = count;
-       // console.log(count);
+        console.log(count);
            curFind
            .sort({date_qualified:1})
-           .skip(pageoffset)
-           .limit(pagesize)
+           // .skip(pageoffset)
+           // .limit(pagesize)
            .toArray()
            .then((athletes) => {
                let response = {

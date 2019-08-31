@@ -81,22 +81,7 @@
                         </mat-accordion>
                     </div>
         </mat-tab>
-        <mat-tab label="Qualified Athletes">
-                <div *ngIf="sportsdetails" class="cards-container" fxLayout="row wrap" fxLayoutGap="16px"
-                fxLayoutAlign="start start">
-                <mat-card color="primary" class="athletes-card"
-                        *ngFor="let athlete of sportsdetails.athletes">
-                        <mat-card-header>
-                                <img mat-card-avatar src="assets/Olympic_icons/{{ sportname }}.png" />
-                                <mat-card-title>{{ athlete.name }}</mat-card-title>
-                                <mat-card-subtitle>{{ athlete.event }}</mat-card-subtitle>
-                        </mat-card-header>
-                        <img mat-card-image class="athlete-image" src="../../../{{ athlete.image }}" alt="{{ athlete.name }} photo" />
-                        <mat-card-content>
-                           <strong>Qualification Event:</strong>&nbsp;{{athlete.qualificationEvent}}
-                        </mat-card-content>
-                </mat-card>
-        </div>
+        <mat-tab label="History">
         </mat-tab>
       </mat-tab-group>
 
