@@ -47,6 +47,20 @@ router.get('/sports/:sportname', (req, res) => {
             });
     });
 });
+router.get('/allsports', (req, res) => {
+    connection((db) => {
+        db.collection('all_sports')
+            .find({})
+            .toArray()
+            .then((allsports) => {
+                response.data = allsports;
+                res.json(response);
+            })
+            .catch((err) => {
+                sendError(err, res);
+            });
+    });
+});
 router.get('/shows', (req, res) => {
     connection((db) => {
         db.collection('shows_data')
@@ -96,5 +110,43 @@ router.get('/calendar', (req, res) => {
         });       
             
     });
+    
+});
+router.get('/athletes', (req, res) => {
+  //console.log(req.query);
+  // let searchterm = req.query.searchterm; 
+  let pageoffset = parseInt(req.query.pageIndex, 10);
+  let pagesize = parseInt(req.query.pageSize,10);
+   
+   connection((db) => {
+
+   let curFind = db.collection('athletes')
+           .find({}); //$text: { $search: searchterm }
+   curFind.count(function (e, count) {
+       let doccount = count;
+       // console.log(count);
+           curFind
+           .sort({date_qualified:1})
+           .skip(pageoffset)
+           .limit(pagesize)
+           .toArray()
+           .then((athletes) => {
+               let response = {
+                   status: 200,
+                   data: {
+                    athletes:athletes,
+                    total:doccount
+                   },
+                   message: null
+               };
+                   res.json(response);
+               })
+               .catch((err) => {
+                   sendError(err, res);
+               });
+       });       
+           
+   });
+   
 });
 module.exports = router;

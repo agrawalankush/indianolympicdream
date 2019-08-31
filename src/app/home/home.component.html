@@ -1,14 +1,14 @@
 <div class="container" fxLayout="row wrap" fxLayoutGap="20px" fxLayoutAlign="center center">
-    <div *ngFor="let sport of sports">
+    <div *ngFor="let sport of allsports">
         <mat-card ngClas="sportsname-card sportsname-card-2"
                   [ngClass.lt-sm]="{'sportsname-card':true,'sportsname-card-2':flase}"
                   [ngClass.gt-xs]="{'sportsname-card':false,'sportsname-card-2':true}" 
-                  routerLink="/sports/{{sport}}">
-        <img src="assets/Olympic_icons/{{sport}}.png" 
+                  routerLink="/sports/{{sport.name}}">
+        <img src="{{sport.pictogram}}" 
             class="sports-icons">
         </mat-card>
         <mat-card-content fxLayoutAlign="center">
-                {{sport}}
+                {{sport.name}}
         </mat-card-content>
     </div>
     <div fxLayoutAlign="start start">
