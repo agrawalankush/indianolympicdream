@@ -1,14 +1,18 @@
   .container{
     margin: 0 auto;
-    max-width:1050px;
+    max-width:800px;
   }
   .event-header .mat-expansion-panel-header-title {
     flex-basis: 0;
     align-items: center;
   }
-  .sports-icons{
-      height: 24px;
-      width: 24px;
+  .medal-icon{
+      margin-top:20px;
+      height: 16px;
+      width: 16px;
+  }
+  .medals-number{
+    font-size: 22px;
   }
   .events-container{
       margin-top: 20px;
@@ -17,16 +21,47 @@
   table{
     width: 100%
   }
-  .sport-card{
-    padding-top: 0px;
-  }
-  .sport-card-title{
-    font-size: 20px;
-  }
-  .sport-card-image{
+  .sports-details-card .sports-details-card-image-bigger{
     border-radius: 4px;
+    max-height: 300px;
+    max-width:  600px;
+    float: left;
   }
-  .mat-button{
-    padding-left:8px;
-    padding-right:0px; 
+
+  .sports-details-card .sports-details-card-image{
+    border-radius: 4px;
+    max-height: 300px;
+    max-width:  320px;
+    float: left;
   }
+
+  .sport-details-card-header h1{
+    // margin-left: 30px;
+    font-weight:400;
+    text-align:left;
+    font-size:40px;
+    padding:0 0 0 0px;
+    letter-spacing:1px;
+    float:left;
+  }
+  
+  .sport-details-card-header-bigger h1 {
+    font-weight:400;
+    text-align:left;
+    font-size:40px;
+    padding:0 0 0 30px;
+    letter-spacing:1px;
+    float:left;
+  }
+  .sport-details-card-header-bigger a{
+    margin: 0px 0px 0px 30px;
+  }
+  p {
+    font-family: 'Montserrat', sans-serif;
+    font-size:12px;
+    float:left;
+    letter-spacing:1px;
+    line-height:20px;
+    text-align:left;
+  }
+  

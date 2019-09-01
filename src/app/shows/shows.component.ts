@@ -8,7 +8,7 @@ import { ShowsdataService } from './showsdata.service';
 export class ShowsComponent implements OnInit {
   public showsdata:any;
   public errmsg:string;
-  videoyoutube: string = "https://www.youtube.com/embed/";
+  public videoyoutube: string = "https://www.youtube.com/embed/";
   constructor(private showdataservice: ShowsdataService) { }
 
   ngOnInit() {

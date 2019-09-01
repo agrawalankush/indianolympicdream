@@ -1,19 +1,33 @@
 <div class="container" fxLayout="column">
-<mat-card class="sport-card" *ngIf="sportsdetails" fxLayout="row wrap">
-        
-        <img class="sport-card-image" mat-card-image fxHide.xs="false" fxHide.lg="true" src="http://localhost:3000/{{sportsdetails.sportname}}.jpeg">
+<!--  <mat-card class="sport-card" *ngIf="sportsdetails" fxLayout="row wrap">
         <mat-card-content fxLayoutAlign="center center">
                 <span class="sport-card-title">{{sportsdetails.sportname}}&nbsp;({{sportsdetails.Medals}})</span>
                 <a mat-button target="_blank" href="{{sportsdetails.doc_pdf}}">
                    <mat-icon>picture_as_pdf</mat-icon>Qualification Road
                 </a>
-        </mat-card-content>
-</mat-card> 
+        </mat-card-content> 
+</mat-card> -->
+<div class="sports-details-card">
+<img ngClass="sports-details-card-image" 
+[ngClass.gt-xs]="{'sports-details-card-image':false, 'sports-details-card-image-bigger':true}" src="http://localhost:3000/sport_images/{{sportsdetails.sportname}}.jpeg">
+<div ngClass="sport-details-card-header"
+[ngClass.gt-xs]="{'sport-details-card-header':false, 'sport-details-card-header-bigger':true}">
+                <h1>{{sportsdetails.sportname | uppercase}}</h1>
+                <span class="medals-number"><img class="medal-icon" src="assets/icon_medal.png">{{sportsdetails.Medals}}</span> 
+                <a mat-flat-button color="accent" target="_blank" href="{{sportsdetails.doc_pdf}}">
+                        <mat-icon>picture_as_pdf</mat-icon>Qualification Road for Tokyo
+                </a>
+</div>
+        <p>This Is Football unpacks the unique phenomenon that grips and unifies 
+                        billions of people from every corner of the globe. Across the 
+                        episodes universal themes of the human experience are explored: 
+                        Redemption, Belief, Chance, Love, Pride, and Wonder.
+        </p>        
+</div>
 <mat-tab-group mat-align-tabs="center">
         <mat-tab label="Events">
                 <div class="events-container" *ngIf="sportsdetails">
                         <mat-accordion multi="true">
-                                <!-- <h2>Events({{sportsdetails.Medals}})</h2> -->
                                 <mat-expansion-panel *ngFor="let eventscatagory of sportsdetails.events | keyvalue" class="event-header" hideToggle="true" #eventpanel>
                                         <mat-expansion-panel-header>
                                             <mat-panel-title>
@@ -54,18 +68,6 @@
                                             <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
                                         </table>
                                         <ng-template #othersports> 
-                                        <!-- <mat-expansion-panel *ngFor="let events of eventscatagory.value" class="lesson-header" hideToggle="true" #lessonpanel>
-                                                <mat-expansion-panel-header collapsedHeight="auto">
-                                                <mat-panel-title class="lesson-title">
-                                                     <mat-icon color="primary" *ngIf="!lessonpanel.expanded">chevron_right</mat-icon>
-                                                    <mat-icon color="primary" *ngIf="lessonpanel.expanded">expand_more</mat-icon>
-                                                    {{events.name}}
-                                                </mat-panel-title>
-                                                <mat-panel-description>
-                                                        {{events.category}}
-                                                </mat-panel-description>
-                                                </mat-expansion-panel-header>
-                                        </mat-expansion-panel> -->
                                         <mat-card *ngFor="let events of eventscatagory.value">
                                                 {{events.name}}
                                                 <mat-card-content>
