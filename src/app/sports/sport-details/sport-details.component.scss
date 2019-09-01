@@ -9,9 +9,10 @@
   .medal-icon{
       margin-top:20px;
       height: 16px;
-      width: 16px;
+      width: 16px;   
   }
   .medals-number{
+    float:left;
     font-size: 22px;
   }
   .events-container{
@@ -39,7 +40,7 @@
     // margin-left: 30px;
     font-weight:400;
     text-align:left;
-    font-size:40px;
+    font-size:30px;
     padding:0 0 0 0px;
     letter-spacing:1px;
     float:left;
