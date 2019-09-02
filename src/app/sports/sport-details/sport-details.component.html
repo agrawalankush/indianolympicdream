@@ -9,19 +9,17 @@
 </mat-card> -->
 <div class="sports-details-card" *ngIf="sportsdetails">
 <img ngClass="sports-details-card-image" 
-[ngClass.gt-sm]="{'sports-details-card-image':false, 'sports-details-card-image-bigger':true}" src="http://localhost:3000/sport_images/{{sportsdetails.sportname}}.jpeg">
+[ngClass.gt-sm]="{'sports-details-card-image':false, 'sports-details-card-image-bigger':true}" [src]="sportsdetails.image">
 <div ngClass="sport-details-card-header"
 [ngClass.gt-xs]="{'sport-details-card-header':false, 'sport-details-card-header-bigger':true}">
-                <h1>{{sportsdetails.sportname | uppercase}}</h1>
+                <h1>{{sportsdetails.name | uppercase}}</h1>
                 <span class="medals-number"><img class="medal-icon" src="assets/icon_medal.png">{{sportsdetails.Medals}}</span> 
-                <a mat-flat-button color="accent" target="_blank" href="Qualifications/{{sportsdetails.sportname}}/{{sportsdetails.sportname}}.pdf">
+                <a mat-flat-button color="accent" target="_blank" [href]="sportsdetails.doc_pdf">
                         <mat-icon>picture_as_pdf</mat-icon>Qualification Road for Tokyo
                 </a>
 </div>
-        <p>This Is Football unpacks the unique phenomenon that grips and unifies 
-                        billions of people from every corner of the globe. Across the 
-                        episodes universal themes of the human experience are explored: 
-                        Redemption, Belief, Chance, Love, Pride, and Wonder.
+        <p>
+               {{sportsdetails.description}}
         </p>        
 </div>
 <mat-tab-group mat-align-tabs="center">
@@ -37,7 +35,7 @@
                                             </mat-panel-title>
                                         </mat-expansion-panel-header>
                                 
-                                        <table mat-table *ngIf="sportsdetails.sportname === 'Athletics'; else othersports"  [dataSource]="eventscatagory.value"
+                                        <table mat-table *ngIf="sportsdetails.name === 'Athletics'; else othersports"  [dataSource]="eventscatagory.value"
                                         class="mat-elevation-z8">
                                             <ng-container matColumnDef="Event">
                                                     <th mat-header-cell *matHeaderCellDef>Event</th>
@@ -72,9 +70,9 @@
                                                 {{events.name}}
                                                 <mat-card-content>
                                                         {{events.category}}
-                                                        <div *ngIf="sportsdetails.sportname === 'Judo' && eventscatagory.key === 'mixed'">
-                                                                        <p>Men-{{events.men}}</p>
-                                                                        <p>Women-{{events.women}}</p>
+                                                        <div *ngIf="sportsdetails.name === 'Judo' && eventscatagory.key === 'mixed'">
+                                                                        Men-{{events.men}}<br />
+                                                                        Women-{{events.women}}
                                                         </div>
                                                 </mat-card-content>
                                         </mat-card>

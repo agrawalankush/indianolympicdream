@@ -35,8 +35,8 @@ let response = {
 router.get('/sports/:sportname', (req, res) => {
     sportname=req.params.sportname;
     connection((db) => {
-        db.collection('sports')
-            .find({"sportname":sportname})
+        db.collection('sports_new')
+            .find({"name":sportname})
             .toArray()
             .then((sports) => {
                 response.data = sports;
