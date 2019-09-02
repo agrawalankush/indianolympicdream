@@ -1,0 +1,47 @@
+<div class="feedback-container">
+<mat-vertical-stepper color="accent" linear="false" #stepper>
+    <mat-step [stepControl]="nameform">
+      <form [formGroup]="nameform">
+        <ng-template matStepLabel>Your good name</ng-template>
+        <mat-form-field>
+          <input matInput color="accent" placeholder="Name" formControlName="name">
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="emailform">
+      <form [formGroup]="emailform">
+        <ng-template matStepLabel>Email id you setteled for</ng-template>
+        <mat-form-field>
+          <input matInput placeholder="Email" formControlName="email">
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="feedbackmsgform">
+        <form [formGroup]="feedbackmsgform">
+          <ng-template matStepLabel>Your valuable feedback</ng-template>
+          <mat-form-field>
+            <textarea matInput placeholder="What you liked and what can be bettered?" formControlName="feedback"></textarea>
+          </mat-form-field>
+          <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button matStepperNext>Next</button>
+          </div>
+        </form>
+      </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Done</ng-template>
+      You are now done.
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <!-- <button mat-button (click)="stepper.reset()">Reset</button> -->
+      </div>
+    </mat-step>
+  </mat-vertical-stepper>
+  </div>
