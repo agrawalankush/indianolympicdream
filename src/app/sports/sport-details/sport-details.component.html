@@ -19,8 +19,13 @@
                 </a>
 </div>
         <p>
-               {{sportsdetails.description}}
-        </p>        
+          {{sportsdetails.description}}
+          <a mat-flat-button *ngIf="sportsdetails.name === 'Hockey'" color="accent" target="_blank" href="https://www.youtube.com/watch?v=B_gcSeiA4zU">
+                <mat-icon>movie</mat-icon>India's Champions
+          </a>  
+        </p>
+                
+                
 </div>
 <mat-tab-group mat-align-tabs="center">
         <mat-tab label="Events">
