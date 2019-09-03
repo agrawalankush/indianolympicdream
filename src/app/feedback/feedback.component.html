@@ -37,10 +37,13 @@
       </mat-step>
     <mat-step>
       <ng-template matStepLabel>Done</ng-template>
-      You are now done.
+      <ng-template matStepLabel *ngIf="successmsg">{{successmsg}}</ng-template>
+      <ng-template matStepLabel *ngIf="errmsg">{{errmsg}}</ng-template>  
       <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <!-- <button mat-button (click)="stepper.reset()">Reset</button> -->
+        <button mat-button *ngIf="!successmsg" matStepperPrevious>Back</button>
+         <span *ngIf="successmsg">{{successmsg}} <button class="submit-btn" mat-flat-button routerLink="/home">Home</button></span>
+         <button mat-flat-button class="submit-btn" color="accent" (click)="stepper.reset()">Reset</button>
+         <a *ngIf="!successmsg" class="submit-btn" mat-flat-button color="accent" [disabled]="nameform.invalid || emailform.invalid || feedbackmsgform.invalid" (click)="submitfeedback()">Send<mat-icon>send</mat-icon></a>
       </div>
     </mat-step>
   </mat-vertical-stepper>

@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const MongoClient = require('mongodb').MongoClient;
-// const ObjectID = require('mongodb').ObjectID;
 
 // Connect
 const connection = (closure) => {
@@ -61,6 +60,28 @@ router.get('/allsports', (req, res) => {
             });
     });
 });
+router.post('/feedback',function(req,res){
+    //let feedback =req.body;
+    let feedbackdata = { 
+     name: req.body.name,
+     email:req.body.email,
+     created :+new Date(),
+     feedback:req.body.feedback
+  };
+     //console.log(feedbackdata);
+     connection((db) => {
+        db.collection('feedback')
+        .insert(feedbackdata)
+        .then((feedbackdata) => {
+            response.data = feedbackdata;
+            res.json(feedbackdata);
+        })
+        .catch((err) => {
+            sendError(err, res);
+        });
+     });
+    }
+ );
 router.get('/shows', (req, res) => {
     connection((db) => {
         db.collection('shows_data')
