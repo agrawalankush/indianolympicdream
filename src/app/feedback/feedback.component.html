@@ -4,7 +4,7 @@
       <form [formGroup]="nameform">
         <ng-template matStepLabel>Name</ng-template>
         <mat-form-field>
-          <input matInput color="accent" placeholder="Fullname" formControlName="name">
+          <input matInput color="accent" placeholder="FullName" formControlName="name">
         </mat-form-field>
         <div>
           <button mat-button matStepperNext>Next</button>
@@ -27,7 +27,7 @@
         <form [formGroup]="feedbackmsgform">
           <ng-template matStepLabel>Feedback</ng-template>
           <mat-form-field>
-            <textarea matInput placeholder="let me know how I can make your life easier also, Appreciation is really appreciated" formControlName="feedback"></textarea>
+            <textarea matInput rows="3" cols="40" placeholder="Your valuable feedback" formControlName="feedback"></textarea>
           </mat-form-field>
           <div>
             <button mat-button matStepperPrevious>Back</button>
