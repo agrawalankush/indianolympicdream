@@ -14,13 +14,13 @@
 [ngClass.gt-xs]="{'sport-details-card-header':false, 'sport-details-card-header-bigger':true}">
                 <h1>{{sportsdetails.name | uppercase}}</h1>
                 <span class="medals-number"><img class="medal-icon" src="assets/icon_medal.png">{{sportsdetails.Medals}}</span> 
-                <a mat-flat-button color="accent" target="_blank" [href]="sportsdetails.doc_pdf">
+                <a mat-flat-button color="primary" target="_blank" [href]="sportsdetails.doc_pdf">
                         <mat-icon>picture_as_pdf</mat-icon>Qualification Road for Tokyo
                 </a>
 </div>
         <p>
           {{sportsdetails.description}}
-          <a mat-flat-button *ngIf="sportsdetails.name === 'Hockey'" color="accent" target="_blank" href="https://www.youtube.com/watch?v=B_gcSeiA4zU">
+          <a mat-flat-button *ngIf="sportsdetails.name === 'Hockey'" color="primary" target="_blank" href="https://www.youtube.com/watch?v=B_gcSeiA4zU">
                 <mat-icon>movie</mat-icon>India's Champions
           </a>  
         </p>
