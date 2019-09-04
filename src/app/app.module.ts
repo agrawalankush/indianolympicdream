@@ -15,7 +15,6 @@ import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { ShowsComponent } from './shows/shows.component';
 import { SafePipe } from './safepipe';
 import { HeaderComponent } from './header/header.component';
-import { FeedbackComponent } from './feedback/feedback.component';
 import { AboutComponent } from './about/about.component';
 
 @NgModule({
@@ -26,7 +25,6 @@ import { AboutComponent } from './about/about.component';
     ShowsComponent,
     SafePipe,
     HeaderComponent,
-    FeedbackComponent,
     AboutComponent
   ],
   imports: [

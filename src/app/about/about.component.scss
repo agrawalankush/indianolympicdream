@@ -1,7 +1,13 @@
-.container{
+.container-bigger{
     margin: 0 auto 0 auto;
     max-width:800px;
   }
+.container {
+    margin: 24px;
+} 
+.header {
+    font-size: 1.3rem;
+} 
   p {
     font-size: 16px;
     line-height: 28px;
@@ -12,5 +18,13 @@
     margin-inline-end: 0px;
 }
 .gif-img {
-    max-width: 100%;
+    width: 100%;
+}
+.mat-button {
+    padding: 4px;
+}
+h3 {
+    padding-top: 1rem;
+    margin-top: 2rem;
+    font-size: 1.35rem;
 }

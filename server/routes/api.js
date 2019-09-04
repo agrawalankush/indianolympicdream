@@ -60,6 +60,7 @@ router.get('/allsports', (req, res) => {
             });
     });
 });
+/**
 router.post('/feedback',function(req,res){
     //let feedback =req.body;
     let feedbackdata = { 
@@ -82,6 +83,7 @@ router.post('/feedback',function(req,res){
      });
     }
  );
+ */ 
 router.get('/shows', (req, res) => {
     connection((db) => {
         db.collection('shows_data')
