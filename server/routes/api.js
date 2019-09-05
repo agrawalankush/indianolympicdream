@@ -49,7 +49,7 @@ router.get('/sports/:sportname', (req, res) => {
 router.get('/allsports', (req, res) => {
     connection((db) => {
         db.collection('all_sports')
-            .find({})
+            .find({"isimportant": true})
             .toArray()
             .then((allsports) => {
                 response.data = allsports;

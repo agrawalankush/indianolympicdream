@@ -17,7 +17,7 @@
   </mat-toolbar>
   <mat-sidenav-container class="sidenav-container">
         <mat-sidenav #drawer class="sidenav" mode="over"> 
-          <mat-nav-list>
+          <mat-nav-list (click)="drawer.close()">
                 <a mat-list-item routerLink="/home" routerLinkActive="active">
                   <mat-icon>home</mat-icon>
                   <span class="sidenav-menu">Home</span>
