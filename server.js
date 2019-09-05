@@ -3,14 +3,15 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const http = require('http');
 const app = express();
-
+const compression = require('compression');
 // API file for interacting with MongoDB
 const api = require('./server/routes/api');
 
 // Parsers
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false}));
-
+//gzip cpmpression
+app.use(compression());
 // Angular DIST output folder
 app.use(express.static(path.join(__dirname, 'dist')));
 app.use(express.static(path.join(__dirname, 'The_Olympic_Dream')));

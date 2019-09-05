@@ -16,6 +16,8 @@ import { ShowsComponent } from './shows/shows.component';
 import { SafePipe } from './safepipe';
 import { HeaderComponent } from './header/header.component';
 import { AboutComponent } from './about/about.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -37,6 +39,7 @@ import { AboutComponent } from './about/about.component';
     AppRoutingModule,
     FlexLayoutModule,
     BrowserAnimationsModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     
   ],
   providers: [],
