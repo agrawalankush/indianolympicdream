@@ -1,6 +1,7 @@
 <!-- <mat-paginator #paginator [length]="totalathletes" [pageIndex]="0" [pageSize]="10" [pageSizeOptions]="[5,10]">
 </mat-paginator> -->
 <!-- {{ athletes | json}} -->
+<mat-progress-bar color="warn" *ngIf="loadingselected" mode="query"></mat-progress-bar>
 <mat-paginator [length]="length"
               [pageSize]="pageSize"
               [pageSizeOptions]="pageSizeOptions"
@@ -8,6 +9,7 @@
 </mat-paginator>
 <div class="cards-container" fxLayout="row wrap" 
         fxLayoutAlign="center center">
+        
         <mat-form-field appearance="outline" class="chip-list">
                         <mat-label>Search your sport</mat-label>
                         <mat-chip-list #chipList aria-label="Sport selection">

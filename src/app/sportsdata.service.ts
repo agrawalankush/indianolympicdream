@@ -25,11 +25,11 @@ export class SportsdataService {
     .set('pageSize', pageSize.toString());
     return this.http.get<Calendar[]>(`/api/calendar`, {params: params});
   }
-  public getathletes(pageIndex: number, pageSize: number) {
+  public getathletes(sports: any,pageIndex: number, pageSize: number) {
     let params = new HttpParams()
-    //.set('searchterm', filter)
     .set('pageIndex', pageIndex.toString())
     .set('pageSize', pageSize.toString());
+    params = params.append('searchedsports', sports);
     return this.http.get<any>(`/api/athletes`, {params: params});
   }
   public getshowsdata(pageIndex: number, pageSize: number) {

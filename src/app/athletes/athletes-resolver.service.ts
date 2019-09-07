@@ -17,7 +17,7 @@ export class AthletesResolverService implements Resolve<any> {
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | Observable<never> {
 
-    return this.sportservice.getathletes(0,8).pipe(
+    return this.sportservice.getathletes([],0,8).pipe(
       take(1),
       mergeMap(athletes => {
         if (athletes) {

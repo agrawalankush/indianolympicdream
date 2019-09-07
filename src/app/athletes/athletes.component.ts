@@ -1,15 +1,16 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SportsdataService } from '../sportsdata.service';
-import {PageEvent} from '@angular/material/paginator';
+import { MatPaginator } from '@angular/material';
+import { PageEvent} from '@angular/material/paginator';
 // import { Athletes} from '../models/app-models';
 import { tap } from 'rxjs/operators';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {FormControl} from '@angular/forms';
 import {MatAutocompleteSelectedEvent, MatAutocomplete} from '@angular/material/autocomplete';
-import {MatChipInputEvent} from '@angular/material/chips';
-import {Observable} from 'rxjs';
-import {map, startWith} from 'rxjs/operators';
+import {Observable, of as observableOf} from 'rxjs';
+import {map, startWith,catchError, finalize} from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-athletes',
@@ -19,8 +20,8 @@ import {map, startWith} from 'rxjs/operators';
 export class AthletesComponent implements OnInit{
   public errmsg: string;
   public athletes: any;
-  public totalathletes;
-  public searchquery = '';
+  loadingselected = false;
+  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
   // MatPaginator Inputs
   length: number;
   pageSize = 8;
@@ -63,7 +64,7 @@ export class AthletesComponent implements OnInit{
   handlePageEvent(e: PageEvent) {
     let index = e.pageIndex * e.pageSize;
     let size =  e.pageSize;
-    this.sportservice.getathletes(index,size)
+    this.sportservice.getathletes(this.sports,index,size)
     .subscribe(
      (res:any) => {
        this.athletes = res.qualifiedathletes.athletes;
@@ -87,6 +88,7 @@ export class AthletesComponent implements OnInit{
 
     if (index >= 0) {
       this.sports.splice(index, 1);
+      this.SearchAthltes(this.sports);
     }
   }
 
@@ -94,6 +96,7 @@ export class AthletesComponent implements OnInit{
     this.sports.push(event.option.viewValue);
     this.sportInput.nativeElement.value = '';
     this.sportCtrl.setValue(null);
+    this.SearchAthltes(this.sports);
   }
 
   private _filter(value: string): string[] {
@@ -104,5 +107,26 @@ export class AthletesComponent implements OnInit{
     } else {
     return this.allsports.filter(sport => sport.toLowerCase().indexOf(filterValue) === 0);
   }
+  }
+  public SearchAthltes(selectedsports: any) {
+    this.loadingselected = true;
+    let index = this.paginator.pageIndex * this.paginator.pageSize;
+    let size =  this.paginator.pageSize;
+    this.sportservice.getathletes(selectedsports,index,size)
+    .pipe(
+      // debounceTime(300),
+      // distinctUntilChanged(),
+      catchError(() => observableOf([])),
+      finalize(() => this.loadingselected = false)
+    )
+    .subscribe(
+     (res:any) => {
+       this.athletes = res.qualifiedathletes.athletes;
+       this.length = res.qualifiedathletes.total;
+   },
+     (error) =>{
+       this.errmsg = error.error;
+       console.log(error);
+     });
   }
 }
