@@ -13,7 +13,6 @@ import { HomeComponent} from './home/home.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { ShowsComponent } from './shows/shows.component';
 import { SafePipe } from './safepipe';
-import { HeaderComponent } from './header/header.component';
 import { AboutComponent } from './about/about.component';
 import { SportDetailsComponent } from './sport-details/sport-details.component';
 import { CalendarComponent } from './calendar/calendar.component';
@@ -28,7 +27,6 @@ import { environment } from '../environments/environment';
     PagenotfoundComponent,
     ShowsComponent,
     SafePipe,
-    HeaderComponent,
     SportDetailsComponent,
     CalendarComponent,
     AthletesComponent,

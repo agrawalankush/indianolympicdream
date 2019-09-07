@@ -1,7 +1,7 @@
 
 <div ngClass="container" 
 [ngClass.gt-sm]="{'container':false, 'container-bigger':true}" fxLayout="column">
-<div class="sports-details-card" *ngIf="sportsdetails">
+<div class="sports-details-card">
 <img ngClass="sports-details-card-image" 
 [ngClass.gt-sm]="{'sports-details-card-image':false, 'sports-details-card-image-bigger':true}" [src]="sportsdetails.image">
 <div ngClass="sport-details-card-header"
@@ -17,11 +17,9 @@
           <a mat-flat-button *ngIf="sportsdetails.name === 'Hockey'" color="primary" target="_blank" href="https://www.youtube.com/watch?v=B_gcSeiA4zU">
                 <mat-icon>movie</mat-icon>India's Champions
           </a>  
-        </p>
-                
-                
+        </p>    
 </div>  <h3> EVENTS </h3>
-        <div class="events-container" *ngIf="sportsdetails">
+        <div class="events-container">
                 <mat-accordion multi="true">
                         <mat-expansion-panel *ngFor="let eventscatagory of sportsdetails.events | keyvalue" class="event-header" hideToggle="true" #eventpanel>
                                 <mat-expansion-panel-header>

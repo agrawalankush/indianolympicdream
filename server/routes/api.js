@@ -38,8 +38,7 @@ router.get('/sports/:sportname', (req, res) => {
             .find({"name":sportname})
             .toArray()
             .then((sports) => {
-                response.data = sports;
-                res.json(response);
+                res.json(sports);
             })
             .catch((err) => {
                 sendError(err, res);

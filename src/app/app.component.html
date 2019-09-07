@@ -1,3 +1,51 @@
 
-<app-header></app-header>
-    
+<mat-toolbar color="" class="mat-elevation-z4">
+        <button mat-icon-button (click)="drawer.toggle()" aria-label="Side nav toggle icon">
+         <mat-icon>menu</mat-icon>
+        </button>
+         <button mat-button  class="logo-button" routerLink="">Indian
+          <img src="assets/logo.png" class="olympic-logo">
+          Dream
+        </button>
+        <!-- <button fxHide.lt-sm="true" mat-button>Blogs</button> -->
+        <nav>
+        <button fxHide.lt-sm="true" routerLink="/calendar" mat-button routerLinkActive="active">Calendar</button>
+        <button fxHide.lt-sm="true" routerLink="/athletes" mat-button routerLinkActive="active">Qualified Athletes</button>
+        <button fxHide.lt-sm="true" routerLink="/shows" mat-button routerLinkActive="active">Shows I love</button>
+        <button fxHide.lt-sm="true" routerLink="/about"  mat-button routerLinkActive="active">About</button>
+        </nav>
+      </mat-toolbar>
+      <mat-progress-bar color="warn" *ngIf="loading" mode="query"></mat-progress-bar>
+      <mat-sidenav-container class="sidenav-container">
+            <mat-sidenav #drawer class="sidenav" mode="over"> 
+              <mat-nav-list (click)="drawer.close()">
+                    <a mat-list-item routerLink="/home" routerLinkActive="active">
+                      <mat-icon>home</mat-icon>
+                      <span class="sidenav-menu">Home</span>
+                    </a>
+                    <a mat-list-item routerLink="/calendar" routerLinkActive="active">
+                        <mat-icon>date_range</mat-icon>
+                        <span class="sidenav-menu">Calendar</span>
+                    </a>
+                    <!-- <a mat-list-item routerLink="" routerLinkActive="active">
+                      <mat-icon>description</mat-icon>
+                      <span class="sidenav-menu">Blogs</span>
+                    </a> -->
+                    <a mat-list-item routerLink="/athletes" routerLinkActive="active">
+                      <mat-icon>directions_run</mat-icon>
+                      <span class="sidenav-menu">Qualified Athletes</span>
+                    </a> 
+                    <a mat-list-item routerLink="/shows" routerLinkActive="active">
+                      <mat-icon>movie</mat-icon>
+                      <span class="sidenav-menu">Shows I love</span>
+                    </a> 
+                    <a mat-list-item routerLink="/about" routerLinkActive="active">
+                        <mat-icon>info</mat-icon>
+                        <span class="sidenav-menu">About</span>
+                    </a>
+                  </mat-nav-list>
+            </mat-sidenav>
+      <mat-sidenav-content>
+        <router-outlet></router-outlet>
+      </mat-sidenav-content>
+      </mat-sidenav-container>

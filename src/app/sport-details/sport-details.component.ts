@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { SportsdataService } from '../sportsdata.service';
+import { SportDetails } from '../models/sport-details';
 @Component({
   selector: 'app-sport-details',
   templateUrl: './sport-details.component.html',
@@ -17,21 +18,15 @@ export class SportDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.sportname = this.route.snapshot.paramMap.get('sportname');
-    console.log(this.sportname);
-    this.getsportdetails(this.sportname);
-  }
-  public getsportdetails(sportname: string){
-    this.sportservice.getsports(sportname)
+    this.route.data
     .subscribe(
-      (sportsdata:any) =>{
-        // console.log(sportsdata.data[0]);
-        this.sportsdetails = sportsdata.data[0];
-      },
+      (data: { sportdata: SportDetails }) => {
+      // console.log(data.sportdata);
+      this.sportsdetails = data.sportdata[0];
+    },
       (error) =>{
         this.errmsg = error.error;
         console.log(error);
-      }
-    )
+      });
   }
 }
