@@ -9,22 +9,21 @@ import { Observable, of, EMPTY }  from 'rxjs';
 import { mergeMap, take }         from 'rxjs/operators';
 
 import { SportsdataService } from '../sportsdata.service';
-import { SportDetails } from '../models/app-models';
+import { AllSports } from '../models/app-models';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
-export class SportDetailsResolverService implements Resolve<SportDetails[]> {
+export class AllSportsResolverService implements Resolve<AllSports[]> {
   constructor(private sportservice: SportsdataService, private router: Router) {}
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<SportDetails[]> | Observable<never> {
-    let sportname = route.paramMap.get('sportname');
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<AllSports[]> | Observable<never> {
 
-    return this.sportservice.getsports(sportname).pipe(
+    return this.sportservice.getallsports().pipe(
       take(1),
-      mergeMap(sportdata => {
-        if (sportdata) {
-          return of(sportdata);
+      mergeMap(allsports => {
+        if (allsports) {
+          return of(allsports);
         } else { 
           // sport not found
           this.router.navigate(['./']);

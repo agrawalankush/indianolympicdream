@@ -51,46 +51,21 @@ router.get('/allsports', (req, res) => {
             .find({"isimportant": true})
             .toArray()
             .then((allsports) => {
-                response.data = allsports;
-                res.json(response);
+                res.json(allsports);
             })
             .catch((err) => {
                 sendError(err, res);
             });
     });
 });
-/**
-router.post('/feedback',function(req,res){
-    //let feedback =req.body;
-    let feedbackdata = { 
-     name: req.body.name,
-     email:req.body.email,
-     created :+new Date(),
-     feedback:req.body.feedback
-  };
-     //console.log(feedbackdata);
-     connection((db) => {
-        db.collection('feedback')
-        .insert(feedbackdata)
-        .then((feedbackdata) => {
-            response.data = feedbackdata;
-            res.json(feedbackdata);
-        })
-        .catch((err) => {
-            sendError(err, res);
-        });
-     });
-    }
- );
- */ 
+
 router.get('/shows', (req, res) => {
     connection((db) => {
         db.collection('shows_data')
             .find({})
             .toArray()
             .then((sports) => {
-                response.data = sports;
-                res.json(response);
+                res.json(sports);
             })
             .catch((err) => {
                 sendError(err, res);
@@ -146,7 +121,7 @@ router.get('/athletes', (req, res) => {
            .find({}); //$text: { $search: searchterm }
    curFind.count(function (e, count) {
        let doccount = count;
-        console.log(count);
+        // console.log(count);
            curFind
            .sort({date_qualified:1})
            // .skip(pageoffset)
@@ -155,7 +130,7 @@ router.get('/athletes', (req, res) => {
            .then((athletes) => {
                let response = {
                    status: 200,
-                   data: {
+                   qualifiedathletes: {
                     athletes:athletes,
                     total:doccount
                    },
@@ -171,4 +146,28 @@ router.get('/athletes', (req, res) => {
    });
    
 });
+/**
+router.post('/feedback',function(req,res){
+    //let feedback =req.body;
+    let feedbackdata = { 
+     name: req.body.name,
+     email:req.body.email,
+     created :+new Date(),
+     feedback:req.body.feedback
+  };
+     //console.log(feedbackdata);
+     connection((db) => {
+        db.collection('feedback')
+        .insert(feedbackdata)
+        .then((feedbackdata) => {
+            response.data = feedbackdata;
+            res.json(feedbackdata);
+        })
+        .catch((err) => {
+            sendError(err, res);
+        });
+     });
+    }
+ );
+ */ 
 module.exports = router;

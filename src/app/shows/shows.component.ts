@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ShowsdataService } from './showsdata.service';
+import { ActivatedRoute } from '@angular/router';
+import { SportsdataService } from '../sportsdata.service';
+import { Shows } from '../models/app-models';
 @Component({
   selector: 'app-shows',
   templateUrl: './shows.component.html',
@@ -9,22 +11,18 @@ export class ShowsComponent implements OnInit {
   public showsdata:any;
   public errmsg:string;
   public videoyoutube: string = "https://www.youtube.com/embed/";
-  constructor(private showdataservice: ShowsdataService) { }
+  constructor(private route:ActivatedRoute,private sportservice: SportsdataService) { }
 
   ngOnInit() {
-     this.getshowsdata();
-  }
-  public getshowsdata(){
-    this.showdataservice.getshowsdata()
+     // this.getshowsdata();
+     this.route.data
     .subscribe(
-      (showsdata:any) =>{
-        //console.log(sportsdata.data[0]);
-        this.showsdata = showsdata.data;
-      },
+      (data: { showsdata: Shows[] }) => {
+      this.showsdata = data.showsdata;
+    },
       (error) =>{
         this.errmsg = error.error;
         console.log(error);
-      }
-    )
+      });
   }
-}
+  }

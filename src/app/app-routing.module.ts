@@ -9,15 +9,31 @@ import { SportDetailsComponent } from './sport-details/sport-details.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { AthletesComponent } from './athletes/athletes.component';
 import { SportDetailsResolverService } from './sport-details/sport-details-resolver.service';
+import { AthletesResolverService } from './athletes/athletes-resolver.service';
+import { AllSportsResolverService } from './home/all-sports-resolver.service';
+import { ShowsResolverService } from './shows/shows-resolver.service';
 const routes: Routes = [
-  { path: 'home',  component: HomeComponent },
+  { path: 'home',  component: HomeComponent,
+    resolve: {
+      allsportsdata: AllSportsResolverService
+    }
+  },
   { path: 'sports/:sportname', component: SportDetailsComponent,
-  resolve: {
-    sportdata: SportDetailsResolverService
-  }},
-  { path: 'calendar', component: CalendarComponent},
-  { path: 'athletes', component: AthletesComponent},
-  { path: 'shows', component: ShowsComponent },
+    resolve: {
+      sportdata: SportDetailsResolverService
+    }
+  },
+  { path: 'calendar', component: CalendarComponent },
+  { path: 'athletes', component: AthletesComponent,
+    resolve: {
+      athletesdata: AthletesResolverService
+    }
+  },
+  { path: 'shows', component: ShowsComponent,
+    resolve: {
+      showsdata: ShowsResolverService
+    }
+  },
   { path: 'about',  component: AboutComponent },
   { path: '',   redirectTo: '/home', pathMatch: 'full' },
   { path: '**', component: PagenotfoundComponent }

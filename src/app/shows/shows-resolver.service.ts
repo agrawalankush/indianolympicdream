@@ -1,5 +1,4 @@
-
-import { Injectable }             from '@angular/core';
+import { Injectable } from '@angular/core';
 import {
   Router, Resolve,
   RouterStateSnapshot,
@@ -9,22 +8,20 @@ import { Observable, of, EMPTY }  from 'rxjs';
 import { mergeMap, take }         from 'rxjs/operators';
 
 import { SportsdataService } from '../sportsdata.service';
-import { SportDetails } from '../models/app-models';
-
+import { Shows } from '../models/app-models';
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
-export class SportDetailsResolverService implements Resolve<SportDetails[]> {
+export class ShowsResolverService implements Resolve<Shows[]> {
   constructor(private sportservice: SportsdataService, private router: Router) {}
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<SportDetails[]> | Observable<never> {
-    let sportname = route.paramMap.get('sportname');
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Shows[]> | Observable<never> {
 
-    return this.sportservice.getsports(sportname).pipe(
+    return this.sportservice.getshowsdata().pipe(
       take(1),
-      mergeMap(sportdata => {
-        if (sportdata) {
-          return of(sportdata);
+      mergeMap(showsdata => {
+        if (showsdata) {
+          return of(showsdata);
         } else { 
           // sport not found
           this.router.navigate(['./']);

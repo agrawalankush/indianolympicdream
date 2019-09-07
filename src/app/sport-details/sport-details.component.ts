@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { SportsdataService } from '../sportsdata.service';
-import { SportDetails } from '../models/sport-details';
+import { SportDetails } from '../models/app-models';
 @Component({
   selector: 'app-sport-details',
   templateUrl: './sport-details.component.html',
@@ -20,7 +20,7 @@ export class SportDetailsComponent implements OnInit {
   ngOnInit() {
     this.route.data
     .subscribe(
-      (data: { sportdata: SportDetails }) => {
+      (data: { sportdata: SportDetails[] }) => {
       // console.log(data.sportdata);
       this.sportsdetails = data.sportdata[0];
     },
