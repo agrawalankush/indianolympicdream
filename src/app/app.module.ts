@@ -7,7 +7,6 @@ import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { SportModule } from './sports/sport.module';
 
 //componets
 import { HomeComponent} from './home/home.component';
@@ -16,6 +15,9 @@ import { ShowsComponent } from './shows/shows.component';
 import { SafePipe } from './safepipe';
 import { HeaderComponent } from './header/header.component';
 import { AboutComponent } from './about/about.component';
+import { SportDetailsComponent } from './sport-details/sport-details.component';
+import { CalendarComponent } from './calendar/calendar.component';
+import { AthletesComponent } from './athletes/athletes.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 
@@ -27,6 +29,9 @@ import { environment } from '../environments/environment';
     ShowsComponent,
     SafePipe,
     HeaderComponent,
+    SportDetailsComponent,
+    CalendarComponent,
+    AthletesComponent,
     AboutComponent
   ],
   imports: [
@@ -35,7 +40,6 @@ import { environment } from '../environments/environment';
     MaterialModule,
     FormsModule, 
     ReactiveFormsModule,
-    SportModule,
     AppRoutingModule,
     FlexLayoutModule,
     BrowserAnimationsModule,

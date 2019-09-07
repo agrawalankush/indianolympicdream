@@ -1,5 +1,5 @@
 import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
-import { SportsService } from '../sports.service';
+import { SportsdataService } from '../sportsdata.service';
 import { MatPaginator } from '@angular/material';
 import { tap } from 'rxjs/operators';
 @Component({
@@ -13,7 +13,7 @@ export class AthletesComponent implements OnInit, AfterViewInit {
   public totalathletes;
   public searchquery = '';
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
-  constructor(private sportservice:SportsService) { }
+  constructor(private sportservice:SportsdataService) { }
 
   ngOnInit() {
     this.getathletes();

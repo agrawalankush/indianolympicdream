@@ -1,7 +1,10 @@
-  .container{
-    margin: 0 auto;
+  .container-bigger{
+    margin: 24px auto;
     max-width:800px;
   }
+  .container {
+    margin: 24px;
+} 
   .event-header .mat-expansion-panel-header-title {
     flex-basis: 0;
     align-items: center;

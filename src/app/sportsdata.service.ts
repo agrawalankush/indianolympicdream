@@ -12,7 +12,24 @@ export class SportsdataService {
   public getallsports() {
     return this.http.get(`/api/allsports`);
   }
-  postfeedback(feedbackjson){
-    return this.http.post(`/api/feedback`,feedbackjson,this.httpOptions);  
+  public getsports(sportname: string) {
+    return this.http.get(`/api/sports/${sportname}`);
   }
+  public getcalendar(filter: string, pageIndex: number, pageSize: number) {
+    let params = new HttpParams()
+    .set('searchterm', filter)
+    .set('pageIndex', pageIndex.toString())
+    .set('pageSize', pageSize.toString());
+    return this.http.get(`/api/calendar`, {params: params});
+  }
+  public getathletes() {
+    // let params = new HttpParams()
+    // .set('searchterm', filter)
+    // .set('pageIndex', pageIndex.toString())
+    // .set('pageSize', pageSize.toString());
+    return this.http.get(`/api/athletes`);
+  }
+  // postfeedback(feedbackjson){
+  //   return this.http.post(`/api/feedback`,feedbackjson,this.httpOptions);  
+  // }
 }

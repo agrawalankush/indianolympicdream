@@ -1,7 +1,7 @@
 import {Component,OnInit, AfterViewInit, ViewChild} from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatPaginator } from '@angular/material';
-import { SportsService } from '../sports.service';
+import { SportsdataService } from '../sportsdata.service';
 import { CalendarDataSource } from './datasource';
 import { tap } from 'rxjs/operators';
 @Component({
@@ -19,7 +19,7 @@ export class CalendarComponent implements OnInit,AfterViewInit {
   constructor(
     private route:ActivatedRoute,
     private router: Router,
-    private sportservice:SportsService
+    private sportservice:SportsdataService
   ) { }
 
   ngOnInit() {

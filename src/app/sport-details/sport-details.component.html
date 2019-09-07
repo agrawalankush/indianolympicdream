@@ -1,5 +1,6 @@
 
-<div class="container" fxLayout="column">
+<div ngClass="container" 
+[ngClass.gt-sm]="{'container':false, 'container-bigger':true}" fxLayout="column">
 <div class="sports-details-card" *ngIf="sportsdetails">
 <img ngClass="sports-details-card-image" 
 [ngClass.gt-sm]="{'sports-details-card-image':false, 'sports-details-card-image-bigger':true}" [src]="sportsdetails.image">

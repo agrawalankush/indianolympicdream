@@ -7,7 +7,7 @@ import {
   catchError,
   finalize
 } from 'rxjs/operators';
-import { SportsService } from '../sports.service';
+import { SportsdataService } from '../sportsdata.service';
 export interface Calendar {
     sportname: string;
     event: Array<{name: string, startdate: number, enddate: number, venue: string}>;
@@ -19,7 +19,7 @@ export class CalendarDataSource implements DataSource<Calendar> {
     public length: number;
     public loading$ = this.loadingSubject.asObservable();
 
-    constructor(private sportservice: SportsService) {}
+    constructor(private sportservice: SportsdataService) {}
 
     connect(collectionViewer: CollectionViewer): Observable<Calendar[]> {
         return this.calendarSubject.asObservable();
