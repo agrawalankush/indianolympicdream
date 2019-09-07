@@ -8,16 +8,16 @@ import { Observable, of, EMPTY }  from 'rxjs';
 import { mergeMap, take }         from 'rxjs/operators';
 
 import { SportsdataService } from '../sportsdata.service';
-import { Athletes } from '../models/app-models';
+// import { Athletes } from '../models/app-models';
 @Injectable({
   providedIn: 'root'
 })
-export class AthletesResolverService implements Resolve<Athletes[]> {
+export class AthletesResolverService implements Resolve<any> {
   constructor(private sportservice: SportsdataService, private router: Router) {}
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Athletes[]> | Observable<never> {
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | Observable<never> {
 
-    return this.sportservice.getathletes().pipe(
+    return this.sportservice.getathletes(0,8).pipe(
       take(1),
       mergeMap(athletes => {
         if (athletes) {

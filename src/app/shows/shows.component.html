@@ -2,6 +2,11 @@
         {{errmsg}}
     </mat-error>
     <!-- <pre>{{showsdata}}</pre> -->
+    <mat-paginator [length]="length"
+              [pageSize]="pageSize"
+              [pageSizeOptions]="pageSizeOptions"
+              (page)="handlePageEvent($event)">
+    </mat-paginator>
     <div *ngIf="showsdata" class="cards-container" fxLayout="row wrap" fxLayoutAlign="center center">
         <mat-card color="primary" class="movies-card" *ngFor="let showcontent of showsdata">
              <mat-card-header>

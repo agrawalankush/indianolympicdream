@@ -25,15 +25,18 @@ export class SportsdataService {
     .set('pageSize', pageSize.toString());
     return this.http.get<Calendar[]>(`/api/calendar`, {params: params});
   }
-  public getathletes() {
-    // let params = new HttpParams()
-    // .set('searchterm', filter)
-    // .set('pageIndex', pageIndex.toString())
-    // .set('pageSize', pageSize.toString());
-    return this.http.get<Athletes[]>(`/api/athletes`);
+  public getathletes(pageIndex: number, pageSize: number) {
+    let params = new HttpParams()
+    //.set('searchterm', filter)
+    .set('pageIndex', pageIndex.toString())
+    .set('pageSize', pageSize.toString());
+    return this.http.get<any>(`/api/athletes`, {params: params});
   }
-  public getshowsdata() {
-    return this.http.get<Shows[]>(`/api/shows`);
+  public getshowsdata(pageIndex: number, pageSize: number) {
+    let params = new HttpParams()
+    .set('pageIndex', pageIndex.toString())
+    .set('pageSize', pageSize.toString());
+    return this.http.get<any>(`/api/shows`, {params: params});
   }
   // postfeedback(feedbackjson){
   //   return this.http.post(`/api/feedback`,feedbackjson,this.httpOptions);  

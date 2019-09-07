@@ -60,20 +60,51 @@ router.get('/allsports', (req, res) => {
 });
 
 router.get('/shows', (req, res) => {
+    let pageoffset = parseInt(req.query.pageIndex, 10);
+    let pagesize = parseInt(req.query.pageSize,10);
+    // connection((db) => {
+    //     db.collection('shows_data')
+    //         .find({})
+    //         .skip(pageoffset)
+    //         .limit(pagesize)
+    //         .toArray()
+    //         .then((sports) => {
+    //             res.json(sports);
+    //         })
+    //         .catch((err) => {
+    //             sendError(err, res);
+    //         });
+    // });
     connection((db) => {
-        db.collection('shows_data')
-            .find({})
+    let showsFind = db.collection('shows_data')
+            .find({}); //$text: { $search: searchterm }
+            showsFind.count(function (err, count) {
+            if(err) console.log(err);    
+        let totalshows = count;
+        // console.log(count);
+        showsFind
+            .skip(pageoffset)
+            .limit(pagesize)
             .toArray()
-            .then((sports) => {
-                res.json(sports);
-            })
-            .catch((err) => {
-                sendError(err, res);
-            });
+            .then((shows) => {
+                let response = {
+                    status: 200,
+                    data: {
+                        shows:shows,
+                        total:totalshows
+                    },
+                    message: null
+                };
+                    res.json(response);
+                })
+                .catch((err) => {
+                    sendError(err, res);
+                });
+        }); 
     });
 });
 router.get('/calendar', (req, res) => {
-     console.log(req.query);
+//console.log(req.query);
    let searchterm = req.query.searchterm; 
    let pageoffset = parseInt(req.query.pageIndex, 10);
    let pagesize = parseInt(req.query.pageSize,10);
@@ -112,20 +143,21 @@ router.get('/calendar', (req, res) => {
 router.get('/athletes', (req, res) => {
   // console.log(req);
   // let searchterm = req.query.searchterm; 
-  // let pageoffset = parseInt(req.query.pageIndex, 10);
-  // let pagesize = parseInt(req.query.pageSize,10);
+   let pageoffset = parseInt(req.query.pageIndex, 10);
+   let pagesize = parseInt(req.query.pageSize,10);
    
    connection((db) => {
 
    let curFind = db.collection('qualified_athletes')
            .find({}); //$text: { $search: searchterm }
-   curFind.count(function (e, count) {
+   curFind.count(function (err, count) {
+    if(err) console.log(err);   
        let doccount = count;
         // console.log(count);
            curFind
            .sort({date_qualified:1})
-           // .skip(pageoffset)
-           // .limit(pagesize)
+            .skip(pageoffset)
+            .limit(pagesize)
            .toArray()
            .then((athletes) => {
                let response = {
