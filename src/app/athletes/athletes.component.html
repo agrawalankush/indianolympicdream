@@ -6,8 +6,33 @@
               [pageSizeOptions]="pageSizeOptions"
               (page)="handlePageEvent($event)">
 </mat-paginator>
-<div *ngIf="athletes" class="cards-container" fxLayout="row wrap" 
+<div class="cards-container" fxLayout="row wrap" 
         fxLayoutAlign="center center">
+        <mat-form-field appearance="outline" class="chip-list">
+                        <mat-label>Search your sport</mat-label>
+                        <mat-chip-list #chipList aria-label="Sport selection">
+                          <mat-chip
+                            *ngFor="let sport of sports"
+                            [selectable]="selectable"
+                            [removable]="removable"
+                            (removed)="remove(sport)">
+                            {{sport}}
+                            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                          </mat-chip>
+                          <input
+                            #sportInput
+                            [formControl]="sportCtrl"
+                            [matAutocomplete]="auto"
+                            [matChipInputFor]="chipList"
+                            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                            >
+                        </mat-chip-list>
+                        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                          <mat-option *ngFor="let sport of filteredSports | async" [value]="sport">
+                            {{sport}}
+                          </mat-option>
+                        </mat-autocomplete>
+                      </mat-form-field>
         <mat-card color="primary" class="athletes-card"
                 *ngFor="let athlete of athletes">
                 <mat-card-header>
