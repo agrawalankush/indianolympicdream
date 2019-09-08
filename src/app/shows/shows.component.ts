@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SportsdataService } from '../sportsdata.service';
-// import { Shows } from '../models/app-models';
+// import { ShowsResolve } from '../models/app-models';
 import {PageEvent} from '@angular/material/paginator';
 @Component({
   selector: 'app-shows',
@@ -25,12 +25,12 @@ export class ShowsComponent implements OnInit {
      this.route.data
     .subscribe(
       (data: { showsdata: any }) => {
-      this.showsdata = data.showsdata.data.shows;
-      this.length = data.showsdata.data.total;
+      this.showsdata = data.showsdata.shows;
+      this.length = data.showsdata.total;
     },
-      (error) =>{
-        this.errmsg = error.error;
-        console.log(error);
+      (error:any) =>{
+        this.errmsg = error;
+        //console.log(error);
       });
   }
   handlePageEvent(e: PageEvent) {
@@ -39,12 +39,12 @@ export class ShowsComponent implements OnInit {
    this.sportservice.getshowsdata(index,size)
    .subscribe(
     (res:any) => {
-      this.showsdata = res.data.shows;
-      this.length = res.data.total;
+      this.showsdata = res.shows;
+      this.length = res.total;
   },
     (error) =>{
-      this.errmsg = error.error;
-      console.log(error);
+      this.errmsg = error;
+      // console.log(error);
     });
   }
   }

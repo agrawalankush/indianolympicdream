@@ -1,5 +1,5 @@
 import {Component,OnInit, AfterViewInit, ViewChild} from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+// import { Router, ActivatedRoute } from '@angular/router';
 import { MatPaginator } from '@angular/material';
 import { SportsdataService } from '../sportsdata.service';
 import { CalendarDataSource } from './datasource';
@@ -17,8 +17,7 @@ export class CalendarComponent implements OnInit,AfterViewInit {
   public displayedColumns: string[] = ['EventName','Sport', 'StartDate', 'EndDate', 'Venue'];
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
   constructor(
-    private route:ActivatedRoute,
-    private router: Router,
+    // private route:ActivatedRoute,
     private sportservice:SportsdataService
   ) { }
 
@@ -36,12 +35,5 @@ export class CalendarComponent implements OnInit,AfterViewInit {
       this.paginator.pageSize
     );
   }
-  // public applyFilter(searchterm: string){
-  //   this.searchquery = searchterm;
-  //   this.dataSource.loadCalendar(
-  //     this.searchquery,
-  //     this.paginator.pageIndex * this.paginator.pageSize,
-  //     this.paginator.pageSize
-  //   );
-  //   }  
+   
 }

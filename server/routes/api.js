@@ -10,7 +10,7 @@ const dbName = 'IndianOlympicDream';
 // Connect
 const connection = (closure) => {
     return MongoClient.connect(mongourl,{ useNewUrlParser: true }, (err, client) => {
-        if (err) return console.log(err);
+        if (err) return console.log('Connection request to mongo failed',err);
         else{
         console.log('Mongodb connection successful!!');
         let db = client.db(dbName);
@@ -18,22 +18,16 @@ const connection = (closure) => {
     }
     });
 };
+// Response handling
+let response = {};
 
 // Error handling
 const sendError = (err, res) => {
     response.status = 501;
-    response.message = typeof err == 'object' ? err.message : err;
+    response.message = 'Internal server error!!' ;
     res.status(501).json(response);
 };
 
-// Response handling
-let response = {
-    status: 200,
-    data: {
-        requesteddata:[]
-    },
-    message: null
-};
 
 // Get users
 router.get('/sports/:sportname', (req, res) => {
@@ -44,7 +38,7 @@ router.get('/sports/:sportname', (req, res) => {
             .find({"name":sportname})
             .toArray()
             .then((sports) => {
-                res.json(sports);
+                res.status(200).json(sports);
             })
             .catch((err) => {
                 sendError(err, res);
@@ -57,7 +51,7 @@ router.get('/allsports', (req, res) => {
             .find({"isimportant": true})
             .toArray()
             .then((allsports) => {
-                 res.json(allsports);
+                res.status(200).json(allsports);
             })
             .catch((err) => {
                 sendError(err, res);
@@ -80,15 +74,9 @@ router.get('/shows', (req, res) => {
             .limit(pagesize)
             .toArray()
             .then((shows) => {
-                let response = {
-                    status: 200,
-                    data: {
-                        shows:shows,
-                        total:totalshows
-                    },
-                    message: null
-                };
-                    res.json(response);
+                        response.shows = shows;
+                        response.total = totalshows;
+                res.status(200).json(response);
                 })
                 .catch((err) => {
                     sendError(err, res);
@@ -98,7 +86,7 @@ router.get('/shows', (req, res) => {
 });
 router.get('/calendar', (req, res) => {
 //console.log(req.query);
-   let searchterm = req.query.searchterm; 
+   // let searchterm = req.query.searchterm; 
    let pageoffset = parseInt(req.query.pageIndex, 10);
    let pagesize = parseInt(req.query.pageSize,10);
     
@@ -106,24 +94,19 @@ router.get('/calendar', (req, res) => {
 
     let curFind = db.collection('calendar_new')
             .find({}); //$text: { $search: searchterm }
-    curFind.count(function (e, count) {
-        let doccount = count;
+    curFind.count(function (err, count) {
+        if(err) console.log(err);
+        let totalevents = count;
         // console.log(count);
             curFind
             .sort({startdate:1})
             .skip(pageoffset)
             .limit(pagesize)
             .toArray()
-            .then((calendar) => {
-                let response = {
-                    status: 200,
-                    data: {
-                        calendar:calendar,
-                        total:doccount
-                    },
-                    message: null
-                };
-                    res.json(response);
+            .then((calendar) => { 
+                response.calendar = calendar;
+                response.total = totalevents;
+                res.status(200).json(response);
                 })
                 .catch((err) => {
                     sendError(err, res);
@@ -157,7 +140,7 @@ router.get('/athletes', (req, res) => {
            .find(condition); //$text: { $search: searchterm }
    curFind.count(function (err, count) {
     if(err) console.log(err);   
-       let doccount = count;
+       let qualifiedathletes = count;
         // console.log(count);
            curFind
            .sort({date_qualified:1})
@@ -165,15 +148,9 @@ router.get('/athletes', (req, res) => {
             .limit(pagesize)
            .toArray()
            .then((athletes) => {
-               let response = {
-                   status: 200,
-                   qualifiedathletes: {
-                    athletes:athletes,
-                    total:doccount
-                   },
-                   message: null
-               };
-                res.json(response);   
+                response.athletes = athletes;
+                response.total = qualifiedathletes;
+                res.status(200).json(response);   
                })
                .catch((err) => {
                    sendError(err, res);

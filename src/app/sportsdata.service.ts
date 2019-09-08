@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams, HttpErrorResponse } from '@angular/common/http';
 import { SportDetails, AllSports, Athletes, Calendar, Shows } from './models/app-models'; 
-// import { Observable, throwError } from 'rxjs';
-import {  retry } from 'rxjs/operators';
+ import { Observable, throwError } from 'rxjs';
+import {  catchError,retry } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
@@ -16,7 +16,8 @@ export class SportsdataService {
   public getallsports() {
     return this.http.get<AllSports[]>(`/api/allsports`)
     .pipe(
-      retry(3)
+      retry(3),
+      catchError(this.handleError)
     );;
   }
   public getsports(sportname: string) {
@@ -32,7 +33,8 @@ export class SportsdataService {
     .set('pageSize', pageSize.toString());
     return this.http.get<Calendar[]>(`/api/calendar`, {params: params})
     .pipe(
-      retry(2) 
+      retry(2),
+      catchError(this.handleError) 
     );;
   }
   public getathletes(sports: any,pageIndex: number, pageSize: number) {
@@ -42,7 +44,8 @@ export class SportsdataService {
     params = params.append('searchedsports', sports);
     return this.http.get<any>(`/api/athletes`, {params: params})
     .pipe(
-      retry(2)
+      retry(2),
+      catchError(this.handleError)
     );;
   }
   public getshowsdata(pageIndex: number, pageSize: number) {
@@ -51,25 +54,30 @@ export class SportsdataService {
     .set('pageSize', pageSize.toString());
     return this.http.get<any>(`/api/shows`, {params: params})
     .pipe(
-      retry(2)
+      retry(2),
+      catchError(this.handleError)
     );;
   }
-  // postfeedback(feedbackjson){
-  //   return this.http.post(`/api/feedback`,feedbackjson,this.httpOptions);  
-  // }
-  // private handleError(error: HttpErrorResponse) {
-  //   if (error.error instanceof ErrorEvent) {
-  //     // A client-side or network error occurred. Handle it accordingly.
-  //     console.error('An error occurred:', error.error.message);
-  //   } else {
-  //     // The backend returned an unsuccessful response code.
-  //     // The response body may contain clues as to what went wrong,
-  //     console.error(
-  //       `Backend returned code ${error.status}, ` +
-  //       `body was: ${error.error.message}`);
-  //   }
-  //   // return an observable with a user-facing error message
-  //   return throwError(
-  //     'Something bad happened; please try again later.');
-  // };
+  postfeedback(feedbackjson){
+    return this.http.post(`/api/feedback`,feedbackjson,this.httpOptions);  
+  }
+  private handleError(error: HttpErrorResponse) {
+    if (error.error instanceof ErrorEvent) {
+      // A client-side or network error occurred. Handle it accordingly.
+      console.error('An error occurred:', error.error.message);
+
+      // return an observable with a user-facing error message
+      return throwError(
+        'Your network is playing tricks on you, please fix that fu***r and try again!');
+    } else {
+      // The backend returned an unsuccessful response code.
+      // The response body may contain clues as to what went wrong,
+      console.error(
+        `Backend returned code ${error.status}, ` +
+        `body was: ${error.error.message}`);
+        return throwError(
+          'I screwed-up on my server somewhere, Please try again after somethime or report to me directly!');
+        }
+    }
+    
 }

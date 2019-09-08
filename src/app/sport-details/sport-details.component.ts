@@ -23,10 +23,6 @@ export class SportDetailsComponent implements OnInit {
       (data: { sportdata: SportDetails[] }) => {
       // console.log(data.sportdata);
       this.sportsdetails = data.sportdata[0];
-    },
-      (error) =>{
-        this.errmsg = error.error;
-        console.log(error);
-      });
+    });
   }
 }

@@ -21,7 +21,9 @@ app.use(express.static(path.join(__dirname, 'images')));
 
 // API location
 app.use('/api', api);
-
+// app.use(function(err,req,res,next){
+//   console.log(err);
+// });
 // Send all other requests to the Angular app
 app.get('*', (req, res) => {
     // res.contentType('text/javascript');

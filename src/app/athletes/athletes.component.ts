@@ -51,8 +51,8 @@ export class AthletesComponent implements OnInit{
     .subscribe(
       (data: { athletesdata: any}) => {
       // console.log(data.athletesdata);
-      this.athletes = data.athletesdata.qualifiedathletes.athletes;
-      this.length = data.athletesdata.qualifiedathletes.total;
+      this.athletes = data.athletesdata.athletes;
+      this.length = data.athletesdata.total;
     })
   }
   handlePageEvent(e: PageEvent) {
@@ -61,8 +61,8 @@ export class AthletesComponent implements OnInit{
     this.sportservice.getathletes(this.sports,index,size)
     .subscribe(
      (res:any) => {
-       this.athletes = res.qualifiedathletes.athletes;
-       this.length = res.qualifiedathletes.total;
+       this.athletes = res.athletes;
+       this.length = res.total;
    },
      (error) =>{
        this.errmsg = error.error;
@@ -108,19 +108,18 @@ export class AthletesComponent implements OnInit{
     let size =  this.paginator.pageSize;
     this.sportservice.getathletes(selectedsports,index,size)
     .pipe(
-      catchError(() => observableOf([])),
       finalize(() => this.loadingselected = false)
     )
     .subscribe(
      (res:any) => {
-       console.log(res);
-       this.athletes = res.qualifiedathletes.athletes;
-       this.length = res.qualifiedathletes.total; 
+       // console.log(res);
+       this.athletes = res.athletes;
+       this.length = res.total; 
        this.paginator.firstPage()
    },
-     (error) =>{
-       this.errmsg = error.error;
-       console.log(error);
+     (error:any) =>{
+       // console.log(error);
+       this.errmsg = error;
      });
   }
 }
