@@ -3,6 +3,10 @@ export interface AllSports {
 	pictogram : string,
 	isimportant : boolean
 }
+export interface AllSportsResolved {
+	allsports: AllSports[];
+	error?: any;
+  }
 export interface eventname {
     name: string,
     category?: string,

@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { AllSports} from '../models/app-models';
+import { AllSportsResolved } from '../models/app-models';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -15,12 +15,8 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.route.data
     .subscribe(
-      (data: { allsportsdata: AllSports[] }) => {
+      (data: { allsportsdata: AllSportsResolved[] }) => {
       this.allsports = data.allsportsdata;
-    },
-      (error) =>{
-        this.errmsg = error.error;
-        console.log(error);
-      });
+    });
   }
 }

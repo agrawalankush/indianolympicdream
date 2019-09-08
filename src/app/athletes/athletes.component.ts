@@ -4,13 +4,11 @@ import { SportsdataService } from '../sportsdata.service';
 import { MatPaginator } from '@angular/material';
 import { PageEvent} from '@angular/material/paginator';
 // import { Athletes} from '../models/app-models';
-import { tap } from 'rxjs/operators';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {FormControl} from '@angular/forms';
 import {MatAutocompleteSelectedEvent, MatAutocomplete} from '@angular/material/autocomplete';
 import {Observable, of as observableOf} from 'rxjs';
 import {map, startWith,catchError, finalize} from 'rxjs/operators';
-
 
 @Component({
   selector: 'app-athletes',
@@ -28,7 +26,7 @@ export class AthletesComponent implements OnInit{
   pageSizeOptions: number[] = [4, 8, 16,32];
   // MatPaginator Output
   pageEvent: PageEvent;
-  
+  pageIndex = 0;
   // Search autocomplete Inputs
   visible = true;
   selectable = true;
@@ -55,11 +53,7 @@ export class AthletesComponent implements OnInit{
       // console.log(data.athletesdata);
       this.athletes = data.athletesdata.qualifiedathletes.athletes;
       this.length = data.athletesdata.qualifiedathletes.total;
-    },
-      (error) =>{
-        this.errmsg = error.error;
-        console.log(error);
-      });
+    })
   }
   handlePageEvent(e: PageEvent) {
     let index = e.pageIndex * e.pageSize;
@@ -114,15 +108,15 @@ export class AthletesComponent implements OnInit{
     let size =  this.paginator.pageSize;
     this.sportservice.getathletes(selectedsports,index,size)
     .pipe(
-      // debounceTime(300),
-      // distinctUntilChanged(),
       catchError(() => observableOf([])),
       finalize(() => this.loadingselected = false)
     )
     .subscribe(
      (res:any) => {
+       console.log(res);
        this.athletes = res.qualifiedathletes.athletes;
-       this.length = res.qualifiedathletes.total;
+       this.length = res.qualifiedathletes.total; 
+       this.paginator.firstPage()
    },
      (error) =>{
        this.errmsg = error.error;

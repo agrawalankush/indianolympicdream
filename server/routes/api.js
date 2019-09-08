@@ -2,13 +2,18 @@ const express = require('express');
 const router = express.Router();
 const MongoClient = require('mongodb').MongoClient;
 
+
+//define mongo url string and database
+const mongourl = 'mongodb://localhost:27017';
+const dbName = 'IndianOlympicDream';
+
 // Connect
 const connection = (closure) => {
-    return MongoClient.connect('mongodb://localhost:27017', (err, client) => {
+    return MongoClient.connect(mongourl,{ useNewUrlParser: true }, (err, client) => {
         if (err) return console.log(err);
         else{
         console.log('Mongodb connection successful!!');
-        let db = client.db('IndianOlympicDream');
+        let db = client.db(dbName);
         closure(db);
     }
     });
@@ -32,6 +37,7 @@ let response = {
 
 // Get users
 router.get('/sports/:sportname', (req, res) => {
+
     sportname=req.params.sportname;
     connection((db) => {
         db.collection('sports_new')
@@ -51,7 +57,7 @@ router.get('/allsports', (req, res) => {
             .find({"isimportant": true})
             .toArray()
             .then((allsports) => {
-                res.json(allsports);
+                 res.json(allsports);
             })
             .catch((err) => {
                 sendError(err, res);
@@ -128,13 +134,13 @@ router.get('/calendar', (req, res) => {
     
 });
 router.get('/athletes', (req, res) => {
-   console.log(req.query.searchedsports, typeof req.query.searchedsports);
+   // console.log(req.query.searchedsports, typeof req.query.searchedsports);
    let searchedsports = [];
    if(req.query.searchedsports && typeof req.query.searchedsports  === "string"){
     searchedsports = req.query.searchedsports.split(',');
   } 
    let condition = {};
-   console.log(searchedsports,typeof searchedsports);
+   // console.log(searchedsports,typeof searchedsports);
    if(searchedsports.length === 0) {
     condition = {};    
    } else if(searchedsports.length === 1) {
@@ -167,7 +173,7 @@ router.get('/athletes', (req, res) => {
                    },
                    message: null
                };
-                   res.json(response);
+                res.json(response);   
                })
                .catch((err) => {
                    sendError(err, res);

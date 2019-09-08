@@ -4,8 +4,10 @@
 <mat-progress-bar color="warn" *ngIf="loadingselected" mode="query"></mat-progress-bar>
 <mat-paginator [length]="length"
               [pageSize]="pageSize"
+              [pageIndex]="pageIndex"
               [pageSizeOptions]="pageSizeOptions"
-              (page)="handlePageEvent($event)">
+              (page)="handlePageEvent($event)"
+              class="mat-elevation-z4">
 </mat-paginator>
 <div class="cards-container" fxLayout="row wrap" 
         fxLayoutAlign="center center">
@@ -13,7 +15,7 @@
         <mat-form-field appearance="outline" class="chip-list">
                         <mat-label>Search your sport</mat-label>
                         <mat-chip-list #chipList aria-label="Sport selection">
-                          <mat-chip
+                          <mat-chip color="primary"
                             *ngFor="let sport of sports"
                             [selectable]="selectable"
                             [removable]="removable"
@@ -35,6 +37,9 @@
                           </mat-option>
                         </mat-autocomplete>
                       </mat-form-field>
+        <span *ngIf="length === 0">
+          Our Athletes are trying hard, hopefully we'll se some qualification soon. 
+        </span>              
         <mat-card color="primary" class="athletes-card"
                 *ngFor="let athlete of athletes">
                 <mat-card-header>
