@@ -6,8 +6,7 @@
               [pageSize]="pageSize"
               [pageIndex]="pageIndex"
               [pageSizeOptions]="pageSizeOptions"
-              (page)="handlePageEvent($event)"
-              class="mat-elevation-z4">
+              (page)="handlePageEvent($event)">
 </mat-paginator>
 
 <div class="cards-container" fxLayout="row wrap" 
@@ -41,7 +40,7 @@
         <span *ngIf="length === 0">
           Our Athletes are trying hard, hopefully we'll see someone qualifying soon. 
         </span>              
-        <mat-card color="primary" class="athletes-card"
+        <mat-card color="primary" class="athletes-card mat-elevation-z8"
                 *ngFor="let athlete of athletes">
                 <mat-card-header>
                         <img mat-card-avatar src="pictograms/{{athlete.sportname}}.png" />

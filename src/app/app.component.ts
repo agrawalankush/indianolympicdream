@@ -8,7 +8,6 @@ import {
   NavigationCancel,
   NavigationError
 } from '@angular/router'
-import {NgZone, Renderer, ElementRef, ViewChild} from '@angular/core'
 
 @Component({
   selector: 'app-root',
@@ -18,6 +17,7 @@ import {NgZone, Renderer, ElementRef, ViewChild} from '@angular/core'
 export class AppComponent {
   // Sets initial value to true to show loading spinner on first load
   public loading = true;
+  public isLightTheme: boolean = false;
   title = 'indianolympicdream';
   constructor(private router: Router) {
     router.events.subscribe((event: RouterEvent) => {
@@ -41,4 +41,12 @@ export class AppComponent {
       this.loading = false;
     }
   }
+    // For dark and light theme mode
+    changeTheme(): void {
+        if (this.isLightTheme) {
+           this.isLightTheme = false;
+        } else {
+           this.isLightTheme = true;
+        }
+     }
 }

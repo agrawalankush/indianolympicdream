@@ -1,6 +1,9 @@
-.container{
+.container-bigger{
     margin: 24px auto;
-    max-width: 1060px;
+    max-width: 80%;
+}
+.container{
+  margin: 24px;
 }
 .mat-table {
     width:100%;

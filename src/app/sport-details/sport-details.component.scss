@@ -17,6 +17,7 @@
   .medals-number{
     float:left;
     font-size: 22px;
+    margin-right: 5px;
   }
   .events-container{
       margin-top: 10px;
@@ -25,24 +26,29 @@
   table{
     width: 100%
   }
+  .sports-details-card {
+    border-radius: 10px;
+  }
   .sports-details-card .sports-details-card-image-bigger{
-    border-radius: 4px;
+    border-radius:10px 0 0 0px;
     max-height: 300px;
     max-width:  600px;
     float: left;
   }
 
   .sports-details-card .sports-details-card-image{
-    border-radius: 4px;
+    border-radius:10px 10px 0 0px;
     max-height: 300px;
-    max-width:  320px;
+    max-width:  100%;
     float: left;
   }
-
+  .sport-details-card-header {
+    text-align:center;
+  }
   .sport-details-card-header h1{
-    // margin-left: 30px;
+    margin-left:24px;
     font-weight:400;
-    text-align:left;
+    text-align:center;
     font-size:30px;
     padding:0 0 0 0px;
     letter-spacing:1px;
@@ -60,7 +66,16 @@
   .sport-details-card-header-bigger a{
     margin: 0px 0px 0px 30px;
   }
+  // .foot-note-pdf{
+  //   margin:5px 24px 5px 24px;
+  //   font-family: 'Montserrat', sans-serif;
+  //   font-size:10px;
+  //   float:left;
+  //   letter-spacing:1px;
+  //   line-height:20px;
+  // }
   p {
+    margin:24px 24px 24px 24px;
     font-family: 'Montserrat', sans-serif;
     font-size:14px;
     float:left;
@@ -68,4 +83,3 @@
     line-height:20px;
     text-align:left;
   }
- 

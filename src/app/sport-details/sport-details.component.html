@@ -1,7 +1,7 @@
 
 <div ngClass="container" 
 [ngClass.gt-sm]="{'container':false, 'container-bigger':true}" fxLayout="column">
-<div class="sports-details-card">
+<div class="sports-details-card mat-elevation-z24">
 <img ngClass="sports-details-card-image" 
 [ngClass.gt-sm]="{'sports-details-card-image':false, 'sports-details-card-image-bigger':true}" [src]="sportsdetails.image">
 <div ngClass="sport-details-card-header"
@@ -11,6 +11,10 @@
                 <a mat-flat-button color="primary" target="_blank" [href]="sportsdetails.doc_pdf">
                         <mat-icon>picture_as_pdf</mat-icon>Qualification Road for Tokyo
                 </a>
+                <!-- <span class="foot-note-pdf" *ngIf="sportsdetails.name === 'Equestrian'">
+                        Note:Above pdf is of Eventing category, as in Jumping and Dressage
+                        category we have zero to little chance of Qualification.
+                </span> -->
 </div>
         <p>
           {{sportsdetails.description}}
@@ -18,8 +22,10 @@
                 <mat-icon>movie</mat-icon>India's Champions
           </a>  
         </p>    
-</div>  <h3> EVENTS </h3>
-        <div class="events-container">
+</div>
+<div>  
+<h3> EVENTS </h3>
+        <div class="events-container mat-elevation-z8">
                 <mat-accordion multi="true">
                         <mat-expansion-panel *ngFor="let eventscatagory of sportsdetails.events | keyvalue" class="event-header" hideToggle="true" #eventpanel>
                                 <mat-expansion-panel-header>
@@ -46,11 +52,11 @@
                                                 <th mat-header-cell *matHeaderCellDef>NR</th>
                                                 <td mat-cell *matCellDef="let element">{{ element.NR }}</td>
                                         </ng-container>
-                                        <ng-container matColumnDef="WR">
+                                      <!--   <ng-container matColumnDef="WR">
                                                 <th mat-header-cell *matHeaderCellDef>WR</th>
                                                 <td mat-cell *matCellDef="let element">{{ element.WR }}</td>
                                         </ng-container>
-                                        <!-- <ng-container matColumnDef="TotalEntries">
+                                        <ng-container matColumnDef="TotalEntries">
                                                 <th mat-header-cell *matHeaderCellDef>Total Entries</th>
                                                 <td mat-cell *matCellDef="let element">
                                                         {{ element.totalentries }}
@@ -76,4 +82,5 @@
                         </mat-expansion-panel>       
                 </mat-accordion>
                 </div>
+</div>
 </div>        

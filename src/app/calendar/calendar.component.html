@@ -1,8 +1,9 @@
-<div class="container">
+<div ngClass="container" 
+[ngClass.gt-sm]="{'container':false, 'container-bigger':true}">
             <div class="spinner-container" *ngIf="dataSource.loading$ | async">
                 <mat-progress-bar mode="indeterminate" color="warn"></mat-progress-bar>
             </div>
-            <mat-paginator #paginator [length]="dataSource.length" [pageIndex]="0" [pageSize]="10" [pageSizeOptions]="[5,10,25]">
+            <mat-paginator class="mat-elevation-z8" #paginator [length]="dataSource.length" [pageIndex]="0" [pageSize]="10" [pageSizeOptions]="[5,10,25]">
             </mat-paginator>
         <!-- <mat-form-field>
                 <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search for specific sport">

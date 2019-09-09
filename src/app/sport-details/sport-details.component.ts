@@ -11,7 +11,7 @@ export class SportDetailsComponent implements OnInit {
   public errmsg: string;
   public sportname:string;
   public sportsdetails:any;
-  public displayedColumns: string[] = ['Event', 'EntryStandard', 'NR', 'WR'];
+  public displayedColumns: string[] = ['Event', 'EntryStandard', 'NR'];
   constructor(
     private route:ActivatedRoute,
     private sportservice:SportsdataService
