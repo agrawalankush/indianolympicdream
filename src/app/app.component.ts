@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SwUpdate } from '@angular/service-worker';
 import {
   Router,
   // import as RouterEvent to avoid confusion with the DOM Event
@@ -19,7 +20,7 @@ export class AppComponent {
   public loading = true;
   public isLightTheme: boolean = false;
   title = 'indianolympicdream';
-  constructor(private router: Router) {
+  constructor(private router: Router,private swUpdate: SwUpdate) {
     router.events.subscribe((event: RouterEvent) => {
       this.navigationInterceptor(event)
     })

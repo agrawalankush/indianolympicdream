@@ -1,3 +1,6 @@
+<div class="home-top-margin" fxLayoutAlign="space-around space-around">
+    <span>Pick your favourite sport</span>
+</div>
 <div class="container" fxLayout="row wrap" fxLayoutGap="20px" fxLayoutAlign="center center">
     <div *ngFor="let sport of allsports">
         <mat-card class="sports-card" [routerLink]="['/sports',sport.name]">
@@ -10,5 +13,5 @@
     </div>
 </div>
 <div fxLayoutAlign="center center">
-    <p>All the pictograms used are owened by the IOC.The Tokyo 2020 pictograms are designed by Masaaki Hiromura.</p>
+    <span>All the pictograms used are owned by the IOC.The Tokyo 2020 pictograms are designed by Masaaki Hiromura.</span>
 </div>

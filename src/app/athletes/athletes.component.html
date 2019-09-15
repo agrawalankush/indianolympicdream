@@ -51,7 +51,12 @@
                 <mat-card-content>
                     <p *ngIf="athlete.imagesrc">({{athlete.imagesrc}})</p>
                     <strong>Qualification Event:</strong>&nbsp;{{athlete.qualificationEvent}}<br />
-                    <strong>Qualified On:</strong>&nbsp;{{ athlete.date_qualified  * 1000  | date}}
+                    <strong>Date Quota Earned:</strong>&nbsp;{{ athlete.date_qualified  * 1000  | date}}
                 </mat-card-content>
         </mat-card>
+        <span>
+            Note:The above athletes are the ones who has won quota places for India, 
+            the final decision  to confirm their participation  for Tokyo will be taken by our NOCs. There is
+            full selection process in place where someone else may be sent by the National Fed. in lieu of the quota holder.
+      </span>
 </div>
