@@ -1,14 +1,18 @@
 .container{
     margin:24px;
 }
+.pictogram-container{
+    margin-bottom: 24px;
+}
 .sports-icons{
-    height: 80px;
-    width: 80px;
+    height: 100px;
+    width: 100px;
+    border-radius: 50%; 
 }
 .sports-card{
     min-width: 80px;
     min-height: 80px;
-    border-radius: 50%; 
+    // border-radius: 50%; 
 }
 .home-top-margin{
     padding-top:20px;

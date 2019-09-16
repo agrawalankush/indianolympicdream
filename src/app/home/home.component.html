@@ -1,19 +1,20 @@
 <div class="home-top-margin" fxLayoutAlign="space-around space-around">
-    <span>Pick your favourite sport</span>
+    <h3>Pick your favourite sport</h3>
 </div>
-<div class="container" fxLayout="row wrap" fxLayoutGap="20px" fxLayoutAlign="center center">
-    <div *ngFor="let sport of allsports">
-        <mat-card class="sports-card" [routerLink]="['/sports',sport.name]">
-        <img [src]="sport.pictogram" 
-            class="sports-icons">
-        </mat-card>
+<div class="container" fxLayout="row wrap" fxLayoutGap="24px" fxLayoutAlign="center center">
+    <div class="pictogram-container" *ngFor="let sport of allsports">
+        <!-- <mat-card class="sports-card" > -->
+        <a [routerLink]="['/sports',sport.name]">
+            <img [src]="sport.pictogram" class="sports-icons">
+         </a>   
+        <!-- </mat-card> -->
         <mat-card-content fxLayoutAlign="center">
                 {{sport.name}}
         </mat-card-content>
     </div>
 </div>
-<div class="home-top-margin" fxLayoutAlign="space-around space-around">
-    <span class="home-top-margin">
+<div fxLayoutAlign="space-around space-around">
+    <span>
         <i>
             All the pictograms used are owned by the IOC. The Tokyo 2020 pictograms are designed by Masaaki Hiromura.
         </i>
