@@ -1,7 +1,7 @@
 {
   "name": "indianolympicdream",
   "short_name": "Indianolympicdream",
-  "theme_color": "#1976d2",
+  "theme_color": "#212121",
   "background_color": "#fafafa",
   "display": "standalone",
   "scope": "/",

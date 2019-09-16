@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, HostBinding } from '@angular/core';
 import { SwUpdate } from '@angular/service-worker';
+import { OverlayContainer} from '@angular/cdk/overlay';
 import {
   Router,
   // import as RouterEvent to avoid confusion with the DOM Event
@@ -20,11 +21,12 @@ export class AppComponent {
   public loading = true;
   public isLightTheme: boolean = false;
   title = 'indianolympicdream';
-  constructor(private router: Router,private swUpdate: SwUpdate) {
+  constructor(private router: Router,private swUpdate: SwUpdate,public overlayContainer: OverlayContainer) {
     router.events.subscribe((event: RouterEvent) => {
       this.navigationInterceptor(event)
     })
   }
+  @HostBinding('class') componentCssClass;
   // Shows and hides the loading spinner during RouterEvent changes
   navigationInterceptor(event: RouterEvent): void {
     if (event instanceof NavigationStart) {
@@ -44,10 +46,14 @@ export class AppComponent {
   }
     // For dark and light theme mode
     changeTheme(): void {
-        if (this.isLightTheme) {
-           this.isLightTheme = false;
-        } else {
-           this.isLightTheme = true;
+         if (this.isLightTheme) {
+            this.isLightTheme = false;
+           this.overlayContainer.getContainerElement().classList.add('default-theme');
+           this.componentCssClass = 'default-theme';
+         } else {
+            this.isLightTheme = true;
+           this.overlayContainer.getContainerElement().classList.add('light-theme');
+           this.componentCssClass = 'light-theme';
         }
      }
 }
