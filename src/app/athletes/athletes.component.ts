@@ -35,7 +35,7 @@ export class AthletesComponent implements OnInit{
   sportCtrl = new FormControl();
   filteredSports: Observable<any>;
   sports: string[] = [];
-  allsports: string[] = ['Archery', 'Athletics', 'Boxing', 'Equestrian', 'Fencing','Golf', 'Gymnastics', 'Hockey',
+  allsports: string[] = ['Archery', 'Athletics','Badminton', 'Boxing', 'Equestrian', 'Fencing','Golf', 'Gymnastics', 'Hockey',
                          'Judo','Rowing','Shooting', 'TableTennis','Tennis', 'Weightlifting', 'Wrestling'];
 
   @ViewChild('sportInput', {static: false}) sportInput: ElementRef<HTMLInputElement>;

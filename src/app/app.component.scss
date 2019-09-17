@@ -15,21 +15,23 @@
   .sidenav-menu{
       padding-left: 30px;
   }
-  .sidenav .mat-toolbar {
+  .sidenav .top-toolbar {
     background: inherit;
   }
   
-  .mat-toolbar {
+  .top-toolbar {
     position: sticky;
     top: 0;
     z-index: 1000;
   }
-  .fill-remaining-space {
-    flex: 1 1 auto;
-  }
   .toggle-text{
     font-size: 14px;
     font-weight: 500;
+  }
+  .botton-toolbar {
+    position: sticky;
+    bottom: 0;
+    z-index: 1000;
   }
 // For dark and light theme mode  
 //    :host { 

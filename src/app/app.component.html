@@ -3,11 +3,12 @@
    </div> 
 -->
 
-<mat-toolbar color="" class="mat-elevation-z4">
+<mat-toolbar color="" class="top-toolbar mat-elevation-z4">
         <button mat-icon-button (click)="drawer.toggle()" aria-label="Side nav toggle icon">
          <mat-icon>menu</mat-icon>
         </button>
-         <button mat-button  class="logo-button" routerLink="">Indian
+         <button mat-button  class="logo-button" routerLink="">
+            Indian
           <img src="assets/logo.png" class="olympic-logo" alt="olympic">
           Dream
         </button>
@@ -58,6 +59,7 @@
             </mat-sidenav>
       <mat-sidenav-content>
         <router-outlet></router-outlet>
+        <!-- <mat-toolbar  class="botton-toolbar"></mat-toolbar> -->
       </mat-sidenav-content>
       </mat-sidenav-container>
   

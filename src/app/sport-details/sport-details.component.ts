@@ -11,6 +11,8 @@ export class SportDetailsComponent implements OnInit {
   public errmsg: string;
   public sportname:string;
   public sportsdetails:any;
+  allsports: string[] = ['Archery', 'Athletics','Badminton', 'Boxing', 'Equestrian', 'Fencing','Golf', 'Gymnastics', 'Hockey',
+                         'Judo','Rowing','Shooting', 'TableTennis','Tennis', 'Weightlifting', 'Wrestling'];
   public displayedColumns: string[] = ['Event', 'EntryStandard', 'NR'];
   constructor(
     private route:ActivatedRoute,

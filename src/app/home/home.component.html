@@ -5,7 +5,7 @@
     <div class="pictogram-container" *ngFor="let sport of allsports">
         <!-- <mat-card class="sports-card" > -->
         <a [routerLink]="['/sports',sport.name]">
-            <img [src]="sport.pictogram" class="sports-icons">
+            <img [src]="sport.pictogram" class="sports-icons" alt="{{sport.name}} pictogram">
          </a>   
         <!-- </mat-card> -->
         <mat-card-content fxLayoutAlign="center">

@@ -1,9 +1,23 @@
-
+<mat-toolbar>
+<button mat-button [routerLink]="['/home']"><mat-icon>home</mat-icon>Home<mat-icon>chevron_right</mat-icon></button>
+<img class="pictogram-sport-details" src="pictograms/{{sportsdetails.name}}.png" alt="{{sportsdetails.name}} pictogram" />
+<span class="fill-remaining-space"></span>
+<mat-menu #appMenu="matMenu">
+                <ng-template matMenuContent>
+                  <button *ngFor="let sport of allsports" mat-menu-item [routerLink]="['/sports',sport]">
+                        {{sport}}
+                  </button>
+                </ng-template>
+</mat-menu>
+<button mat-button color="primary" [matMenuTriggerFor]="appMenu">
+    Go To<mat-icon>sports_kabaddi</mat-icon>
+</button>
+</mat-toolbar>
 <div ngClass="container" 
 [ngClass.gt-sm]="{'container':false, 'container-bigger':true}" fxLayout="column">
-<div class="sports-details-card mat-elevation-z24">
+<div class="sports-details-card mat-elevation-z8">
 <img ngClass="sports-details-card-image" 
-[ngClass.gt-sm]="{'sports-details-card-image':false, 'sports-details-card-image-bigger':true}" [src]="sportsdetails.image">
+[ngClass.gt-sm]="{'sports-details-card-image':false, 'sports-details-card-image-bigger':true}" [src]="sportsdetails.image" alt="Athlete Image">
 <div ngClass="sport-details-card-header"
 [ngClass.gt-xs]="{'sport-details-card-header':false, 'sport-details-card-header-bigger':true}">
                 <h1>{{sportsdetails.name | uppercase}}</h1>
