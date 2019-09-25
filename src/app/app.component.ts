@@ -1,5 +1,5 @@
 import { Component, HostBinding } from '@angular/core';
-import { SwUpdate } from '@angular/service-worker';
+import { SwupdateService } from './swupdate.service';
 import { OverlayContainer} from '@angular/cdk/overlay';
 import {
   Router,
@@ -21,7 +21,8 @@ export class AppComponent {
   public loading = true;
   public isLightTheme: boolean = false;
   title = 'indianolympicdream';
-  constructor(private router: Router,private swUpdate: SwUpdate,public overlayContainer: OverlayContainer) {
+  constructor(private router: Router,private swupdateservice: SwupdateService,public overlayContainer: OverlayContainer) {
+    this.swupdateservice.checkForUpdates();
     router.events.subscribe((event: RouterEvent) => {
       this.navigationInterceptor(event)
     })

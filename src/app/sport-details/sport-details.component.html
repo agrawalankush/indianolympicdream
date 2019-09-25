@@ -21,7 +21,7 @@
 <div ngClass="sport-details-card-header"
 [ngClass.gt-xs]="{'sport-details-card-header':false, 'sport-details-card-header-bigger':true}">
                 <h1>{{sportsdetails.name | uppercase}}</h1>
-                <span class="medals-number"><img class="medal-icon" src="assets/icon_medal.png">{{sportsdetails.Medals}}</span> 
+                <span class="medals-number"><img class="medal-icon" src="assets/icon_medal.png" alt="medals">{{sportsdetails.Medals}}</span> 
                 <a mat-flat-button color="primary" target="_blank" [href]="sportsdetails.doc_pdf">
                         <mat-icon>picture_as_pdf</mat-icon>Qualification Road for Tokyo
                 </a>
