@@ -16,8 +16,11 @@
 <div ngClass="container" 
 [ngClass.gt-sm]="{'container':false, 'container-bigger':true}" fxLayout="column">
 <div class="sports-details-card mat-elevation-z8">
-<img ngClass="sports-details-card-image" 
-[ngClass.gt-sm]="{'sports-details-card-image':false, 'sports-details-card-image-bigger':true}" [src]="sportsdetails.image" alt="Athlete Image">
+                <picture>
+                   <source type="image/webp" srcset="sport_images/{{sportsdetails.name}}.webp">
+                   <img ngClass="sports-details-card-image" 
+                        [ngClass.gt-sm]="{'sports-details-card-image':false, 'sports-details-card-image-bigger':true}" [src]="sportsdetails.image" alt="Athlete Image">
+                </picture>
 <div ngClass="sport-details-card-header"
 [ngClass.gt-xs]="{'sport-details-card-header':false, 'sport-details-card-header-bigger':true}">
                 <h1>{{sportsdetails.name | uppercase}}</h1>

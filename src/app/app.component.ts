@@ -20,7 +20,7 @@ export class AppComponent {
   // Sets initial value to true to show loading spinner on first load
   public loading = true;
   public isLightTheme: boolean = false;
-  title = 'indianolympicdream';
+  title = 'IndianOlympicDream';
   constructor(private router: Router,private swupdateservice: SwupdateService,public overlayContainer: OverlayContainer) {
     this.swupdateservice.checkForUpdates();
     router.events.subscribe((event: RouterEvent) => {
