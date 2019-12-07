@@ -93,7 +93,7 @@ router.get('/calendar', (req, res) => {
     connection((db) => {
 
     let curFind = db.collection('calendar_new')
-            .find({}); //$text: { $search: searchterm }
+            .find({"enddate":{ $gte: 1575708986}}); //$text: { $search: searchterm }
     curFind.count(function (err, count) {
         if(err) console.log(err);
         let totalevents = count;
