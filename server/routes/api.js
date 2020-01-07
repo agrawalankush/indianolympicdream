@@ -24,7 +24,7 @@ let response = {};
 // Error handling
 const sendError = (err, res) => {
     response.status = 501;
-    response.message = 'Internal server error!!' ;
+    response.message = 'Internal server error, looks like I screwed up somewhere!!' ;
     res.status(501).json(response);
 };
 
@@ -66,7 +66,7 @@ router.get('/shows', (req, res) => {
     let showsFind = db.collection('shows_data')
             .find({}); //$text: { $search: searchterm }
             showsFind.count(function (err, count) {
-            if(err) console.log(err);    
+            if(err) console.log(err);
         let totalshows = count;
         // console.log(count);
         showsFind
@@ -81,19 +81,19 @@ router.get('/shows', (req, res) => {
                 .catch((err) => {
                     sendError(err, res);
                 });
-        }); 
+        });
     });
 });
 router.get('/calendar', (req, res) => {
 //console.log(req.query);
-   // let searchterm = req.query.searchterm; 
+   // let searchterm = req.query.searchterm;
    let pageoffset = parseInt(req.query.pageIndex, 10);
    let pagesize = parseInt(req.query.pageSize,10);
-    
+
     connection((db) => {
 
     let curFind = db.collection('calendar_new')
-            .find({"enddate":{ $gte: 1575708986}}); //$text: { $search: searchterm }
+            .find({"enddate":{ $gte: 1575993621}}); //$text: { $search: searchterm }
     curFind.count(function (err, count) {
         if(err) console.log(err);
         let totalevents = count;
@@ -103,7 +103,7 @@ router.get('/calendar', (req, res) => {
             .skip(pageoffset)
             .limit(pagesize)
             .toArray()
-            .then((calendar) => { 
+            .then((calendar) => {
                 response.calendar = calendar;
                 response.total = totalevents;
                 res.status(200).json(response);
@@ -111,35 +111,35 @@ router.get('/calendar', (req, res) => {
                 .catch((err) => {
                     sendError(err, res);
                 });
-        });       
-            
+        });
+
     });
-    
+
 });
 router.get('/athletes', (req, res) => {
    // console.log(req.query.searchedsports, typeof req.query.searchedsports);
    let searchedsports = [];
    if(req.query.searchedsports && typeof req.query.searchedsports  === "string"){
     searchedsports = req.query.searchedsports.split(',');
-  } 
+  }
    let condition = {};
    // console.log(searchedsports,typeof searchedsports);
    if(searchedsports.length === 0) {
-    condition = {};    
+    condition = {};
    } else if(searchedsports.length === 1) {
     condition.sportname = {$all:searchedsports};
    } else {
-    condition.sportname = {$in:searchedsports}; 
-   } 
+    condition.sportname = {$in:searchedsports};
+   }
    let pageoffset = parseInt(req.query.pageIndex, 10);
    let pagesize = parseInt(req.query.pageSize,10);
-   
+
    connection((db) => {
 
    let curFind = db.collection('qualified_athletes')
            .find(condition); //$text: { $search: searchterm }
    curFind.count(function (err, count) {
-    if(err) console.log(err);   
+    if(err) console.log(err);
        let qualifiedathletes = count;
         // console.log(count);
            curFind
@@ -150,20 +150,20 @@ router.get('/athletes', (req, res) => {
            .then((athletes) => {
                 response.athletes = athletes;
                 response.total = qualifiedathletes;
-                res.status(200).json(response);   
+                res.status(200).json(response);
                })
                .catch((err) => {
                    sendError(err, res);
                });
-       });       
-           
+       });
+
    });
-   
+
 });
 /**
 router.post('/feedback',function(req,res){
     //let feedback =req.body;
-    let feedbackdata = { 
+    let feedbackdata = {
      name: req.body.name,
      email:req.body.email,
      created :+new Date(),
@@ -183,5 +183,5 @@ router.post('/feedback',function(req,res){
      });
     }
  );
- */ 
+ */
 module.exports = router;

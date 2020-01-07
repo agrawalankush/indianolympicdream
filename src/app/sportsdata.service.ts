@@ -68,7 +68,7 @@ export class SportsdataService {
 
       // return an observable with a user-facing error message
       return throwError(
-        'Your network is playing tricks on you, please fix that fu***r and try again!');
+        'Your network is playing tricks on you, please fix and try again!');
     } else {
       // The backend returned an unsuccessful response code.
       // The response body may contain clues as to what went wrong,
@@ -76,7 +76,7 @@ export class SportsdataService {
         `Backend returned code ${error.status}, ` +
         `body was: ${error.error.message}`);
         return throwError(
-          'I screwed-up on my server somewhere, Please try again after somethime or report to me directly!');
+          'I screwed-up on my server somewhere, Please try again after sometime or report to me directly!');
         }
     }
     
