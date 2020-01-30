@@ -3,9 +3,9 @@ import {
   Router, Resolve,
   RouterStateSnapshot,
   ActivatedRouteSnapshot
-}                                 from '@angular/router';
-import { Observable, of, EMPTY }  from 'rxjs';
-import { mergeMap, take }         from 'rxjs/operators';
+} from '@angular/router';
+import { Observable, of, EMPTY } from 'rxjs';
+import { mergeMap, take } from 'rxjs/operators';
 
 import { SportsdataService } from '../sportsdata.service';
 // import { Shows } from '../models/app-models';
@@ -17,12 +17,12 @@ export class ShowsResolverService implements Resolve<any> {
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | Observable<never> {
 
-    return this.sportservice.getshowsdata(0,6).pipe(
+    return this.sportservice.getshowsdata(0, 6).pipe(
       take(1),
       mergeMap(showsdata => {
         if (showsdata) {
           return of(showsdata);
-        } else { 
+        } else {
           // sport not found
           this.router.navigate(['./']);
           return EMPTY;

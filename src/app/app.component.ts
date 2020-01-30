@@ -9,7 +9,7 @@ import {
   NavigationEnd,
   NavigationCancel,
   NavigationError
-} from '@angular/router'
+} from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -19,13 +19,13 @@ import {
 export class AppComponent {
   // Sets initial value to true to show loading spinner on first load
   public loading = true;
-  public isLightTheme: boolean = false;
+  public isLightTheme = false;
   title = 'IndianOlympicDream';
-  constructor(private router: Router,private swupdateservice: SwupdateService,public overlayContainer: OverlayContainer) {
+  constructor(private router: Router, private swupdateservice: SwupdateService, public overlayContainer: OverlayContainer) {
     this.swupdateservice.checkForUpdates();
     router.events.subscribe((event: RouterEvent) => {
-      this.navigationInterceptor(event)
-    })
+      this.navigationInterceptor(event);
+    });
   }
   @HostBinding('class') componentCssClass;
   // Shows and hides the loading spinner during RouterEvent changes
@@ -49,12 +49,12 @@ export class AppComponent {
     changeTheme(): void {
          if (this.isLightTheme) {
             this.isLightTheme = false;
-           this.overlayContainer.getContainerElement().classList.add('default-theme');
-           this.componentCssClass = 'default-theme';
+            this.overlayContainer.getContainerElement().classList.add('default-theme');
+            this.componentCssClass = 'default-theme';
          } else {
             this.isLightTheme = true;
-           this.overlayContainer.getContainerElement().classList.add('light-theme');
-           this.componentCssClass = 'light-theme';
+            this.overlayContainer.getContainerElement().classList.add('light-theme');
+            this.componentCssClass = 'light-theme';
         }
      }
 }

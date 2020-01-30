@@ -9,16 +9,16 @@ import {PageEvent} from '@angular/material/paginator';
   styleUrls: ['./shows.component.scss']
 })
 export class ShowsComponent implements OnInit {
-  public showsdata:any;
-  public errmsg:string;
-  public videoyoutube: string = "https://www.youtube.com/embed/";
+  public showsdata: any;
+  public errmsg: string;
+  public videoyoutube = 'https://www.youtube.com/embed/';
   // MatPaginator Inputs
-  length :number;
+  length: number;
   pageSize = 6;
-  pageSizeOptions: number[] = [3, 6, 12,24];
+  pageSizeOptions: number[] = [3, 6, 12, 24];
   // MatPaginator Output
   pageEvent: PageEvent;
-  constructor(private route:ActivatedRoute,private sportservice: SportsdataService) { }
+  constructor(private route: ActivatedRoute, private sportservice: SportsdataService) { }
 
   ngOnInit() {
      // this.getshowsdata();
@@ -28,21 +28,21 @@ export class ShowsComponent implements OnInit {
       this.showsdata = data.showsdata.shows;
       this.length = data.showsdata.total;
     },
-      (error:any) =>{
+      (error: any) => {
         this.errmsg = error;
-        //console.log(error);
+        // console.log(error);
       });
   }
   handlePageEvent(e: PageEvent) {
-   let index = e.pageIndex * e.pageSize;
-   let size =  e.pageSize;
-   this.sportservice.getshowsdata(index,size)
+   const index = e.pageIndex * e.pageSize;
+   const size =  e.pageSize;
+   this.sportservice.getshowsdata(index, size)
    .subscribe(
-    (res:any) => {
+    (res: any) => {
       this.showsdata = res.shows;
       this.length = res.total;
   },
-    (error) =>{
+    (error) => {
       this.errmsg = error;
       // console.log(error);
     });
