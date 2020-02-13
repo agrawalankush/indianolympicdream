@@ -1,7 +1,7 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SportsdataService } from '../sportsdata.service';
-import { MatPaginator } from '@angular/material';
+import { MatPaginator } from '@angular/material/paginator';
 import { PageEvent} from '@angular/material/paginator';
 // import { Athletes} from '../models/app-models';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
@@ -19,7 +19,7 @@ export class AthletesComponent implements OnInit{
   public errmsg: string;
   public athletes: any;
   loadingselected = false;
-  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   // MatPaginator Inputs
   length: number;
   pageSize = 8;
@@ -38,8 +38,8 @@ export class AthletesComponent implements OnInit{
   allsports: string[] = ['Archery', 'Athletics','Badminton', 'Boxing', 'Equestrian', 'Fencing','Golf', 'Gymnastics', 'Hockey',
                          'Judo','Rowing','Shooting', 'TableTennis','Tennis', 'Weightlifting', 'Wrestling'];
 
-  @ViewChild('sportInput', {static: false}) sportInput: ElementRef<HTMLInputElement>;
-  @ViewChild('auto', {static: false}) matAutocomplete: MatAutocomplete;
+  @ViewChild('sportInput') sportInput: ElementRef<HTMLInputElement>;
+  @ViewChild('auto') matAutocomplete: MatAutocomplete;
   constructor(private route:ActivatedRoute,private sportservice:SportsdataService) { 
     this.filteredSports = this.sportCtrl.valueChanges.pipe(
       startWith(null),

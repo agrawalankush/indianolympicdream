@@ -1,6 +1,6 @@
 import {Component,OnInit, AfterViewInit, ViewChild} from '@angular/core';
 // import { Router, ActivatedRoute } from '@angular/router';
-import { MatPaginator } from '@angular/material';
+import { MatPaginator } from '@angular/material/paginator';
 import { SportsdataService } from '../sportsdata.service';
 import { CalendarDataSource } from './datasource';
 import { tap } from 'rxjs/operators';
@@ -15,7 +15,7 @@ export class CalendarComponent implements OnInit,AfterViewInit {
   public searchquery = '';
   public dataSource: CalendarDataSource;
   public displayedColumns: string[] = ['EventName','Sport', 'StartDate', 'EndDate', 'Venue'];
-  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   constructor(
     // private route:ActivatedRoute,
     private sportservice:SportsdataService
