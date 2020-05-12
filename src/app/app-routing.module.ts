@@ -12,6 +12,8 @@ import { SportDetailsResolverService } from './sport-details/sport-details-resol
 import { AthletesResolverService } from './athletes/athletes-resolver.service';
 import { AllSportsResolverService } from './home/all-sports-resolver.service';
 import { ShowsResolverService } from './shows/shows-resolver.service';
+import { ServerErrorComponent } from './server-error/server-error.component';
+
 const routes: Routes = [
   { path: 'home',  component: HomeComponent,
     resolve: {
@@ -36,6 +38,7 @@ const routes: Routes = [
   },
   { path: 'about',  component: AboutComponent },
   { path: '',   redirectTo: '/home', pathMatch: 'full' },
+  { path: 'internal-error', component: ServerErrorComponent },
   { path: '**', component: PagenotfoundComponent }
 ];
 

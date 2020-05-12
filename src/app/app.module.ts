@@ -19,6 +19,7 @@ import { CalendarComponent } from './calendar/calendar.component';
 import { AthletesComponent } from './athletes/athletes.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { ServerErrorComponent } from './server-error/server-error.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { environment } from '../environments/environment';
     SportDetailsComponent,
     CalendarComponent,
     AthletesComponent,
-    AboutComponent
+    AboutComponent,
+    ServerErrorComponent
   ],
   imports: [
     BrowserModule,
