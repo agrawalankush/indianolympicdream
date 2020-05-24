@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const MongoClient = require('mongodb').MongoClient;
 
-
 //define mongo url string and database
 const mongourl = 'mongodb://localhost:27017';
 const dbName = 'IndianOlympicDream';

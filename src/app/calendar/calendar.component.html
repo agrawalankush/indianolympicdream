@@ -1,8 +1,8 @@
-<div ngClass="container" 
+<div ngClass="container"
 [ngClass.gt-sm]="{'container':false, 'container-bigger':true}">
-            <div class="spinner-container" *ngIf="dataSource.loading$ | async">
+            <!-- <div class="spinner-container" *ngIf="dataSource.loading$ | async">
                 <mat-progress-bar mode="indeterminate" color="warn"></mat-progress-bar>
-            </div>
+            </div> -->
             <mat-paginator class="mat-elevation-z8" #paginator [length]="dataSource.length" [pageIndex]="0" [pageSize]="10" [pageSizeOptions]="[5,10,25]">
             </mat-paginator>
         <!-- <mat-form-field>
@@ -43,8 +43,8 @@
                         <span class="mobile-label">Venue:</span>
                             {{ element.venue }}
                     </mat-cell>
-            </ng-container> 
+            </ng-container>
             <mat-header-row *matHeaderRowDef="displayedColumns;sticky: true"></mat-header-row>
             <mat-row mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
     </mat-table>
-</div>       
+</div>

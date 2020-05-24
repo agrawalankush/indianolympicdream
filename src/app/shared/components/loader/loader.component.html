@@ -1,0 +1,13 @@
+<!-- <div [class.loader-hidden]="!show">
+  <div >
+          <div>
+            <mat-progress-bar mode="indeterminate" color="warn"></mat-progress-bar>
+              <mat-spinner *ngIf="show"></mat-spinner>
+          </div>
+  </div>
+</div> -->
+<div [class.hidden]="!show">
+  <div class="loader-overlay">
+    <mat-progress-bar *ngIf="show" mode="indeterminate" color="warn"></mat-progress-bar>
+  </div>
+</div>

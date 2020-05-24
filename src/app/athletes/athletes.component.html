@@ -1,7 +1,6 @@
 <!-- <mat-paginator #paginator [length]="totalathletes" [pageIndex]="0" [pageSize]="10" [pageSizeOptions]="[5,10]">
 </mat-paginator> -->
 <!-- {{ athletes | json}} -->
-<mat-progress-bar color="warn" *ngIf="loadingselected" mode="query"></mat-progress-bar>
 <mat-paginator [length]="length"
               [pageSize]="pageSize"
               [pageIndex]="pageIndex"
@@ -9,7 +8,7 @@
               (page)="handlePageEvent($event)">
 </mat-paginator>
 
-<div class="cards-container" fxLayout="row wrap" 
+<div class="cards-container" fxLayout="row wrap"
         fxLayoutAlign="center center">
         <mat-error *ngIf="errmsg">{{errmsg}}</mat-error>
         <mat-form-field appearance="outline" class="chip-list">
@@ -38,8 +37,8 @@
                         </mat-autocomplete>
                       </mat-form-field>
         <span *ngIf="length === 0">
-          Our Athletes are trying hard, hopefully we'll see someone qualifying soon. 
-        </span>              
+          Our Athletes are trying hard, hopefully we'll see someone qualifying soon.
+        </span>
         <mat-card color="primary" class="athletes-card mat-elevation-z8"
                 *ngFor="let athlete of athletes">
                 <mat-card-header>
@@ -60,8 +59,8 @@
 </div>
 <div *ngIf="!(length === 0)" class="botton-note">
         <i>
-        Note: The above athletes are the ones who has won quota places for India, 
+        Note: The above athletes are the ones who has won quota places for India,
         the final decision  to confirm their participation  for Tokyo will be taken by our NOCs. There is
         full selection process in place where someone else may be sent by the National Fed. in lieu of the quota holder.
-        </i>  
+        </i>
 </div>

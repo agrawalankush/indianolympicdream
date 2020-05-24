@@ -1,4 +1,4 @@
-import {CollectionViewer, DataSource} from "@angular/cdk/collections";
+import {CollectionViewer, DataSource} from '@angular/cdk/collections';
 import { Observable, of } from 'rxjs';
 import { BehaviorSubject } from 'rxjs';
 import {
@@ -40,8 +40,8 @@ export class CalendarDataSource implements DataSource<Calendar> {
         )
         .subscribe((calendardata: any) => {
             calendardata.calendar.forEach(element => {
-                      let sdate = new Date(element.startdate*1000);
-                      let edate = new Date(element.enddate*1000);
+                      const sdate = new Date(element.startdate*1000);
+                      const edate = new Date(element.enddate*1000);
                       element.startdate = sdate.toDateString();
                       element.enddate = edate.toDateString();
                     });
@@ -52,5 +52,5 @@ export class CalendarDataSource implements DataSource<Calendar> {
                  console.log(error);
             }
         );
-    }    
+    }
 }

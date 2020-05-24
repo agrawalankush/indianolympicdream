@@ -1,12 +1,12 @@
 <div class="home-top-margin" fxLayoutAlign="space-around space-around">
     <h3>Pick your favourite sport</h3>
 </div>
-<div class="container" fxLayout="row wrap" fxLayoutGap="24px" fxLayoutAlign="center center">
+<div class="container" *ngIf="allsports" fxLayout="row wrap" fxLayoutGap="24px" fxLayoutAlign="center center">
     <div class="pictogram-container" *ngFor="let sport of allsports">
         <!-- <mat-card class="sports-card" > -->
         <a [routerLink]="['/sports',sport.name]">
             <img [src]="sport.pictogram" class="sports-icons" alt="{{sport.name}} pictogram">
-         </a>   
+         </a>
         <!-- </mat-card> -->
         <mat-card-content fxLayoutAlign="center">
                 {{sport.name}}

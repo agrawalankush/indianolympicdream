@@ -23,7 +23,7 @@ export class CalendarComponent implements OnInit,AfterViewInit {
 
   ngOnInit() {
     this.dataSource = new CalendarDataSource(this.sportservice);
-    this.dataSource.loadCalendar(this.searchquery, 0, 10);  
+    this.dataSource.loadCalendar(this.searchquery, 0, 10);
   }
   ngAfterViewInit() {
     this.paginator.page.pipe(tap(() => this.loadUCalendarPage())).subscribe();
@@ -35,5 +35,4 @@ export class CalendarComponent implements OnInit,AfterViewInit {
       this.paginator.pageSize
     );
   }
-   
 }

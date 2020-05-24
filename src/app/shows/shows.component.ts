@@ -22,15 +22,15 @@ export class ShowsComponent implements OnInit {
 
   ngOnInit() {
      // this.getshowsdata();
-     this.route.data
+    this.sportservice.getshowsdata(0, 6)
     .subscribe(
-      (data: { showsdata: any }) => {
-      this.showsdata = data.showsdata.shows;
-      this.length = data.showsdata.total;
+      (res:any) => {
+        this.showsdata = res.shows;
+        this.length = res.total;
     },
       (error: any) => {
-        this.errmsg = error;
         // console.log(error);
+        this.errmsg = error.error;
       });
   }
   handlePageEvent(e: PageEvent) {

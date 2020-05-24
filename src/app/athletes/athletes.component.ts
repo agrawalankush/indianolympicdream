@@ -18,7 +18,6 @@ import {map, startWith,catchError, finalize} from 'rxjs/operators';
 export class AthletesComponent implements OnInit{
   public errmsg: string;
   public athletes: any;
-  loadingselected = false;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   // MatPaginator Inputs
   length: number;
@@ -40,24 +39,28 @@ export class AthletesComponent implements OnInit{
 
   @ViewChild('sportInput') sportInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
-  constructor(private route:ActivatedRoute,private sportservice:SportsdataService) { 
+  constructor(private route:ActivatedRoute,private sportservice:SportsdataService) {
     this.filteredSports = this.sportCtrl.valueChanges.pipe(
       startWith(null),
       map((sport: string | null) => sport ? this._filter(sport) : this.getallsports()));
   }
 
   ngOnInit() {
-    this.route.data
+    this.sportservice.getathletes([],0,8)
     .subscribe(
-      (data: { athletesdata: any}) => {
-      // console.log(data.athletesdata);
-      this.athletes = data.athletesdata.athletes;
-      this.length = data.athletesdata.total;
+      (res: any) => {
+      // console.log(data);
+      this.athletes = res.athletes;
+      this.length = res.total;
+    },
+    (error) =>{
+      this.errmsg = error.error;
+      // console.log(error);
     })
   }
   handlePageEvent(e: PageEvent) {
-    let index = e.pageIndex * e.pageSize;
-    let size =  e.pageSize;
+    const index = e.pageIndex * e.pageSize;
+    const size =  e.pageSize;
     this.sportservice.getathletes(this.sports,index,size)
     .subscribe(
      (res:any) => {
@@ -69,9 +72,9 @@ export class AthletesComponent implements OnInit{
        console.log(error);
      });
    }
-   getallsports() { 
-   if(this.sports){ 
-   // console.log(this.allsports.filter(sport => !(this.sports.includes(sport))))  
+   getallsports() {
+   if(this.sports){
+   // console.log(this.allsports.filter(sport => !(this.sports.includes(sport))))
    return this.allsports.filter(sport => !(this.sports.includes(sport)));
   } else {
    return this.allsports.slice();
@@ -96,25 +99,21 @@ export class AthletesComponent implements OnInit{
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
     if(this.sports.length > 0) {
-      let filteredallsports = this.allsports.filter(sport => !(this.sports.includes(sport)));
+      const filteredallsports = this.allsports.filter(sport => !(this.sports.includes(sport)));
       return filteredallsports.filter(sport => sport.toLowerCase().indexOf(filterValue) === 0);
     } else {
     return this.allsports.filter(sport => sport.toLowerCase().indexOf(filterValue) === 0);
   }
   }
   public SearchAthltes(selectedsports: any) {
-    this.loadingselected = true;
-    let index = this.paginator.pageIndex * this.paginator.pageSize;
-    let size =  this.paginator.pageSize;
+    const index = this.paginator.pageIndex * this.paginator.pageSize;
+    const size =  this.paginator.pageSize;
     this.sportservice.getathletes(selectedsports,index,size)
-    .pipe(
-      finalize(() => this.loadingselected = false)
-    )
     .subscribe(
      (res:any) => {
        // console.log(res);
        this.athletes = res.athletes;
-       this.length = res.total; 
+       this.length = res.total;
        this.paginator.firstPage()
    },
      (error:any) =>{

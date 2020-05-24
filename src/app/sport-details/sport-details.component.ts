@@ -15,16 +15,19 @@ export class SportDetailsComponent implements OnInit {
                          'Judo','Rowing','Shooting', 'TableTennis','Tennis', 'Weightlifting', 'Wrestling'];
   public displayedColumns: string[] = ['Event', 'EntryStandard', 'NR'];
   constructor(
-    private route:ActivatedRoute,
+    private route: ActivatedRoute,
     private sportservice:SportsdataService
   ) { }
 
   ngOnInit() {
-    this.route.data
+    this.route.paramMap.subscribe((params:any) => {
+      // console.log(params.params.sportname);
+      this.sportservice.getsports(params.params.sportname)
     .subscribe(
-      (data: { sportdata: SportDetails[] }) => {
-      // console.log(data.sportdata);
-      this.sportsdetails = data.sportdata[0];
+      (res: any) => {
+      // console.log(res);
+      this.sportsdetails = res[0];
     });
+    })
   }
 }

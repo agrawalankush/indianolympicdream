@@ -21,7 +21,7 @@ export class SportsdataService {
     );
   }
   public getsports(sportname: string) {
-    return this.http.get<SportDetails[]>(`/api/sports/${sportname}`)
+    return this.http.get<any>(`/api/sports/${sportname}`)
     .pipe(
       retry(2)
     );

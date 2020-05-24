@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AllSportsResolved } from '../models/app-models';
+import { SportsdataService } from '../sportsdata.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -9,14 +10,13 @@ import { AllSportsResolved } from '../models/app-models';
 export class HomeComponent implements OnInit {
   public errmsg:string;
   public allsports: any;
-  
-  constructor(private route:ActivatedRoute) { }
+  constructor(private route:ActivatedRoute, private sportservice: SportsdataService) { }
 
   ngOnInit() {
-    this.route.data
+    this.sportservice.getallsports()
     .subscribe(
-      (data: { allsportsdata: AllSportsResolved[] }) => {
-      this.allsports = data.allsportsdata;
+      (res: any) => {
+      this.allsports = res;
     });
   }
 }

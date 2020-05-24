@@ -1,3 +1,4 @@
+<div *ngIf="sportsdetails">
 <mat-toolbar>
 <button mat-button [routerLink]="['/home']"><mat-icon>home</mat-icon>Home<mat-icon>chevron_right</mat-icon></button>
 <img class="pictogram-sport-details" src="pictograms/{{sportsdetails.name}}.png" alt="{{sportsdetails.name}} pictogram" />
@@ -13,18 +14,18 @@
     Go To<mat-icon>sports_kabaddi</mat-icon>
 </button>
 </mat-toolbar>
-<div ngClass="container" 
+<div ngClass="container"
 [ngClass.gt-sm]="{'container':false, 'container-bigger':true}" fxLayout="column">
 <div class="sports-details-card mat-elevation-z8">
                 <picture>
                    <source type="image/webp" srcset="sport_images/{{sportsdetails.name}}.webp">
-                   <img ngClass="sports-details-card-image" 
+                   <img ngClass="sports-details-card-image"
                         [ngClass.gt-sm]="{'sports-details-card-image':false, 'sports-details-card-image-bigger':true}" [src]="sportsdetails.image" alt="Athlete Image">
                 </picture>
 <div ngClass="sport-details-card-header"
 [ngClass.gt-xs]="{'sport-details-card-header':false, 'sport-details-card-header-bigger':true}">
                 <h1>{{sportsdetails.name | uppercase}}</h1>
-                <span class="medals-number"><img class="medal-icon" src="assets/icon_medal.png" alt="medals">{{sportsdetails.Medals}}</span> 
+                <span class="medals-number"><img class="medal-icon" src="assets/icon_medal.png" alt="medals">{{sportsdetails.Medals}}</span>
                 <a mat-flat-button color="primary" target="_blank" [href]="sportsdetails.doc_pdf">
                         <mat-icon>picture_as_pdf</mat-icon>Qualification Road for Tokyo
                 </a>
@@ -35,12 +36,12 @@
 </div>
         <p>
           {{sportsdetails.description}}
-          <a mat-flat-button *ngIf="sportsdetails.name === 'Hockey'" color="primary" target="_blank" href="https://www.youtube.com/watch?v=B_gcSeiA4zU">
+          <!-- <a mat-flat-button *ngIf="sportsdetails.name === 'Hockey'" color="primary" target="_blank" href="https://www.youtube.com/watch?v=B_gcSeiA4zU">
                 <mat-icon>movie</mat-icon>India's Champions
-          </a>  
-        </p>    
+          </a> -->
+        </p>
 </div>
-<div>  
+<div>
 <h3> EVENTS </h3>
         <div class="events-container mat-elevation-z8">
                 <mat-accordion multi="true">
@@ -52,7 +53,7 @@
                                         {{eventscatagory.key | titlecase}}
                                         </mat-panel-title>
                                 </mat-expansion-panel-header>
-                        
+
                                 <table mat-table *ngIf="sportsdetails.name === 'Athletics'; else othersports"  [dataSource]="eventscatagory.value"
                                 class="mat-elevation-z8">
                                         <ng-container matColumnDef="Event">
@@ -78,7 +79,7 @@
                                                 <td mat-cell *matCellDef="let element">
                                                         {{ element.totalentries }}
                                                 </td>
-                                        </ng-container> 
+                                        </ng-container>
                                         -->
                                         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                                         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
@@ -95,9 +96,10 @@
                                                 </div>
                                         </mat-card-content>
                                 </mat-card>
-                                </ng-template>  
-                        </mat-expansion-panel>       
+                                </ng-template>
+                        </mat-expansion-panel>
                 </mat-accordion>
                 </div>
 </div>
-</div>        
+</div>
+</div>

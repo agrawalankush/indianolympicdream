@@ -7,8 +7,9 @@ import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { httpInterceptorProviders } from './http-interceptors/index';
 
-//componets
+// componets
 import { HomeComponent} from './home/home.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { ShowsComponent } from './shows/shows.component';
@@ -19,6 +20,7 @@ import { CalendarComponent } from './calendar/calendar.component';
 import { AthletesComponent } from './athletes/athletes.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { LoaderComponent } from './shared/components/loader/loader.component';
 import { ServerErrorComponent } from './server-error/server-error.component';
 
 @NgModule({
@@ -32,21 +34,23 @@ import { ServerErrorComponent } from './server-error/server-error.component';
     CalendarComponent,
     AthletesComponent,
     AboutComponent,
+    LoaderComponent,
     ServerErrorComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     MaterialModule,
-    FormsModule, 
+    FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
     FlexLayoutModule,
     BrowserAnimationsModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
-    
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
-  providers: [],
+  providers: [
+    httpInterceptorProviders
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
