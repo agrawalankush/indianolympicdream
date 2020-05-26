@@ -13,14 +13,14 @@
              <mat-card-header>
                 <mat-card-title>{{showcontent.name}}</mat-card-title>
             </mat-card-header>
-            <iframe class="mat-elevation-z24" mat-card-image height="250px" [src]="videoyoutube + showcontent.youtube_id | safe" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            <mat-card-content >
+            <iframe class="mat-elevation-z24" mat-card-image [src]="videoyoutube + showcontent.youtube_id | safe" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <!--  <mat-card-content >
                 {{showcontent.description}}
             </mat-card-content>
-        <!-- <mat-card-actions>
+         <mat-card-actions>
                 <button mat-button>LIKE</button>
                 <button mat-button>SHARE</button>
-            </mat-card-actions> 
+            </mat-card-actions>
         -->
         </mat-card>
     </div>
