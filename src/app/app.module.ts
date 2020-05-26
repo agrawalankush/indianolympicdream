@@ -16,7 +16,7 @@ import { ShowsComponent } from './shows/shows.component';
 import { SafePipe } from './safepipe';
 import { AboutComponent } from './about/about.component';
 import { SportDetailsComponent } from './sport-details/sport-details.component';
-import { CalendarComponent } from './calendar/calendar.component';
+// import { CalendarComponent } from './calendar/calendar.component';
 import { AthletesComponent } from './athletes/athletes.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
@@ -31,7 +31,7 @@ import { ServerErrorComponent } from './server-error/server-error.component';
     ShowsComponent,
     SafePipe,
     SportDetailsComponent,
-    CalendarComponent,
+   // CalendarComponent,
     AthletesComponent,
     AboutComponent,
     LoaderComponent,

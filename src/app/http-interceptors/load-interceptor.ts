@@ -41,7 +41,7 @@ export class LoadInterceptor implements HttpInterceptor {
                 }
               },
               (error => {
-                if (error instanceof HttpErrorResponse && error.status === 501) {
+                if (error instanceof HttpErrorResponse && error.status === 502) {
                   this.onEnd();
                   this.router.navigate(['internal-error']);
                 } else {
