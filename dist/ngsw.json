@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1590497801939,
+  "timestamp": 1590565120235,
   "index": "/index.html",
   "assetGroups": [
     {
@@ -10,8 +10,8 @@
       "urls": [
         "/favicon.ico",
         "/index.html",
-        "/main-es2015.c88af4185127e00f23a1.js",
-        "/main-es5.c88af4185127e00f23a1.js",
+        "/main-es2015.e473600550791436c31f.js",
+        "/main-es5.e473600550791436c31f.js",
         "/manifest.webmanifest",
         "/polyfills-es2015.ca64e4516afbb1b890d5.js",
         "/polyfills-es5.ad81c68d1c3d7a0429f1.js",
@@ -59,9 +59,9 @@
     "/assets/primevideo.jpg": "abc0cd02b763e84c532debaf97d63a853c4870c0",
     "/assets/youtube.png": "2c5c688976c879bb1bf2bf4138f49dfe0851b007",
     "/favicon.ico": "6134835c65aa395c08b2e888a24152301aed70c3",
-    "/index.html": "68700aec166c9993431c0d0bf408085a65e5f662",
-    "/main-es2015.c88af4185127e00f23a1.js": "cd695b9c9e112572270ccabfb49fcf87c5a41495",
-    "/main-es5.c88af4185127e00f23a1.js": "59c4af33a98100967689058e490b02848d9c9f29",
+    "/index.html": "7d70217bc9562a87f287799437a04323eb3a4a85",
+    "/main-es2015.e473600550791436c31f.js": "82a92f6962088c140a43a865f13626db345ce18a",
+    "/main-es5.e473600550791436c31f.js": "0b7320ec19fec460b557569a049ecbc177a1972c",
     "/manifest.webmanifest": "9cb86b6576b1b6b521d351a5d285ecda2847372c",
     "/polyfills-es2015.ca64e4516afbb1b890d5.js": "8779ed8d9bf0580e1b50b352a9b8fd520be24433",
     "/polyfills-es5.ad81c68d1c3d7a0429f1.js": "8d03638471d7374e81cf33adfdea439f84ac3873",

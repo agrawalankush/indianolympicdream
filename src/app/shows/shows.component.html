@@ -2,14 +2,14 @@
         {{errmsg}}
     </mat-error>
     <!-- <pre>{{showsdata}}</pre> -->
-    <mat-paginator
+    <mat-paginator class="sticky-paginator mat-elevation-z4"
               [length]="length"
               [pageSize]="pageSize"
               [pageSizeOptions]="pageSizeOptions"
               (page)="handlePageEvent($event)">
     </mat-paginator>
     <div class="cards-container" fxLayout="row wrap" fxLayoutAlign="center center">
-        <mat-card color="primary" class="movies-card mat-elevation-z8" *ngFor="let showcontent of showsdata">
+        <mat-card color="primary" class="movies-card" *ngFor="let showcontent of showsdata">
              <mat-card-header>
                 <mat-card-title>{{showcontent.name}}</mat-card-title>
             </mat-card-header>

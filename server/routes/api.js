@@ -18,7 +18,7 @@ const connection = (closure) => {
     });
 };
 // Response handling
-let response = {};
+const response = {};
 
 // Error handling
 const sendError = (err, res) => {
@@ -66,6 +66,7 @@ router.get('/shows', (req, res) => {
             .find({}); //$text: { $search: searchterm }
             showsFind.count(function (err, count) {
             if(err) console.log(err);
+        const response = {};
         let totalshows = count;
         // console.log(count);
         showsFind
@@ -95,6 +96,7 @@ router.get('/calendar', (req, res) => {
             .find({"enddate":{ $gte: 1579894153}}); //$text: { $search: searchterm }
     curFind.count(function (err, count) {
         if(err) console.log(err);
+        const response = {};
         let totalevents = count;
         // console.log(count);
             curFind
@@ -139,6 +141,7 @@ router.get('/athletes', (req, res) => {
            .find(condition); //$text: { $search: searchterm }
    curFind.count(function (err, count) {
     if(err) console.log(err);
+    const response = {};
        let qualifiedathletes = count;
         // console.log(count);
            curFind
