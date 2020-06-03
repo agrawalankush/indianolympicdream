@@ -20,14 +20,16 @@ export class AppComponent {
   // Sets initial value to true to show loading spinner on first load
   public loading = true;
   public isLightTheme = false;
-  title = 'IndianOlympicDream';
+  @HostBinding('class') componentCssClass;
+  selectedtheme: string;
   constructor(private router: Router, private swupdateservice: SwupdateService, public overlayContainer: OverlayContainer) {
+    const theme = localStorage.getItem('selectedTheme');
+    this.onSetTheme(theme);
     this.swupdateservice.checkForUpdates();
     router.events.subscribe((event: RouterEvent) => {
       this.navigationInterceptor(event);
     });
   }
-  @HostBinding('class') componentCssClass;
   // Shows and hides the loading spinner during RouterEvent changes
   navigationInterceptor(event: RouterEvent): void {
     if (event instanceof NavigationStart) {
@@ -46,15 +48,27 @@ export class AppComponent {
     }
   }
     // For dark and light theme mode
-    changeTheme(): void {
-         if (this.isLightTheme) {
-            this.isLightTheme = false;
-            this.overlayContainer.getContainerElement().classList.add('default-theme');
-            this.componentCssClass = 'default-theme';
-         } else {
-            this.isLightTheme = true;
-            this.overlayContainer.getContainerElement().classList.add('light-theme');
-            this.componentCssClass = 'light-theme';
-        }
-     }
+    // changeTheme(): void {
+    //      if (this.isLightTheme) {
+    //         this.isLightTheme = false;
+    //         this.overlayContainer.getContainerElement().classList.add('default-theme');
+    //         this.componentCssClass = 'default-theme';
+    //      } else {
+    //         this.isLightTheme = true;
+    //         this.overlayContainer.getContainerElement().classList.add('light-theme');
+    //         this.componentCssClass = 'light-theme';
+    //     }
+    //  }
+     onSetTheme(theme) {
+      localStorage.setItem('selectedTheme', theme);
+      if (this.componentCssClass) {
+        this.overlayContainer.getContainerElement().classList.remove(this.componentCssClass);
+        this.componentCssClass = null;
+        this.overlayContainer.getContainerElement().classList.add(theme);
+        this.componentCssClass = theme;
+      } else {
+        this.componentCssClass = theme;
+        this.overlayContainer.getContainerElement().classList.add(theme);
+      }
+    }
 }

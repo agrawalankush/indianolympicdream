@@ -20,12 +20,20 @@
         <button fxHide.lt-sm="true" routerLink="/about"  mat-button routerLinkActive="mat-primary">About</button>
         </nav>
         <span class="fill-remaining-space"></span>
-            <button *ngIf="isLightTheme" mat-button (click)="changeTheme()">
+            <!-- <button *ngIf="isLightTheme" mat-button (click)="changeTheme()">
               <mat-icon>brightness_5</mat-icon>F**k go back
             </button>
             <button *ngIf="!isLightTheme" mat-button (click)="changeTheme()">
             <mat-icon>brightness_2</mat-icon>The Dark knight
-            </button>
+            </button> -->
+            <button mat-icon-button [matMenuTriggerFor]="appMenu">
+              <mat-icon>format_color_fill</mat-icon>
+              </button>
+            <mat-menu #appMenu="matMenu">
+              <button mat-menu-item (click)="onSetTheme('default-theme')">Indigo & Pink</button>
+              <button mat-menu-item (click)="onSetTheme('dark-theme')">Blue grey & Amber</button>
+              <button mat-menu-item (click)="onSetTheme('red-dark-theme')">Red & Orange</button>
+          </mat-menu>
       </mat-toolbar>
       <mat-progress-bar color="warn" *ngIf="loading" mode="query"></mat-progress-bar>
       <mat-sidenav-container class="sidenav-container">
