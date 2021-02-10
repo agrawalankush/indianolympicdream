@@ -14,15 +14,15 @@ export class ShowsComponent implements OnInit {
   public videoyoutube = 'https://www.youtube.com/embed/';
   // MatPaginator Inputs
   length: number;
-  pageSize = 6;
-  pageSizeOptions: number[] = [3, 6, 12, 24];
+  pageSize = 8;
+  pageSizeOptions: number[] = [4, 8, 16, 32];
   // MatPaginator Output
   pageEvent: PageEvent;
   constructor(private route: ActivatedRoute, private sportservice: SportsdataService) { }
 
   ngOnInit() {
      // this.getshowsdata();
-    this.sportservice.getshowsdata(0, 6)
+    this.sportservice.getshowsdata(0, 8)
     .subscribe(
       (res:any) => {
         this.showsdata = res.shows;

@@ -1,18 +1,14 @@
 .cards-container{
-     margin:24px 0px 24px 24px;
+     margin: 24px 0px 0px 24px;
 }
 .movies-card{
-    width:410px;
-    max-width:410px;
+    width:300px;
     margin-bottom: 16px;
     margin-right: 16px;
-    height: 400px;
-    max-height: 400px;
+    height: 380px;
 }
 .mat-card-image{
-  min-height: 350px;
-  height: 380px;
-  // max-height: 380px;
+  height: 260px;
   border-bottom-left-radius: 4px;
   border-bottom-right-radius: 4px;
 }
@@ -20,4 +16,11 @@
   position: sticky;
   top: 0;
   z-index: 1000;
+}
+.mat-card-content {
+  white-space: nowrap;
+  overflow: hidden;
+  padding-left: 4px;
+  padding-right: 4px;
+  text-overflow: ellipsis;
 }
