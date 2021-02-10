@@ -18,8 +18,8 @@ export class SwupdateService {
   public checkForUpdates() {
     if (this.updates.isEnabled) {
       this.updates.available.subscribe(event => {
-        // console.log('current version is', event.current);
-        // console.log('available version is', event.available);
+        console.log('current version is', event.current);
+        console.log('available version is', event.available);
         this.promptUser(event);
       });
       // this.updates.activated.subscribe(event => {

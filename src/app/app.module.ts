@@ -46,7 +46,7 @@ import { ServerErrorComponent } from './server-error/server-error.component';
     AppRoutingModule,
     FlexLayoutModule,
     BrowserAnimationsModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production, registrationStrategy: 'registerImmediately' })
   ],
   providers: [
     httpInterceptorProviders
