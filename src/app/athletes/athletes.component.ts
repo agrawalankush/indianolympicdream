@@ -35,7 +35,7 @@ export class AthletesComponent implements OnInit{
   filteredSports: Observable<any>;
   sports: string[] = [];
   allsports: string[] = ['Archery', 'Athletics','Badminton', 'Boxing', 'Equestrian', 'Fencing','Golf', 'Gymnastics', 'Hockey',
-                         'Judo','Rowing','Shooting', 'TableTennis','Tennis', 'Weightlifting', 'Wrestling'];
+                         'Judo','Rowing','Shooting', 'Sailing', 'TableTennis','Tennis', 'Weightlifting', 'Wrestling'];
 
   @ViewChild('sportInput') sportInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
