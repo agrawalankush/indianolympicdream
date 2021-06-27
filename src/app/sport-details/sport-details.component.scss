@@ -4,10 +4,11 @@
   }
   .container {
     margin: 24px;
-} 
+}
 .pictogram-sport-details{
   height: 40px;
   width: 40px;
+  border-radius: 50%;
 }
   .event-header .mat-expansion-panel-header-title {
     flex-basis: 0;
@@ -16,7 +17,7 @@
   .medal-icon{
       margin-top:20px;
       height: 16px;
-      width: 16px;   
+      width: 16px;
   }
   .medals-number{
     float:left;
@@ -26,7 +27,7 @@
   .events-container{
       margin-top: 10px;
   }
-  
+
   table{
     width: 100%
   }
@@ -36,7 +37,7 @@
   .sports-details-card .sports-details-card-image-bigger{
     border-radius:10px 0 0 0px;
     max-height: 300px;
-    max-width:  600px;
+    max-width:  500px;
     float: left;
   }
 
@@ -58,7 +59,7 @@
     letter-spacing:1px;
     float:left;
   }
-  
+
   .sport-details-card-header-bigger h1 {
     font-weight:400;
     text-align:left;
