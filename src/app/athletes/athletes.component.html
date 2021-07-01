@@ -14,7 +14,7 @@
         <mat-form-field appearance="outline" class="chip-list">
                         <mat-label>Search your sport</mat-label>
                         <mat-chip-list #chipList aria-label="Sport selection">
-                          <mat-chip color="primary"
+                          <mat-chip class="mat-chip-category"
                             *ngFor="let sport of sports"
                             [selectable]="selectable"
                             [removable]="removable"
