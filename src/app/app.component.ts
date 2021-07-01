@@ -8,13 +8,18 @@ import {
   NavigationStart,
   NavigationEnd,
   NavigationCancel,
-  NavigationError
+  NavigationError,
+  RouterOutlet
 } from '@angular/router';
+import { slideInAnimation } from './animations';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  animations: [
+    slideInAnimation
+  ]
 })
 export class AppComponent {
   // Sets initial value to true to show loading spinner on first load
@@ -70,5 +75,8 @@ export class AppComponent {
         this.componentCssClass = theme;
         this.overlayContainer.getContainerElement().classList.add(theme);
       }
+    }
+    prepareRoute(outlet: RouterOutlet) {
+      return outlet && outlet.activatedRouteData && outlet.activatedRouteData.animation;
     }
 }

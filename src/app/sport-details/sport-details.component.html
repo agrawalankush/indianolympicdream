@@ -16,7 +16,7 @@
 </mat-toolbar>
 <div ngClass="container"
 [ngClass.gt-sm]="{'container':false, 'container-bigger':true}" fxLayout="column">
-<div class="sports-details-card mat-elevation-z8">
+<div class="sports-details-card mat-elevation-z2">
                 <picture>
                    <source type="image/webp" srcset="sport_images/{{sportsdetails.name}}.webp">
                    <img ngClass="sports-details-card-image"
@@ -27,7 +27,10 @@
                 <h1>{{sportsdetails.name | uppercase}}</h1>
                 <span class="medals-number"><img class="medal-icon" src="assets/icon_medal.png" alt="medals">{{sportsdetails.Medals}}</span>
                 <a mat-flat-button color="primary" target="_blank" [href]="sportsdetails.doc_pdf">
-                        <mat-icon>picture_as_pdf</mat-icon>Qualification Road for Tokyo
+                    <mat-icon>picture_as_pdf</mat-icon>  Qualification Road for Tokyo
+                </a>
+                <a style="margin-top: 8px;" mat-flat-button color="primary" [routerLink]="['/athletes']" [queryParams]="{sports: qualifiedAthletesString, pageIndex: '0', pazeSize: '8'}">
+                  <mat-icon>flight_takeoff</mat-icon>  Qualified Athletes
                 </a>
                 <!-- <span class="foot-note-pdf" *ngIf="sportsdetails.name === 'Equestrian'">
                         Note:Above pdf is of Eventing category, as in Jumping and Dressage
@@ -43,7 +46,7 @@
 </div>
 <div>
 <h3> EVENTS </h3>
-        <div class="events-container mat-elevation-z8">
+        <div class="events-container mat-elevation-z0">
                 <mat-accordion multi="true">
                         <mat-expansion-panel *ngFor="let eventscatagory of sportsdetails.events | keyvalue" class="event-header" hideToggle="true" #eventpanel>
                                 <mat-expansion-panel-header>

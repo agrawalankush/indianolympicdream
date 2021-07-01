@@ -11,6 +11,7 @@ export class SportDetailsComponent implements OnInit {
   public errmsg: string;
   public sportname:string;
   public sportsdetails:any;
+  qualifiedAthletesString: string;
   allsports: string[] = ['Archery', 'Athletics','Badminton', 'Boxing', 'Equestrian', 'Fencing','Golf', 'Gymnastics', 'Hockey',
                          'Judo','Rowing','Shooting', 'Sailing', 'Swimming', 'TableTennis','Tennis', 'Weightlifting', 'Wrestling'];
   public displayedColumns: string[] = ['Event', 'EntryStandard', 'NR'];
@@ -27,6 +28,7 @@ export class SportDetailsComponent implements OnInit {
       (res: any) => {
       // console.log(res);
       this.sportsdetails = res[0];
+      this.qualifiedAthletesString = JSON.stringify([this.sportsdetails.name]);
     });
     })
   }

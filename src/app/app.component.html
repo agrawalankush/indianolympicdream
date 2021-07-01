@@ -66,7 +66,9 @@
                   </mat-nav-list>
             </mat-sidenav>
       <mat-sidenav-content>
-        <router-outlet></router-outlet>
+        <div [@routeAnimations]="prepareRoute(outlet)">
+        <router-outlet #outlet="outlet"></router-outlet>
+      </div>
         <!-- <mat-toolbar  class="botton-toolbar"></mat-toolbar> -->
       </mat-sidenav-content>
       </mat-sidenav-container>

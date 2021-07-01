@@ -1,41 +1,46 @@
 <!-- <mat-paginator #paginator [length]="totalathletes" [pageIndex]="0" [pageSize]="10" [pageSizeOptions]="[5,10]">
 </mat-paginator> -->
 <!-- {{ athletes | json}} -->
-<mat-paginator [length]="length"
+<div class="filter-options mat-elevation-z1">
+<div class="search-field">
+<mat-form-field  class="chip-list">
+  <mat-label>Search Sports</mat-label>
+  <mat-chip-list #chipList aria-label="Sport selection">
+    <mat-chip class="mat-chip-category"
+      *ngFor="let sport of sports"
+      [selectable]="selectable"
+      [removable]="removable"
+      (removed)="remove(sport)">
+      {{sport}}
+      <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+    </mat-chip>
+    <input
+      #sportInput
+      [formControl]="sportCtrl"
+      [matAutocomplete]="auto"
+      [matChipInputFor]="chipList"
+      [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+      >
+  </mat-chip-list>
+  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+    <mat-option *ngFor="let sport of filteredSports | async" [value]="sport">
+      {{sport}}
+    </mat-option>
+  </mat-autocomplete>
+</mat-form-field>
+</div>
+<mat-paginator
+              [length]="length"
               [pageSize]="pageSize"
               [pageIndex]="pageIndex"
               [pageSizeOptions]="pageSizeOptions"
               (page)="handlePageEvent($event)">
+              <mat-icon>search</mat-icon>
 </mat-paginator>
-
+</div>
 <div class="cards-container" fxLayout="row wrap"
         fxLayoutAlign="center center">
         <mat-error *ngIf="errmsg">{{errmsg}}</mat-error>
-        <mat-form-field appearance="outline" class="chip-list">
-                        <mat-label>Search your sport</mat-label>
-                        <mat-chip-list #chipList aria-label="Sport selection">
-                          <mat-chip class="mat-chip-category"
-                            *ngFor="let sport of sports"
-                            [selectable]="selectable"
-                            [removable]="removable"
-                            (removed)="remove(sport)">
-                            {{sport}}
-                            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-                          </mat-chip>
-                          <input
-                            #sportInput
-                            [formControl]="sportCtrl"
-                            [matAutocomplete]="auto"
-                            [matChipInputFor]="chipList"
-                            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                            >
-                        </mat-chip-list>
-                        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
-                          <mat-option *ngFor="let sport of filteredSports | async" [value]="sport">
-                            {{sport}}
-                          </mat-option>
-                        </mat-autocomplete>
-                      </mat-form-field>
         <span *ngIf="length === 0">
           Our Athletes are trying hard, hopefully we'll see someone qualifying soon.
         </span>

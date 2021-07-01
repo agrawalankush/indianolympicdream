@@ -12,16 +12,16 @@ import { AthletesComponent } from './athletes/athletes.component';
 import { ServerErrorComponent } from './server-error/server-error.component';
 
 const routes: Routes = [
-  { path: 'home',  component: HomeComponent
+  { path: 'home',  component: HomeComponent, data: { animation: 'HomePage'}
     // resolve: {
     //   allsportsdata: AllSportsResolverService
     // }
   },
-  { path: 'sports/:sportname', component: SportDetailsComponent },
+  { path: 'sports/:sportname', component: SportDetailsComponent, data: { animation: 'SportDetailsPage'} },
   // { path: 'calendar', component: CalendarComponent},
-  { path: 'athletes', component: AthletesComponent},
-  { path: 'shows', component: ShowsComponent },
-  { path: 'about',  component: AboutComponent },
+  { path: 'athletes', component: AthletesComponent, data: { animation: 'AthletesPage'}},
+  { path: 'shows', component: ShowsComponent, data: { animation: 'ShowsPage'} },
+  { path: 'about',  component: AboutComponent, data: { animation: 'AboutPage'} },
   { path: 'internal-error', component: ServerErrorComponent },
   { path: '',   redirectTo: '/home', pathMatch: 'full' },
   { path: '**', component: PagenotfoundComponent }
