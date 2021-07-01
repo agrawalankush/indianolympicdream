@@ -47,4 +47,4 @@ export class ShowsComponent implements OnInit {
       // console.log(error);
     });
   }
-  }
+}

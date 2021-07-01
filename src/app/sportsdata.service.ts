@@ -37,11 +37,11 @@ export class SportsdataService {
       catchError(this.handleError)
     );
   }
-  public getathletes(sports: any, pageIndex: number, pageSize: number) {
+  public getathletes(sports: any, pageIndex: string, pageSize: string) {
     let params = new HttpParams()
-    .set('pageIndex', pageIndex.toString())
-    .set('pageSize', pageSize.toString());
-    params = params.append('searchedsports', sports);
+    .set('pageIndex', pageIndex)
+    .set('pageSize', pageSize);
+    params = params.append('searchedsports', JSON.parse(sports));
     return this.http.get<any>(`/api/athletes`, {params})
     .pipe(
       retry(2),

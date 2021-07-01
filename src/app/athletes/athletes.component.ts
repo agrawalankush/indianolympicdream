@@ -1,5 +1,5 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { SportsdataService } from '../sportsdata.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { PageEvent} from '@angular/material/paginator';
@@ -34,68 +34,57 @@ export class AthletesComponent implements OnInit{
   sportCtrl = new FormControl();
   filteredSports: Observable<any>;
   sports: string[] = [];
-  allsports: string[] = ['Archery', 'Athletics','Badminton', 'Boxing', 'Equestrian', 'Fencing','Golf', 'Gymnastics', 'Hockey',
-                         'Judo','Rowing','Shooting', 'Sailing', 'Swimming', 'TableTennis','Tennis', 'Weightlifting', 'Wrestling'];
+  allsports: string[] = [
+    'Archery',
+    'Athletics',
+    'Badminton',
+    'Boxing',
+    'Equestrian',
+    'Fencing',
+    'Golf',
+    'Gymnastics',
+    'Hockey',
+    'Judo',
+    'Rowing',
+    'Shooting',
+    'Sailing',
+    'Swimming',
+    'TableTennis',
+    'Tennis',
+    'Weightlifting',
+    'Wrestling'
+  ];
 
   @ViewChild('sportInput') sportInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
-  constructor(private route:ActivatedRoute,private sportservice:SportsdataService) {
+  constructor(private route:ActivatedRoute, private router: Router,private sportservice:SportsdataService) {
     this.filteredSports = this.sportCtrl.valueChanges.pipe(
-      startWith(null),
       map((sport: string | null) => sport ? this._filter(sport) : this.getallsports()));
   }
 
   ngOnInit() {
-    this.sportservice.getathletes([],0,8)
-    .subscribe(
-      (res: any) => {
-      // console.log(data);
-      this.athletes = res.athletes;
-      this.length = res.total;
-    },
-    (error) =>{
-      this.errmsg = error.error;
-      // console.log(error);
-    })
-  }
-  handlePageEvent(e: PageEvent) {
-    const index = e.pageIndex * e.pageSize;
-    const size =  e.pageSize;
-    this.sportservice.getathletes(this.sports,index,size)
-    .subscribe(
-     (res:any) => {
-       this.athletes = res.athletes;
-       this.length = res.total;
-   },
-     (error) =>{
-       this.errmsg = error.error;
-       console.log(error);
-     });
-   }
-   getallsports() {
-   if(this.sports){
-   // console.log(this.allsports.filter(sport => !(this.sports.includes(sport))))
-   return this.allsports.filter(sport => !(this.sports.includes(sport)));
-  } else {
-   return this.allsports.slice();
-  }
-   }
-   remove(sport: string): void {
-    const index = this.sports.indexOf(sport);
+    this.route.queryParams
+      .subscribe(params => {
+        // console.log(params);
+        if(Object.keys(params).length === 0 && params.constructor === Object){
+          this.SearchAthletes("[]", "0", "8");
+        } else {
+        this.sports = JSON.parse(params.sports);
+        // this.pageIndex = parseInt(params.pageIndex);
+        // this.pageSize = parseInt(params.pazeSize);
+        this.SearchAthletes(params.sports, params.pageIndex, params.pazeSize);
+        }
+      }
+    );
 
-    if (index >= 0) {
-      this.sports.splice(index, 1);
-      this.SearchAthltes(this.sports);
-    }
   }
-
-  selected(event: MatAutocompleteSelectedEvent): void {
-    this.sports.push(event.option.viewValue);
-    this.sportInput.nativeElement.value = '';
-    this.sportCtrl.setValue(null);
-    this.SearchAthltes(this.sports);
+  get queryParams() {
+    const index = this.paginator.pageIndex * this.paginator.pageSize;
+    const size =  this.paginator.pageSize;
+    const sports = JSON.stringify(this.sports);
+    const queryParams: Params = { sports:sports, pageIndex: index, pazeSize: size };
+    return queryParams;
   }
-
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
     if(this.sports.length > 0) {
@@ -105,20 +94,55 @@ export class AthletesComponent implements OnInit{
     return this.allsports.filter(sport => sport.toLowerCase().indexOf(filterValue) === 0);
   }
   }
-  public SearchAthltes(selectedsports: any) {
-    const index = this.paginator.pageIndex * this.paginator.pageSize;
-    const size =  this.paginator.pageSize;
-    this.sportservice.getathletes(selectedsports,index,size)
+  getallsports() {
+    if(this.sports){
+    // console.log(this.allsports.filter(sport => !(this.sports.includes(sport))))
+    return this.allsports.filter(sport => !(this.sports.includes(sport)));
+    } else {
+    return this.allsports.slice();
+    }
+  }
+  prepareQueryUrl() {
+    this.router.navigate(
+      [],
+      {
+        relativeTo: this.route,
+        queryParams: this.queryParams,
+        // queryParamsHandling: 'merge'
+      });
+  }
+  handlePageEvent(e: PageEvent) {
+   // console.log(e);
+   this.prepareQueryUrl();
+  }
+
+  selected(event: MatAutocompleteSelectedEvent): void {
+    this.sports.push(event.option.viewValue);
+    this.sportInput.nativeElement.value = '';
+    this.sportCtrl.setValue(null);
+    this.paginator.pageIndex = 0;
+    this.prepareQueryUrl();
+  }
+
+  remove(sport: string): void {
+    const index = this.sports.indexOf(sport);
+    if (index >= 0) {
+      this.sports.splice(index, 1);
+      this.paginator.pageIndex = 0;
+      this.prepareQueryUrl();
+    }
+  }
+  public SearchAthletes(selectedsports: any, pageIndex: string, pageSize: string) {
+    this.sportservice.getathletes(selectedsports, pageIndex, pageSize)
     .subscribe(
      (res:any) => {
        // console.log(res);
        this.athletes = res.athletes;
        this.length = res.total;
-       this.paginator.firstPage()
    },
      (error:any) =>{
        // console.log(error);
-       this.errmsg = error;
+       this.errmsg = error.error;
      });
   }
 }
