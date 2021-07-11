@@ -14,7 +14,7 @@ export class EventDetailsComponent implements OnInit {
 
   ngOnInit(): void {
 
-    console.log(typeof this.data.events[0].starttime, this.data.events[0].starttime)
+    // console.log(typeof this.data.events[0].starttime, this.data.events[0].starttime)
   }
   close(): void {
     this.dialogRef.close();
