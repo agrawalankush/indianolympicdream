@@ -8,7 +8,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { httpInterceptorProviders } from './http-interceptors/index';
+// pipes
 
+import { HumanizePipe} from './shared/components/loader/pipes/humanize';
 // componets
 import { HomeComponent} from './home/home.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
@@ -23,6 +25,7 @@ import { environment } from '../environments/environment';
 import { LoaderComponent } from './shared/components/loader/loader.component';
 import { ServerErrorComponent } from './server-error/server-error.component';
 import { ScheduleComponent } from './schedule/schedule.component';
+import { EventDetailsComponent } from './event-details/event-details.component';
 
 @NgModule({
   declarations: [
@@ -36,8 +39,10 @@ import { ScheduleComponent } from './schedule/schedule.component';
     AthletesComponent,
     AboutComponent,
     LoaderComponent,
+    HumanizePipe,
     ServerErrorComponent,
-    ScheduleComponent
+    ScheduleComponent,
+    EventDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -49,6 +54,9 @@ import { ScheduleComponent } from './schedule/schedule.component';
     FlexLayoutModule,
     BrowserAnimationsModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production, registrationStrategy: 'registerImmediately' })
+  ],
+  entryComponents:[
+    EventDetailsComponent
   ],
   providers: [
     httpInterceptorProviders

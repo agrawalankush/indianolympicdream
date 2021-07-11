@@ -32,6 +32,9 @@
                 <a style="margin-top: 8px;" mat-flat-button color="primary" [routerLink]="['/athletes']" [queryParams]="{sports: qualifiedAthletesString, pageIndex: '0', pazeSize: '8'}">
                   <mat-icon>flight_takeoff</mat-icon>  Qualified Athletes
                 </a>
+                <a style="margin-top: 8px;" mat-flat-button color="primary" [routerLink]="['/schedule']" [queryParams]="{sport: sportsdetails.name}">
+                  <mat-icon>today</mat-icon>  Schedule
+                </a>
                 <!-- <span class="foot-note-pdf" *ngIf="sportsdetails.name === 'Equestrian'">
                         Note:Above pdf is of Eventing category, as in Jumping and Dressage
                         category we have zero to little chance of Qualification.

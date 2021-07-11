@@ -12,4 +12,24 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   z-index: 1000;
 }
 
+.pictogram-sport-details{
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+}
+
+.custom-dialog .mat-dialog-container {
+  display: block;
+  padding-top: 0px;
+  padding-right: 0px;
+  padding-bottom: 0px;
+  margin: 24px;
+  padding-left: 0px;
+  border-radius: 4px;
+  box-sizing: border-box;
+  overflow: auto;
+  outline: 0;
+  min-height: inherit;
+  max-height: inherit;
+}
 

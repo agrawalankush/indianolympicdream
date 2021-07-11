@@ -1,0 +1,57 @@
+.mat-toolbar {
+  height: 100px;
+  justify-content: center;
+  align-content: center;
+}
+.schedule-conatiner {
+  margin: 24px;
+  // width: 100%;
+}
+.medal-icon {
+  height: 20px;
+  width: 20px;
+}
+.schedule-label {
+  display: table-cell;
+  font-size: 14px;
+  margin-left: 8px;
+  min-width: 120px;
+}
+.pictogram-sport-schedule {
+  height: 24px;
+  width: 24px;
+  text-align: center;
+  vertical-align: middle;
+}
+.pictogram-sport-schedule-date {
+  height: 60px;
+  width: 60px;
+  text-align: center;
+  vertical-align: middle;
+}
+// button{
+//   white-space: pre-line !important;
+// }
+.schedule-button-row {
+  display: table-cell;
+  // width: 800px;
+}
+
+.schedule-button-row .mat-button-base {
+  margin: 8px 8px 8px 0;
+}
+.date-button {
+  margin: 4px;
+}
+.schedule-flex-container {
+  display: flex;
+  align-content: center;
+  // justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.schedule-button-container {
+  display: flex;
+  // justify-content: center;
+  // width: 60px;
+}

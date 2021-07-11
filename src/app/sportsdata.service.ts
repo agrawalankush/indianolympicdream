@@ -48,12 +48,23 @@ export class SportsdataService {
       catchError(this.handleError)
     );
   }
-  public getschedule(sports: any) {
+  public getschedule(sport: string) {
     let params = new HttpParams()
     // .set('pageIndex', pageIndex)
     // .set('pageSize', pageSize);
-    params = params.append('searchedsports', JSON.parse(sports));
+    params = params.append('searchedsports', sport);
     return this.http.get<any>(`/api/schedule`, {params})
+    .pipe(
+      retry(1),
+      catchError(this.handleError)
+    );
+  }
+  public getschedulebydate(date: string) {
+    let params = new HttpParams()
+    // .set('pageIndex', pageIndex)
+    // .set('pageSize', pageSize);
+    params = params.append('date', date);
+    return this.http.get<any>(`/api/schedulebydate`, {params})
     .pipe(
       retry(1),
       catchError(this.handleError)

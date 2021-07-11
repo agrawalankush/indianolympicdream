@@ -85,21 +85,12 @@ router.get('/shows', (req, res) => {
     });
 });
 router.get('/schedule', (req, res) => {
-  let searchedsports = [];
-   if(req.query.searchedsports && typeof req.query.searchedsports  === "string"){
-    searchedsports = req.query.searchedsports.split(',');
-  }
+  let searchedsports = req.query.searchedsports;
    let condition = {};
-   // console.log(searchedsports,typeof searchedsports);
-   if(searchedsports.length === 0) {
-    condition = {};
-   } else if(searchedsports.length === 1) {
-    condition.sportname = {$all:searchedsports};
-   } else {
-    condition.sportname = {$in:searchedsports};
+   // console.log(searchedsports);
+   if(searchedsports) {
+    condition = {"sportname": searchedsports};
    }
-  // let pageoffset = parseInt(req.query.pageIndex, 10);
-  // let pagesize = parseInt(req.query.pageSize,10);
   connection((db) => {
   let schedule = db.collection('schedule')
           .find(condition); //$text: { $search: searchterm }
@@ -111,6 +102,36 @@ router.get('/schedule', (req, res) => {
       schedule
           // .skip(pageoffset)
           // .limit(pagesize)
+          .sort({sportname:1})
+          .toArray()
+          .then((schedule) => {
+                      response.schedule = schedule;
+                      response.total = sportstotal;
+              res.status(200).json(response);
+              })
+              .catch((err) => {
+                  sendError(err, res);
+              });
+      });
+  });
+});
+router.get('/schedulebydate', (req, res) => {
+   let date = req.query.date;
+   console.log(date);
+   let condition = {};
+   if(date) {
+    condition = { "sportname" : date};
+   }
+  connection((db) => {
+  let schedule = db.collection('scheduleByDate')
+          .find(condition); //$text: { $search: searchterm }
+          schedule.count(function (err, count) {
+          if(err) console.log(err);
+      const response = {};
+      let sportstotal = count;
+      // console.log(count);
+      schedule
+          // .sort({sportname:1})
           .toArray()
           .then((schedule) => {
                       response.schedule = schedule;

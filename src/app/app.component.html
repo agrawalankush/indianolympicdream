@@ -16,7 +16,7 @@
         <nav>
         <!-- <button fxHide.lt-sm="true" routerLink="/calendar" mat-button routerLinkActive="mat-primary">Calendar</button> -->
         <button fxHide.lt-sm="true" routerLink="/athletes" mat-button routerLinkActive="mat-primary">Quotas Earned</button>
-        <button fxHide.lt-sm="true" routerLink="/schedule" mat-button routerLinkActive="mat-primary">Schedule</button>
+        <button fxHide.lt-sm="true" [routerLink]="['/schedule']" [queryParams]="{sport: ''}" mat-button routerLinkActive="mat-primary">Schedule</button>
         <button fxHide.lt-sm="true" routerLink="/shows" mat-button routerLinkActive="mat-primary">Shows I love</button>
         <button fxHide.lt-sm="true" routerLink="/about"  mat-button routerLinkActive="mat-primary">About</button>
         </nav>
