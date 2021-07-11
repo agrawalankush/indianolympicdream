@@ -1,7 +1,12 @@
 .mat-toolbar {
-  height: 100px;
+  height: 150px;
+  display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-content: center;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 .schedule-conatiner {
   margin: 24px;

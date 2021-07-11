@@ -1,9 +1,15 @@
-<mat-toolbar>
-  <h4> Full Indian <span *ngIf="sport">{{sport}}</span> Schedule <span *ngIf="date">For {{date}}</span> </h4>
+<mat-toolbar class="mat-elevation-z2">
+  <h4> Full <span *ngIf="sport">{{sport}}</span> Schedule <span *ngIf="date">For {{date}}</span> </h4>
   <span class="fill-remaining-space"></span>
+  <div>
   <button mat-button [routerLink]="['/schedule']" [queryParams]="{sport: ''}">
-    Get For All Sports
+    All Sports
   </button>
+  <button mat-button [routerLink]="['/schedule']" [queryParams]="{date: ''}">
+    All Dates
+  </button>
+</div>
+<div>
   <mat-menu #appMenu="matMenu">
     <ng-template matMenuContent>
       <button *ngFor="let sportname of allsports" mat-menu-item [routerLink]="['/schedule']" [queryParams]="{sport: sportname}">
@@ -12,10 +18,7 @@
     </ng-template>
 </mat-menu>
 <button mat-button [matMenuTriggerFor]="appMenu">
-  Get By Sport<mat-icon>expand_more</mat-icon>
-</button>
-<button mat-button [routerLink]="['/schedule']" [queryParams]="{date: ''}">
-  Get For All Dates
+  See By Sport<mat-icon>expand_more</mat-icon>
 </button>
 <mat-menu #appMenuDate="matMenu">
   <ng-template matMenuContent>
@@ -25,9 +28,9 @@
   </ng-template>
 </mat-menu>
 <button mat-button [matMenuTriggerFor]="appMenuDate">
-  Get By Date<mat-icon>expand_more</mat-icon>
+  See By Date<mat-icon>expand_more</mat-icon>
 </button>
-
+</div>
 </mat-toolbar>
 <div class="schedule-conatiner">
 <section *ngFor="let sports of schedule">
