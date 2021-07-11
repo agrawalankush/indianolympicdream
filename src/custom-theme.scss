@@ -14,7 +14,10 @@ $light-theme:   mat-light-theme($light-primary, $light-accent, $light-warn);
 
 // Include the default theme styles.
 @include angular-material-theme($light-theme);
-
+:root{
+  --color-background: #ffffff;
+  --primary-color: $light-primary;
+}
 
 // Define an alternate dark theme.
 $dark-primary: mat-palette($mat-amber, A200, A100, A400);
@@ -26,6 +29,8 @@ $dark-theme:   mat-dark-theme($dark-primary, $dark-accent,$dark-warn);
 // CSS class whatever you want.
 .dark-theme {
   @include angular-material-theme($dark-theme);
+  --color-background: #424242;
+  --primary-color: $dark-primary;
 }
 // // Dark theme
 // $dark-primary: mat-palette($mat-blue-grey);
@@ -50,4 +55,5 @@ $red-dark-theme: mat-dark-theme($red-dark-primary, $red-dark-accent, $red-dark-w
     --color-accent: #{mat-color($red-dark-accent)};
     --color-warn: #{mat-color($red-dark-warn)};
     --color-background: #424242;
+    --primary-color: $red-dark-primary;
 }
