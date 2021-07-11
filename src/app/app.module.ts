@@ -22,6 +22,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { LoaderComponent } from './shared/components/loader/loader.component';
 import { ServerErrorComponent } from './server-error/server-error.component';
+import { ScheduleComponent } from './schedule/schedule.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { ServerErrorComponent } from './server-error/server-error.component';
     AthletesComponent,
     AboutComponent,
     LoaderComponent,
-    ServerErrorComponent
+    ServerErrorComponent,
+    ScheduleComponent
   ],
   imports: [
     BrowserModule,

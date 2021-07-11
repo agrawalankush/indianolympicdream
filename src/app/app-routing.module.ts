@@ -10,7 +10,7 @@ import { SportDetailsComponent } from './sport-details/sport-details.component';
 import { AthletesComponent } from './athletes/athletes.component';
 // import { AllSportsResolverService } from './home/all-sports-resolver.service';
 import { ServerErrorComponent } from './server-error/server-error.component';
-
+import { ScheduleComponent } from './schedule/schedule.component';
 const routes: Routes = [
   { path: 'home',  component: HomeComponent, data: { animation: 'HomePage'}
     // resolve: {
@@ -20,6 +20,7 @@ const routes: Routes = [
   { path: 'sports/:sportname', component: SportDetailsComponent, data: { animation: 'SportDetailsPage'} },
   // { path: 'calendar', component: CalendarComponent},
   { path: 'athletes', component: AthletesComponent, data: { animation: 'AthletesPage'}},
+  { path: 'schedule', component: ScheduleComponent, data: { animation: 'SchedulePage'}},
   { path: 'shows', component: ShowsComponent, data: { animation: 'ShowsPage'} },
   { path: 'about',  component: AboutComponent, data: { animation: 'AboutPage'} },
   { path: 'internal-error', component: ServerErrorComponent },

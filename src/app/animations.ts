@@ -2,7 +2,7 @@ import { trigger, transition, style, query, animateChild, animate, group } from 
 
 export const slideInAnimation =
   trigger('routeAnimations', [
-    transition('HomePage => SportDetailsPage, HomePage => AthletesPage, HomePage => ShowsPage, HomePage => AboutPage, SportDetailsPage => AthletesPage, SportDetailsPage => ShowsPage, SportDetailsPage => AboutPage, AthletesPage => ShowsPage, ShowsPage => AboutPage', [
+    transition('HomePage => SportDetailsPage, HomePage => AthletesPage, HomePage => SchedulePage, HomePage => ShowsPage, HomePage => AboutPage, SportDetailsPage => AthletesPage, SportDetailsPage => ShowsPage, SportsDetailsPage => SchedulePage,  SportDetailsPage => AboutPage, AthletesPage => ShowsPage, AthletesPage => SchedulePage, ShowsPage => AboutPage', [
       style({ position: 'relative' }),
       query(':enter, :leave', [
         style({
@@ -20,7 +20,7 @@ export const slideInAnimation =
       ]),
       query(':enter', animateChild())
     ]),
-    transition('AthletesPage => SportDetailsPage, ShowsPage => AthletesPage, AboutPage => ShowsPage, AboutPage => AthletesPage', [
+    transition('AthletesPage => SportDetailsPage, SchedulePage => AthletesPage, SchedulePage => SportDetailsPage, ShowsPage => AthletesPage, ShowsPage => SchedulePage, AboutPage => ShowsPage, AboutPage => SchedulePage, AboutPage => AthletesPage', [
       style({ position: 'relative' }),
       query(':enter, :leave', [
         style({
