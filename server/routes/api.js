@@ -131,7 +131,7 @@ router.get('/schedulebydate', (req, res) => {
       let sportstotal = count;
       // console.log(count);
       schedule
-          // .sort({sportname:1})
+          .sort({index:1})
           .toArray()
           .then((schedule) => {
                       response.schedule = schedule;
