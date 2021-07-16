@@ -1,5 +1,4 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 const path = require('path');
 // const fs = require('fs');
 const compression = require('compression');
@@ -14,8 +13,8 @@ const api = require('./server/routes/api');
 app.use(helmet());
 
 // Parsers
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false}));
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
 
 //gzip cpmpression
 app.use(compression());

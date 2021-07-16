@@ -8,7 +8,7 @@ const dbName = 'IndianOlympicDream';
 
 // Connect
 const connection = (closure) => {
-    return MongoClient.connect(mongourl,{ useNewUrlParser: true }, (err, client) => {
+    return MongoClient.connect(mongourl,{ useNewUrlParser: true, useUnifiedTopology: true }, (err, client) => {
         if (err) return console.log('Connection request to mongo failed',err);
         else{
         console.log('Mongodb connection successful!!');
@@ -30,7 +30,6 @@ const sendError = (err, res) => {
 
 // Get users
 router.get('/sports/:sportname', (req, res) => {
-
     sportname=req.params.sportname;
     connection((db) => {
         db.collection('sports_new')
