@@ -6,54 +6,70 @@
 
 @include mat-core();
 
-// Define the default theme .
+// Define the default theme
 $light-primary: mat-palette($mat-indigo);
-$light-accent:  mat-palette($mat-pink, A200, A100, A400);
-$light-warn:    mat-palette($mat-deep-orange);
-$light-theme:   mat-light-theme($light-primary, $light-accent, $light-warn);
+$light-accent: mat-palette($mat-pink, A200, A100, A400);
+$light-warn: mat-palette($mat-deep-orange);
 
-// Include the default theme styles.
+$light-theme: mat-light-theme((
+  color: (
+    primary: $light-primary,
+    accent: $light-accent,
+    warn: $light-warn
+  ),
+  typography: mat-typography-config(),
+  density: 0
+));
+
+// Include the default theme styles
 @include angular-material-theme($light-theme);
-:root{
+
+:root {
   --color-background: #ffffff;
   --primary-color: $light-primary;
 }
 
-// Define an alternate dark theme.
+// Define dark theme
 $dark-primary: mat-palette($mat-amber, A200, A100, A400);
-$dark-accent:  mat-palette($mat-blue-grey);
-$dark-warn:    mat-palette($mat-deep-orange);
-$dark-theme:   mat-dark-theme($dark-primary, $dark-accent,$dark-warn);
+$dark-accent: mat-palette($mat-blue-grey);
+$dark-warn: mat-palette($mat-deep-orange);
 
-// Include the alternative theme styles inside of a block with a CSS class. You can make this
-// CSS class whatever you want.
+$dark-theme: mat-dark-theme((
+  color: (
+    primary: $dark-primary,
+    accent: $dark-accent,
+    warn: $dark-warn
+  ),
+  typography: mat-typography-config(),
+  density: 0
+));
+
 .dark-theme {
-  @include angular-material-theme($dark-theme);
+  @include angular-material-color($dark-theme);
   --color-background: #424242;
   --primary-color: $dark-primary;
 }
-// // Dark theme
-// $dark-primary: mat-palette($mat-blue-grey);
-// $dark-accent: mat-palette($mat-amber, A200, A100, A400);
-// $dark-warn: mat-palette($mat-deep-orange);
-// $dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
-// .grey-dark-theme {
-//     @include angular-material-theme($dark-theme);
-//     --color-primary: #{mat-color($dark-primary)};
-//     --color-accent: #{mat-color($dark-accent)};
-//     --color-warn: #{mat-color($dark-warn)};
-//     --color-background: #424242;
-// }
-// Red Dark .dark-theme
+
+// Red Dark theme
 $red-dark-primary: mat-palette($mat-red);
 $red-dark-accent: mat-palette($mat-deep-orange, A200, A100, A400);
 $red-dark-warn: mat-palette($mat-red);
-$red-dark-theme: mat-dark-theme($red-dark-primary, $red-dark-accent, $red-dark-warn);
+
+$red-dark-theme: mat-dark-theme((
+  color: (
+    primary: $red-dark-primary,
+    accent: $red-dark-accent,
+    warn: $red-dark-warn
+  ),
+  typography: mat-typography-config(),
+  density: 0
+));
+
 .red-dark-theme {
-    @include angular-material-theme($red-dark-theme);
-    --color-primary: #{mat-color($red-dark-primary)};
-    --color-accent: #{mat-color($red-dark-accent)};
-    --color-warn: #{mat-color($red-dark-warn)};
-    --color-background: #424242;
-    --primary-color: $red-dark-primary;
+  @include angular-material-color($red-dark-theme);
+  --color-primary: #{mat-color($red-dark-primary)};
+  --color-accent: #{mat-color($red-dark-accent)};
+  --color-warn: #{mat-color($red-dark-warn)};
+  --color-background: #424242;
+  --primary-color: $red-dark-primary;
 }
