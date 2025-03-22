@@ -74,18 +74,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "indianolympicdream:build"
+            "buildTarget": "indianolympicdream:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "indianolympicdream:build:production"
+              "buildTarget": "indianolympicdream:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "indianolympicdream:build"
+            "buildTarget": "indianolympicdream:build"
           }
         },
         "test": {
