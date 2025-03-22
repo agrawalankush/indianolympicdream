@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { MaterialModule } from './material/material.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -27,8 +27,7 @@ import { ServerErrorComponent } from './server-error/server-error.component';
 import { ScheduleComponent } from './schedule/schedule.component';
 import { EventDetailsComponent } from './event-details/event-details.component';
 
-@NgModule({
-    declarations: [
+@NgModule({ declarations: [
         AppComponent,
         HomeComponent,
         PagenotfoundComponent,
@@ -44,20 +43,15 @@ import { EventDetailsComponent } from './event-details/event-details.component';
         ScheduleComponent,
         EventDetailsComponent
     ],
-    imports: [
-        BrowserModule,
-        HttpClientModule,
+    bootstrap: [AppComponent], imports: [BrowserModule,
         MaterialModule,
         FormsModule,
         ReactiveFormsModule,
         AppRoutingModule,
         // FlexLayoutModule,
         BrowserAnimationsModule,
-        ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production, registrationStrategy: 'registerImmediately' })
-    ],
-    providers: [
-        httpInterceptorProviders
-    ],
-    bootstrap: [AppComponent]
-})
+        ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production, registrationStrategy: 'registerImmediately' })], providers: [
+        httpInterceptorProviders,
+        provideHttpClient(withInterceptorsFromDi())
+    ] })
 export class AppModule { }
