@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { SwUpdate } from '@angular/service-worker';
+import { SwUpdate, VersionEvent } from '@angular/service-worker';
 import { interval } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 @Injectable({
@@ -17,25 +17,23 @@ export class SwupdateService {
   // Called from app.components.ts constructor
   public checkForUpdates() {
     if (this.updates.isEnabled) {
-      this.updates.available.subscribe(event => {
-        console.log('current version is', event.current);
-        console.log('available version is', event.available);
-        this.promptUser(event);
+      this.updates.versionUpdates.subscribe((event) => {
+        if (event.type === 'VERSION_READY') {
+          console.log('current version is', event.currentVersion);
+          console.log('available version is', event.latestVersion);
+          this.promptUser(event);
+        }
       });
-      // this.updates.activated.subscribe(event => {
-      //   console.log('old version was', event.previous);
-      //   console.log('new version is', event.current);
-      // });
     }
   }
 
   // If there is an update, promt the user
-  private promptUser(e): void {
-    if (e.available) {
+  private promptUser(e: VersionEvent): void {
+    if (e.type === 'VERSION_READY') {
       const snackBarRef = this.snackBar.open(
         'A new version of app is available',
         'Update',
-        {horizontalPosition: 'left'}
+        { horizontalPosition: 'left' }
       );
       snackBarRef.onAction().subscribe(() => document.location.reload());
     }

@@ -19,8 +19,8 @@ app.use(express.urlencoded({extended: true}));
 //gzip cpmpression
 app.use(compression());
 
-// Angular DIST output folder
-app.use(express.static(path.join(__dirname, 'dist')));
+// Angular DIST output folder - update path to include project name
+app.use(express.static(path.join(__dirname, 'dist/indianolympicdream')));
 // app.use(express.static(path.join(__dirname, 'The_Olympic_Dream')));
 // app.use(express.static(path.join(__dirname, 'images')));
 
@@ -31,10 +31,9 @@ app.use('/api', api);
 //   console.log(err);
 // });
 
-// Send all other requests to the Angular app
+// Send all other requests to the Angular app - update path to include project name
 app.get('*', (req, res) => {
-    // res.contentType('text/javascript');
-    res.sendFile(path.join(__dirname, 'dist/index.html'));
+    res.sendFile(path.join(__dirname, 'dist/indianolympicdream/index.html'));
 });
 
 //Set Port
