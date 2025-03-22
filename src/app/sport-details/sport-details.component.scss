@@ -1,9 +1,11 @@
-  .container-bigger{
+.container-bigger{
     margin: 24px auto;
     max-width:800px;
   }
   .container {
     margin: 24px;
+    display: flex;
+    flex-direction: column;
 }
 
   .event-header .mat-expansion-panel-header-title {
@@ -84,3 +86,34 @@
     line-height:20px;
     text-align:left;
   }
+
+@media (min-width: 960px) {
+  .container {
+    margin: 24px auto;
+    max-width: 800px;
+  }
+
+  .sports-details-card-image {
+    border-radius: 10px 0 0 0px;
+    max-height: 300px;
+    max-width: 500px;
+  }
+
+  .sport-details-card-header {
+    h1 {
+      font-size: 40px;
+      text-align: left;
+      padding: 0 0 0 30px;
+    }
+
+    a {
+      margin: 0px 0px 0px 30px;
+    }
+  }
+}
+
+@media (min-width: 600px) {
+  .sport-details-card-header {
+    text-align: left;
+  }
+}

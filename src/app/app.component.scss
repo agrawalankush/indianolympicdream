@@ -44,8 +44,12 @@
   align-items: center;
 }
 
+.nav-button {
+  display: block;
+}
+
 @media (max-width: 599px) {
-  .hide-mobile {
+  .nav-button {
     display: none;
   }
 }

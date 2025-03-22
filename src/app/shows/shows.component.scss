@@ -1,5 +1,9 @@
-.cards-container{
-     margin: 24px 0px 0px 24px;
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 24px 0px 0px 24px;
 }
 .movies-card{
     width:300px;
