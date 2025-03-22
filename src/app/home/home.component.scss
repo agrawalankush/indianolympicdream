@@ -3,6 +3,8 @@
 }
 [fxFlex]:last-of-type { margin-right:24px; }
 .pictogram-container{
+    display: flex;
+    flex-direction: column;
     margin-bottom: 24px;
 }
 .sports-icons{
