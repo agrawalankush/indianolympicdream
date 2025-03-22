@@ -2,27 +2,28 @@ import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { SportsdataService } from '../sportsdata.service';
 import { MatPaginator } from '@angular/material/paginator';
-import { PageEvent} from '@angular/material/paginator';
+import { PageEvent } from '@angular/material/paginator';
 // import { Athletes} from '../models/app-models';
-import {COMMA, ENTER} from '@angular/cdk/keycodes';
-import {UntypedFormControl} from '@angular/forms';
-import {MatAutocompleteSelectedEvent, MatAutocomplete} from '@angular/material/autocomplete';
-import {Observable, of as observableOf} from 'rxjs';
-import {map, startWith,catchError, finalize} from 'rxjs/operators';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { UntypedFormControl } from '@angular/forms';
+import { MatAutocompleteSelectedEvent, MatAutocomplete } from '@angular/material/autocomplete';
+import { Observable, of as observableOf } from 'rxjs';
+import { map, startWith, catchError, finalize } from 'rxjs/operators';
+import { MatChipGrid } from '@angular/material/chips';
 
 @Component({
   selector: 'app-athletes',
   templateUrl: './athletes.component.html',
   styleUrls: ['./athletes.component.scss']
 })
-export class AthletesComponent implements OnInit{
+export class AthletesComponent implements OnInit {
   public errmsg: string;
   public athletes: any;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   // MatPaginator Inputs
   length: number;
   pageSize = 8;
-  pageSizeOptions: number[] = [4, 8, 16,32];
+  pageSizeOptions: number[] = [4, 8, 16, 32];
   // MatPaginator Output
   pageEvent: PageEvent;
   pageIndex = 0;
@@ -57,7 +58,8 @@ export class AthletesComponent implements OnInit{
 
   @ViewChild('sportInput') sportInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
-  constructor(private route:ActivatedRoute, private router: Router,private sportservice:SportsdataService) {
+  @ViewChild('chipGrid') chipGrid: MatChipGrid;
+  constructor(private route: ActivatedRoute, private router: Router, private sportservice: SportsdataService) {
     this.filteredSports = this.sportCtrl.valueChanges.pipe(
       map((sport: string | null) => sport ? this._filter(sport) : this.getallsports()));
   }
@@ -66,40 +68,40 @@ export class AthletesComponent implements OnInit{
     this.route.queryParams
       .subscribe(params => {
         // console.log(params);
-        if(Object.keys(params).length === 0 && params.constructor === Object){
+        if (Object.keys(params).length === 0 && params.constructor === Object) {
           this.SearchAthletes("[]", "0", "8");
         } else {
-        this.sports = JSON.parse(params.sports);
-        // this.pageIndex = parseInt(params.pageIndex);
-        // this.pageSize = parseInt(params.pazeSize);
-        this.SearchAthletes(params.sports, params.pageIndex, params.pazeSize);
+          this.sports = JSON.parse(params.sports);
+          // this.pageIndex = parseInt(params.pageIndex);
+          // this.pageSize = parseInt(params.pazeSize);
+          this.SearchAthletes(params.sports, params.pageIndex, params.pazeSize);
         }
       }
-    );
+      );
 
   }
   get queryParams() {
     const index = this.paginator.pageIndex * this.paginator.pageSize;
-    const size =  this.paginator.pageSize;
+    const size = this.paginator.pageSize;
     const sports = JSON.stringify(this.sports);
-    const queryParams: Params = { sports:sports, pageIndex: index, pazeSize: size };
+    const queryParams: Params = { sports: sports, pageIndex: index, pazeSize: size };
     return queryParams;
   }
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
-    if(this.sports.length > 0) {
+    if (this.sports.length > 0) {
       const filteredallsports = this.allsports.filter(sport => !(this.sports.includes(sport)));
       return filteredallsports.filter(sport => sport.toLowerCase().indexOf(filterValue) === 0);
     } else {
-    return this.allsports.filter(sport => sport.toLowerCase().indexOf(filterValue) === 0);
-  }
+      return this.allsports.filter(sport => sport.toLowerCase().indexOf(filterValue) === 0);
+    }
   }
   getallsports() {
-    if(this.sports){
-    // console.log(this.allsports.filter(sport => !(this.sports.includes(sport))))
-    return this.allsports.filter(sport => !(this.sports.includes(sport)));
+    if (this.sports) {
+      // console.log(this.allsports.filter(sport => !(this.sports.includes(sport))))
+      return this.allsports.filter(sport => !(this.sports.includes(sport)));
     } else {
-    return this.allsports.slice();
+      return this.allsports.slice();
     }
   }
   prepareQueryUrl() {
@@ -112,8 +114,8 @@ export class AthletesComponent implements OnInit{
       });
   }
   handlePageEvent(e: PageEvent) {
-   // console.log(e);
-   this.prepareQueryUrl();
+    // console.log(e);
+    this.prepareQueryUrl();
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
@@ -134,15 +136,15 @@ export class AthletesComponent implements OnInit{
   }
   public SearchAthletes(selectedsports: any, pageIndex: string, pageSize: string) {
     this.sportservice.getathletes(selectedsports, pageIndex, pageSize)
-    .subscribe(
-     (res:any) => {
-       // console.log(res);
-       this.athletes = res.athletes;
-       this.length = res.total;
-   },
-     (error:any) =>{
-       // console.log(error);
-       this.errmsg = error.error;
-     });
+      .subscribe(
+        (res: any) => {
+          // console.log(res);
+          this.athletes = res.athletes;
+          this.length = res.total;
+        },
+        (error: any) => {
+          // console.log(error);
+          this.errmsg = error.error;
+        });
   }
 }

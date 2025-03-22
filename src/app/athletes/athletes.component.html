@@ -2,70 +2,56 @@
 </mat-paginator> -->
 <!-- {{ athletes | json}} -->
 <div class="filter-options mat-elevation-z1">
-<div class="search-field">
-<mat-form-field  class="chip-list">
-  <mat-label>Search Sports</mat-label>
-  <mat-chip-list #chipList aria-label="Sport selection">
-    <mat-chip class="mat-chip-category"
-      *ngFor="let sport of sports"
-      [selectable]="selectable"
-      [removable]="removable"
-      (removed)="remove(sport)">
-      {{sport}}
-      <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-    </mat-chip>
-    <input
-      #sportInput
-      [formControl]="sportCtrl"
-      [matAutocomplete]="auto"
-      [matChipInputFor]="chipList"
-      [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-      >
-  </mat-chip-list>
-  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
-    <mat-option *ngFor="let sport of filteredSports | async" [value]="sport">
-      {{sport}}
-    </mat-option>
-  </mat-autocomplete>
-</mat-form-field>
+  <div class="search-field">
+    <mat-form-field class="chip-list">
+      <mat-label>Search Sports</mat-label>
+      <mat-chip-grid #chipGrid aria-label="Sport selection">
+        <mat-chip-row class="mat-chip-category" *ngFor="let sport of sports" [selectable]="selectable"
+          [removable]="removable" (removed)="remove(sport)">
+          {{sport}}
+          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+        </mat-chip-row>
+        <input #sportInput [formControl]="sportCtrl" [matAutocomplete]="auto" [matChipInputFor]="chipGrid"
+          [matChipInputSeparatorKeyCodes]="separatorKeysCodes">
+      </mat-chip-grid>
+      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+        <mat-option *ngFor="let sport of filteredSports | async" [value]="sport">
+          {{sport}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </div>
+  <mat-paginator [length]="length" [pageSize]="pageSize" [pageIndex]="pageIndex" [pageSizeOptions]="pageSizeOptions"
+    (page)="handlePageEvent($event)">
+    <mat-icon>search</mat-icon>
+  </mat-paginator>
 </div>
-<mat-paginator
-              [length]="length"
-              [pageSize]="pageSize"
-              [pageIndex]="pageIndex"
-              [pageSizeOptions]="pageSizeOptions"
-              (page)="handlePageEvent($event)">
-              <mat-icon>search</mat-icon>
-</mat-paginator>
-</div>
-<div class="cards-container" fxLayout="row wrap"
-        fxLayoutAlign="center center">
-        <mat-error *ngIf="errmsg">{{errmsg}}</mat-error>
-        <span *ngIf="length === 0">
-          Our Athletes are trying hard, hopefully we'll see someone qualifying soon.
-        </span>
-        <mat-card color="primary" class="athletes-card mat-elevation-z8"
-                *ngFor="let athlete of athletes">
-                <mat-card-header>
-                        <img mat-card-avatar src="pictograms/{{athlete.sportname}}.png" alt="{{athlete.sportname}} pictogram" />
-                        <mat-card-title>{{ athlete.name }}</mat-card-title>
-                        <mat-card-subtitle>{{ athlete.event }}</mat-card-subtitle>
-                </mat-card-header>
-                 <picture>
-                  <source type="image/webp" srcset="{{athlete.webpimage}}">
-                <img mat-card-image class="athlete-image" src="{{athlete.image}}" alt="{{ athlete.name }} photo">
-                 </picture>
-                <mat-card-content>
-                    <!-- <p *ngIf="athlete.imagesrc">({{athlete.imagesrc}})</p> -->
-                    <strong>Qualification Event:</strong>&nbsp;{{athlete.qualificationEvent}}<br />
-                    <strong>Date Quota Earned:</strong>&nbsp;{{ athlete.date_qualified  * 1000  | date}}
-                </mat-card-content>
-        </mat-card>
+<div class="cards-container" fxLayout="row wrap" fxLayoutAlign="center center">
+  <mat-error *ngIf="errmsg">{{errmsg}}</mat-error>
+  <span *ngIf="length === 0">
+    Our Athletes are trying hard, hopefully we'll see someone qualifying soon.
+  </span>
+  <mat-card color="primary" class="athletes-card mat-elevation-z8" *ngFor="let athlete of athletes">
+    <mat-card-header>
+      <img mat-card-avatar src="pictograms/{{athlete.sportname}}.png" alt="{{athlete.sportname}} pictogram" />
+      <mat-card-title>{{ athlete.name }}</mat-card-title>
+      <mat-card-subtitle>{{ athlete.event }}</mat-card-subtitle>
+    </mat-card-header>
+    <picture>
+      <source type="image/webp" srcset="{{athlete.webpimage}}">
+      <img mat-card-image class="athlete-image" src="{{athlete.image}}" alt="{{ athlete.name }} photo">
+    </picture>
+    <mat-card-content>
+      <!-- <p *ngIf="athlete.imagesrc">({{athlete.imagesrc}})</p> -->
+      <strong>Qualification Event:</strong>&nbsp;{{athlete.qualificationEvent}}<br />
+      <strong>Date Quota Earned:</strong>&nbsp;{{ athlete.date_qualified * 1000 | date}}
+    </mat-card-content>
+  </mat-card>
 </div>
 <div *ngIf="!(length === 0)" class="botton-note">
-        <i>
-        Note: The above athletes are the ones who has won quota places for India,
-        the final decision  to confirm their participation  for Tokyo will be taken by our NOCs. There is
-        full selection process in place where someone else may be sent by the National Fed. in lieu of the quota holder.
-        </i>
+  <i>
+    Note: The above athletes are the ones who has won quota places for India,
+    the final decision to confirm their participation for Tokyo will be taken by our NOCs. There is
+    full selection process in place where someone else may be sent by the National Fed. in lieu of the quota holder.
+  </i>
 </div>
