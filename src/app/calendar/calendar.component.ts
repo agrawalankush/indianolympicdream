@@ -5,9 +5,10 @@ import { SportsdataService } from '../sportsdata.service';
 import { CalendarDataSource } from './datasource';
 import { tap } from 'rxjs/operators';
 @Component({
-  selector: 'app-calendar',
-  templateUrl: './calendar.component.html',
-  styleUrls: ['./calendar.component.scss']
+    selector: 'app-calendar',
+    templateUrl: './calendar.component.html',
+    styleUrls: ['./calendar.component.scss'],
+    standalone: false
 })
 export class CalendarComponent implements OnInit,AfterViewInit {
   public errmsg:string;

@@ -3,9 +3,10 @@ import { ActivatedRoute } from '@angular/router';
 import { SportsdataService } from '../sportsdata.service';
 import { SportDetails } from '../models/app-models';
 @Component({
-  selector: 'app-sport-details',
-  templateUrl: './sport-details.component.html',
-  styleUrls: ['./sport-details.component.scss']
+    selector: 'app-sport-details',
+    templateUrl: './sport-details.component.html',
+    styleUrls: ['./sport-details.component.scss'],
+    standalone: false
 })
 export class SportDetailsComponent implements OnInit {
   public errmsg: string;

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-server-error',
-  template: `
+    selector: 'app-server-error',
+    template: `
     <div class="wrapper">
 <div class="box">
 <h1>500</h1>
@@ -11,14 +11,14 @@ import { Component, OnInit } from '@angular/core';
 </div>
 </div>
   `,
-  styles: [
-    `.wrapper {
+    styles: [
+        `.wrapper {
       position: relative;
       max-width: 1298px;
       height: auto;
       margin: 2em auto 0 auto;
     }`,
-    `.box {
+        `.box {
       max-width: 70%;
       min-height: auto;
       margin: 0 auto;
@@ -27,7 +27,7 @@ import { Component, OnInit } from '@angular/core';
       background: url("https://www.dropbox.com/s/xq0841cp3icnuqd/flame.png?raw=1") no-repeat top 10em center/128px 128px,
                   transparent url("https://www.dropbox.com/s/w7qqrcvhlx3pwnf/desktop-pc.png?raw=1") no-repeat top 13em center/128px 128px;
     }`,
-    `h1, p:not(:last-of-type) { text-shadow: 0 0 6px #216f79; }
+        `h1, p:not(:last-of-type) { text-shadow: 0 0 6px #216f79; }
 
     h1 {
       margin: 0 0 1rem 0;
@@ -46,7 +46,8 @@ import { Component, OnInit } from '@angular/core';
     }
     p > a:hover { text-shadow: 0 0 6px #216f79; }
     p img { vertical-align: bottom; }`
-  ]
+    ],
+    standalone: false
 })
 export class ServerErrorComponent implements OnInit {
 

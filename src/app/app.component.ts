@@ -14,12 +14,13 @@ import {
 import { slideInAnimation } from './animations';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
-  animations: [
-    slideInAnimation
-  ]
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.scss'],
+    animations: [
+        slideInAnimation
+    ],
+    standalone: false
 })
 export class AppComponent {
   // Sets initial value to true to show loading spinner on first load

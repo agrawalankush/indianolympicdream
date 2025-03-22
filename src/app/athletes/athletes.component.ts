@@ -12,9 +12,10 @@ import { map, startWith, catchError, finalize } from 'rxjs/operators';
 import { MatChipGrid } from '@angular/material/chips';
 
 @Component({
-  selector: 'app-athletes',
-  templateUrl: './athletes.component.html',
-  styleUrls: ['./athletes.component.scss']
+    selector: 'app-athletes',
+    templateUrl: './athletes.component.html',
+    styleUrls: ['./athletes.component.scss'],
+    standalone: false
 })
 export class AthletesComponent implements OnInit {
   public errmsg: string;

@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-pagenotfound',
-  template: `
+    selector: 'app-pagenotfound',
+    template: `
       <div class="error-container">
         <img class="errorimage" src="./assets/404errorpage.png">
         <button mat-button routerLink="/home">This will take you back home</button>
       </div>
   `,
-  styles: [
-    `
+    styles: [
+        `
         .error-container {
           display: flex;
           flex-direction: column;
@@ -31,7 +31,8 @@ import { Component, OnInit } from '@angular/core';
           font-size:2em;
         }
   `
-  ]
+    ],
+    standalone: false
 })
 export class PagenotfoundComponent implements OnInit {
   constructor() { }

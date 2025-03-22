@@ -4,9 +4,10 @@ import { SportsdataService } from '../sportsdata.service';
 // import { ShowsResolve } from '../models/app-models';
 import {PageEvent} from '@angular/material/paginator';
 @Component({
-  selector: 'app-shows',
-  templateUrl: './shows.component.html',
-  styleUrls: ['./shows.component.scss']
+    selector: 'app-shows',
+    templateUrl: './shows.component.html',
+    styleUrls: ['./shows.component.scss'],
+    standalone: false
 })
 export class ShowsComponent implements OnInit {
   public showsdata: any;

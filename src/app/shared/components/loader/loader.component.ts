@@ -4,9 +4,10 @@ import { delay } from 'rxjs/operators';
 import { LoaderService } from './loader.service';
 import { LoaderState } from './loader';
 @Component({
-  selector: 'app-loader',
-  templateUrl: './loader.component.html',
-  styleUrls: ['./loader.component.css']
+    selector: 'app-loader',
+    templateUrl: './loader.component.html',
+    styleUrls: ['./loader.component.css'],
+    standalone: false
 })
 export class LoaderComponent implements OnInit, OnDestroy {
   // show = false;
