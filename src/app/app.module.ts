@@ -6,13 +6,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FlexLayoutModule } from '@angular/flex-layout';
+// import { FlexLayoutModule } from '@angular/flex-layout';
 import { httpInterceptorProviders } from './http-interceptors/index';
 // pipes
 
-import { HumanizePipe} from './shared/components/loader/pipes/humanize';
+import { HumanizePipe } from './shared/components/loader/pipes/humanize';
 // componets
-import { HomeComponent} from './home/home.component';
+import { HomeComponent } from './home/home.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { ShowsComponent } from './shows/shows.component';
 import { SafePipe } from './safepipe';
@@ -51,7 +51,7 @@ import { EventDetailsComponent } from './event-details/event-details.component';
         FormsModule,
         ReactiveFormsModule,
         AppRoutingModule,
-        FlexLayoutModule,
+        // FlexLayoutModule,
         BrowserAnimationsModule,
         ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production, registrationStrategy: 'registerImmediately' })
     ],

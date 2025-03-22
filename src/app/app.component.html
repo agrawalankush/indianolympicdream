@@ -4,74 +4,74 @@
 -->
 <app-loader></app-loader>
 <mat-toolbar color="" class="top-toolbar mat-elevation-z4">
-        <button mat-icon-button (click)="drawer.toggle()" aria-label="Side nav toggle icon">
-         <mat-icon>menu</mat-icon>
-        </button>
-         <button mat-button  class="logo-button" routerLink="">
-            Indian
-          <img src="assets/logo.png" class="olympic-logo" alt="olympic">
-          Dream
-        </button>
-        <!-- <button fxHide.lt-sm="true" mat-button>Blogs</button> -->
-        <nav>
-        <!-- <button fxHide.lt-sm="true" routerLink="/calendar" mat-button routerLinkActive="mat-primary">Calendar</button> -->
-        <button fxHide.lt-sm="true" routerLink="/athletes" mat-button routerLinkActive="mat-primary">Quotas Earned</button>
-        <button fxHide.lt-sm="true" [routerLink]="['/schedule']" [queryParams]="{sport: ''}" mat-button routerLinkActive="mat-primary">Schedule</button>
-        <button fxHide.lt-sm="true" routerLink="/shows" mat-button routerLinkActive="mat-primary">Shows I love</button>
-        <button fxHide.lt-sm="true" routerLink="/about"  mat-button routerLinkActive="mat-primary">About</button>
-        </nav>
-        <span class="fill-remaining-space"></span>
-            <!-- <button *ngIf="isLightTheme" mat-button (click)="changeTheme()">
+  <button mat-icon-button (click)="drawer.toggle()" aria-label="Side nav toggle icon">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <button mat-button class="logo-button" routerLink="">
+    Indian
+    <img src="assets/logo.png" class="olympic-logo" alt="olympic">
+    Dream
+  </button>
+  <!-- <button fxHide.lt-sm="true" mat-button>Blogs</button> -->
+  <nav class="nav-links">
+    <!-- <button fxHide.lt-sm="true" routerLink="/calendar" mat-button routerLinkActive="mat-primary">Calendar</button> -->
+    <button class="hide-mobile" routerLink="/athletes" mat-button routerLinkActive="mat-primary">Quotas Earned</button>
+    <button class="hide-mobile" [routerLink]="['/schedule']" [queryParams]="{sport: ''}" mat-button
+      routerLinkActive="mat-primary">Schedule</button>
+    <button class="hide-mobile" routerLink="/shows" mat-button routerLinkActive="mat-primary">Shows I love</button>
+    <button class="hide-mobile" routerLink="/about" mat-button routerLinkActive="mat-primary">About</button>
+  </nav>
+  <span class="fill-remaining-space"></span>
+  <!-- <button *ngIf="isLightTheme" mat-button (click)="changeTheme()">
               <mat-icon>brightness_5</mat-icon>F**k go back
             </button>
             <button *ngIf="!isLightTheme" mat-button (click)="changeTheme()">
             <mat-icon>brightness_2</mat-icon>The Dark knight
             </button> -->
-            <button mat-icon-button [matMenuTriggerFor]="appMenu">
-              <mat-icon>format_color_fill</mat-icon>
-              </button>
-            <mat-menu #appMenu="matMenu">
-              <button mat-menu-item (click)="onSetTheme('default-theme')">Indigo & Pink</button>
-              <button mat-menu-item (click)="onSetTheme('dark-theme')">Blue grey & Amber</button>
-              <button mat-menu-item (click)="onSetTheme('red-dark-theme')">Red & Orange</button>
-          </mat-menu>
-      </mat-toolbar>
-      <mat-progress-bar color="warn" *ngIf="loading" mode="query"></mat-progress-bar>
-      <mat-sidenav-container class="sidenav-container">
-            <mat-sidenav #drawer class="sidenav" mode="over">
-              <mat-nav-list (click)="drawer.close()">
-                    <a mat-list-item routerLink="/home" routerLinkActive="mat-primary">
-                      <mat-icon>home</mat-icon>
-                      <span class="sidenav-menu">Home</span>
-                    </a>
-                    <!-- <a mat-list-item routerLink="/calendar" routerLinkActive="mat-primary">
+  <button mat-icon-button [matMenuTriggerFor]="appMenu">
+    <mat-icon>format_color_fill</mat-icon>
+  </button>
+  <mat-menu #appMenu="matMenu">
+    <button mat-menu-item (click)="onSetTheme('default-theme')">Indigo & Pink</button>
+    <button mat-menu-item (click)="onSetTheme('dark-theme')">Blue grey & Amber</button>
+    <button mat-menu-item (click)="onSetTheme('red-dark-theme')">Red & Orange</button>
+  </mat-menu>
+</mat-toolbar>
+<mat-progress-bar color="warn" *ngIf="loading" mode="query"></mat-progress-bar>
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" mode="over">
+    <mat-nav-list (click)="drawer.close()">
+      <a mat-list-item routerLink="/home" routerLinkActive="mat-primary">
+        <mat-icon>home</mat-icon>
+        <span class="sidenav-menu">Home</span>
+      </a>
+      <!-- <a mat-list-item routerLink="/calendar" routerLinkActive="mat-primary">
                         <mat-icon>date_range</mat-icon>
                         <span class="sidenav-menu">Calendar</span>
                     </a> -->
-                    <!-- <a mat-list-item routerLink="" routerLinkActive="active">
+      <!-- <a mat-list-item routerLink="" routerLinkActive="active">
                       <mat-icon>description</mat-icon>
                       <span class="sidenav-menu">Blogs</span>
                     </a> -->
-                    <a mat-list-item [routerLink]="['/athletes']" [queryParams]="{prop: 'xxx'}" queryParamsHandling="preserve" routerLinkActive="mat-primary">
-                      <mat-icon>directions_run</mat-icon>
-                      <span class="sidenav-menu">Quotas Earned</span>
-                    </a>
-                    <a mat-list-item routerLink="/shows" routerLinkActive="mat-primary">
-                      <mat-icon>movie</mat-icon>
-                      <span class="sidenav-menu">Shows I love</span>
-                    </a>
-                    <a mat-list-item routerLink="/about" routerLinkActive="mat-primary">
-                        <mat-icon>info</mat-icon>
-                        <span class="sidenav-menu">About</span>
-                    </a>
-                  </mat-nav-list>
-            </mat-sidenav>
-      <mat-sidenav-content>
-        <div [@routeAnimations]="prepareRoute(outlet)">
-        <router-outlet #outlet="outlet"></router-outlet>
-      </div>
-        <!-- <mat-toolbar  class="botton-toolbar"></mat-toolbar> -->
-      </mat-sidenav-content>
-      </mat-sidenav-container>
-
-
+      <a mat-list-item [routerLink]="['/athletes']" [queryParams]="{prop: 'xxx'}" queryParamsHandling="preserve"
+        routerLinkActive="mat-primary">
+        <mat-icon>directions_run</mat-icon>
+        <span class="sidenav-menu">Quotas Earned</span>
+      </a>
+      <a mat-list-item routerLink="/shows" routerLinkActive="mat-primary">
+        <mat-icon>movie</mat-icon>
+        <span class="sidenav-menu">Shows I love</span>
+      </a>
+      <a mat-list-item routerLink="/about" routerLinkActive="mat-primary">
+        <mat-icon>info</mat-icon>
+        <span class="sidenav-menu">About</span>
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div [@routeAnimations]="prepareRoute(outlet)">
+      <router-outlet #outlet="outlet"></router-outlet>
+    </div>
+    <!-- <mat-toolbar  class="botton-toolbar"></mat-toolbar> -->
+  </mat-sidenav-content>
+</mat-sidenav-container>

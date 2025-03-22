@@ -5,6 +5,14 @@
 .container {
     margin: 24px;
 }
+
+@media (min-width: 960px) {
+    .container {
+        margin: 0 auto;
+        max-width: 60%;
+    }
+}
+
 .header {
     font-size: 1.3rem;
 }

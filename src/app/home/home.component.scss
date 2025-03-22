@@ -18,3 +18,16 @@
 .home-top-margin{
     padding-top:20px;
 }
+
+.sports-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin: 24px;
+  gap: 24px;
+}
+
+.text-center {
+  text-align: center;
+}

@@ -38,3 +38,14 @@
 //      min-height: 100%;
 //      display: flex;
 //  }
+
+.nav-links {
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: 599px) {
+  .hide-mobile {
+    display: none;
+  }
+}
