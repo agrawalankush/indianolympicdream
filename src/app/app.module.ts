@@ -28,39 +28,36 @@ import { ScheduleComponent } from './schedule/schedule.component';
 import { EventDetailsComponent } from './event-details/event-details.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent,
-    PagenotfoundComponent,
-    ShowsComponent,
-    SafePipe,
-    SportDetailsComponent,
-   // CalendarComponent,
-    AthletesComponent,
-    AboutComponent,
-    LoaderComponent,
-    HumanizePipe,
-    ServerErrorComponent,
-    ScheduleComponent,
-    EventDetailsComponent
-  ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    MaterialModule,
-    FormsModule,
-    ReactiveFormsModule,
-    AppRoutingModule,
-    FlexLayoutModule,
-    BrowserAnimationsModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production, registrationStrategy: 'registerImmediately' })
-  ],
-  entryComponents:[
-    EventDetailsComponent
-  ],
-  providers: [
-    httpInterceptorProviders
-  ],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        HomeComponent,
+        PagenotfoundComponent,
+        ShowsComponent,
+        SafePipe,
+        SportDetailsComponent,
+        // CalendarComponent,
+        AthletesComponent,
+        AboutComponent,
+        LoaderComponent,
+        HumanizePipe,
+        ServerErrorComponent,
+        ScheduleComponent,
+        EventDetailsComponent
+    ],
+    imports: [
+        BrowserModule,
+        HttpClientModule,
+        MaterialModule,
+        FormsModule,
+        ReactiveFormsModule,
+        AppRoutingModule,
+        FlexLayoutModule,
+        BrowserAnimationsModule,
+        ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production, registrationStrategy: 'registerImmediately' })
+    ],
+    providers: [
+        httpInterceptorProviders
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

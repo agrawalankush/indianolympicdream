@@ -5,7 +5,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { PageEvent} from '@angular/material/paginator';
 // import { Athletes} from '../models/app-models';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
-import {FormControl} from '@angular/forms';
+import {UntypedFormControl} from '@angular/forms';
 import {MatAutocompleteSelectedEvent, MatAutocomplete} from '@angular/material/autocomplete';
 import {Observable, of as observableOf} from 'rxjs';
 import {map, startWith,catchError, finalize} from 'rxjs/operators';
@@ -31,7 +31,7 @@ export class AthletesComponent implements OnInit{
   selectable = true;
   removable = true;
   separatorKeysCodes: number[] = [ENTER, COMMA];
-  sportCtrl = new FormControl();
+  sportCtrl = new UntypedFormControl();
   filteredSports: Observable<any>;
   sports: string[] = [];
   allsports: string[] = [
