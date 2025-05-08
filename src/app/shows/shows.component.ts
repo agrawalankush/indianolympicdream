@@ -15,8 +15,8 @@ export class ShowsComponent implements OnInit {
   public videoyoutube = 'https://www.youtube.com/embed/';
   // MatPaginator Inputs
   length: number;
-  pageSize = 51;
-  pageSizeOptions: number[] = [9, 15, 30, 51];
+  pageSize = 100;
+  pageSizeOptions: number[] = [15, 30, 50, 100];
   // MatPaginator Output
   pageEvent: PageEvent;
   constructor(private route: ActivatedRoute, private sportservice: SportsdataService) { }
