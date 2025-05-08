@@ -1,0 +1,110 @@
+.container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.funky-bg {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform-origin: center center;
+    width: 600px;
+    height: 600px;
+    background: linear-gradient(45deg, 
+        #0081C8,  /* Olympic Blue */
+        #FCB131,  /* Olympic Yellow */
+        #000000,  /* Olympic Black */
+        #00A651,  /* Olympic Green */
+        #EE334E   /* Olympic Red */
+    );
+    clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
+    animation: expand 5s infinite alternate;
+    opacity: 0.1;
+    z-index: -1;
+
+    @media (max-width: 768px) {
+        width: 300px;
+        height: 200px;
+    }
+    
+    @media (min-width: 1200px) {
+        width: 800px;
+        height: 600px;
+    }
+}
+
+@keyframes expand {
+    0% {
+        transform: translate(-50%, -50%) scale(0.1) rotate(0deg);
+        opacity: 0;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1.2) rotate(360deg);
+        opacity: 0.1;
+    }
+}
+
+.coming-soon {
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    padding: 0 20px;
+    
+    h1 {
+        font-size: 3.5rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+
+        @media (max-width: 768px) {
+            font-size: 2rem;
+        }
+        
+        @media (min-width: 1200px) {
+            font-size: 4.5rem;
+        }
+    }
+    
+    p {
+        font-size: 1.25rem;
+        color: #666;
+
+        @media (max-width: 768px) {
+            font-size: 1rem;
+        }
+        
+        @media (min-width: 1200px) {
+            font-size: 1.5rem;
+        }
+    }
+}
+
+.loader {
+    margin-top: 2rem;
+}
+
+.spinner {
+    width: 2rem;
+    height: 2rem;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #3498db;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto;
+
+    @media (max-width: 768px) {
+        width: 1.5rem;
+        height: 1.5rem;
+    }
+    
+    @media (min-width: 1200px) {
+        width: 2.5rem;
+        height: 2.5rem;
+    }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

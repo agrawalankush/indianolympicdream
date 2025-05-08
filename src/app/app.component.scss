@@ -2,9 +2,26 @@
     width: 60px;
     padding: 0px 2px 0px 0px;
 }
-.logo-button{
-    margin-left: 0px;
+
+.logo-button {
+  display: inline-flex !important;
+  align-items: center !important;
+  //height: 1%;
+  line-height: normal !important;
+  
+  span {
+    display: inline-block;
+    vertical-align: middle;
+  }
+  
+  .olympic-logo {
+    height: 24px;
+    width: auto;
+    margin: 0 4px;
+    vertical-align: middle;
+  }
 }
+
 .sidenav-container {
     height: 100%;
   }
@@ -24,6 +41,7 @@
     top: 0;
     z-index: 1000;
   }
+
   .toggle-text{
     font-size: 14px;
     font-weight: 500;
@@ -40,12 +58,19 @@
 //  }
 
 .nav-links {
+  margin: 0px 0px 0px 48px;
   display: flex;
   align-items: center;
 }
 
 .nav-button {
   display: block;
+  
+  &.active-link {
+    background-color: rgba(0, 0, 0, 0.1);
+    color: var(--primary-color);
+    font-weight: 500;
+  }
 }
 
 @media (max-width: 599px) {

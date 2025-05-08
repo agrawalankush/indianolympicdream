@@ -8,24 +8,25 @@
     <mat-icon>menu</mat-icon>
   </button>
   <button mat-button class="logo-button" routerLink="">
-    Indian
+    <span>Indian</span>
     <img src="assets/logo.png" class="olympic-logo" alt="olympic">
-    Dream
+    <span>Dream</span>
   </button>
-  <!-- <button fxHide.lt-sm="true" mat-button>Blogs</button> -->
+  <!--  -->
   <nav class="nav-links">
-    <!-- <button fxHide.lt-sm="true" routerLink="/calendar" mat-button routerLinkActive="mat-primary">Calendar</button> -->
-    <button class="nav-button" routerLink="/athletes" mat-button routerLinkActive="mat-primary">Quotas Earned</button>
+    <button class="nav-button" routerLink="/athletes" mat-button routerLinkActive="active-link">Quotas Earned</button>
+    <button class="nav-button" routerLink="/calendar" mat-button routerLinkActive="active-link">Calendar</button>
     <button class="nav-button" [routerLink]="['/schedule']" [queryParams]="{sport: ''}" mat-button
-      routerLinkActive="mat-primary">Schedule</button>
-    <button class="nav-button" routerLink="/shows" mat-button routerLinkActive="mat-primary">Shows I love</button>
-    <button class="nav-button" routerLink="/about" mat-button routerLinkActive="mat-primary">About</button>
+      routerLinkActive="active-link">Schedule</button>
+    <button class="nav-button" routerLink="/shows" mat-button routerLinkActive="active-link">Shows I love</button>
+    <button class="nav-button" routerLink="/blogs" mat-button routerLinkActive="active-link">Blogs</button>
+    <button class="nav-button" routerLink="/about" mat-button routerLinkActive="active-link">About Me</button>
   </nav>
   <span class="fill-remaining-space"></span>
   <!-- <button *ngIf="isLightTheme" mat-button (click)="changeTheme()">
               <mat-icon>brightness_5</mat-icon>F**k go back
             </button>
-            <button *ngIf="!isLightTheme" mat-button (click)="changeTheme()">
+            <button *ngIf="!isLπightTheme" mat-button (click)="changeTheme()">
             <mat-icon>brightness_2</mat-icon>The Dark knight
             </button> -->
   <button mat-icon-button [matMenuTriggerFor]="appMenu">

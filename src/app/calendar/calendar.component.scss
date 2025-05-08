@@ -2,12 +2,20 @@
     margin: 24px auto;
     max-width: 80%;
 }
-.container{
-  margin: 24px;
+.container {
+    margin: 24px;
 }
+
+@media (min-width: 960px) {
+    .container {
+        margin: 24px auto;
+        max-width: 80%;
+    }
+}
+
 .mat-table {
     width:100%;
-  }
+}
 .mat-form-field{
     width: 100%;
 }  

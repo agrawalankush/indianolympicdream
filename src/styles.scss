@@ -33,3 +33,19 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   max-height: inherit;
 }
 
+.logo-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  span {
+    line-height: 24px; /* match with logo height */
+  }
+
+  .olympic-logo {
+    height: 24px;
+    width: auto;
+  }
+}
+
+
