@@ -2,24 +2,22 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   margin: 24px 0px 0px 24px;
 }
 .movies-card{
-    width:300px;
+    width:350px;
     margin-bottom: 16px;
     margin-right: 16px;
     height: 380px;
 }
 .mat-card-image{
-  height: 260px;
-  border-bottom-left-radius: 4px;
-  border-bottom-right-radius: 4px;
+  height: 350px;
 }
-.mat-card-content {
-  white-space: nowrap;
-  overflow: hidden;
-  padding-left: 4px;
-  padding-right: 4px;
-  text-overflow: ellipsis;
-}
+// .mat-card-content {
+//   white-space: nowrap;
+//   overflow: hidden;
+//   padding-left: 4px;
+//   padding-right: 4px;
+//   text-overflow: ellipsis;
+// }
