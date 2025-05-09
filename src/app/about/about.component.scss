@@ -29,8 +29,9 @@
 .gif-img {
     width: 100%;
 }
-.mat-button {
-    padding: 4px;
+.mdc-button {
+    padding: 0px !important;
+    min-width: 56px;
 }
 h3 {
     padding-top: 1rem;

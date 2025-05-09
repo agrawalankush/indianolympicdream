@@ -28,10 +28,26 @@
   
   .sidenav {
     width: 250px;
+
+    .mdc-list-item {
+      display: flex;
+      align-items: center;
+      height: 48px;
+
+      .mat-icon {
+        margin-right: 0;
+        vertical-align: middle;
+      }
+    }
   }
-  .sidenav-menu{
-      padding-left: 30px;
+
+  .sidenav-menu {
+      padding-left: 16px;
+      display: inline-flex;
+      align-items: center;
+      vertical-align: middle;
   }
+  
   .sidenav .top-toolbar {
     background: inherit;
   }

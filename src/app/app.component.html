@@ -46,22 +46,22 @@
         <mat-icon>home</mat-icon>
         <span class="sidenav-menu">Home</span>
       </a>
-      <!-- <a mat-list-item routerLink="/calendar" routerLinkActive="mat-primary">
-                        <mat-icon>date_range</mat-icon>
-                        <span class="sidenav-menu">Calendar</span>
-                    </a> -->
-      <!-- <a mat-list-item routerLink="" routerLinkActive="active">
-                      <mat-icon>description</mat-icon>
-                      <span class="sidenav-menu">Blogs</span>
-                    </a> -->
       <a mat-list-item [routerLink]="['/athletes']" [queryParams]="{prop: 'xxx'}" queryParamsHandling="preserve"
         routerLinkActive="mat-primary">
         <mat-icon>directions_run</mat-icon>
         <span class="sidenav-menu">Quotas Earned</span>
       </a>
+      <a mat-list-item routerLink="/calendar" routerLinkActive="mat-primary">
+        <mat-icon>date_range</mat-icon>
+        <span class="sidenav-menu">Calendar</span>
+      </a>
       <a mat-list-item routerLink="/shows" routerLinkActive="mat-primary">
         <mat-icon>movie</mat-icon>
         <span class="sidenav-menu">Shows I love</span>
+      </a>
+      <a mat-list-item routerLink="/blogs" routerLinkActive="active">
+        <mat-icon>description</mat-icon>
+        <span class="sidenav-menu">Blogs</span>
       </a>
       <a mat-list-item routerLink="/about" routerLinkActive="mat-primary">
         <mat-icon>info</mat-icon>
