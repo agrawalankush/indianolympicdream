@@ -2,29 +2,34 @@
 <mat-toolbar>
   {{data.sportname}} Schedule
   <span class="fill-remaining-space"></span>
-  <button mat-button (click)="close()">
+  <button mat-icon-button (click)="close()">
     <mat-icon>clear</mat-icon>
   </button>
 </mat-toolbar>
-<mat-card class="event-card mat-elevation-z1" *ngFor="let event of data.events">
-  <mat-card-header>
-    <img mat-card-avatar src="pictograms/{{data.sportname}}.png" alt="{{data.sportname}} pictogram" />
-    <mat-card-title>{{ event.eventname }}</mat-card-title>
-    <mat-card-subtitle>{{ event.event }}</mat-card-subtitle>
-</mat-card-header>
-  <mat-card-content style="margin: 24px;">
-    <!-- <p> -->
-      <h3>Athletes Competing: {{event.athletes }}</h3>
-      <h4>
-        Start Time(Estimated):
+<div class="cards-container">
+  <mat-card class="event-card mat-elevation-z1" *ngFor="let event of data.events">
+    <mat-card-header>
+      <img mat-card-avatar src="pictograms/{{data.sportname}}.png" alt="{{data.sportname}} pictogram" />
+      <mat-card-title>{{ event.eventname }}</mat-card-title>
+      <mat-card-subtitle>{{ event.event }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <!-- <p> -->
+      <div class="event-details-text">
+        <strong>Athletes Competing:</strong>
+        {{event.athletes }}
+      </div>
+      <div class="event-details-text">
+        <strong>Start Time(Estimated):</strong>
         <span *ngIf="event.starttime; else notime;">
           {{event.starttime * 1000 | date: "MMM d, y, h:mm:ss a" }}
         </span>
-      <ng-template #notime>
-        **will update soon!
-      </ng-template>
-      </h4>
+        <ng-template #notime>
+          **No Time Available Yet!
+        </ng-template>
+      </div>
       <!-- End Time(Estimated): {{event.starttime * 1000 | date: "MMM d, y, h:mm:ss a" }} -->
-    <!-- </p> -->
-  </mat-card-content>
-</mat-card>
+      <!-- </p> -->
+    </mat-card-content>
+  </mat-card>
+</div>

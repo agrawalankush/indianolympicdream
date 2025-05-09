@@ -1,8 +1,72 @@
-.mat-toolbar {
+@use '@angular/material' as mat;
+
+.mdc-toolbar {
   width: 100%;
 }
+
+.cards-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 16px;
+}
+
 .event-card {
-  // max-width: 600px;
-  margin: 24px;
-  overflow: auto;
+  flex: 0 1 250px;
+  margin: 16px;
+  border-radius: 8px;
+  transition: transform 0.2s;
+  @include mat.elevation-transition();
+  @include mat.elevation(8);
+  // Theme aware background
+  background-color: var(--mat-card-background-color);
+
+  &:hover {
+    transform: translateY(-2px);
+    @include mat.elevation(16);
+  }
+
+  .mat-card-header {
+    padding: 16px 16px 0;
+
+    .mat-card-title {
+      color: var(--mat-primary-800);
+      font-size: 1.2rem;
+      margin-bottom: 8px;
+    }
+
+    .mat-card-subtitle {
+      color: var(--mat-secondary-text);
+    }
+
+    .mat-card-avatar {
+      background-color: var(--mat-card-background-color);
+      padding: 4px;
+      border: 1px solid var(--mat-divider-color);
+    }
+  }
+  .mat-card-content {
+    padding: 16px;
+    color: var(--mat-body-text);
+    h3 {
+      margin: 8px 0;
+      font-weight: 500;
+      color: var(--mat-primary-700);
+    }
+
+    h4 {
+      margin: 8px 0;
+      font-weight: 400;
+      color: var(--mat-secondary-text);
+
+      span {
+        color: var(--mat-primary-700);
+      }
+    }
+  }
+}
+
+.fill-remaining-space {
+  flex: 1 1 auto;
 }
