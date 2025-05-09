@@ -7,29 +7,24 @@
   </button>
 </mat-toolbar>
 <div class="cards-container">
-  <mat-card class="event-card mat-elevation-z1" *ngFor="let event of data.events">
-    <mat-card-header>
-      <img mat-card-avatar src="pictograms/{{data.sportname}}.png" alt="{{data.sportname}} pictogram" />
-      <mat-card-title>{{ event.eventname }}</mat-card-title>
-      <mat-card-subtitle>{{ event.event }}</mat-card-subtitle>
+  <mat-card class="event-card" *ngFor="let event of data.events">
+    <mat-card-header class="mat-mdccard-header">
+      <img mat-card-avatar class="mat-mdccard-avatar" src="pictograms/{{data.sportname}}.png"
+        alt="{{data.sportname}} pictogram" />
+      <mat-card-title class="mat-mdccard-title">{{ event.eventname }}</mat-card-title>
+      <mat-card-subtitle class="mat-mdccard-subtitle">{{ event.event }}</mat-card-subtitle>
     </mat-card-header>
-    <mat-card-content>
-      <!-- <p> -->
-      <div class="event-details-text">
-        <strong>Athletes Competing:</strong>
-        {{event.athletes }}
-      </div>
-      <div class="event-details-text">
-        <strong>Start Time(Estimated):</strong>
+    <mat-card-content class="mat-mdccard-content">
+      <h3>Athletes Competing: {{event.athletes }}</h3>
+      <h4>
+        Start Time(Estimated):
         <span *ngIf="event.starttime; else notime;">
           {{event.starttime * 1000 | date: "MMM d, y, h:mm:ss a" }}
         </span>
         <ng-template #notime>
-          **No Time Available Yet!
+          No Time Available Yet!
         </ng-template>
-      </div>
-      <!-- End Time(Estimated): {{event.starttime * 1000 | date: "MMM d, y, h:mm:ss a" }} -->
-      <!-- </p> -->
+      </h4>
     </mat-card-content>
   </mat-card>
 </div>

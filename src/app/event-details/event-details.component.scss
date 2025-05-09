@@ -27,26 +27,26 @@
     @include mat.elevation(16);
   }
 
-  .mat-card-header {
+  .mat-mdccard-header {
     padding: 16px 16px 0;
 
-    .mat-card-title {
+    .mat-mdccard-title {
       color: var(--mat-primary-800);
       font-size: 1.2rem;
       margin-bottom: 8px;
     }
 
-    .mat-card-subtitle {
+    .mat-mdccard-subtitle {
       color: var(--mat-secondary-text);
     }
 
-    .mat-card-avatar {
+    .mat-mdccard-avatar {
       background-color: var(--mat-card-background-color);
       padding: 4px;
       border: 1px solid var(--mat-divider-color);
     }
   }
-  .mat-card-content {
+  .mat-mdccard-content {
     padding: 16px;
     color: var(--mat-body-text);
     h3 {
