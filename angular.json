@@ -43,7 +43,13 @@
               "includePaths": [
                 "node_modules"
               ]
-            }
+            },
+            "optimization": false,
+            "sourceMap": false,
+            "namedChunks": false,
+            "vendorChunk": true,
+            "buildOptimizer": false,
+            "statsJson": false
           },
           "configurations": {
             "production": {
@@ -72,19 +78,29 @@
                 }
               ],
               "serviceWorker": "ngsw-config.json"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
             }
           }
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "buildTarget": "indianolympicdream:build"
+            "buildTarget": "indianolympicdream:build",
+            "proxyConfig": "proxy.conf.json"
           },
           "configurations": {
             "production": {
               "buildTarget": "indianolympicdream:build:production"
+            },
+            "development": {
+              "buildTarget": "indianolympicdream:build:development"
             }
-          }
+          },
+          "defaultConfiguration": "development"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
