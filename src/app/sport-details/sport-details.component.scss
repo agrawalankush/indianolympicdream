@@ -1,105 +1,124 @@
-.container-bigger{
-    margin: 24px auto;
-    max-width:800px;
-  }
-  .container {
-    margin: 24px;
-    display: flex;
-    flex-direction: column;
+.container-bigger {
+  margin: 24px auto;
+  max-width: 800px;
+}
+.container {
+  margin: 24px;
+  display: flex;
+  flex-direction: column;
 }
 
-  .event-header .mat-expansion-panel-header-title {
-    flex-basis: 0;
-    align-items: center;
-  }
-  .medal-icon{
-      margin-top:20px;
-      height: 16px;
-      width: 16px;
-  }
-  .medals-number{
-    float:left;
-    font-size: 22px;
-    margin-right: 5px;
-  }
-  .events-container{
-      margin-top: 10px;
-  }
+.event-header .mdc-expansion-panel-header-title {
+  flex-basis: 0;
+  align-items: center;
+}
+.medal-icon {
+  margin-top: 20px;
+  height: 16px;
+  width: 16px;
+}
+.medals-number {
+  float: left;
+  font-size: 22px;
+  margin-right: 5px;
+}
+.events-container {
+  margin-top: 10px;
+}
 
-  table{
-    width: 100%
-  }
-  .sports-details-card {
-    border-radius: 10px;
-  }
-  .sports-details-card .sports-details-card-image-bigger{
-    border-radius:10px 0 0 0px;
+table {
+  width: 100%;
+}
+.sports-details-card {
+  border-radius: 10px;
+
+  .sports-details-card-image {
+    border-radius: 10px 10px 0 0;
     max-height: 300px;
-    max-width:  500px;
+    max-width: 100%;
     float: left;
   }
+}
 
-  .sports-details-card .sports-details-card-image{
-    border-radius:10px 10px 0 0px;
-    max-height: 300px;
-    max-width:  100%;
-    float: left;
+@media (max-width: 959px) {
+  .sports-details-card-image {
+    width: 100%;
   }
-  .sport-details-card-header {
-    text-align:center;
-  }
-  .sport-details-card-header h1{
-    margin-left:24px;
-    font-weight:400;
-    text-align:center;
-    font-size:30px;
-    padding:0 0 0 0px;
-    letter-spacing:1px;
-    float:left;
-  }
+}
 
-  .sport-details-card-header-bigger h1 {
-    font-weight:400;
-    text-align:left;
-    font-size:40px;
-    padding:0 0 0 30px;
-    letter-spacing:1px;
-    float:left;
-  }
-  .sport-details-card-header-bigger a{
-    margin: 0px 0px 0px 30px;
-  }
-  // .foot-note-pdf{
-  //   margin:5px 24px 5px 24px;
-  //   font-family: 'Montserrat', sans-serif;
-  //   font-size:10px;
-  //   float:left;
-  //   letter-spacing:1px;
-  //   line-height:20px;
-  // }
-  p {
-    margin:24px 24px 24px 24px;
-    font-family: 'Montserrat', sans-serif;
-    font-size:14px;
-    float:left;
-    letter-spacing:1px;
-    line-height:20px;
-    text-align:left;
-  }
+.sport-details-card-header {
+  text-align: center;
+}
+.sport-details-card-header h1 {
+  margin-left: 24px;
+  font-weight: 400;
+  text-align: center;
+  font-size: 30px;
+  padding: 0 0 0 0px;
+  letter-spacing: 1px;
+  float: left;
+}
+
+.sport-details-card-header-bigger h1 {
+  font-weight: 400;
+  text-align: left;
+  font-size: 40px;
+  padding: 0 0 0 30px;
+  letter-spacing: 1px;
+  float: left;
+}
+.sport-details-card-header-bigger a {
+  margin: 0px 0px 0px 30px;
+}
+// .foot-note-pdf{
+//   margin:5px 24px 5px 24px;
+//   font-family: 'Montserrat', sans-serif;
+//   font-size:10px;
+//   float:left;
+//   letter-spacing:1px;
+//   line-height:20px;
+// }
+p {
+  margin: 24px 24px 24px 24px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  float: left;
+  letter-spacing: 1px;
+  line-height: 20px;
+  text-align: left;
+}
 
 @media (min-width: 960px) {
   .container {
     margin: 24px auto;
-    max-width: 800px;
+    max-width: 850px;
   }
 
-  .sports-details-card-image {
-    border-radius: 10px 0 0 0px;
-    max-height: 300px;
-    max-width: 500px;
+  .sports-details-card {
+    box-shadow: 0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12);
+    .sports-details-card-image {
+      border-radius: 10px 0 0 0;
+      max-height: 300px;
+      max-width: 500px;
+      float: left;
+    }
+    .sports-details-card-image-bigger {
+      border-radius: 10px 0 0 0;
+      max-height: 300px;
+      min-width: 424px;
+      max-width: 500px;
+      float: left;
+    }
   }
 
   .sport-details-card-header {
+    display: flex;
+    flex-direction: column;
+    .sport-buttons {
+      display: flex;
+      flex-direction: column;
+      margin-right: 24px;
+    }
     h1 {
       font-size: 40px;
       text-align: left;
