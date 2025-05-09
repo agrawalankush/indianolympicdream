@@ -10,11 +10,13 @@
 }
 .schedule-conatiner {
   margin: 24px;
+  min-height: 48px;
   // width: 100%;
 }
 .medal-icon {
   height: 20px;
   width: 20px;
+  vertical-align: middle;
 }
 .schedule-label {
   display: table-cell;
@@ -28,15 +30,6 @@
   text-align: center;
   vertical-align: middle;
 }
-.pictogram-sport-schedule-date {
-  height: 60px;
-  width: 60px;
-  text-align: center;
-  vertical-align: middle;
-}
-// button{
-//   white-space: pre-line !important;
-// }
 .schedule-button-row {
   display: table-cell;
   // width: 800px;

@@ -2,60 +2,64 @@
   <h4> Full <span *ngIf="sport">{{sport}}</span> Schedule <span *ngIf="date">For {{date}}</span> </h4>
   <span class="fill-remaining-space"></span>
   <div>
-  <button mat-button [routerLink]="['/schedule']" [queryParams]="{sport: ''}">
-    All Sports
-  </button>
-  <button mat-button [routerLink]="['/schedule']" [queryParams]="{date: ''}">
-    All Dates
-  </button>
-</div>
-<div>
-  <mat-menu #appMenu="matMenu">
-    <ng-template matMenuContent>
-      <button *ngFor="let sportname of allsports" mat-menu-item [routerLink]="['/schedule']" [queryParams]="{sport: sportname}">
-            {{sportname}}
-      </button>
-    </ng-template>
-</mat-menu>
-<button mat-button [matMenuTriggerFor]="appMenu">
-  See By Sport<mat-icon>expand_more</mat-icon>
-</button>
-<mat-menu #appMenuDate="matMenu">
-  <ng-template matMenuContent>
-    <button *ngFor="let date of alldates" mat-menu-item [routerLink]="['/schedule']" [queryParams]="{date: date}">
-          {{date | humanize}}
+    <button mat-button [routerLink]="['/schedule']" [queryParams]="{sport: ''}">
+      All Sports
     </button>
-  </ng-template>
-</mat-menu>
-<button mat-button [matMenuTriggerFor]="appMenuDate">
-  See By Date<mat-icon>expand_more</mat-icon>
-</button>
-</div>
+    <button mat-button [routerLink]="['/schedule']" [queryParams]="{date: ''}">
+      All Dates
+    </button>
+  </div>
+  <div>
+    <mat-menu #appMenu="matMenu">
+      <ng-template matMenuContent>
+        <button *ngFor="let sportname of allsports" mat-menu-item [routerLink]="['/schedule']"
+          [queryParams]="{sport: sportname}">
+          {{sportname}}
+        </button>
+      </ng-template>
+    </mat-menu>
+    <button mat-button [matMenuTriggerFor]="appMenu">
+      See By Sport<mat-icon>expand_more</mat-icon>
+    </button>
+    <mat-menu #appMenuDate="matMenu">
+      <ng-template matMenuContent>
+        <button *ngFor="let date of alldates" mat-menu-item [routerLink]="['/schedule']" [queryParams]="{date: date}">
+          {{date | humanize}}
+        </button>
+      </ng-template>
+    </mat-menu>
+    <button mat-button [matMenuTriggerFor]="appMenuDate">
+      See By Date<mat-icon>expand_more</mat-icon>
+    </button>
+  </div>
 </mat-toolbar>
 <div class="schedule-conatiner">
-<section *ngFor="let sports of schedule">
-  <div class="schedule-label">
-    <img *ngIf="!getByDate" class="pictogram-sport-schedule" src="pictograms/{{sports.sportname}}.png" alt="{{sports.sportname}} pictogram" />
-    {{sports.sportname | humanize}}
-  </div>
-  <div class="schedule-button-row">
-    <div class="schedule-flex-container">
-      <div class="schedule-button-container" *ngFor="let event of sports.events | keyvalue:originalOrder">
-        <button *ngIf="!getByDate" mat-button color="primary" (click)="showEvents(sports.sportname, event.value)" aria-label="Date schedule button">
-          <!-- <mat-icon>calendar_today</mat-icon> -->
-          <img *ngIf="event.value[0].ismedalevent" class="medal-icon" src="assets/icon_medal.png" alt="medals">
-          {{event.key | humanize}}
-        </button>
-        <button *ngIf="getByDate" [matTooltip]="event.key" mat-button color="primary" (click)="showEvents(sports.sportname, event.value, event.key)" aria-label="Date schedule button">
-          <!-- <mat-icon>calendar_today</mat-icon> -->
-          <img  class="pictogram-sport-schedule-date" src="pictograms/{{event.key}}.png" alt="{{event.key}} pictogram" />
-          <span *ngIf="!getByDate">{{event.key | humanize}}</span>
-        </button>
+  <section style="min-height: 48px;" *ngFor="let sports of schedule">
+    <div class="schedule-label">
+      <img *ngIf="!getByDate" class="pictogram-sport-schedule" src="pictograms/{{sports.sportname}}.png"
+        alt="{{sports.sportname}} pictogram" />
+      {{sports.sportname | humanize}}
+    </div>
+    <div class="schedule-button-row">
+      <div class="schedule-flex-container">
+        <div class="schedule-button-container" *ngFor="let event of sports.events | keyvalue:originalOrder">
+          <button *ngIf="!getByDate" mat-button color="primary" (click)="showEvents(sports.sportname, event.value)"
+            aria-label="Date schedule button">
+            <!-- <mat-icon>calendar_today</mat-icon> -->
+            <img *ngIf="event.value[0]?.ismedalevent" class="medal-icon" src="assets/icon_medal.png" alt="medals">
+            {{event.key | humanize}}
+          </button>
+          <button *ngIf="getByDate" [matTooltip]="event.key" mat-icon-button color="primary"
+            (click)="showEvents(sports.sportname, event.value, event.key)" aria-label="Date schedule button">
+            <!-- <mat-icon>calendar_today</mat-icon> -->
+            <img src="pictograms/{{event?.key}}.png" alt="{{event?.key}} pictogram" />
+            <span *ngIf="!getByDate">{{event.key | humanize}}</span>
+          </button>
+        </div>
       </div>
     </div>
-  </div>
-  <mat-divider></mat-divider>
-</section>
+    <mat-divider></mat-divider>
+  </section>
   <!-- <pre>
     {{ schedule | json}}
   </pre> -->
