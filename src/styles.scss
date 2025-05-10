@@ -1,18 +1,72 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+/* Geist Font Face Declarations */
+/* Only include essential font weights to reduce bundle size */
+@font-face {
+  font-family: 'Geist Sans';
+  src: local('Geist Sans'),
+       url('/assets/fonts/GeistSans-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+000-5FF; /* Latin glyphs only */
+}
+
+@font-face {
+  font-family: 'Geist Sans';
+  src: local('Geist Sans Medium'),
+       url('/assets/fonts/GeistSans-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+000-5FF;
+}
+
+@font-face {
+  font-family: 'Geist Mono';
+  src: local('Geist Mono'),
+       url('/assets/fonts/GeistMono-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+000-5FF; /* Latin glyphs only */
+}
+
+html, body { 
+  height: 100%; 
+}
+
+body { 
+  margin: 0; 
+  font-family: 'Geist Sans', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-display: optional;
+}
+
 .fill-remaining-space {
-    flex: 1 1 auto;
-  }
-.mat-chip-category { background-color: darkcyan !important; }
+  flex: 1 1 auto;
+}
+.pictogram-button-image {
+  border-radius: 50%;
+}
+
+.mat-chip-category { 
+  background-color: var(--primary-color) !important; 
+}
+.mdc-evolution-chip__text-label {
+  color: var(--color-background) !important;
+}
+.mat-mdc-standard-chip:not(.mdc-evolution-chip--disabled) .mdc-evolution-chip__action--trailing {
+  color: var(--color-background) !important; 
+}
+
 .sticky-paginator {
   position: sticky;
   top: 0;
   z-index: 1000;
 }
 
-.pictogram-sport-details{
+.pictogram-sport-details {
   height: 40px;
   width: 40px;
   border-radius: 50%;
@@ -23,7 +77,6 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   padding-top: 0px;
   padding-right: 0px;
   padding-bottom: 0px;
-  margin: 24px;
   padding-left: 0px;
   border-radius: 4px;
   box-sizing: border-box;
@@ -48,4 +101,35 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   }
 }
 
+// Typography styles
+h1, h2, h3, h4, h5, h6,
+.mat-headline, 
+.mat-title,
+.mat-card-title,
+.mat-toolbar {
+  font-family: 'Geist Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
 
+.mat-button, 
+.mat-raised-button,
+.mat-flat-button {
+  font-family: 'Geist Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+code, pre, 
+.mat-mono {
+  font-family: 'Geist Mono', monospace;
+  font-weight: 400;
+}
+
+.mat-body, 
+.mat-body-1,
+p {
+  font-family: 'Geist Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+}

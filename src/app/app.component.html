@@ -3,7 +3,7 @@
    </div>
 -->
 <app-loader></app-loader>
-<mat-toolbar color="" class="top-toolbar mat-elevation-z4">
+<mat-toolbar class="top-toolbar">
   <button mat-icon-button (click)="drawer.toggle()" aria-label="Side nav toggle icon">
     <mat-icon>menu</mat-icon>
   </button>
@@ -24,7 +24,7 @@
   </nav>
   <span class="fill-remaining-space"></span>
   <button mat-icon-button (click)="onSetTheme()" class="theme-toggle"
-    [matTooltip]="currentTheme === 'dark-theme' ? 'Switch to Light Mode' : 'Switch to Dark Mode'">
+    [matTooltip]="currentTheme === 'dark-theme' ? 'Joker' : 'The Dark Knight'">
     <mat-icon>{{currentTheme === 'dark-theme' ? 'brightness_2' : 'brightness_5'}}</mat-icon>
   </button>
 </mat-toolbar>

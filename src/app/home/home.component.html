@@ -4,7 +4,7 @@
 <div class="sports-container" *ngIf="allsports">
     <div class="pictogram-container" *ngFor="let sport of allsports;let last = last;">
         <a [ngStyle]="{'margin-right': last ? '24px': '0px'}" [routerLink]="['/sports',sport.name]">
-            <img [src]="sport.pictogram" class="sports-icons" alt="{{sport.name}} pictogram">
+            <img [src]="sport.pictogram" class="sports-icons pictogram-button-image" alt="{{sport.name}} pictogram">
         </a>
         <mat-card-content [ngStyle]="{'margin-right': last ? '24px': '0px'}" class="text-center">
             {{sport.name}}

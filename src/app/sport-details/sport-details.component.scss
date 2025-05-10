@@ -1,138 +1,233 @@
-.container-bigger {
-  margin: 24px auto;
-  max-width: 800px;
+@use '@angular/material' as mat;
+.child-toolbar {
+  text-align: center;
+  width: 100%;
+  position: sticky;
+  top: 0;
+  height: 84px;
+  z-index: 1005;  // Increased to be above top-toolbar
+  background-color: var(--mat-toolbar-container-background-color);
+  @include mat.elevation(8);  // Increased elevation for better visual hierarchy
+  padding: 0;  // Remove default padding
+  overflow-x: visible; // Allow overflow for slider
+  position: relative; // Add this to contain absolute borders
 }
+
+.pictogram-slider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-x: scroll;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  flex-grow: 1;
+  gap: 8px;
+  width:100%;
+  height: 100%;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  margin: 0 auto;
+  position: relative;
+  border-left: 2px solid var(--primary-color);
+  border-right: 2px solid var(--primary-color);
+}
+
+.pictogram-slider button {
+  min-width: 40px;
+  min-height: 40px;
+  scroll-snap-align: start;
+  touch-action: manipulation;
+  position: relative;
+  transform-origin: center bottom;
+  transform: translateY(0);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              background-color 0.3s ease,
+              box-shadow 0.3s ease;
+  border-radius: 50%;  // Add this to match the button shape
+  pointer-events: auto;  // Ensure hover only works on button
+
+  &::after {
+    content: attr(data-sport);
+    position: absolute;
+    bottom: -35px;  // Increased from -30px
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--mat-card-background-color);
+    color: var(--mat-card-foreground-color);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.3s ease,
+                bottom 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+    @include mat.elevation(2);
+  }
+
+  &:hover {
+    transform: translateY(-12px);
+    background-color: var(--mat-card-background-color);
+    @include mat.elevation(4);
+    box-shadow: gray 0px 0.5px 4px 4px;
+    &::after {
+      opacity: 1;
+      bottom: -32px;
+    }
+  }
+}
+
+.pictogram-slider::-webkit-scrollbar {
+  display: none;
+}
+
+.active-sport-button {
+  background-color: var(--mat-card-background-color);
+  @include mat.elevation(4);
+  box-shadow: gray 0px 0.5px 4px 4px;
+}
+
+/* Make buttons easier to tap on mobile */
+.pictogram-slider button {
+  min-width: 40px;
+  min-height: 40px;
+  scroll-snap-align: start;
+  touch-action: manipulation;
+}
+
+/* Media query for small screens */
+@media screen and (max-width: 600px) {
+  .pictogram-slider {
+    padding: 4px 32px;  // Adjusted padding
+    width: calc(100% - 64px);  // Adjusted width
+
+    &::before,
+    &::after {
+      height: 32px;
+      width: 3px;
+    }
+
+    &::before {
+      left: 16px;
+    }
+
+    &::after {
+      right: 16px;
+    }
+  }
+
+  .pictogram-button-image {
+    width: 24px;
+    height: 24px;
+  }
+
+  .pictogram-slider button {
+    min-width: 36px;
+    min-height: 36px;
+  }
+}
+
 .container {
   margin: 24px;
   display: flex;
   flex-direction: column;
+  
+  @media (min-width: 960px) {
+    margin: 24px auto;
+    max-width: 850px;
+  }
 }
 
-.event-header .mdc-expansion-panel-header-title {
-  flex-basis: 0;
-  align-items: center;
-}
 .medal-icon {
-  margin-top: 20px;
   height: 16px;
   width: 16px;
 }
+
 .medals-number {
-  float: left;
   font-size: 22px;
-  margin-right: 5px;
-}
-.events-container {
-  margin-top: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
 }
 
-table {
-  width: 100%;
-}
 .sports-details-card {
   border-radius: 10px;
+  @include mat.elevation(2);
 
   .sports-details-card-image {
     border-radius: 10px 10px 0 0;
     max-height: 300px;
-    max-width: 100%;
-    float: left;
-  }
-}
-
-@media (max-width: 959px) {
-  .sports-details-card-image {
     width: 100%;
+    
+    @media (min-width: 960px) {
+      border-radius: 10px 0 0 0;
+      max-width: 500px;
+      float: left;
+      margin-right: 24px;
+      margin-bottom: 2px;
+    }
   }
 }
 
 .sport-details-card-header {
-  text-align: center;
-}
-.sport-details-card-header h1 {
-  margin-left: 24px;
-  font-weight: 400;
-  text-align: center;
-  font-size: 30px;
-  padding: 0 0 0 0px;
-  letter-spacing: 1px;
-  float: left;
-}
+  padding: 16px;
+  
+  &-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    
+    h1 {
+      margin: 0;
+      font-weight: 400;
+      font-size: 30px;
+      letter-spacing: 1px;
 
-.sport-details-card-header-bigger h1 {
-  font-weight: 400;
-  text-align: left;
-  font-size: 40px;
-  padding: 0 0 0 30px;
-  letter-spacing: 1px;
-  float: left;
-}
-.sport-details-card-header-bigger a {
-  margin: 0px 0px 0px 30px;
-}
-// .foot-note-pdf{
-//   margin:5px 24px 5px 24px;
-//   font-family: 'Montserrat', sans-serif;
-//   font-size:10px;
-//   float:left;
-//   letter-spacing:1px;
-//   line-height:20px;
-// }
-p {
-  margin: 24px 24px 24px 24px;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 14px;
-  float: left;
-  letter-spacing: 1px;
-  line-height: 20px;
-  text-align: left;
-}
-
-@media (min-width: 960px) {
-  .container {
-    margin: 24px auto;
-    max-width: 850px;
-  }
-
-  .sports-details-card {
-    box-shadow: 0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12);
-    .sports-details-card-image {
-      border-radius: 10px 0 0 0;
-      max-height: 300px;
-      max-width: 500px;
-      float: left;
-    }
-    .sports-details-card-image-bigger {
-      border-radius: 10px 0 0 0;
-      max-height: 300px;
-      min-width: 424px;
-      max-width: 500px;
-      float: left;
+      @media (min-width: 960px) {
+        font-size: 34px;
+      }
     }
   }
 
-  .sport-details-card-header {
+  .sport-buttons {
     display: flex;
     flex-direction: column;
-    .sport-buttons {
-      display: flex;
-      flex-direction: column;
-      margin-right: 24px;
-    }
-    h1 {
-      font-size: 40px;
-      text-align: left;
-      padding: 0 0 0 30px;
-    }
+    gap: 16px;
+    margin-top: 16px;
 
-    a {
-      margin: 0px 0px 0px 30px;
+    .action-buttons,
+    .category-buttons {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;justify-content: center;
+      .mat-mdc-fab {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+        &:hover {
+          transform: translateY(-4px);
+          @include mat.elevation(4);
+        }
+      }
     }
   }
 }
 
-@media (min-width: 600px) {
-  .sport-details-card-header {
-    text-align: left;
+p {
+  margin: 0px 24px 24px 24px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  letter-spacing: 1px;
+  line-height: 20px;
+  text-align: justify;
+  hyphens: auto;
+  
+  @media (min-width: 960px) {
+    clear: none;
   }
+}
+
+.selected {
+  transform: scale(1.1);
 }

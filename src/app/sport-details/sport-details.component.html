@@ -1,20 +1,14 @@
 <div *ngIf="sportsdetails">
-        <mat-toolbar>
-                <button mat-button
-                        [routerLink]="['/home']"><mat-icon>home</mat-icon>Home<mat-icon>chevron_right</mat-icon></button>
-                <img class="pictogram-sport-details" src="pictograms/{{sportsdetails.name}}.png"
-                        alt="{{sportsdetails.name}} pictogram" />
-                <span class="fill-remaining-space"></span>
-                <mat-menu #appMenu="matMenu">
-                        <ng-template matMenuContent>
-                                <button *ngFor="let sport of allsports" mat-menu-item [routerLink]="['/sports',sport]">
-                                        {{sport}}
-                                </button>
-                        </ng-template>
-                </mat-menu>
-                <button mat-button color="primary" [matMenuTriggerFor]="appMenu">
-                        Go To<mat-icon>sports_kabaddi</mat-icon>
-                </button>
+        <mat-toolbar class="child-toolbar">
+                <div class="pictogram-slider">
+                        <button class="toolbar-pictogram-button"
+                                [ngClass]="{'active-sport-button': sport === sportsdetails.name}" mat-icon-button
+                                *ngFor="let sport of allsports" [routerLink]="['/sports',sport]"
+                                [class.active]="sport === sportsdetails.name" [attr.data-sport]="sport">
+                                <img class="pictogram-button-image" src="pictograms/{{sport}}.png"
+                                        alt="{{sport}} pictogram" />
+                        </button>
+                </div>
         </mat-toolbar>
         <div class="container">
                 <div class="sports-details-card mat-elevation-z2">
@@ -24,108 +18,45 @@
                                         [src]="sportsdetails.image" alt="Athlete Image">
                         </picture>
                         <div class="sport-details-card-header">
-                                <div>
+                                <div class="sport-details-card-header-text">
                                         <h1>{{sportsdetails.name | uppercase}}</h1>
                                         <span class="medals-number"><img class="medal-icon" src="assets/icon_medal.png"
                                                         alt="medals">{{sportsdetails.Medals}}</span>
                                 </div>
                                 <div class="sport-buttons">
-                                        <a mat-flat-button color="primary" target="_blank"
-                                                [href]="sportsdetails.doc_pdf">
-                                                <mat-icon>picture_as_pdf</mat-icon> Qualification Road for Tokyo
-                                        </a>
-                                        <a style="margin-top: 8px;" mat-flat-button color="primary"
-                                                [routerLink]="['/athletes']"
-                                                [queryParams]="{sports: qualifiedAthletesString, pageIndex: '0', pazeSize: '8'}">
-                                                <mat-icon>flight_takeoff</mat-icon> Qualified Athletes
-                                        </a>
-                                        <a style="margin-top: 8px;" mat-flat-button color="primary"
-                                                [routerLink]="['/schedule']"
-                                                [queryParams]="{sport: sportsdetails.name}">
-                                                <mat-icon>today</mat-icon> Schedule
-                                        </a>
+                                        <div class="action-buttons">
+                                                <button mat-fab color="primary"
+                                                        [matTooltip]="'Qualification Road for Tokyo'"
+                                                        matTooltipPosition="below" [href]="sportsdetails.doc_pdf"
+                                                        target="_blank">
+                                                        <mat-icon>picture_as_pdf</mat-icon>
+                                                </button>
+                                                <button mat-fab color="primary" [matTooltip]="'Qualified Athletes'"
+                                                        matTooltipPosition="below" [routerLink]="['/athletes']"
+                                                        [queryParams]="{sports: qualifiedAthletesString, pageIndex: '0', pazeSize: '8'}">
+                                                        <mat-icon>flight_takeoff</mat-icon>
+                                                </button>
+                                                <button mat-fab color="primary" [matTooltip]="'Schedule'"
+                                                        matTooltipPosition="below" [routerLink]="['/schedule']"
+                                                        [queryParams]="{sport: sportsdetails.name}">
+                                                        <mat-icon>today</mat-icon>
+                                                </button>
+                                        </div>
+                                        <div class="category-buttons">
+                                                <button mat-fab *ngFor="let category of sportsdetails.events | keyvalue"
+                                                        (click)="showEvents(category)"
+                                                        [class.selected]="selectedCategory === category.key"
+                                                        [color]="selectedCategory === category.key ? 'secondary' : 'primary'"
+                                                        [matTooltip]="category.key | titlecase"
+                                                        matTooltipPosition="below">
+                                                        <mat-icon>{{getCategoryShorthand(category.key)}}</mat-icon>
+                                                </button>
+                                        </div>
                                 </div>
-                                <!-- <span class="foot-note-pdf" *ngIf="sportsdetails.name === 'Equestrian'">
-                        Note:Above pdf is of Eventing category, as in Jumping and Dressage
-                        category we have zero to little chance of Qualification.
-                </span> -->
                         </div>
                         <p>
                                 {{sportsdetails.description}}
-                                <!-- <a mat-flat-button *ngIf="sportsdetails.name === 'Hockey'" color="primary" target="_blank" href="https://www.youtube.com/watch?v=B_gcSeiA4zU">
-                <mat-icon>movie</mat-icon>India's Champions
-          </a> -->
                         </p>
-                </div>
-                <div>
-                        <h3> EVENTS </h3>
-                        <div class="events-container mat-elevation-z0">
-                                <mat-accordion multi="true">
-                                        <mat-expansion-panel
-                                                *ngFor="let eventscatagory of sportsdetails.events | keyvalue"
-                                                class="event-header" hideToggle="true" #eventpanel>
-                                                <mat-expansion-panel-header>
-                                                        <mat-panel-title>
-                                                                <mat-icon color="primary"
-                                                                        *ngIf="!eventpanel.expanded">chevron_right</mat-icon>
-                                                                <mat-icon color="primary"
-                                                                        *ngIf="eventpanel.expanded">expand_more</mat-icon>
-                                                                {{eventscatagory.key | titlecase}}
-                                                        </mat-panel-title>
-                                                </mat-expansion-panel-header>
-
-                                                <table mat-table
-                                                        *ngIf="sportsdetails.name === 'Athletics'; else othersports"
-                                                        [dataSource]="eventscatagory.value" class="mat-elevation-z8">
-                                                        <ng-container matColumnDef="Event">
-                                                                <th mat-header-cell *matHeaderCellDef>Event</th>
-                                                                <td mat-cell *matCellDef="let element">{{ element.name
-                                                                        }}</td>
-                                                        </ng-container>
-                                                        <ng-container matColumnDef="EntryStandard">
-                                                                <th mat-header-cell *matHeaderCellDef>Entry Standard
-                                                                </th>
-                                                                <td mat-cell *matCellDef="let element">
-                                                                        {{ element.qualificationstandard }}
-                                                                </td>
-                                                        </ng-container>
-                                                        <ng-container matColumnDef="NR">
-                                                                <th mat-header-cell *matHeaderCellDef>NR</th>
-                                                                <td mat-cell *matCellDef="let element">{{ element.NR }}
-                                                                </td>
-                                                        </ng-container>
-                                                        <!--   <ng-container matColumnDef="WR">
-                                                <th mat-header-cell *matHeaderCellDef>WR</th>
-                                                <td mat-cell *matCellDef="let element">{{ element.WR }}</td>
-                                        </ng-container>
-                                        <ng-container matColumnDef="TotalEntries">
-                                                <th mat-header-cell *matHeaderCellDef>Total Entries</th>
-                                                <td mat-cell *matCellDef="let element">
-                                                        {{ element.totalentries }}
-                                                </td>
-                                        </ng-container>
-                                        -->
-                                                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                                                        <tr mat-row *matRowDef="let row; columns: displayedColumns">
-                                                        </tr>
-                                                </table>
-                                                <ng-template #othersports>
-
-                                                        <mat-card *ngFor="let events of eventscatagory.value">
-                                                                {{events.name}}
-                                                                <mat-card-content>
-                                                                        {{events.category}}
-                                                                        <div
-                                                                                *ngIf="sportsdetails.name === 'Judo' && eventscatagory.key === 'mixed'">
-                                                                                Men-{{events.men}}<br />
-                                                                                Women-{{events.women}}
-                                                                        </div>
-                                                                </mat-card-content>
-                                                        </mat-card>
-                                                </ng-template>
-                                        </mat-expansion-panel>
-                                </mat-accordion>
-                        </div>
                 </div>
         </div>
 </div>

@@ -3,7 +3,7 @@
 <!-- {{ athletes | json}} -->
 <div class="filter-options mat-elevation-z1">
   <div class="search-field">
-    <mat-form-field class="chip-list">
+    <mat-form-field appearance="outline" class="chip-list">
       <mat-label>Search Sports</mat-label>
       <mat-chip-grid #chipGrid aria-label="Sport selection">
         <mat-chip-row class="mat-chip-category" *ngFor="let sport of sports" [selectable]="selectable"
@@ -33,7 +33,8 @@
   </span>
   <mat-card color="primary" class="athletes-card mat-elevation-z8" *ngFor="let athlete of athletes">
     <mat-card-header>
-      <img mat-card-avatar src="pictograms/{{athlete.sportname}}.png" alt="{{athlete.sportname}} pictogram" />
+      <img mat-card-avatar class="pictogram-button-image" src="pictograms/{{athlete.sportname}}.png"
+        alt="{{athlete.sportname}} pictogram" />
       <mat-card-title>{{ athlete.name }}</mat-card-title>
       <mat-card-subtitle>{{ athlete.event }}</mat-card-subtitle>
     </mat-card-header>
