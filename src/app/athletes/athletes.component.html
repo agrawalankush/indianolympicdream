@@ -33,14 +33,14 @@
   </span>
   <mat-card color="primary" class="athletes-card mat-elevation-z8" *ngFor="let athlete of athletes">
     <mat-card-header>
-      <img mat-card-avatar class="pictogram-button-image" src="pictograms/{{athlete.sportname}}.png"
+      <img mat-card-avatar class="pictogram-button-image" src="assets/images/pictograms/{{athlete.sportname}}.png"
         alt="{{athlete.sportname}} pictogram" />
       <mat-card-title>{{ athlete.name }}</mat-card-title>
       <mat-card-subtitle>{{ athlete.event }}</mat-card-subtitle>
     </mat-card-header>
     <picture>
-      <source type="image/webp" srcset="{{athlete.webpimage}}">
-      <img mat-card-image class="athlete-image" src="{{athlete.image}}" alt="{{ athlete.name }} photo">
+      <source type="image/webp" srcset="assets/images/{{athlete.webpimage}}">
+      <img mat-card-image class="athlete-image" src="assets/images/{{athlete.image}}" alt="{{ athlete.name }} photo">
     </picture>
     <mat-card-content>
       <!-- <p *ngIf="athlete.imagesrc">({{athlete.imagesrc}})</p> -->

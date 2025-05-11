@@ -60,6 +60,13 @@
     @include mat.elevation(8)
   }
 
+  mat-toolbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    @include mat.elevation(4);
+  }
+
   .toggle-text{
     font-size: 14px;
     font-weight: 500;

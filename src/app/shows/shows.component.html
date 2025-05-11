@@ -8,7 +8,8 @@
 <div class="cards-container">
     <mat-card color="primary" class="movies-card" *ngFor="let showcontent of showsdata">
         <mat-card-header>
-            <img mat-card-avatar src="assets/{{showcontent.availableOn}}.jpg" alt="{{showcontent.availableOn}} logo" />
+            <img mat-card-avatar src="assets/images/streaming/{{showcontent.availableOn}}.jpg"
+                alt="{{showcontent.availableOn}} logo" />
             <mat-card-title>{{showcontent.name}}</mat-card-title>
             <mat-card-subtitle>{{ showcontent.sport }}</mat-card-subtitle>
         </mat-card-header>

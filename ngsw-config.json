@@ -14,16 +14,47 @@
           "/manifest.webmanifest"
         ]
       }
-    }, {
+    },
+    {
       "name": "assets",
       "installMode": "lazy",
       "updateMode": "prefetch",
       "resources": {
         "files": [
-          "/assets/**",
-          "/*.(eot|svg|cur|jpg|png|webp|gif|otf|ttf|woff|woff2|ani)"
+          "/assets/images/**/*",
+          "/assets/fonts/*",
+          "/assets/icons/*",
+          "/assets/docs/**/*.pdf"
+        ],
+        "urls": [
+          "https://fonts.googleapis.com/**",
+          "https://fonts.gstatic.com/**"
         ]
       }
+    }
+  ],
+  "dataGroups": [
+    {
+      "name": "images-cache",
+      "cacheConfig": {
+        "strategy": "performance",
+        "maxSize": 100,
+        "maxAge": "7d"
+      },
+      "patterns": [
+        "/assets/images/**"
+      ]
+    },
+    {
+      "name": "documents-cache",
+      "cacheConfig": {
+        "strategy": "performance",
+        "maxSize": 20,
+        "maxAge": "30d"
+      },
+      "patterns": [
+        "/assets/docs/**"
+      ]
     }
   ]
 }

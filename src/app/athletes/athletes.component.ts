@@ -11,15 +11,31 @@ import { Observable, of as observableOf } from 'rxjs';
 import { map, startWith, catchError, finalize } from 'rxjs/operators';
 import { MatChipGrid } from '@angular/material/chips';
 
+interface Athlete {
+  name: string;
+  sportname: string;
+  event: string;
+  index: string; // Add this field
+  image: string;
+  webpimage: string;
+  qualificationEvent: string;
+  date_qualified: number;
+}
+
+interface AthleteResponse {
+  athletes: Athlete[];
+  total: number;
+}
+
 @Component({
-    selector: 'app-athletes',
-    templateUrl: './athletes.component.html',
-    styleUrls: ['./athletes.component.scss'],
-    standalone: false
+  selector: 'app-athletes',
+  templateUrl: './athletes.component.html',
+  styleUrls: ['./athletes.component.scss'],
+  standalone: false
 })
 export class AthletesComponent implements OnInit {
   public errmsg: string;
-  public athletes: any;
+  public athletes: Athlete[];
   @ViewChild(MatPaginator) paginator: MatPaginator;
   // MatPaginator Inputs
   length: number;
@@ -135,17 +151,17 @@ export class AthletesComponent implements OnInit {
       this.prepareQueryUrl();
     }
   }
-  public SearchAthletes(selectedsports: any, pageIndex: string, pageSize: string) {
+  public SearchAthletes(selectedsports: string, pageIndex: string, pageSize: string) {
     this.sportservice.getathletes(selectedsports, pageIndex, pageSize)
-      .subscribe(
-        (res: any) => {
-          // console.log(res);
-          this.athletes = res.athletes;
-          this.length = res.total;
-        },
-        (error: any) => {
-          // console.log(error);
-          this.errmsg = error.error;
-        });
+      .pipe(
+        catchError((error) => {
+          this.errmsg = error.message || 'An error occurred';
+          return observableOf({ athletes: [], total: 0 });
+        })
+      )
+      .subscribe((res: AthleteResponse) => {
+        this.athletes = res.athletes;
+        this.length = res.total;
+      });
   }
 }
