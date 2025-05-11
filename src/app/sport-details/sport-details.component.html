@@ -25,12 +25,13 @@
                                 </div>
                                 <div class="sport-buttons">
                                         <div class="action-buttons">
-                                                <button mat-fab color="primary"
-                                                        [matTooltip]="'Qualification Road for Tokyo'"
-                                                        matTooltipPosition="below" [href]="sportsdetails.doc_pdf"
-                                                        target="_blank">
-                                                        <mat-icon>picture_as_pdf</mat-icon>
-                                                </button>
+                                                <a [href]="sportsdetails.doc_pdf" target="_blank">
+                                                        <button mat-fab color="primary"
+                                                                [matTooltip]="'Qualification Road for Tokyo'"
+                                                                matTooltipPosition="below">
+                                                                <mat-icon>picture_as_pdf</mat-icon>
+                                                        </button>
+                                                </a>
                                                 <button mat-fab color="primary" [matTooltip]="'Qualified Athletes'"
                                                         matTooltipPosition="below" [routerLink]="['/athletes']"
                                                         [queryParams]="{sports: qualifiedAthletesString, pageIndex: '0', pazeSize: '8'}">
