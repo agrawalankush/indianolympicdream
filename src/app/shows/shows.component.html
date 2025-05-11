@@ -12,9 +12,27 @@
             <mat-card-title>{{showcontent.name}}</mat-card-title>
             <mat-card-subtitle>{{ showcontent.sport }}</mat-card-subtitle>
         </mat-card-header>
-        <iframe class="mat-card-image mat-elevation-z4" mat-card-image
-            [src]="videoyoutube + showcontent.youtube_id | safe" frameborder="0"
-            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <div class="video-container mat-card-image mat-elevation-z4">
+            <img [src]="videoStates[showcontent.youtube_id].thumbnailUrl"
+                [class.fade-out]="videoStates[showcontent.youtube_id].isPlaying" class="video-thumbnail"
+                [alt]="showcontent.name">
+
+            <div class="play-button" *ngIf="!videoStates[showcontent.youtube_id].isPlaying"
+                (click)="playVideo(showcontent.youtube_id)">
+                <div class="play-icon"></div>
+            </div>
+
+            <div class="loading-spinner" *ngIf="videoStates[showcontent.youtube_id].isLoading">
+                <mat-spinner diameter="50"></mat-spinner>
+            </div>
+
+            <iframe *ngIf="videoStates[showcontent.youtube_id].isPlaying"
+                [src]="(videoyoutube + showcontent.youtube_id + videoParams) | safe"
+                (load)="onVideoLoad(showcontent.youtube_id)" frameborder="0" class="video-frame"
+                [class.visible]="!videoStates[showcontent.youtube_id].isLoading"
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+            </iframe>
+        </div>
         <!-- <mat-card-content matTooltip="{{showcontent.description}}">
             {{showcontent.description}}
         </mat-card-content> -->

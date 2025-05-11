@@ -1,8 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SportsdataService } from '../sportsdata.service';
-// import { ShowsResolve } from '../models/app-models';
 import { PageEvent } from '@angular/material/paginator';
+
+interface VideoState {
+  isPlaying: boolean;
+  isLoading: boolean;
+  thumbnailUrl: string;
+}
+
 @Component({
   selector: 'app-shows',
   templateUrl: './shows.component.html',
@@ -13,27 +19,50 @@ export class ShowsComponent implements OnInit {
   public showsdata: any;
   public errmsg: string;
   public videoyoutube = 'https://www.youtube.com/embed/';
+  public videoParams = '?autoplay=1&mute=0&enablejsapi=1&rel=0';
+  public videoStates: { [key: string]: VideoState } = {};
   // MatPaginator Inputs
   length: number;
   pageSize = 100;
   pageSizeOptions: number[] = [15, 30, 50, 100];
   // MatPaginator Output
   pageEvent: PageEvent;
-  constructor(private route: ActivatedRoute, private sportservice: SportsdataService) { }
+
+  constructor(
+    private route: ActivatedRoute,
+    private sportservice: SportsdataService
+  ) { }
 
   ngOnInit() {
-    // this.getshowsdata();
     this.sportservice.getshowsdata(0, this.pageSize)
       .subscribe(
         (res: any) => {
           this.showsdata = res.shows;
           this.length = res.total;
+          this.showsdata.forEach((show: any) => {
+            this.videoStates[show.youtube_id] = {
+              isPlaying: false,
+              isLoading: false,  // Initialize loading state
+              thumbnailUrl: `https://img.youtube.com/vi/${show.youtube_id}/hqdefault.jpg`
+            };
+          });
         },
         (error: any) => {
-          // console.log(error);
           this.errmsg = error.error;
         });
   }
+
+  playVideo(youtubeId: string) {
+    if (!this.videoStates[youtubeId].isLoading) {
+      this.videoStates[youtubeId].isLoading = true;
+      this.videoStates[youtubeId].isPlaying = true;
+    }
+  }
+
+  onVideoLoad(youtubeId: string) {
+    this.videoStates[youtubeId].isLoading = false;
+  }
+
   handlePageEvent(e: PageEvent) {
     const index = e.pageIndex * e.pageSize;
     const size = e.pageSize;
@@ -45,7 +74,6 @@ export class ShowsComponent implements OnInit {
         },
         (error) => {
           this.errmsg = error;
-          // console.log(error);
         });
   }
 }
