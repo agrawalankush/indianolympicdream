@@ -1,30 +1,28 @@
-<!-- <mat-paginator #paginator [length]="totalathletes" [pageIndex]="0" [pageSize]="10" [pageSizeOptions]="[5,10]">
-</mat-paginator> -->
-<!-- {{ athletes | json}} -->
 <div class="filter-options mat-elevation-z1">
-  <div class="search-field">
-    <mat-form-field appearance="outline" class="chip-list">
-      <mat-label>Search Sports</mat-label>
-      <mat-chip-grid #chipGrid aria-label="Sport selection">
-        <mat-chip-row class="mat-chip-category" *ngFor="let sport of sports" [selectable]="selectable"
-          [removable]="removable" (removed)="remove(sport)">
-          {{sport}}
-          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-        </mat-chip-row>
-        <input #sportInput [formControl]="sportCtrl" [matAutocomplete]="auto" [matChipInputFor]="chipGrid"
-          [matChipInputSeparatorKeyCodes]="separatorKeysCodes">
-      </mat-chip-grid>
-      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
-        <mat-option *ngFor="let sport of filteredSports | async" [value]="sport">
-          {{sport}}
-        </mat-option>
-      </mat-autocomplete>
-    </mat-form-field>
+  <div class="filter-container">
+    <div class="search-field">
+      <mat-form-field appearance="outline" class="chip-list">
+        <mat-label>Search Sports</mat-label>
+        <mat-chip-grid #chipGrid aria-label="Sport selection">
+          <mat-chip-row class="mat-chip-category" *ngFor="let sport of sports" [selectable]="selectable"
+            [removable]="removable" (removed)="remove(sport)">
+            {{sport}}
+            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+          </mat-chip-row>
+          <input #sportInput [formControl]="sportCtrl" [matAutocomplete]="auto" [matChipInputFor]="chipGrid"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes">
+        </mat-chip-grid>
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+          <mat-option *ngFor="let sport of filteredSports | async" [value]="sport">
+            {{sport}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </div>
+    <mat-paginator class="paginator" [length]="length" [pageSize]="pageSize" [pageIndex]="pageIndex"
+      [pageSizeOptions]="pageSizeOptions" (page)="handlePageEvent($event)">
+    </mat-paginator>
   </div>
-  <mat-paginator [length]="length" [pageSize]="pageSize" [pageIndex]="pageIndex" [pageSizeOptions]="pageSizeOptions"
-    (page)="handlePageEvent($event)">
-    <mat-icon>search</mat-icon>
-  </mat-paginator>
 </div>
 <div class="cards-container">
   <mat-error *ngIf="errmsg">{{errmsg}}</mat-error>
@@ -39,8 +37,9 @@
       <mat-card-subtitle>{{ athlete.event }}</mat-card-subtitle>
     </mat-card-header>
     <picture>
-      <source type="image/webp" srcset="assets/images/{{athlete.webpimage}}">
-      <img mat-card-image class="athlete-image" src="assets/images/{{athlete.image}}" alt="{{ athlete.name }} photo">
+      <source *ngIf="athlete.webpimage" type="image/webp" srcset="assets/images/{{athlete.webpimage}}">
+      <img mat-card-image class="athlete-image" src="assets/images/{{athlete.image}}"
+        [attr.alt]="athlete.name + ' photo'" onerror="this.onerror=null; this.src='assets/images/placeholder.png';">
     </picture>
     <mat-card-content>
       <!-- <p *ngIf="athlete.imagesrc">({{athlete.imagesrc}})</p> -->

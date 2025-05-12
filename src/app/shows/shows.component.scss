@@ -1,3 +1,4 @@
+@use '@angular/material' as mat;
 .cards-container {
   display: flex;
   flex-wrap: wrap;
@@ -10,6 +11,7 @@
     margin-bottom: 16px;
     margin-right: 16px;
     height: 380px;
+    background-color: var(--mat-toolbar-container-background-color);
 }
 .mat-card-image{
   height: 350px;
@@ -145,4 +147,11 @@
   &:hover {
     filter: brightness(0.8);
   }
+}
+
+
+
+.mat-mdc-paginator {
+  @include mat.elevation(4);
+  background-color: var(--mat-toolbar-container-background-color);
 }

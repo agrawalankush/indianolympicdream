@@ -1,5 +1,6 @@
+@use '@angular/material' as mat;
 .mat-toolbar {
-  height: 150px;
+  height: 84px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -7,11 +8,13 @@
   position: sticky;
   top: 0;
   z-index: 1000;
+  @include mat.elevation(4);
 }
 .schedule-conatiner {
-  margin: 24px;
+  padding: 24px;
   min-height: 48px;
   // width: 100%;
+  background-color: var(--mat-toolbar-container-background-color);
 }
 .medal-icon {
   height: 20px;

@@ -155,7 +155,7 @@
 .sports-details-card {
   border-radius: 10px;
   @include mat.elevation(2);
-
+  background-color: var(--mat-toolbar-container-background-color);
   .sports-details-card-image {
     border-radius: 10px 10px 0 0;
     max-height: 300px;
