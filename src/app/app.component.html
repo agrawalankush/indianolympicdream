@@ -1,18 +1,13 @@
-<!-- For switching b/w light and dark theme
-   <div [class.light-theme]="isLightTheme">
-   </div>
--->
 <app-loader></app-loader>
 <mat-toolbar>
   <button mat-icon-button (click)="drawer.toggle()">
     <mat-icon>menu</mat-icon>
   </button>
-  <button mat-button class="logo-button" routerLink="">
+  <div class="logo-container" routerLink="" [class.active-logo]="isActivePath()">
     <span>Indian</span>
     <img src="assets/images/generic/logo.png" class="olympic-logo" alt="olympic">
     <span>Dream</span>
-  </button>
-  <!--  -->
+  </div>
   <nav class="nav-links">
     <button class="nav-button" routerLink="/athletes" mat-button routerLinkActive="active-link">Quotas Earned</button>
     <button class="nav-button" routerLink="/calendar" mat-button routerLinkActive="active-link">Calendar</button>
@@ -29,31 +24,28 @@
   </button>
 </mat-toolbar>
 <mat-progress-bar color="warn" *ngIf="loading" mode="query"></mat-progress-bar>
+
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #drawer class="sidenav" mode="over">
     <mat-nav-list (click)="drawer.close()">
-      <a mat-list-item routerLink="/home" routerLinkActive="mat-primary">
-        <mat-icon>home</mat-icon>
-        <span class="sidenav-menu">Home</span>
-      </a>
       <a mat-list-item [routerLink]="['/athletes']" [queryParams]="{prop: 'xxx'}" queryParamsHandling="preserve"
-        routerLinkActive="mat-primary">
+        routerLinkActive="mat-list-active">
         <mat-icon>directions_run</mat-icon>
         <span class="sidenav-menu">Quotas Earned</span>
       </a>
-      <a mat-list-item routerLink="/calendar" routerLinkActive="mat-primary">
+      <a mat-list-item routerLink="/calendar" routerLinkActive="mat-list-active">
         <mat-icon>date_range</mat-icon>
         <span class="sidenav-menu">Calendar</span>
       </a>
-      <a mat-list-item routerLink="/shows" routerLinkActive="mat-primary">
+      <a mat-list-item routerLink="/shows" routerLinkActive="mat-list-active">
         <mat-icon>movie</mat-icon>
         <span class="sidenav-menu">Shows I love</span>
       </a>
-      <a mat-list-item routerLink="/blogs" routerLinkActive="active">
+      <a mat-list-item routerLink="/blogs" routerLinkActive="mat-list-active">
         <mat-icon>description</mat-icon>
         <span class="sidenav-menu">Blogs</span>
       </a>
-      <a mat-list-item routerLink="/about" routerLinkActive="mat-primary">
+      <a mat-list-item routerLink="/about" routerLinkActive="mat-list-active">
         <mat-icon>info</mat-icon>
         <span class="sidenav-menu">About</span>
       </a>

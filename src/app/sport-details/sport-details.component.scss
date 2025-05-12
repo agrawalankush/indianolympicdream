@@ -71,7 +71,7 @@
     transform: translateY(-12px);
     background-color: var(--mat-card-background-color);
     @include mat.elevation(4);
-    box-shadow: gray 0px 0.5px 4px 4px;
+    box-shadow: gray 0px 0.1px 4px 2px;
     &::after {
       opacity: 1;
       bottom: -32px;
@@ -86,7 +86,7 @@
 .active-sport-button {
   background-color: var(--mat-card-background-color);
   @include mat.elevation(4);
-  box-shadow: gray 0px 0.5px 4px 4px;
+  box-shadow: var(--primary-color) 0px 0.5px 11px 2px;
 }
 
 /* Make buttons easier to tap on mobile */
