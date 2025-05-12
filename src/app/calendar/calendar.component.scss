@@ -1,48 +1,54 @@
-.container-bigger{
-    margin: 24px auto;
-    max-width: 80%;
-}
+@use '@angular/material' as mat;
+
 .container {
-    margin: 24px;
+    margin: 88px 24px 24px 24px; // 64px toolbar + 24px spacing
 }
 
 @media (min-width: 960px) {
     .container {
-        margin: 24px auto;
-        max-width: 80%;
+        margin: 24px;
+        max-width: 100%;
     }
 }
 
-.mat-table {
-    width:100%;
-}
-.mat-form-field{
-    width: 100%;
-}  
 // By default, the mobile label shouldn't show
 .mobile-label {
     display: none;
-  }
-  
-  @media(max-width: 600px) {
-    // Custom header label that shows in each column, with a set width and bold font
+}
+
+@media (max-width: 600px) {
     .mobile-label {
-      width: 80px;
-      display: inline-block;
-      font-weight: bold;
+        width: 100px;
+        display: inline-block;
+        font-weight: bold;
+        margin-right: 8px;
     }
-  
-    // Remove the header row altogether
-    .mat-header-row {
-      display: none;
+
+    .mat-mdc-header-row {
+        display: none;
     }
-    .mat-cell {
-      padding: 0px 8px 0px 0px;
+
+    .mat-mdc-cell {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        padding: 8px 0;
+        min-height: 24px;
+        border-bottom: none;
     }
-    // The row cells should display as a column, justified left, with a bit of extra padding
-    .mat-row { 
-      flex-direction: column;
-      align-items: start;
-      padding: 8px 24px;
+
+    .mat-mdc-row {
+        flex-direction: column;
+        align-items: start;
+        padding: 12px 24px;
+        &:not(:last-child) {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+        }
     }
-  }
+}
+
+.mat-mdc-paginator, .mat-mdc-table {
+    width: 100%;
+    @include mat.elevation(4);
+    background-color: var(--mat-toolbar-container-background-color);
+}

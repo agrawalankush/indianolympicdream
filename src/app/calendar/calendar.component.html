@@ -1,50 +1,53 @@
-<div class="container">
-        <!-- <div class="spinner-container" *ngIf="dataSource.loading$ | async">
-                <mat-progress-bar mode="indeterminate" color="warn"></mat-progress-bar>
-            </div> -->
-        <mat-paginator class="mat-elevation-z8" #paginator [length]="dataSource.length" [pageIndex]="0" [pageSize]="10"
+<div class="calendar-wrapper">
+        <mat-paginator class="sticky-paginator" #paginator [length]="dataSource.length" [pageIndex]="0" [pageSize]="10"
                 [pageSizeOptions]="[5,10,25]">
         </mat-paginator>
-        <!-- <mat-form-field>
+        <div class="container">
+                <!-- <div class="spinner-container" *ngIf="dataSource.loading$ | async">
+                <mat-progress-bar mode="indeterminate" color="warn"></mat-progress-bar>
+            </div> -->
+
+                <!-- <mat-form-field>
                 <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search for specific sport">
         </mat-form-field> -->
-        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-                <ng-container matColumnDef="EventName">
-                        <mat-header-cell *matHeaderCellDef>Event Name</mat-header-cell>
-                        <mat-cell *matCellDef="let element">
-                                <span class="mobile-label">Event Name:</span>
-                                {{ element.name }}
-                        </mat-cell>
-                </ng-container>
-                <ng-container matColumnDef="Sport">
-                        <mat-header-cell *matHeaderCellDef>Sport</mat-header-cell>
-                        <mat-cell *matCellDef="let element">
-                                <span class="mobile-label">Sport Name:</span>
-                                {{ element.sportname }}
-                        </mat-cell>
-                </ng-container>
-                <ng-container matColumnDef="StartDate">
-                        <mat-header-cell *matHeaderCellDef>StartDate</mat-header-cell>
-                        <mat-cell *matCellDef="let element">
-                                <span class="mobile-label">Start Date:</span>
-                                {{ element.startdate }}
-                        </mat-cell>
-                </ng-container>
-                <ng-container matColumnDef="EndDate">
-                        <mat-header-cell *matHeaderCellDef>EndDate</mat-header-cell>
-                        <mat-cell *matCellDef="let element">
-                                <span class="mobile-label">End Date:</span>
-                                {{ element.enddate }}
-                        </mat-cell>
-                </ng-container>
-                <ng-container matColumnDef="Venue">
-                        <mat-header-cell *matHeaderCellDef>Venue</mat-header-cell>
-                        <mat-cell *matCellDef="let element">
-                                <span class="mobile-label">Venue:</span>
-                                {{ element.venue }}
-                        </mat-cell>
-                </ng-container>
-                <mat-header-row *matHeaderRowDef="displayedColumns;sticky: true"></mat-header-row>
-                <mat-row mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
-        </table>
+                <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+                        <ng-container matColumnDef="EventName">
+                                <mat-header-cell *matHeaderCellDef>Event Name</mat-header-cell>
+                                <mat-cell *matCellDef="let element">
+                                        <span class="mobile-label">Event Name:</span>
+                                        {{ element.name }}
+                                </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="Sport">
+                                <mat-header-cell *matHeaderCellDef>Sport</mat-header-cell>
+                                <mat-cell *matCellDef="let element">
+                                        <span class="mobile-label">Sport Name:</span>
+                                        {{ element.sportname }}
+                                </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="StartDate">
+                                <mat-header-cell *matHeaderCellDef>StartDate</mat-header-cell>
+                                <mat-cell *matCellDef="let element">
+                                        <span class="mobile-label">Start Date:</span>
+                                        {{ element.startdate }}
+                                </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="EndDate">
+                                <mat-header-cell *matHeaderCellDef>EndDate</mat-header-cell>
+                                <mat-cell *matCellDef="let element">
+                                        <span class="mobile-label">End Date:</span>
+                                        {{ element.enddate }}
+                                </mat-cell>
+                        </ng-container>
+                        <ng-container matColumnDef="Venue">
+                                <mat-header-cell *matHeaderCellDef>Venue</mat-header-cell>
+                                <mat-cell *matCellDef="let element">
+                                        <span class="mobile-label">Venue:</span>
+                                        {{ element.venue }}
+                                </mat-cell>
+                        </ng-container>
+                        <mat-header-row *matHeaderRowDef="displayedColumns;sticky: true"></mat-header-row>
+                        <mat-row mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+                </table>
+        </div>
 </div>
