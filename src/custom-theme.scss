@@ -5,8 +5,8 @@
 @include mat.core();
 
 // Define palettes using m2- prefixed functions and palettes
-$light-primary: mat.m2-define-palette(mat.$m2-indigo-palette);
-$light-accent: mat.m2-define-palette(mat.$m2-pink-palette, A200, A100, A400);
+$light-primary: mat.m2-define-palette(mat.$m2-blue-palette, 700); // Azure blue
+$light-accent: mat.m2-define-palette(mat.$m2-light-blue-palette, A200, A100, A400);
 $light-warn: mat.m2-define-palette(mat.$m2-red-palette);
 
 // Create the theme object with m2-define-light-theme
@@ -22,7 +22,7 @@ $light-theme: mat.m2-define-light-theme((
 @include mat.all-component-themes($light-theme);
 
 :root {
-  --color-background: #ffffff;
+  --color-background: #f0f8ff; // Azure-tinted background
   --primary-color: #{mat.m2-get-color-from-palette($light-primary)};
 }
 
