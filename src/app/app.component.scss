@@ -91,19 +91,13 @@
   .sidenav .top-toolbar {
     background: inherit;
   }
-  
-  .top-toolbar {
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    @include mat.elevation(8)
-  }
+
 
   mat-toolbar {
     position: sticky;
     top: 0;
     z-index: 1000;
-    @include mat.elevation(4);
+    @include mat.elevation(8);
   }
 
   .toggle-text{
