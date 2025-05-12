@@ -162,3 +162,31 @@ p {
   -webkit-font-feature-settings: 'liga';
   -webkit-font-smoothing: antialiased;
 }
+
+.snackbar-success {
+  .mdc-snackbar__surface {
+    background-color: var(--mat-toolbar-container-background-color) !important;
+  }
+  
+  .mdc-snackbar__label {
+    color: #4caf50 !important;
+  }
+  
+  .mat-mdc-button {
+    color: #4caf50 !important;
+  }
+}
+
+.snackbar-error {
+  .mdc-snackbar__surface {
+    background-color: var(--mat-toolbar-container-background-color) !important;
+  }
+  
+  .mdc-snackbar__label {
+    color: #f44336 !important;
+  }
+  
+  .mat-mdc-button {
+    color: #f44336 !important;
+  }
+}

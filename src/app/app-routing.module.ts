@@ -12,6 +12,8 @@ import { AthletesComponent } from './athletes/athletes.component';
 import { ServerErrorComponent } from './server-error/server-error.component';
 import { ScheduleComponent } from './schedule/schedule.component';
 import { BlogsComponent } from './blogs/blogs.component';
+import { FeedbackComponent } from './feedback/feedback.component';
+
 const routes: Routes = [
   {
     path: 'home', component: HomeComponent, data: { animation: 'HomePage' }
@@ -27,6 +29,7 @@ const routes: Routes = [
   { path: 'blogs', component: BlogsComponent },
   { path: 'about', component: AboutComponent, data: { animation: 'AboutPage' } },
   { path: 'internal-error', component: ServerErrorComponent },
+  { path: 'feedback', component: FeedbackComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', component: PagenotfoundComponent }
 ];

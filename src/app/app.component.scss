@@ -41,7 +41,7 @@
   &.active-logo {
     background-color: var(--mat-card-background-color);
     @include mat.elevation(4);
-    box-shadow: var(--primary-color) 0px 0.5px 11px 0.5px;
+    box-shadow: var(--primary-color) 0px 0.5px 8px 0.5px;
   }
 }
 
@@ -111,7 +111,7 @@
   }
 
 .nav-links {
-  margin: 0px 0px 0px 48px;
+  margin: 0px 0px 0px 24px;
   display: flex;
   align-items: center;
 }

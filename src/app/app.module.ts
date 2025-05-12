@@ -26,6 +26,7 @@ import { ServerErrorComponent } from './server-error/server-error.component';
 import { ScheduleComponent } from './schedule/schedule.component';
 import { EventDetailsComponent } from './event-details/event-details.component';
 import { BlogsComponent } from './blogs/blogs.component';
+import { FeedbackComponent } from './feedback/feedback.component';
 
 @NgModule({
     declarations: [
@@ -43,7 +44,8 @@ import { BlogsComponent } from './blogs/blogs.component';
         ServerErrorComponent,
         ScheduleComponent,
         EventDetailsComponent,
-        BlogsComponent
+        BlogsComponent,
+        FeedbackComponent
     ],
     bootstrap: [AppComponent], imports: [BrowserModule,
         MaterialModule,

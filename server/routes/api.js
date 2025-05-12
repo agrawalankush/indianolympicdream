@@ -221,16 +221,14 @@ router.get('/athletes', (req, res) => {
    });
 
 });
-/**
+
 router.post('/feedback',function(req,res){
-    //let feedback =req.body;
     let feedbackdata = {
      name: req.body.name,
      email:req.body.email,
      created :+new Date(),
      feedback:req.body.feedback
   };
-     //console.log(feedbackdata);
      connection((db) => {
         db.collection('feedback')
         .insert(feedbackdata)
@@ -244,5 +242,4 @@ router.post('/feedback',function(req,res){
      });
     }
  );
- */
 module.exports = router;

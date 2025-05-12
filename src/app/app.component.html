@@ -9,13 +9,35 @@
     <span>Dream</span>
   </div>
   <nav class="nav-links">
-    <button class="nav-button" routerLink="/athletes" mat-button routerLinkActive="active-link">Quotas Earned</button>
-    <button class="nav-button" routerLink="/calendar" mat-button routerLinkActive="active-link">Calendar</button>
+    <button class="nav-button" routerLink="/athletes" mat-button routerLinkActive="active-link">
+      <!-- <mat-icon>directions_run</mat-icon> -->
+      Quotas Earned
+    </button>
+    <button class="nav-button" routerLink="/calendar" mat-button routerLinkActive="active-link">
+      <!-- <mat-icon>calendar_month</mat-icon> -->
+      Calendar
+    </button>
     <button class="nav-button" [routerLink]="['/schedule']" [queryParams]="{sport: ''}" mat-button
-      routerLinkActive="active-link">Schedule</button>
-    <button class="nav-button" routerLink="/shows" mat-button routerLinkActive="active-link">Shows I love</button>
-    <button class="nav-button" routerLink="/blogs" mat-button routerLinkActive="active-link">Blogs</button>
-    <button class="nav-button" routerLink="/about" mat-button routerLinkActive="active-link">About Me</button>
+      routerLinkActive="active-link">
+      <!-- <mat-icon>date_range</mat-icon> -->
+      Schedule
+    </button>
+    <button class="nav-button" routerLink="/shows" mat-button routerLinkActive="active-link">
+      <!-- <mat-icon>movie</mat-icon> -->
+      Shows I love
+    </button>
+    <button class="nav-button" routerLink="/blogs" mat-button routerLinkActive="active-link">
+      <!-- <mat-icon>description</mat-icon> -->
+      Blogs
+    </button>
+    <button class="nav-button" routerLink="/about" mat-button routerLinkActive="active-link">
+      <!-- <mat-icon>info</mat-icon> -->
+      About Me
+    </button>
+    <button class="nav-button" routerLink="/feedback" mat-button routerLinkActive="active-link">
+      <!-- <mat-icon>feedback</mat-icon> -->
+      Feedback
+    </button>
   </nav>
   <span class="fill-remaining-space"></span>
   <button mat-icon-button (click)="onSetTheme()" class="theme-toggle"
@@ -34,8 +56,12 @@
         <span class="sidenav-menu">Quotas Earned</span>
       </a>
       <a mat-list-item routerLink="/calendar" routerLinkActive="mat-list-active">
-        <mat-icon>date_range</mat-icon>
+        <mat-icon>calendar_month</mat-icon>
         <span class="sidenav-menu">Calendar</span>
+      </a>
+      <a mat-list-item routerLink="/schedule" routerLinkActive="mat-list-active">
+        <mat-icon>date_range</mat-icon>
+        <span class="sidenav-menu">Schedule</span>
       </a>
       <a mat-list-item routerLink="/shows" routerLinkActive="mat-list-active">
         <mat-icon>movie</mat-icon>

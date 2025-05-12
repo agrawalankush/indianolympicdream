@@ -1,0 +1,58 @@
+@use '@angular/material' as mat;
+.feedback-container {
+  display: flex;
+  justify-content: center;
+  margin: 16px;
+
+  mat-card {
+    background-color: var(--mat-toolbar-container-background-color);
+    border-radius: 10px;
+    @include mat.elevation(2);
+    padding: 16px;
+    max-width: 700px;
+
+    @media screen and (max-width: 600px) {
+      margin: 24px 0px 0px 0px;
+      border-radius: 0;
+    }
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    @media screen and (max-width: 600px) {
+      padding: 8px;
+    }
+  }
+
+  mat-form-field {
+    width: 100%;
+  }
+
+  button {
+    align-self: center;
+
+    @media screen and (max-width: 600px) {
+      width: 100%;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    margin: 0;
+  }
+}
+p {
+    margin: 0px 24px 24px 24px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    letter-spacing: 1px;
+    line-height: 20px;
+    text-align: justify;
+    hyphens: auto;
+    
+    @media (min-width: 960px) {
+      clear: none;
+    }
+  }
