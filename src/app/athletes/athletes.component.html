@@ -49,10 +49,12 @@
     </mat-card-content>
   </mat-card>
 </div>
-<mat-card *ngIf="!(length === 0)" class="bottom-note">
-  <mat-card-content>
-    Note: The above athletes are the ones who has won quota places for India,
-    the final decision to confirm their participation for Tokyo will be taken by our NOCs. There is
-    full selection process in place where someone else may be sent by the National Fed. in lieu of the quota holder.
-  </mat-card-content>
-</mat-card>
+<div class="bottom-note">
+  <mat-card *ngIf="!(length === 0)">
+    <mat-card-content>
+      Note: The above athletes are the ones who has won quota places for India,
+      the final decision to confirm their participation for Tokyo will be taken by our NOCs. There is
+      full selection process in place where someone else may be sent by the National Fed. in lieu of the quota holder.
+    </mat-card-content>
+  </mat-card>
+</div>

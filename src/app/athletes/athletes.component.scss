@@ -27,27 +27,7 @@
   .chip-list {
     width: 80%;
   }
- .botton-note{
-   margin-left: 24px;
-   margin-right: 24px;
- }
-.bottom-note {
-  margin: 24px;
-  background-color: var(--mat-toolbar-container-background-color);
-  max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
-
-  mat-card-content {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 14px;
-    letter-spacing: 1px;
-    line-height: 20px;
-    text-align: justify;
-    hyphens: auto;
-    padding: 16px;
-  }
-}
+ 
 .filter-options {
   position: sticky;
   top: 0;

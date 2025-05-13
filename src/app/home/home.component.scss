@@ -1,26 +1,12 @@
-.container{
-    margin:24px;
-}
-[fxFlex]:last-of-type { margin-right:24px; }
-.pictogram-container{
+@use '@angular/material' as mat;
+
+.home-container {
     display: flex;
     flex-direction: column;
-    margin-bottom: 24px;
+    align-items: center;
+    justify-content: center;
 }
-.sports-icons{
-    height: 100px;
-    width: 100px;
-    border-radius: 50%;
-}
-.sports-card{
-    min-width: 80px;
-    min-height: 80px;
-    // border-radius: 50%;
-}
-.home-top-margin{
-    padding-top:20px;
-}
-
+// Container styles
 .sports-container {
   display: flex;
   flex-wrap: wrap;
@@ -28,8 +14,76 @@
   align-items: center;
   margin: 24px;
   gap: 24px;
+  padding: 24px;
+  border-radius: 8px;
+  background-color: var(--mat-toolbar-container-background-color);
+  @include mat.elevation(2);
+
+  &:hover {
+    @include mat.elevation(8);
+    transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
 }
 
+// Pictogram styles
+.pictogram-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.sports-icons {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  object-fit: contain;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  @include mat.elevation(4);
+  &:hover {
+    transform: translateY(-12px);
+    @include mat.elevation(8);
+    mix-blend-mode: luminosity;
+    filter: brightness(2) contrast(0.8) invert(1);
+  }
+}
+
+// Theme-specific styles
+:host-context(.dark-theme) .sports-icons {
+  filter: brightness(1) contrast(0.8) invert(1);
+}
+
+
+// Text styles
 .text-center {
   text-align: center;
+  color: var(--mat-body-text-color);
+  margin-top: 8px;
+  transition: opacity 0.3s ease;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  letter-spacing: 1px;
+  line-height: 20px;
+}
+
+// Responsive styles
+@media screen and (max-width: 600px) {
+  .sports-icons {
+    width: 80px;
+    height: 80px;
+    padding: 6px;
+  }
+  
+  .text-center {
+    font-size: 12px;
+  }
+  
+  .sports-container {
+    margin: 16px;
+    padding: 16px;
+    gap: 16px;
+  }
+  .bottom-note {
+    margin: 16px;
+  }
 }

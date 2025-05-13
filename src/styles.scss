@@ -195,6 +195,30 @@ p {
   }
 }
 
+mat-mdc-card {
+  background-color: var(--mat-toolbar-container-background-color);
+}
+
+.bottom-note {
+  max-width: 600px;
+  display: flex;
+  align-self: center;
+  justify-self: center;
+  mat-card {
+    background-color: var(--mat-toolbar-container-background-color);
+    padding: 16px;
+  }
+  mat-card-content {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    letter-spacing: 1px;
+    line-height: 20px;
+    text-align: justify;
+    hyphens: auto;
+    padding: 16px;
+  }
+}
+
 // Component theming includes
 @include form-theme.form-field-theme();
 // @include tooltip.tooltip-theme();

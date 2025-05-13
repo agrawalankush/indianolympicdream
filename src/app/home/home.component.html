@@ -1,21 +1,21 @@
-<div class="home-top-margin text-center">
-    <h3>Pick your favourite sport</h3>
-</div>
-<div class="sports-container" *ngIf="allsports">
-    <div class="pictogram-container" *ngFor="let sport of allsports;let last = last;">
-        <a [ngStyle]="{'margin-right': last ? '24px': '0px'}" [routerLink]="['/sports',sport.name]">
-            <img [src]="'assets/images/pictograms/' + sport.name + '.png'" class="sports-icons pictogram-button-image"
-                alt="{{sport.name}} pictogram">
-        </a>
-        <mat-card-content [ngStyle]="{'margin-right': last ? '24px': '0px'}" class="text-center">
-            {{sport.name}}
-        </mat-card-content>
+<div class="home-container">
+    <div class="sports-container" *ngIf="allsports">
+        <div class="pictogram-container" *ngFor="let sport of allsports">
+            <a [routerLink]="['/sports',sport.name]">
+                <img [src]="'assets/images/pictograms/' + sport.name + '.webp'" class="sports-icons"
+                    [alt]="sport.name + ' pictogram'">
+            </a>
+            <mat-card-content class="text-center">
+                {{sport.name}}
+            </mat-card-content>
+        </div>
     </div>
-</div>
-<div class="text-center">
-    <span>
-        <i>
-            All the pictograms used are owned by the IOC. The Tokyo 2020 pictograms are designed by Masaaki Hiromura.
-        </i>
-    </span>
+    <div class="bottom-note">
+        <mat-card>
+            <mat-card-content>
+                Note: All the pictograms used are owned by the IOC. Pictograms used in the app were designed by Masaaki
+                Hiromura for Tokyo 2020.
+            </mat-card-content>
+        </mat-card>
+    </div>
 </div>
