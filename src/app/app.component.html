@@ -40,10 +40,13 @@
     </button>
   </nav>
   <span class="fill-remaining-space"></span>
-  <button mat-icon-button (click)="onSetTheme()" class="theme-toggle"
-    [matTooltip]="currentTheme === 'dark-theme' ? 'Joker' : 'The Dark Knight'">
-    <mat-icon>{{currentTheme === 'dark-theme' ? 'brightness_2' : 'brightness_5'}}</mat-icon>
-  </button>
+  <div class="theme-switch">
+    <div><mat-icon>{{currentTheme === 'dark-theme' ? 'dark_mode' : 'light_mode'}}</mat-icon></div>
+    <div><mat-slide-toggle class="theme-toggle" [checked]="currentTheme === 'dark-theme'" (change)="onSetTheme()"
+        [disableRipple]="true">
+      </mat-slide-toggle>
+    </div>
+  </div>
 </mat-toolbar>
 <mat-progress-bar color="warn" *ngIf="loading" mode="query"></mat-progress-bar>
 

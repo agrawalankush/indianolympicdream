@@ -1,6 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 @use '@angular/material' as mat;
 @use './styles/components/form-field-theme' as form-theme;
+// @use './styles/components/tooltip-theme' as tooltip;
+@use './styles/components/slide-toggle-theme' as slide-toggle;
 
 /* Geist Font Face Declarations */
 /* Only include essential font weights to reduce bundle size */
@@ -53,7 +55,7 @@ html, body {
 
 body { 
   margin: 0; 
-  font-family: 'Geist Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: 'Geist Mono', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   -webkit-font-smoothing: antialiased;
   font-display: optional;
 }
@@ -193,6 +195,7 @@ p {
   }
 }
 
-// Keep only core Material styles and theme includes
-@include mat.core();
+// Component theming includes
 @include form-theme.form-field-theme();
+// @include tooltip.tooltip-theme();
+@include slide-toggle.slide-toggle-theme();

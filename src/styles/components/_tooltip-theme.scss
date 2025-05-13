@@ -1,0 +1,16 @@
+@use '@angular/material' as mat;
+
+@mixin tooltip-theme {
+  .mat-mdc-tooltip,
+  .mat-mdc-tooltip-surface {
+    background: var(--mat-card-background-color) !important;
+    color: var(--mat-toolbar-container-text-color) !important;
+    font-size: 12px !important;
+  }
+
+  // Override MDC tooltip surface specific styles
+  .mdc-tooltip__surface {
+    background-color: var(--mat-card-background-color) !important;
+    color: var(--mat-toolbar-container-text-color) !important;
+  }
+}

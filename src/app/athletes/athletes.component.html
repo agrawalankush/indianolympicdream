@@ -10,8 +10,9 @@
             <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
           </mat-chip-row>
           <input #sportInput [formControl]="sportCtrl" [matAutocomplete]="auto" [matChipInputFor]="chipGrid"
-            [matChipInputSeparatorKeyCodes]="separatorKeysCodes">
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes" placeholder="Add a sport...">
         </mat-chip-grid>
+        <mat-icon matPrefix>search</mat-icon>
         <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
           <mat-option *ngFor="let sport of filteredSports | async" [value]="sport">
             {{sport}}
@@ -48,10 +49,10 @@
     </mat-card-content>
   </mat-card>
 </div>
-<div *ngIf="!(length === 0)" class="botton-note">
-  <i>
+<mat-card *ngIf="!(length === 0)" class="bottom-note">
+  <mat-card-content>
     Note: The above athletes are the ones who has won quota places for India,
     the final decision to confirm their participation for Tokyo will be taken by our NOCs. There is
     full selection process in place where someone else may be sent by the National Fed. in lieu of the quota holder.
-  </i>
-</div>
+  </mat-card-content>
+</mat-card>

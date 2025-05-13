@@ -32,26 +32,55 @@
   }
 
   &:hover {
-    transform: translateY(-4px);
     background-color: var(--mat-card-background-color);
-    @include mat.elevation(2);
     box-shadow: gray 0px 0.1px 4px 2px;
   }
 
   &.active-logo {
     background-color: var(--mat-card-background-color);
-    @include mat.elevation(4);
-    box-shadow: var(--primary-color) 0px 0.5px 8px 0.5px;
+    color: var(--primary-color);
+  }
+
+  @media (max-width: 1024px) {
+    padding: 0.2rem 0.4rem;
+    margin: 0 0.3rem;
+    
+    span {
+      font-size: 14px;
+    }
+    
+    .olympic-logo {
+      height: 20px;
+      margin: 0 4px;
+    }
   }
 }
 
 :host-context(.dark-theme) {
   .logo-container .olympic-logo {
     filter: drop-shadow(0px 1px 3px rgba(255, 255, 255, 0.3)) 
-            drop-shadow(0px 0px 6px var(--primary-color));
+            drop-shadow(0px 0px 10px white);
   }
 }
+.theme-switch {
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 4px;
+ .mat-icon {
+  margin-top: 8px;
+ }
 
+ @media (min-width: 600px) and (max-width: 922px) {
+    margin-left: 8px;
+    gap: 2px;
+    
+    .mat-icon {
+      font-size: 20px;
+      margin-top: 6px;
+    }
+  }
+}
 .sidenav-container {
     height: 100%;
   }
@@ -98,6 +127,14 @@
     top: 0;
     z-index: 1000;
     @include mat.elevation(8);
+    overflow: hidden;
+    width: 100%;
+    
+    @media (min-width: 600px) and (max-width: 992px) {
+      padding: 0 8px;
+      height: auto;
+      min-height: 64px;
+    }
   }
 
   .toggle-text{
@@ -114,6 +151,18 @@
   margin: 0px 0px 0px 24px;
   display: flex;
   align-items: center;
+
+  @media (max-width: 1024px) {
+    margin: 0px 0px 0px 12px;
+    gap: 2px;
+  }
+
+  @media (min-width: 600px) and (max-width: 992px) {
+    margin: 0px 0px 0px 8px;
+    gap: 1px;
+    flex-wrap: wrap;
+    padding: 4px 0;
+  }
 }
 
 .nav-button {
@@ -140,6 +189,16 @@
     // font-weight: 500;
     box-shadow: var(--primary-color) 0px 0.5px 11px 0.5px;
   }
+
+  // @media (min-width: 600px) and (max-width: 1024px) {
+  //   padding: 0 12px;
+  //   font-size: 13px;
+  //   margin: 0 2px;
+    
+  //   &:hover {
+  //     transform: translateY(-2px);
+  //   }
+  // }
 }
 
 .fill-remaining-space {
@@ -155,19 +214,7 @@
   }
 }
 
-.theme-toggle {
-  transition: transform 0.3s ease;
-  background-color:  var(--primary-color);
-  .mat-icon {
-    color: var(--color-background);
-  }
-  &:hover {
-    transform: rotate(45deg);
-    color: var(--primary-color);
-  }
-}
-
-@media (max-width: 599px) {
+@media (max-width: 699px) {
   .nav-button {
     display: none;
   }

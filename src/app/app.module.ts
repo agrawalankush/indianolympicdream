@@ -53,9 +53,10 @@ import { FeedbackComponent } from './feedback/feedback.component';
         ReactiveFormsModule,
         AppRoutingModule,
         BrowserAnimationsModule,
-        ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production, registrationStrategy: 'registerImmediately' })], providers: [
-            httpInterceptorProviders,
-            provideHttpClient(withInterceptorsFromDi())
-        ]
+        ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production, registrationStrategy: 'registerImmediately' })
+    ], providers: [
+        httpInterceptorProviders,
+        provideHttpClient(withInterceptorsFromDi())
+    ]
 })
 export class AppModule { }
