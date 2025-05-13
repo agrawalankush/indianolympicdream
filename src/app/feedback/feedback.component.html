@@ -5,7 +5,7 @@
             complete mess or did you find or learned something? How can I make your life more easier? Is Information in
             sports details any good?<br />
             Send in your thoughts directly to me. I'm on <a target="_blank" rel="noopener" color="primary" mat-button
-                href="https://twitter.com/olympic_indian">Twitter</a>,feel free to shoot there !<br />
+                href="https://twitter.com/olympic_indian">Twitter</a>, feel free to shoot there !<br />
             I would totally love to hear about your experience about information on this app. Give suggestions on how to
             make this better or let me know about my mistakes. I want this app to be one of the best on the web about
             Indian sports and I can't do it without your help.
@@ -14,30 +14,46 @@
             <form [formGroup]="feedbackForm" (ngSubmit)="onSubmit()">
                 <mat-form-field appearance="outline">
                     <mat-label>Name</mat-label>
-                    <input matInput formControlName="name" required>
-                    <mat-error *ngIf="feedbackForm.get('name')?.errors?.['required']">
-                        Name is required
-                    </mat-error>
+                    <input matInput formControlName="name" required placeholder="Enter your name">
+                    <mat-icon matSuffix [class.valid-icon]="feedbackForm.get('name')?.valid">
+                        {{feedbackForm.get('name')?.valid ? 'check_circle' : 'person'}}
+                    </mat-icon>
+                    <mat-hint align="end">{{feedbackForm.get('name')?.value?.length || 0}}/50</mat-hint>
+                    <!-- <mat-error *ngIf="feedbackForm.get('name')?.errors?.['required']">
+                        Please add your name
+                    </mat-error> -->
                 </mat-form-field>
 
                 <mat-form-field appearance="outline">
                     <mat-label>Email</mat-label>
-                    <input matInput formControlName="email" type="email">
-                    <mat-error *ngIf="feedbackForm.get('email')?.errors?.['email']">
-                        Please enter a valid email address
-                    </mat-error>
+                    <input matInput formControlName="email" type="email" placeholder="your.email@example.com">
+                    <mat-icon matSuffix
+                        [class.valid-icon]="feedbackForm.get('email')?.valid && feedbackForm.get('email')?.value">
+                        {{(feedbackForm.get('email')?.valid && feedbackForm.get('email')?.value) ? 'check_circle' :
+                        'email'}}
+                    </mat-icon>
+                    <mat-hint>Optional - for updates on your feedback</mat-hint>
+                    <!-- <mat-error *ngIf="feedbackForm.get('email')?.errors?.['email']">
+                        Please check email format
+                    </mat-error> -->
                 </mat-form-field>
 
                 <mat-form-field appearance="outline">
                     <mat-label>Feedback</mat-label>
-                    <textarea matInput formControlName="feedback" required rows="4"></textarea>
-                    <mat-error *ngIf="feedbackForm.get('feedback')?.errors?.['required']">
-                        Feedback is required
-                    </mat-error>
+                    <textarea matInput formControlName="feedback" required rows="4" #feedbackInput
+                        placeholder="Share your thoughts about the app..."></textarea>
+                    <mat-icon matSuffix [class.valid-icon]="feedbackForm.get('feedback')?.valid">
+                        {{feedbackForm.get('feedback')?.valid ? 'check_circle' : 'bug_report'}}
+                    </mat-icon>
+                    <mat-hint align="end">{{feedbackInput.value?.length || 0}}/500</mat-hint>
+                    <!-- <mat-error *ngIf="feedbackForm.get('feedback')?.errors?.['required']">
+                        Please share your thoughts
+                    </mat-error> -->
                 </mat-form-field>
 
-                <button mat-raised-button color="primary" type="submit" [disabled]="!feedbackForm.valid">
-                    Submit Feedback
+                <button mat-fab extended color="primary" type="submit" [disabled]="!feedbackForm.valid">
+                    <mat-icon>rocket_launch</mat-icon>
+                    Shoot
                 </button>
             </form>
         </mat-card-content>

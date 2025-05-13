@@ -1,4 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
+@use './styles/components/form-field-theme' as form-theme;
 
 /* Geist Font Face Declarations */
 /* Only include essential font weights to reduce bundle size */
@@ -190,3 +192,7 @@ p {
     color: #f44336 !important;
   }
 }
+
+// Keep only core Material styles and theme includes
+@include mat.core();
+@include form-theme.form-field-theme();

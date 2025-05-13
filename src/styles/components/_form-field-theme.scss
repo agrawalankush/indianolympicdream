@@ -1,0 +1,71 @@
+@use '@angular/material' as mat;
+
+@mixin form-field-theme {
+  .mat-mdc-form-field {
+    // Remove outline styles
+    .mdc-text-field--outlined .mdc-notched-outline {
+      display: none;
+    }
+
+    // Base container styles
+    .mdc-text-field {
+      border-radius: 32px;
+      background: var(--mat-toolbar-container-background-color);
+      transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+      padding: 0 16px;
+      @include mat.elevation(1);
+
+      // Input element styles
+      .mat-mdc-input-element {
+        text-align: center;
+        font-family: 'Montserrat', sans-serif;
+        letter-spacing: 0.5px;
+
+        &::placeholder {
+          opacity: 0.5;
+          color: var(--primary-color);
+        }
+      }
+
+      // States
+      &:hover {
+        @include mat.elevation(8);
+        transform: translateY(-2px);
+        box-shadow: gray 0px 0.1px 4px 2px;
+      }
+
+      &:focus-within {
+        @include mat.elevation(16);
+        transform: translateY(-4px);
+        box-shadow: var(--primary-color) 0px 0.5px 11px 0.5px;
+      }
+    }
+
+    // Validation states
+    .mdc-text-field--invalid {
+      box-shadow: red 0px 0.5px 11px 0.5px;
+    }
+
+    // Spacing and hint styles
+    &:has(.mat-mdc-form-field-hint) + .mat-mdc-form-field {
+      margin-top: 8px;
+    }
+
+    // Helper text styles
+    .mat-mdc-form-field-hint,
+    .mat-mdc-form-field-error {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 12px;
+      letter-spacing: 1px;
+    }
+
+    .mat-mdc-form-field-hint {
+      opacity: 0.7;
+    }
+
+    // Icon styles
+    .valid-icon {
+      color: var(--primary-color) !important;
+    }
+  }
+}

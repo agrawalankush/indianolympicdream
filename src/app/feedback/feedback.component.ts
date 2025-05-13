@@ -20,9 +20,9 @@ export class FeedbackComponent {
         private router: Router
     ) {
         this.feedbackForm = this.fb.group({
-            name: ['', Validators.required],
+            name: ['', [Validators.required, Validators.maxLength(24)]],
             email: ['', [Validators.email]],
-            feedback: ['', Validators.required]
+            feedback: ['', [Validators.required, Validators.maxLength(500)]]
         });
     }
 
@@ -30,7 +30,7 @@ export class FeedbackComponent {
         if (this.feedbackForm.valid) {
             this.sportsService.postfeedback(this.feedbackForm.value).subscribe({
                 next: () => {
-                    this.snackBar.open('Thank You, You Beautiful Soul!!', 'Close', {
+                    this.snackBar.open('Thank You, You Beautiful Creature!!', 'Close', {
                         duration: 5000,
                         horizontalPosition: 'center',
                         verticalPosition: 'bottom',

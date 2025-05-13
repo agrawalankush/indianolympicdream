@@ -13,7 +13,6 @@ import { ServerErrorComponent } from './server-error/server-error.component';
 import { ScheduleComponent } from './schedule/schedule.component';
 import { BlogsComponent } from './blogs/blogs.component';
 import { FeedbackComponent } from './feedback/feedback.component';
-
 const routes: Routes = [
   {
     path: 'home', component: HomeComponent, data: { animation: 'HomePage' }
