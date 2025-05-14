@@ -2,7 +2,7 @@
     <div class="sports-container" *ngIf="allsports">
         <div class="pictogram-container" *ngFor="let sport of allsports">
             <a [routerLink]="['/sports',sport.name]">
-                <img [src]="'assets/images/pictograms/' + sport.name + '.webp'" class="sports-icons"
+                <img [src]="'assets/images/pictograms/kinetic/' + sport.name + '.webp'" class="sports-icons"
                     [alt]="sport.name + ' pictogram'" loading="lazy" />
             </a>
             <mat-card-content class="text-center">
