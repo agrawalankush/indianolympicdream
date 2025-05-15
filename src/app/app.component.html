@@ -5,9 +5,24 @@
   </button>
   <div class="logo-container" routerLink="" [class.active-logo]="isActivePath()">
     <span>Indian</span>
-    <img src="assets/images/generic/logo.png" class="olympic-logo" alt="olympic">
+    <img src="assets/images/generic/logo.png" class="olympic-logo" alt="olympic rings logo" loading="lazy"
+      decoding="async" fetchpriority="high" width="60" height="24">
     <span>Dream</span>
   </div>
+  <!-- <mat-form-field appearance="outline" class="olympics-select">
+    <mat-select-trigger>
+      <img [src]="selectedOlympicsLogo" class="olympics-option-logo" [alt]="selectedOlympics + ' logo'" loading="lazy"
+        decoding="async" fetchpriority="low" width="24" height="24">
+    </mat-select-trigger>
+    <mat-select [(ngModel)]="selectedOlympics" (selectionChange)="onOlympicsChange($event)">
+      <mat-option *ngFor="let option of olympicOptions" [value]="option.id">
+        {{option.name}}
+      </mat-option>
+    </mat-select
+  </mat-form-field> -->
+  <img [src]="selectedOlympicsLogo" class="olympics-option-logo" [alt]="selectedOlympics + ' logo'" loading="lazy"
+    decoding="async" fetchpriority="low">
+
   <nav class="nav-links">
     <button class="nav-button" routerLink="/athletes" mat-button routerLinkActive="active-link">
       <!-- <mat-icon>directions_run</mat-icon> -->
@@ -77,6 +92,10 @@
       <a mat-list-item routerLink="/about" routerLinkActive="mat-list-active">
         <mat-icon>info</mat-icon>
         <span class="sidenav-menu">About</span>
+      </a>
+      <a mat-list-item routerLink="/feedback" routerLinkActive="mat-list-active">
+        <mat-icon>feedback</mat-icon>
+        <span class="sidenav-menu">Feedback</span>
       </a>
     </mat-nav-list>
   </mat-sidenav>

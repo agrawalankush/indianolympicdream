@@ -5,7 +5,7 @@
             complete mess or did you find or learned something? How can I make your life more easier? Is Information in
             sports details any good?<br />
             Send in your thoughts directly to me. I'm on <a target="_blank" rel="noopener" color="primary" mat-button
-                href="https://twitter.com/olympic_indian">Twitter</a>, feel free to shoot there !<br />
+                href="https://twitter.com/olympic_indian">Twitter</a>, feel free to shoot there too!<br />
             I would totally love to hear about your experience about information on this app. Give suggestions on how to
             make this better or let me know about my mistakes. I want this app to be one of the best on the web about
             Indian sports and I can't do it without your help.
@@ -26,12 +26,9 @@
 
                 <mat-form-field appearance="outline">
                     <mat-label>Email</mat-label>
-                    <input matInput formControlName="email" type="email" placeholder="your.email@example.com">
-                    <mat-icon matSuffix
-                        [class.valid-icon]="feedbackForm.get('email')?.valid && feedbackForm.get('email')?.value">
-                        {{(feedbackForm.get('email')?.valid && feedbackForm.get('email')?.value) ? 'check_circle' :
-                        'email'}}
-                    </mat-icon>
+                    <input matInput formControlName="email" type="email"
+                        placeholder="your.email@example.com or X @handle">
+
                     <mat-hint>Optional - for updates on your feedback</mat-hint>
                     <!-- <mat-error *ngIf="feedbackForm.get('email')?.errors?.['email']">
                         Please check email format

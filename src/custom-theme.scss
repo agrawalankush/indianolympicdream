@@ -24,6 +24,8 @@ $light-theme: mat.m2-define-light-theme((
 :root {
   --color-background: #f0f8ff; // Azure-tinted background
   --primary-color: #{mat.m2-get-color-from-palette($light-primary)};
+  --color-accent: #{mat.m2-get-color-from-palette($light-accent)};
+  --color-warn: #{mat.m2-get-color-from-palette($light-warn)};
 }
 
 // Dark theme with m2- prefixed functions and palettes
@@ -43,6 +45,8 @@ $dark-theme: mat.m2-define-dark-theme((
   @include mat.all-component-colors($dark-theme);
   --color-background: #424242;
   --primary-color: #{mat.m2-get-color-from-palette($dark-primary)};
+  --color-accent: #{mat.m2-get-color-from-palette($dark-accent)};
+  --color-warn: #{mat.m2-get-color-from-palette($dark-warn)};
 }
 
 // Red Dark theme

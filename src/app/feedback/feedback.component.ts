@@ -21,7 +21,7 @@ export class FeedbackComponent {
     ) {
         this.feedbackForm = this.fb.group({
             name: ['', [Validators.required, Validators.maxLength(24)]],
-            email: ['', [Validators.email]],
+            email: [''],
             feedback: ['', [Validators.required, Validators.maxLength(500)]]
         });
     }
