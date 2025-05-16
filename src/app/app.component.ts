@@ -30,7 +30,7 @@ export class AppComponent {
   currentTheme = 'default-theme';
   currentSport: string = '';
   olympicOptions = [
-    { id: 'tokyo2020', name: 'Tokyo 2020', logo: 'assets/images/olympics/tokyo2020.png' },
+    { id: 'tokyo2020', name: 'Tokyo 2020', logo: 'assets/images/olympics/tokyo2020_no_bg.png' },
     // { id: 'paris2024', name: 'Paris 2024', logo: 'assets/images/olympics/paris2024.png' },
     // { id: 'la2028', name: 'LA 2028', logo: 'assets/images/olympics/la2028.png' }
   ];
