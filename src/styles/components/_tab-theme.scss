@@ -1,0 +1,17 @@
+@use '@angular/material' as mat;
+
+@mixin tab-theme {
+  .mat-mdc-tab-group {
+    @include mat.tabs-theme((
+      header-border-radius: 25px,
+      header-background-color: var(--mat-card-background-color),
+      header-text-color: var(--primary-color),
+      header-text-size: 16px,
+      header-elevation: 2,
+    ));
+
+    .mat-mdc-tab-body-content {
+      overflow: hidden;
+    }
+  }
+}

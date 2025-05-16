@@ -16,7 +16,7 @@
 .pictogram-slider {
   display: flex;
   align-items: center;
-  justify-content: flex-start;  // Changed from center to ensure buttons stay accessible
+  justify-content: flex-start;
   overflow-x: scroll;
   -webkit-overflow-scrolling: touch;
   scroll-snap-type: x mandatory;
@@ -31,63 +31,68 @@
   position: relative;
   border-left: 2px solid var(--primary-color);
   border-right: 2px solid var(--primary-color);
-  padding: 0 16px;  // Added consistent padding
-}
+  padding: 0 16px;
 
-.pictogram-slider button {
-  min-width: 40px;
-  min-height: 40px;
-  scroll-snap-align: start;
-  touch-action: manipulation;
-  position: relative;
-  transform-origin: center bottom;
-  transform: translateY(0);
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-              background-color 0.3s ease,
-              box-shadow 0.3s ease;
-  border-radius: 50%;  // Add this to match the button shape
-  pointer-events: auto;  // Ensure hover only works on button
+  button {
+    min-width: 48px;
+    min-height: 48px;
+    padding: 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transform-origin: center bottom;
+    transform: translateY(0);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.3s ease;
+    border-radius: 50%;
+    pointer-events: auto;
 
-  &::after {
-    content: attr(data-sport);
-    position: absolute;
-    bottom: -35px;  // Increased from -30px
-    left: 50%;
-    transform: translateX(-50%);
-    background: var(--mat-card-background-color);
-    color: var(--mat-card-foreground-color);
-    padding: 4px 8px;
-    border-radius: 4px;
-    font-size: 12px;
-    white-space: nowrap;
-    opacity: 0;
-    transition: opacity 0.3s ease,
-                bottom 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    pointer-events: none;
-    @include mat.elevation(2);
-  }
-
-  &:hover {
-    transform: translateY(-12px);
-    background-color: var(--mat-card-background-color);
-    @include mat.elevation(4);
-    box-shadow: gray 0px 0.1px 4px 2px;
     &::after {
-      opacity: 1;
-      bottom: -32px;
+      content: attr(data-sport);
+      position: absolute;
+      bottom: -35px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--mat-card-background-color);
+      color: var(--mat-card-foreground-color);
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      white-space: nowrap;
+      opacity: 0;
+      transition: opacity 0.3s ease,
+                  bottom 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      pointer-events: none;
+      @include mat.elevation(2);
+    }
+
+    &:hover {
+      transform: translateY(-16px);
+      @include mat.elevation(4);
+      box-shadow: var(--primary-color) 0px 0.5px 11px 0.5px;
+
+      &::after {
+        opacity: 1;
+        bottom: -32px;
+      }
     }
   }
+
+  .active-sport-button {
+    background-color: var(--mat-card-background-color);
+    @include mat.elevation(4);
+    box-shadow: var(--primary-color) 0px 0.5px 11px 2px;
+    transform: translateZ(-8px);
+  }
 }
 
-.pictogram-slider::-webkit-scrollbar {
-  display: none;
-}
-
-.active-sport-button {
-  background-color: var(--mat-card-background-color);
-  @include mat.elevation(4);
-  box-shadow: var(--primary-color) 0px 0.5px 11px 2px;
-}
+// .pictogram-slider::-webkit-scrollbar {
+//   display: auto;
+// }
 
 /* Make buttons easier to tap on mobile */
 .pictogram-slider button {
@@ -116,11 +121,6 @@
     &::after {
       right: 16px;
     }
-  }
-
-  .pictogram-button-image {
-    width: 24px;
-    height: 24px;
   }
 
   .pictogram-slider button {

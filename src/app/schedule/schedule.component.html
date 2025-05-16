@@ -34,10 +34,10 @@
   </div>
 </mat-toolbar>
 <div *ngIf="schedule" class="schedule-conatiner">
-  <section style="min-height: 48px;" *ngFor="let sports of schedule">
+  <section style="min-height: 64px;" *ngFor="let sports of schedule">
     <div class="schedule-label">
       <button *ngIf="!getByDate" mat-icon-button color="primary">
-        <img loading="lazy" class="pictogram-button-image pictogram-sport-schedule"
+        <img *ngIf="sports?.sportname" class="pictogram-button-image pictogram-sport-schedule"
           src="assets/images/pictograms/icons/{{sports.sportname}}.png" alt="{{sports.sportname}} pictogram" />
       </button>
       {{sports.sportname | humanize}}
@@ -52,8 +52,9 @@
               alt="medals">
             {{event.key | humanize}}
           </button>
-          <button *ngIf="getByDate" [matTooltip]="event.key" mat-icon-button color="primary"
-            (click)="showEvents(sports.sportname, event.value, event.key)" aria-label="Date schedule button">
+          <button *ngIf="getByDate" [matTooltip]="event.key" matTooltipPosition="below" matTooltipClass=""
+            mat-icon-button color="primary" (click)="showEvents(sports.sportname, event.value, event.key)"
+            aria-label="Date schedule button">
             <!-- <mat-icon>calendar_today</mat-icon> -->
             <img src="assets/images/pictograms/icons/{{event?.key}}.png" class="pictogram-button-image"
               alt="{{event?.key}} pictogram" />

@@ -1,0 +1,30 @@
+@use '@angular/material' as mat;
+@use './theme' as theme;
+@use './components/tab-theme' as tab;
+@use './components/expansion-theme' as expansion;
+@use './components/form-field-theme' as form-field;
+@use './components/tooltip-theme' as tooltip;
+@use './components/slide-toggle-theme' as slide-toggle;
+
+@include theme.theme-exports() using ($light-theme, $dark-theme) {
+  @include mat.core();
+  
+  // Apply the light theme by default
+  @include mat.core-theme($light-theme);
+  @include mat.all-component-themes($light-theme);
+  @include tab.tab-theme();
+  @include expansion.expansion-theme();
+  @include form-field.form-field-theme();
+  @include tooltip.tooltip-theme();
+  @include slide-toggle.slide-toggle-theme();
+
+  // Apply the dark theme only when the `.dark-theme` class is present
+  .dark-theme {
+    @include mat.all-component-colors($dark-theme);
+    @include tab.tab-theme();
+    @include expansion.expansion-theme();
+    @include form-field.form-field-theme();
+    @include tooltip.tooltip-theme();
+    @include slide-toggle.slide-toggle-theme();
+  }
+}

@@ -1,0 +1,16 @@
+@use '@angular/material' as mat;
+
+@mixin expansion-theme {
+  .mat-expansion-panel {
+    @include mat.expansion-overrides((
+      header-collapsed-state-height: 64px,
+      header-expanded-state-height: 64px,
+      header-indicator-color: var(--primary-color),
+      container-shape: 25px,
+      container-background-color: var(--mat-card-background-color),
+      header-text-color: var(--primary-color),
+      header-text-size: 16px,
+      header-description-color: var(--mat-card-foreground-color),
+    ));
+  }
+}

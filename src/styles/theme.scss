@@ -1,0 +1,51 @@
+@use '@angular/material' as mat;
+@use 'sass:map';
+
+// Define palettes using m2- prefixed functions and palettes
+// Changed from blue to deep-purple for better shadow contrast
+$primary-palette: mat.m2-define-palette(mat.$m2-deep-purple-palette, 500);
+$accent-palette: mat.m2-define-palette(mat.$m2-teal-palette, A200, A100, A400);
+$warn-palette: mat.m2-define-palette(mat.$m2-red-palette);
+
+// Create theme object using m2-define-light-theme
+$light-theme: mat.m2-define-light-theme((
+  color: (
+    primary: $primary-palette,
+    accent: $accent-palette,
+    warn: $warn-palette
+  )
+));
+$dark-primary-palette:mat.m2-define-palette(mat.$m2-amber-palette, A200, A100, A400);
+// Define dark theme using m2- functions
+$dark-theme: mat.m2-define-dark-theme((
+  color: (
+    primary: $dark-primary-palette,
+    accent: $accent-palette,
+    warn: $warn-palette
+  )
+));
+
+// CSS Custom Properties using m2-get-color-from-palette
+:root {
+  --primary-color: #{mat.m2-get-color-from-palette($primary-palette, 500)};
+  --accent-color: #{mat.m2-get-color-from-palette($accent-palette, 500)};
+  --warn-color: #{mat.m2-get-color-from-palette($warn-palette, 500)};
+  --mat-toolbar-container-background-color: #{mat.m2-get-color-from-palette(mat.$m2-grey-palette, 100)}; // Darker for better contrast
+  --mat-card-background-color: #{mat.m2-get-color-from-palette(mat.$m2-grey-palette, 50)}; // Keep light for cards
+  --mat-card-foreground-color: #{mat.m2-get-color-from-palette(mat.$m2-grey-palette, 900)}; // Dark text for contrast
+}
+
+.dark-theme {
+  --primary-color: #{mat.m2-get-color-from-palette($dark-primary-palette, 300)};
+  --accent-color: #{mat.m2-get-color-from-palette($accent-palette, 300)};
+  --warn-color: #{mat.m2-get-color-from-palette($warn-palette, 300)};
+  --mat-toolbar-container-background-color: #{mat.m2-get-color-from-palette(mat.$m2-grey-palette, 800)};
+  --mat-card-background-color: #{mat.m2-get-color-from-palette(mat.$m2-grey-palette, 900)}; // Darker than toolbar
+  --mat-card-foreground-color: #{mat.m2-get-color-from-palette(mat.$m2-grey-palette, 100)}; --mat-card-foreground-color: #{mat.m2-get-color-from-palette(mat.$m2-grey-palette, 100)};
+}
+
+// Theme mixin that includes all component themesudes all component themes
+@mixin theme-exports() {
+  @content($light-theme, $dark-theme);
+}
+

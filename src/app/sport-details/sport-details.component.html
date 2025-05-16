@@ -4,7 +4,7 @@
                         <button class="toolbar-pictogram-button"
                                 [ngClass]="{'active-sport-button': sport === sportsdetails.name}" mat-icon-button
                                 *ngFor="let sport of allsports" [routerLink]="['/sports',sport]"
-                                [class.active]="sport === sportsdetails.name" [attr.data-sport]="sport">
+                                [attr.data-sport]="sport | titlecase">
                                 <img class="pictogram-button-image" src="assets/images/pictograms/icons/{{sport}}.png"
                                         alt="{{sport}} pictogram" />
                         </button>
@@ -29,18 +29,21 @@
                                                 <a [href]="'assets/docs/qualification/' + sportsdetails.name + '/' + sportsdetails.name + '.pdf'"
                                                         target="_blank">
                                                         <button mat-fab color="primary"
-                                                                [matTooltip]="'Qualification Road for Tokyo'"
-                                                                matTooltipPosition="below">
+                                                                [matTooltip]="'Read Qualification Guide'"
+                                                                matTooltipPosition="below"
+                                                                matTooltipClass="custom-tooltip">
                                                                 <mat-icon>picture_as_pdf</mat-icon>
                                                         </button>
                                                 </a>
                                                 <button mat-fab color="primary" [matTooltip]="'Qualified Athletes'"
-                                                        matTooltipPosition="below" [routerLink]="['/athletes']"
+                                                        matTooltipPosition="below" matTooltipClass="custom-tooltip"
+                                                        [routerLink]="['/athletes']"
                                                         [queryParams]="{sports: qualifiedAthletesString, pageIndex: '0', pazeSize: '8'}">
                                                         <mat-icon>flight_takeoff</mat-icon>
                                                 </button>
                                                 <button mat-fab color="primary" [matTooltip]="'Schedule'"
-                                                        matTooltipPosition="below" [routerLink]="['/schedule']"
+                                                        matTooltipPosition="below" matTooltipClass="custom-tooltip"
+                                                        [routerLink]="['/schedule']"
                                                         [queryParams]="{sport: sportsdetails.name}">
                                                         <mat-icon>today</mat-icon>
                                                 </button>
@@ -50,8 +53,8 @@
                                                         (click)="showEvents(category)"
                                                         [class.selected]="selectedCategory === category.key"
                                                         [color]="selectedCategory === category.key ? 'secondary' : 'primary'"
-                                                        [matTooltip]="category.key | titlecase"
-                                                        matTooltipPosition="below">
+                                                        [matTooltip]="category.key + '&nbsp; Events' | titlecase"
+                                                        matTooltipPosition="below" matTooltipClass="custom-tooltip">
                                                         <mat-icon>{{getCategoryShorthand(category.key)}}</mat-icon>
                                                 </button>
                                         </div>

@@ -1,7 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-@use '@angular/material' as mat;
-@use './styles/components/form-field-theme' as form-theme;
-@use './styles/components/slide-toggle-theme' as slide-toggle;
+@use './styles/theme-manager';
 
 /* Geist Font Face Declarations */
 /* Only include essential font weights to reduce bundle size */
@@ -64,9 +62,10 @@ body {
 }
 .pictogram-button-image {
   border-radius: 50%;
-  // TO DO: Use effects to create dark theme icons
-  // mix-blend-mode: luminosity;
-  // filter: brightness(2) contrast(0.8) invert(1);
+}
+
+.dark-theme .pictogram-button-image {
+  filter: brightness(1) contrast(0.8) invert(1);
 }
 
 .mat-chip-category { 
@@ -221,6 +220,19 @@ mat-mdc-card {
   }
 }
 
-// Component theming includes
-@include form-theme.form-field-theme();
-@include slide-toggle.slide-toggle-theme();
+// Custom tooltip styles
+.custom-tooltip {
+  background: var(--mat-card-background-color) !important;
+  color: var(--mat-card-foreground-color) !important;
+  font-size: 12px !important;
+  padding: 8px 12px !important;
+  border-radius: 8px !important;
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: var(--primary-color) 0px 0.5px 8px 0.5px !important;
+
+  &.mat-mdc-tooltip-show {
+    opacity: 1;
+    transform: translateY(-4px);
+  }
+}
