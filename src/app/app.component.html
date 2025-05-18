@@ -45,9 +45,13 @@
       <!-- <mat-icon>description</mat-icon> -->
       Blogs
     </button>
-    <button class="nav-button" routerLink="/about" mat-button routerLinkActive="active-link">
-      <!-- <mat-icon>info</mat-icon> -->
-      About Me
+    <mat-menu #aboutMenu="matMenu">
+      <button mat-menu-item (click)="navigateToAboutApp()">App</button>
+      <button mat-menu-item (click)="openAboutMe()">Me</button>
+    </mat-menu>
+    <button class="nav-button" mat-button [matMenuTriggerFor]="aboutMenu"
+      [ngClass]="{'active-link': router.url === '/about'}">
+      About
     </button>
     <button class="nav-button" routerLink="/feedback" mat-button routerLinkActive="active-link">
       <!-- <mat-icon>feedback</mat-icon> -->

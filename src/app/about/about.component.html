@@ -1,20 +1,46 @@
-<div class="container">
-    <h3>For The Love Of Indian Sports</h3>
-    <p>
-        This app is born out of my ever growing frustration with Indian Main Stream media and their ignorence towards
-        Olympics sports. Here, you can track qualified Indian athletes for Tokyo, Find official qualification pathway,
-        find
-        upcoming Olympic qualification events. The app currently only focuses on sports in which our
-        Indian athletes have a genuine chance of qualifying for Tokyo 2020, It's based on my own intuition, I hope I get
-        it wrong(Honestly, I'd love that).
-    </p>
-    <p>
-        Also, one of the things which is hot on twitter these days is of all Bollywood Celebs jumping on the bandwagon,
-        tweeting about glory to India and Indian athletes.
-        They end up making a shitty sports biopics(Smash it like Sindhu may be next).
-        That's why Shows I love section is there, you'll find some of the best sports shows and movies which I've ever
-        come across while watching shows.I'll update the list frequently when I come across more.
-        The shows are in no particular order, but every damn thing in that list has a great rewatch value attached. It's
-        definitely worth your time.
-    </p>
+<div class="about-container">
+    <div class="qa-cards">
+        <div class="qa-card" *ngFor="let panel of appPanels; let i = index" [class.active]="panel.expanded">
+            <div class="qa-header" (click)="togglePanel(panel, i)">
+                <ul class="question-list">
+                    <li>
+                        <h3>{{panel.question}}</h3>
+                    </li>
+                </ul>
+                <div class="controls">
+                    <button mat-stroked-button class="expand-button">
+                        {{panel.expanded ? 'Collapse' : 'Expand'}}
+                    </button>
+                </div>
+            </div>
+
+            <div class="qa-content" [@panelAnimation]="getPanelState(panel)"
+                (@panelAnimation.done)="onAnimationDone($event, i)">
+                <div class="content-wrapper" [@contentAnimation]="getContentState()">
+                    <div class="answer-detailed">
+                        <ul class="answer-list">
+                            <li>
+                                <div class="detail-content">
+                                    <p *ngIf="panel.description">{{panel.description}}</p>
+
+                                    <div class="features" *ngIf="panel.features?.length">
+                                        <ul>
+                                            <li *ngFor="let feature of panel.features"
+                                                [innerHTML]="parseLinks(feature)"></li>
+                                        </ul>
+                                    </div>
+
+                                    <!-- New additional info paragraph -->
+                                    <p *ngIf="panel.additionalInfo" class="additional-info">{{panel.additionalInfo}}</p>
+
+                                    <p class="conclusion" *ngIf="panel.conclusion">
+                                        {{panel.conclusion}}</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

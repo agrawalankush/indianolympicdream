@@ -236,3 +236,35 @@ mat-mdc-card {
     transform: translateY(-4px);
   }
 }
+
+/* Global link styling */
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: color 0.2s ease, text-decoration 0.2s ease;
+  
+  &:hover, &:focus {
+    text-decoration: underline;
+    color: var(--primary-color);
+  }
+  
+  &:visited {
+    color: var(--primary-color);
+  }
+}
+
+/* Dark theme adjustments for links */
+.dark-theme a {
+  /* Slightly brighter for dark theme contrast */
+  &:visited {
+    color: var(--primary-color);
+  }
+}
+.mat-mdc-menu-panel {
+  margin-top: 10px !important;
+  background-color: var(--mat-toolbar-container-background-color) !important;
+  box-shadow: var(--primary-color) 0px 0.5px 11px 0.5px !important;
+  border-radius: 25px !important;
+  width: 60px !important;
+  min-width: 15px !important;
+}

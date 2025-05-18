@@ -39,7 +39,7 @@ export class AppComponent {
   selectedOlympicsLogo: string = this.olympicOptions[0].logo;
 
   constructor(
-    private router: Router,
+    public router: Router,
     private route: ActivatedRoute,
     private swupdateservice: SwupdateService,
     public overlayContainer: OverlayContainer
@@ -109,5 +109,13 @@ export class AppComponent {
   */
   prepareRoute(outlet: RouterOutlet) {
     return outlet && outlet.activatedRouteData && outlet.activatedRouteData.animation;
+  }
+
+  navigateToAboutApp() {
+    this.router.navigate(['/about']);
+  }
+
+  openAboutMe() {
+    window.open('https://github.com/agrawalankush', '_blank');
   }
 }
