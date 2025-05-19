@@ -37,6 +37,16 @@
   unicode-range: U+000-5FF;
 }
 
+/* Tangerine Font Face */
+@font-face {
+  font-family: 'Tangerine';
+  src: local('Tangerine'), url('/assets/fonts/Tangerine-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0900-097F, U+000-5FF; // Devanagari + Latin
+}
+
 /* Material Icons Font Face */
 @font-face {
   font-family: 'Material Icons';
@@ -265,6 +275,6 @@ a {
   background-color: var(--mat-toolbar-container-background-color) !important;
   box-shadow: var(--primary-color) 0px 0.5px 11px 0.5px !important;
   border-radius: 25px !important;
-  width: 60px !important;
-  min-width: 15px !important;
+  min-width: 60px !important;
+  max-width: 120px !important;
 }

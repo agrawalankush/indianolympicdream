@@ -11,7 +11,7 @@ import { AthletesComponent } from './athletes/athletes.component';
 // import { AllSportsResolverService } from './home/all-sports-resolver.service';
 import { ServerErrorComponent } from './server-error/server-error.component';
 import { ScheduleComponent } from './schedule/schedule.component';
-import { BlogsComponent } from './blogs/blogs.component';
+import { StoriesComponent } from './stories/stories.component';
 import { FeedbackComponent } from './feedback/feedback.component';
 const routes: Routes = [
   {
@@ -25,7 +25,7 @@ const routes: Routes = [
   { path: 'athletes', component: AthletesComponent, data: { animation: 'AthletesPage' } },
   { path: 'schedule', component: ScheduleComponent, data: { animation: 'SchedulePage' } },
   { path: 'shows', component: ShowsComponent, data: { animation: 'ShowsPage' } },
-  { path: 'blogs', component: BlogsComponent },
+  { path: 'stories', component: StoriesComponent },
   { path: 'about', component: AboutComponent, data: { animation: 'AboutPage' } },
   { path: 'internal-error', component: ServerErrorComponent },
   { path: 'feedback', component: FeedbackComponent },

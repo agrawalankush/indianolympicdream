@@ -25,7 +25,7 @@ import { LoaderComponent } from './shared/components/loader/loader.component';
 import { ServerErrorComponent } from './server-error/server-error.component';
 import { ScheduleComponent } from './schedule/schedule.component';
 import { EventDetailsComponent } from './event-details/event-details.component';
-import { BlogsComponent } from './blogs/blogs.component';
+import { StoriesComponent } from './stories/stories.component';
 import { FeedbackComponent } from './feedback/feedback.component';
 
 @NgModule({
@@ -44,7 +44,7 @@ import { FeedbackComponent } from './feedback/feedback.component';
         ServerErrorComponent,
         ScheduleComponent,
         EventDetailsComponent,
-        BlogsComponent,
+        StoriesComponent,
         FeedbackComponent
     ],
     bootstrap: [AppComponent], imports: [BrowserModule,
