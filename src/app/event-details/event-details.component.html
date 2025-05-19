@@ -1,30 +1,33 @@
-<!-- <pre>{{data.events | json}}</pre> -->
-<mat-toolbar>
-  {{data.sportname}} Schedule
-  <span class="fill-remaining-space"></span>
-  <button mat-icon-button (click)="close()">
-    <mat-icon>clear</mat-icon>
-  </button>
-</mat-toolbar>
-<div class="cards-container">
-  <mat-card class="event-card" *ngFor="let event of data.events">
-    <mat-card-header class="mat-mdccard-header">
-      <img mat-card-avatar class="mat-mdccard-avatar pictogram-button-image"
-        src="assets/images/pictograms/icons/{{data.sportname}}.png" alt="{{data.sportname}} pictogram" />
-      <mat-card-title class="mat-mdccard-title">{{ event.eventname }}</mat-card-title>
-      <mat-card-subtitle class="mat-mdccard-subtitle">{{ event.event }}</mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content class="mat-mdccard-content">
-      <h3>Athletes Competing: {{event.athletes }}</h3>
-      <h4>
-        Start Time(Estimated):
-        <span *ngIf="event.starttime; else notime;">
-          {{event.starttime * 1000 | date: "MMM d, y, h:mm:ss a" }}
-        </span>
-        <ng-template #notime>
-          No Time Available Yet!
-        </ng-template>
-      </h4>
-    </mat-card-content>
-  </mat-card>
+<div class="event-details-container">
+  <div class="event-details-header">
+    <div class="sport-title">
+      <img class="pictogram-button-image" src="assets/images/pictograms/icons/{{data?.sportname}}.png"
+        alt="{{data.sportname}} pictogram" />
+      <div>{{data?.sportname}}</div>
+    </div>
+    <button mat-mini-fab color="primary" class="close-btn" (click)="close()">
+      <mat-icon>clear</mat-icon>
+    </button>
+  </div>
+  <ul class="event-list">
+    <li class="event-list-item" *ngFor="let event of data.events">
+      <div class="event-list-title">
+        <!-- <img class="pictogram-button-image" src="assets/images/pictograms/icons/{{data.sportname}}.png"
+          alt="{{data.sportname}} pictogram" /> -->
+        <span class="event-name">{{ event?.eventname }}</span>
+      </div>
+      <div class="event-list-content">
+        <div>Athletes Competing: {{event?.athletes }}</div>
+        <div>
+          Start Time(Estimated):
+          <span *ngIf="event.starttime; else notime;">
+            {{event.starttime * 1000 | date: "MMM d, y, h:mm:ss a" }}
+          </span>
+          <ng-template #notime>
+            No Time Available Yet!
+          </ng-template>
+        </div>
+      </div>
+    </li>
+  </ul>
 </div>

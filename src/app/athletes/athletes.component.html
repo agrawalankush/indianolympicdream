@@ -10,7 +10,7 @@
             <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
           </mat-chip-row>
           <input #sportInput [formControl]="sportCtrl" [matAutocomplete]="auto" [matChipInputFor]="chipGrid"
-            [matChipInputSeparatorKeyCodes]="separatorKeysCodes" placeholder="Add a sport...">
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes" placeholder="Search for a sport...">
         </mat-chip-grid>
         <mat-icon matPrefix>search</mat-icon>
         <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">

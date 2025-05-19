@@ -10,11 +10,38 @@
   z-index: 1000;
   @include mat.elevation(4);
 }
+.filter-btns {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  
+}
 .schedule-conatiner {
   padding: 24px;
-  min-height: 48px;
+  width: 80%;
+  margin: 24px auto;
+  border-radius: 10px;
   // width: 100%;
   background-color: var(--mat-toolbar-container-background-color);
+  .pictogram-button-image {
+    height: 36px;
+    width: 36px;
+    transform-origin: center bottom;
+    transform: translateY(0);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                background-color 0.3s ease,
+                box-shadow 0.3s ease;
+    cursor: pointer;
+    
+  }
+}
+.schedule-section {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 8px;
+  border-bottom: 1px solid var(--mat-divider-color);
 }
 .medal-icon {
   height: 20px;
@@ -34,25 +61,46 @@
   vertical-align: middle;
 }
 .schedule-button-row {
-  display: table-cell;
-  // width: 800px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  margin-left: 16px;
+  gap: 16px;
+}
+.schedule-button {
+  display: block;
+  border-radius: 35px;
+  transform-origin: center bottom;
+  transform: translateY(0);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              background-color 0.3s ease,
+              box-shadow 0.3s ease;
+  padding: 12px;
+  margin: 0 4px;
+  @include mat.elevation(2);
+  cursor: pointer;
+  &:hover {
+    transform: translateY(-4px);
+    background-color: var(--mat-card-background-color);
+    @include mat.elevation(4);
+    box-shadow: gray 0px 0.1px 4px 2px;
+  }
+  &.active-link {
+    background-color: var(--mat-card-background-color);
+    @include mat.elevation(4);
+    box-shadow: var(--primary-color) 0px 0.5px 11px 0.5px;
+  }
+  
 }
 
-.schedule-button-row .mat-button-base {
-  margin: 8px 8px 8px 0;
-}
 .date-button {
   margin: 4px;
 }
-.schedule-flex-container {
-  display: flex;
-  align-content: center;
-  // justify-content: space-between;
-  flex-wrap: wrap;
-}
-
-.schedule-button-container {
-  display: flex;
-  // justify-content: center;
-  // width: 60px;
+@media (min-width: 600px) and (max-width: 922px) {
+  .pictogram-button-image {
+    height: 24px;
+    width: 24px;
+    border-radius: 50%;
+  }
 }

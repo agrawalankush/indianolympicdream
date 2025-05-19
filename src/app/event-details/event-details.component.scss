@@ -1,72 +1,42 @@
 @use '@angular/material' as mat;
 
-.mdc-toolbar {
-  width: 100%;
+.event-details-container {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--mat-toolbar-container-background-color);
+  padding: 24px 24px 24px 24px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  letter-spacing: 1px;
+  line-height: 20px;
+  text-align: justify;
+  hyphens: auto;
+  color: var(--mat-card-foreground-color);
 }
-
-.cards-container {
+.event-details-header {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
-  gap: 16px;
-  padding: 16px;
+  align-content: center;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 8px 0 0;
 }
-
-.event-card {
-  flex: 0 1 250px;
-  margin: 16px;
-  border-radius: 8px;
-  transition: transform 0.2s;
-  @include mat.elevation-transition();
-  @include mat.elevation(8);
-  // Theme aware background
-  background-color: var(--mat-card-background-color);
-
-  &:hover {
-    transform: translateY(-2px);
-    @include mat.elevation(16);
-  }
-
-  .mat-mdccard-header {
-    padding: 16px 16px 0;
-
-    .mat-mdccard-title {
-      color: var(--mat-primary-800);
-      font-size: 1.2rem;
-      margin-bottom: 8px;
-    }
-
-    .mat-mdccard-subtitle {
-      color: var(--mat-secondary-text);
-    }
-
-    .mat-mdccard-avatar {
-      background-color: var(--mat-card-background-color);
-      padding: 4px;
-      border: 1px solid var(--mat-divider-color);
-    }
-  }
-  .mat-mdccard-content {
-    padding: 16px;
-    color: var(--mat-body-text);
-    h3 {
-      margin: 8px 0;
-      font-weight: 500;
-      color: var(--mat-primary-700);
-    }
-
-    h4 {
-      margin: 8px 0;
-      font-weight: 400;
-      color: var(--mat-secondary-text);
-
-      span {
-        color: var(--mat-primary-700);
-      }
-    }
-  }
+.sport-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 24px;
 }
-
-.fill-remaining-space {
-  flex: 1 1 auto;
+.pictogram-button-image {
+  height: 56px;
+  width: 56px;
+  border-radius: 50%;
+  margin-right: 4px;
+}
+.event-list-item {
+  margin: 8px;
+}
+.close-btn {
+  margin-left: auto;
 }

@@ -130,8 +130,8 @@ export class ScheduleComponent implements OnInit, OnDestroy {
       sport = Bydate;
     }
     const dialogRef = this.dialog.open(EventDetailsComponent, {
-      width: '80%',
-      height: '50%',
+      // width: '80%',
+      // height: '50%',
       data: { sportname: sport, events: events },
       panelClass: 'custom-dialog'
     });
