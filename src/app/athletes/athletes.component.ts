@@ -39,8 +39,8 @@ export class AthletesComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   // MatPaginator Inputs
   length: number;
-  pageSize = 8;
-  pageSizeOptions: number[] = [4, 8, 16, 32];
+  pageSize = 96;
+  pageSizeOptions: number[] = [24, 48, 96];
   // MatPaginator Output
   pageEvent: PageEvent;
   pageIndex = 0;

@@ -30,16 +30,6 @@
     transition: filter 0.3s ease;
   }
 
-  &:hover {
-    background-color: var(--mat-card-background-color);
-    // box-shadow: gray 0px 0.1px 4px 2px;
-  }
-
-  &.active-logo {
-    background-color: var(--mat-card-background-color);
-    // color: var(--primary-color);
-  }
-
   @media (max-width: 1024px) {
     padding: 0.2rem 0.4rem;
     margin: 0 0.3rem;

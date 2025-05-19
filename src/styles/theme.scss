@@ -33,6 +33,7 @@ $dark-theme: mat.m2-define-dark-theme((
   --mat-toolbar-container-background-color: #{mat.m2-get-color-from-palette(mat.$m2-grey-palette, 100)}; // Darker for better contrast
   --mat-card-background-color: #{mat.m2-get-color-from-palette(mat.$m2-grey-palette, 50)}; // Keep light for cards
   --mat-card-foreground-color: #{mat.m2-get-color-from-palette(mat.$m2-grey-palette, 900)}; // Dark text for contrast
+  --scrollbar-thumb-color: #{mat.m2-get-color-from-palette($primary-palette, 400, 0.65)};
 }
 
 .dark-theme {
@@ -42,6 +43,7 @@ $dark-theme: mat.m2-define-dark-theme((
   --mat-toolbar-container-background-color: #{mat.m2-get-color-from-palette(mat.$m2-grey-palette, 800)};
   --mat-card-background-color: #{mat.m2-get-color-from-palette(mat.$m2-grey-palette, 900)}; // Darker than toolbar
   --mat-card-foreground-color: #{mat.m2-get-color-from-palette(mat.$m2-grey-palette, 100)}; --mat-card-foreground-color: #{mat.m2-get-color-from-palette(mat.$m2-grey-palette, 100)};
+  --scrollbar-thumb-color: #{mat.m2-get-color-from-palette($dark-primary-palette, 200, 0.75)};
 }
 
 // Theme mixin that includes all component themesudes all component themes
