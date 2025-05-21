@@ -27,6 +27,7 @@ import { ScheduleComponent } from './schedule/schedule.component';
 import { EventDetailsComponent } from './event-details/event-details.component';
 import { StoriesComponent } from './stories/stories.component';
 import { FeedbackComponent } from './feedback/feedback.component';
+import { AnalyticsService } from './services/analytics.service';
 
 @NgModule({
     declarations: [
@@ -56,7 +57,8 @@ import { FeedbackComponent } from './feedback/feedback.component';
         ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production, registrationStrategy: 'registerImmediately' })
     ], providers: [
         httpInterceptorProviders,
-        provideHttpClient(withInterceptorsFromDi())
+        provideHttpClient(withInterceptorsFromDi()),
+        AnalyticsService
     ]
 })
 export class AppModule { }

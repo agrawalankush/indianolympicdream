@@ -1,4 +1,4 @@
-import { Component, HostBinding } from '@angular/core';
+import { Component, HostBinding, OnInit } from '@angular/core';
 import { SwupdateService } from './swupdate.service';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import {
@@ -12,6 +12,8 @@ import {
   ActivatedRoute
 } from '@angular/router';
 import { slideInAnimation } from './animations';
+import { filter } from 'rxjs/operators';
+import { AnalyticsService } from './services/analytics.service';
 
 @Component({
   selector: 'app-root',
@@ -22,7 +24,7 @@ import { slideInAnimation } from './animations';
   ],
   standalone: false
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   public loading = true;
   public isLightTheme = false;
   @HostBinding('class') componentCssClass;
@@ -42,7 +44,8 @@ export class AppComponent {
     public router: Router,
     private route: ActivatedRoute,
     private swupdateservice: SwupdateService,
-    public overlayContainer: OverlayContainer
+    public overlayContainer: OverlayContainer,
+    private analyticsService: AnalyticsService
   ) {
     this.onSetTheme();
     this.swupdateservice.checkForUpdates();
@@ -56,6 +59,15 @@ export class AppComponent {
       this.updateSelectedOlympicsLogo();
     });
      */
+  }
+
+  ngOnInit() {
+    // Track page views when routes change
+    this.router.events.pipe(
+      filter((event: RouterEvent): event is NavigationEnd => event instanceof NavigationEnd)
+    ).subscribe((event: NavigationEnd) => {
+      this.analyticsService.pageView(event.urlAfterRedirects, document.title);
+    });
   }
 
   navigationInterceptor(event: RouterEvent): void {
