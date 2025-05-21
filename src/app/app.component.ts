@@ -47,7 +47,7 @@ export class AppComponent implements OnInit {
     public overlayContainer: OverlayContainer,
     private analyticsService: AnalyticsService
   ) {
-    this.onSetTheme();
+    this.loadThemePreference();
     this.swupdateservice.checkForUpdates();
     this.router.events.subscribe((event: RouterEvent) => {
       this.navigationInterceptor(event);
@@ -93,9 +93,25 @@ export class AppComponent implements OnInit {
     return url.startsWith('/sports/') || url === '/' || url === '/home';
   }
 
+  loadThemePreference() {
+    // Load theme from localStorage or default to light theme
+    const savedTheme = localStorage.getItem('selectedTheme');
+    this.currentTheme = savedTheme || 'default-theme';
+
+    // Apply the theme
+    if (this.componentCssClass) {
+      this.overlayContainer.getContainerElement().classList.remove(this.componentCssClass);
+    }
+    this.overlayContainer.getContainerElement().classList.add(this.currentTheme);
+    this.componentCssClass = this.currentTheme;
+  }
+
   onSetTheme() {
+    // Toggle theme
     this.currentTheme = this.currentTheme === "default-theme" ? "dark-theme" : "default-theme";
     localStorage.setItem('selectedTheme', this.currentTheme);
+
+    // Apply theme
     if (this.componentCssClass) {
       this.overlayContainer.getContainerElement().classList.remove(this.componentCssClass);
     }
