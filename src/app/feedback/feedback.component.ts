@@ -22,6 +22,7 @@ export class FeedbackComponent {
         this.feedbackForm = this.fb.group({
             name: ['', [Validators.required, Validators.maxLength(24)]],
             email: [''],
+            preferredTheme: ['dark'], // Default value set to light
             feedback: ['', [Validators.required, Validators.maxLength(500)]]
         });
     }

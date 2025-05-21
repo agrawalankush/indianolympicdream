@@ -94,7 +94,7 @@
     &:hover {
       transform: translateY(-16px);
       @include mat.elevation(4);
-      box-shadow: var(--primary-color) 0px 0.5px 11px 0.5px;
+      box-shadow: gray 0px 0.1px 4px 2px;
 
       &::after {
         opacity: 1;

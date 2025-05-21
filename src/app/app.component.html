@@ -61,8 +61,8 @@
   <span class="fill-remaining-space"></span>
   <div class="theme-switch">
     <div><mat-icon>{{currentTheme === 'dark-theme' ? 'dark_mode' : 'light_mode'}}</mat-icon></div>
-    <div><mat-slide-toggle class="theme-toggle" [checked]="currentTheme === 'dark-theme'" (change)="onSetTheme()"
-        [disableRipple]="true">
+    <div><mat-slide-toggle class="theme-toggle" color="primary" [checked]="currentTheme === 'dark-theme'"
+        (change)="onSetTheme()" [disableRipple]="true">
       </mat-slide-toggle>
     </div>
   </div>

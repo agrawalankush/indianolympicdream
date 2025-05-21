@@ -58,3 +58,25 @@ p {
     clear: none;
   }
 }
+
+.theme-preference {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 8px;
+  
+  .theme-label {
+    font-size: 14px;
+    color: var(--mat-form-field-label-text-color);
+  }
+  
+  mat-radio-group {
+    display: flex;
+    gap: 20px;
+    
+    @media screen and (max-width: 600px) {
+      flex-direction: column;
+      gap: 8px;
+    }
+  }
+}

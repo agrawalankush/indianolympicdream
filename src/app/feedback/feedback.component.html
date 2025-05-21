@@ -35,10 +35,19 @@
                     </mat-error> -->
                 </mat-form-field>
 
+                <div class="theme-preference">
+                    <label class="theme-label">Preferred Theme:</label>
+                    <mat-radio-group color="primary" formControlName="preferredTheme"
+                        aria-label="Select preferred theme">
+                        <mat-radio-button value="light">Light</mat-radio-button>
+                        <mat-radio-button value="dark">Dark Knight</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+
                 <mat-form-field appearance="outline">
                     <mat-label>Feedback</mat-label>
                     <textarea matInput formControlName="feedback" required rows="4" #feedbackInput
-                        placeholder="Share your thoughts about the app..."></textarea>
+                        placeholder="Thoughts about the app, feature requests, bugs..."></textarea>
                     <mat-icon matSuffix [class.valid-icon]="feedbackForm.get('feedback')?.valid">
                         {{feedbackForm.get('feedback')?.valid ? 'check_circle' : 'bug_report'}}
                     </mat-icon>
