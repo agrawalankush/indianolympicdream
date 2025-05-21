@@ -33,6 +33,12 @@
                 background-color 0.3s ease,
                 box-shadow 0.3s ease;
     cursor: pointer;
+  &:hover {
+    transform: translateY(-16px);
+    @include mat.elevation(4);
+    box-shadow: gray 0px 0.5px 11px 0.5px;
+    cursor: pointer;
+  }
     
   }
 }

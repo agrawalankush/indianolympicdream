@@ -1,4 +1,4 @@
-<div *ngIf="sportsdetails">
+<div class="sport-details-container" *ngIf="sportsdetails">
         <mat-toolbar class="child-toolbar">
                 <div class="pictogram-slider">
                         <button class="toolbar-pictogram-button"
@@ -39,7 +39,7 @@
                                                         matTooltipPosition="below" matTooltipClass="custom-tooltip"
                                                         [routerLink]="['/athletes']"
                                                         [queryParams]="{sports: qualifiedAthletesString, pageIndex: '0', pazeSize: '8'}">
-                                                        <mat-icon>flight_takeoff</mat-icon>
+                                                        <mat-icon>directions_run</mat-icon>
                                                 </button>
                                                 <button mat-fab color="primary" [matTooltip]="'Schedule'"
                                                         matTooltipPosition="below" matTooltipClass="custom-tooltip"

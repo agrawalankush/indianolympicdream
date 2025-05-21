@@ -38,7 +38,8 @@
   <section class="schedule-section" *ngFor="let sports of schedule">
     <div class="schedule-label">
       <div *ngIf="!getByDate" color="">
-        <img *ngIf="sports?.sportname" class="pictogram-button-image pictogram-sport-schedule"
+        <img *ngIf="sports?.sportname" routerLink="/sports/{{sports?.sportname}}"
+          class="pictogram-button-image pictogram-sport-schedule"
           src="assets/images/pictograms/icons/{{sports?.sportname}}.png" alt="{{sports.sportname}} pictogram" />
       </div>
       <div *ngIf="getByDate" color="">{{sports.sportname | humanize}}</div>
@@ -52,8 +53,8 @@
           <img *ngIf="event.value[0]?.ismedalevent" class="medal-icon" src="assets/images/icons/medal.png" alt="medals">
           {{event.key | humanize}}
         </div>
-        <div *ngIf="getByDate" [matTooltip]="event.key" matTooltipPosition="below" matTooltipClass="" color=""
-          (click)="showEvents(sports.sportname, event.value, event.key)" aria-label="Date schedule button">
+        <div *ngIf="getByDate" color="" (click)="showEvents(sports.sportname, event.value, event.key)"
+          aria-label="Date schedule button">
           <!-- <mat-icon>calendar_today</mat-icon> -->
           <img src="assets/images/pictograms/icons/{{event?.key}}.png" class="pictogram-button-image"
             alt="{{event?.key}} pictogram" />

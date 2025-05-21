@@ -15,13 +15,27 @@
   height: 450px;
   background-color: var(--mat-toolbar-container-background-color);
 }
-.mat-card-header{
-    height:80px;
+
+.pictogram-button-image {
+  transform-origin: center bottom;
+    transform: translateY(0);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow 0.3s ease;
+  &:hover {
+    transform: translateY(-16px);
+    @include mat.elevation(4);
+    box-shadow: gray 0px 0.5px 11px 0.5px;
+    cursor: pointer;
+  }
+}
+.mat-mdc-card-header{
+    height: 76px;
 }
 .athlete-image {
     height:280px;
     padding:0px;
     width: 300px;
+    margin-bottom: 4px;
     object-fit: cover;
   }
   .chip-list {
