@@ -218,6 +218,7 @@ mat-mdc-card {
   display: flex;
   align-self: center;
   justify-self: center;
+  margin: 24px;
   mat-card {
     background-color: var(--mat-toolbar-container-background-color);
     padding: 16px;

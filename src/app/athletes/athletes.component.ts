@@ -39,7 +39,7 @@ export class AthletesComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   // MatPaginator Inputs
   length: number;
-  pageSize = 96;
+  pageSize = 24;
   pageSizeOptions: number[] = [24, 48, 96];
   // MatPaginator Output
   pageEvent: PageEvent;
@@ -86,7 +86,7 @@ export class AthletesComponent implements OnInit {
       .subscribe(params => {
         // console.log(params);
         if (Object.keys(params).length === 0 && params.constructor === Object) {
-          this.SearchAthletes("[]", "0", "8");
+          this.SearchAthletes("[]", "0", "24");
         } else {
           this.sports = JSON.parse(params.sports);
           // this.pageIndex = parseInt(params.pageIndex);

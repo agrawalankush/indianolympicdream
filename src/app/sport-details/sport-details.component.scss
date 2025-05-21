@@ -5,12 +5,12 @@
   position: sticky;
   top: 0;
   height: 84px;
-  z-index: 1005;  // Increased to be above top-toolbar
+  z-index: 1000;  // Increased to be above top-toolbar
   background-color: var(--mat-toolbar-container-background-color);
   @include mat.elevation(8);  // Increased elevation for better visual hierarchy
   padding: 0;  // Remove default padding
   overflow-x: visible; // Allow overflow for slider
-  position: relative; // Add this to contain absolute borders
+  overflow-y: visible;
 }
 
 .pictogram-slider {
