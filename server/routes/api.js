@@ -1,30 +1,45 @@
 const express = require('express');
 const router = express.Router();
-const MongoClient = require('mongodb').MongoClient;
-require('dotenv').config();
+const { MongoClient } = require('mongodb');
+const config = require('../config/config');
 
-// Define mongo url string and database based on environment
-const environment = process.env.NODE_ENV || 'development';
-const mongourl = environment === 'production' 
-    ? process.env.MONGO_URI_PROD 
-    : process.env.MONGO_URI_DEV;
-const dbName = process.env.MONGO_DB_NAME;
+let cachedClient = null;
 
-// Connect using promises instead of callbacks
+// Improved connection with better error logging
 const connection = async (closure) => {
-    try {
-        const client = await MongoClient.connect(mongourl, { 
-            useNewUrlParser: true, 
-            useUnifiedTopology: true 
-        });
-        console.log(`Mongodb connection successful to ${environment} environment!`);
-        const db = client.db(dbName);
-        await closure(db);
-        return client;
-    } catch (err) {
-        console.log('Connection request to mongo failed', err);
-        throw err;
+  try {
+    let client = cachedClient;
+    
+    if (!client || !client.topology || !client.topology.isConnected()) {
+      console.log(`🔗 Attempting MongoDB connection...`);
+      
+      const connectionOptions = {
+        useNewUrlParser: true, 
+        useUnifiedTopology: true,
+        serverSelectionTimeoutMS: 5000,
+        connectTimeoutMS: 10000
+      };
+      
+      // Add authSource only for production (when AUTH_SOURCE is provided)
+      if (config.NODE_ENV === 'production' && config.MONGODB.AUTH_SOURCE) {
+        connectionOptions.authSource = config.MONGODB.AUTH_SOURCE;
+      }
+      
+      client = await MongoClient.connect(config.MONGODB.URI, connectionOptions);
+      cachedClient = client;
+      console.log(`✅ MongoDB connection successful to ${config.NODE_ENV} environment!`);
     }
+    
+    const db = client.db(config.MONGODB.DB_NAME);
+    return await closure(db);
+  } catch (err) {
+    console.error('❌ MongoDB connection failed:');
+    console.error(`URI: ${config.MONGODB.URI.replace(/:([^:@]+)@/, ':***@')}`);
+    console.error(`Database: ${config.MONGODB.DB_NAME}`);
+    console.error(`Auth Source: ${config.MONGODB.AUTH_SOURCE || 'none'}`);
+    console.error(`Error: ${err.message}`);
+    throw err;
+  }
 };
 
 // Response handling
@@ -173,21 +188,4 @@ router.get('/athletes', (req, res) => {
     });
 });
 
-router.post('/feedback',function(req,res){
-    let feedbackdata = {
-        name: req.body.name,
-        email:req.body.email,
-        created :+new Date(),
-        feedback:req.body.feedback
-    };
-    connection(async (db) => {
-        try {
-            const feedbackResult = await db.collection('feedback').insertOne(feedbackdata);
-            response.data = feedbackResult;
-            res.json(feedbackResult);
-        } catch (err) {
-            sendError(err, res);
-        }
-    });
-});
 module.exports = router;

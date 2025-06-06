@@ -1,27 +1,45 @@
-# Indianolympicdream
+# Indian Olympic Dream
 
 Following Indian athletes and their journey for Tokyo 2020 and beyond.
 
-## Development server
+## Development Workflow
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+### Local Development
+- **Angular Dev Server**: `http://localhost:4200`
+- **Node.js API Server**: `http://localhost:3000`
+- **MongoDB**: `mongodb://localhost:27017`
 
-## Code scaffolding
+### Production (Pi Server)
+- **Access**: `https://indianolympicdream.com`
+- **MongoDB**: MongoDB on Pi
+- **Deployment**: Via Coolify on Pi
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Quick Start
 
-## Build
+**Development:**
+```bash
+npm install
+npm run dev          # Start API server with nodemon
+ng serve             # Start Angular dev server (new terminal)
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+**Deploy to Production:**
+- Push to Git
+- Coolify auto-deploys
 
-## Running unit tests
+## Environment Setup
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+**Local Development:**
+- No environment variables needed
 
-## Running end-to-end tests
+**Production (Coolify):**
+```bash
+NODE_ENV=production
+MONGO_URI=<set-in-coolify-dashboard>
+```
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+## Development Flow
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+1. **Code locally** → `npm run dev` + `ng serve`
+2. **Test features** → `http://localhost:4200`
+3. **Push to Git** → Coolify auto-deploys

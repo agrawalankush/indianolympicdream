@@ -1,9 +1,10 @@
 const express = require('express');
 const path = require('path');
-// const fs = require('fs');
 const compression = require('compression');
 const http = require('http');
 const helmet = require('helmet');
+const config = require('./server/config/config');
+
 const app = express();
 
 // API file for interacting with MongoDB
@@ -21,15 +22,9 @@ app.use(compression());
 
 // Angular DIST output folder - update path to include project name
 app.use(express.static(path.join(__dirname, 'dist/indianolympicdream')));
-// app.use(express.static(path.join(__dirname, 'The_Olympic_Dream')));
-// app.use(express.static(path.join(__dirname, 'images')));
 
 // API location
 app.use('/api', api);
-
-// app.use(function(err,req,res,next){
-//   console.log(err);
-// });
 
 // Send all other requests to the Angular app - update path to include project name
 app.get('*', (req, res) => {
@@ -37,10 +32,11 @@ app.get('*', (req, res) => {
 });
 
 //Set Port
-const port = process.env.PORT || '3000';
-process.env.NODE_ENV = 'production';
-app.set('port', port);
+app.set('port', config.PORT);
 
 const server = http.createServer(app);
 
-server.listen(port, () => console.log(`Running on localhost:${port}`));
+// Bind to all interfaces for Docker Network compatibility
+server.listen(config.PORT, '0.0.0.0', () => {
+  console.log(`Server running on 0.0.0.0:${config.PORT} in ${config.NODE_ENV} mode`);
+});

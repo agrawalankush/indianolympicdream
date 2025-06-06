@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "nodemon server",
-    "build": "ng build",
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "build": "ng build --configuration production",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
