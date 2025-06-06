@@ -35,26 +35,16 @@
   ],
   "dataGroups": [
     {
-      "name": "images-cache",
+      "name": "api-cache",
+      "urls": [
+        "/api/**"
+      ],
       "cacheConfig": {
-        "strategy": "performance",
-        "maxSize": 100,
-        "maxAge": "7d"
-      },
-      "patterns": [
-        "/assets/images/**"
-      ]
-    },
-    {
-      "name": "documents-cache",
-      "cacheConfig": {
-        "strategy": "performance",
-        "maxSize": 20,
-        "maxAge": "30d"
-      },
-      "patterns": [
-        "/assets/docs/**"
-      ]
+        "strategy": "freshness",
+        "maxSize": 50,
+        "maxAge": "1h",
+        "timeout": "10s"
+      }
     }
   ]
 }

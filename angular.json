@@ -27,10 +27,6 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
-              "src/pictograms",
-              "src/qualified_athletes",
-              "src/Qualifications",
-              "src/sport_images",
               "src/manifest.webmanifest"
             ],
             "styles": [
