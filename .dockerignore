@@ -40,9 +40,7 @@ src/**/*.spec.ts
 karma.conf.js
 protractor.conf.js
 
-# Other
+# Other config files (but keep essential build files)
 .editorconfig
 .browserslistrc
-angular.json
-tsconfig.*
 tslint.json
