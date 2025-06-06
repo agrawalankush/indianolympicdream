@@ -1,22 +1,32 @@
 const express = require('express');
 const router = express.Router();
 const MongoClient = require('mongodb').MongoClient;
+require('dotenv').config();
 
-//define mongo url string and database
-const mongourl = 'mongodb://localhost:27017';
-const dbName = 'IndianOlympicDream';
+// Define mongo url string and database based on environment
+const environment = process.env.NODE_ENV || 'development';
+const mongourl = environment === 'production' 
+    ? process.env.MONGO_URI_PROD 
+    : process.env.MONGO_URI_DEV;
+const dbName = process.env.MONGO_DB_NAME;
 
-// Connect
-const connection = (closure) => {
-    return MongoClient.connect(mongourl,{ useNewUrlParser: true, useUnifiedTopology: true }, (err, client) => {
-        if (err) return console.log('Connection request to mongo failed',err);
-        else{
-        console.log('Mongodb connection successful!!');
-        let db = client.db(dbName);
-        closure(db);
+// Connect using promises instead of callbacks
+const connection = async (closure) => {
+    try {
+        const client = await MongoClient.connect(mongourl, { 
+            useNewUrlParser: true, 
+            useUnifiedTopology: true 
+        });
+        console.log(`Mongodb connection successful to ${environment} environment!`);
+        const db = client.db(dbName);
+        await closure(db);
+        return client;
+    } catch (err) {
+        console.log('Connection request to mongo failed', err);
+        throw err;
     }
-    });
 };
+
 // Response handling
 const response = {};
 
@@ -27,219 +37,157 @@ const sendError = (err, res) => {
     res.status(501).json(response);
 };
 
-
 // Get users
 router.get('/sports/:sportname', (req, res) => {
     sportname=req.params.sportname;
-    connection((db) => {
-        db.collection('sports_new')
-            .find({"name":sportname})
-            .toArray()
-            .then((sports) => {
-                res.status(200).json(sports);
-            })
-            .catch((err) => {
-                sendError(err, res);
-            });
+    connection(async (db) => {
+        try {
+            const sports = await db.collection('sports_new')
+                .find({"name":sportname})
+                .toArray();
+            res.status(200).json(sports);
+        } catch (err) {
+            sendError(err, res);
+        }
     });
 });
 router.get('/allsports', (req, res) => {
-    connection((db) => {
-        db.collection('all_sports')
-            .find({"isimportant": true})
-            .toArray()
-            .then((allsports) => {
-                res.status(200).json(allsports);
-            })
-            .catch((err) => {
-                sendError(err, res);
-            });
+    connection(async (db) => {
+        try {
+            const allsports = await db.collection('all_sports')
+                .find({"isimportant": true})
+                .toArray();
+            res.status(200).json(allsports);
+        } catch (err) {
+            sendError(err, res);
+        }
     });
 });
 
 router.get('/shows', (req, res) => {
     let pageoffset = parseInt(req.query.pageIndex, 10);
     let pagesize = parseInt(req.query.pageSize,10);
-    connection((db) => {
-    let showsFind = db.collection('shows_data')
-            .find({}); //$text: { $search: searchterm }
-            showsFind.count(function (err, count) {
-            if(err) console.log(err);
-        const response = {};
-        let totalshows = count;
-        // console.log(count);
-        showsFind
-            .skip(pageoffset)
-            .limit(pagesize)
-            .toArray()
-            .then((shows) => {
-                        response.shows = shows;
-                        response.total = totalshows;
-                res.status(200).json(response);
-                })
-                .catch((err) => {
-                    sendError(err, res);
-                });
-        });
+    connection(async (db) => {
+        try {
+            const showsFind = db.collection('shows_data').find({});
+            const totalshows = await showsFind.count();
+            const shows = await showsFind
+                .skip(pageoffset)
+                .limit(pagesize)
+                .toArray();
+            const response = { shows, total: totalshows };
+            res.status(200).json(response);
+        } catch (err) {
+            sendError(err, res);
+        }
     });
 });
 router.get('/schedule', (req, res) => {
-  let searchedsports = req.query.searchedsports;
-   let condition = {};
-   // console.log(searchedsports);
-   if(searchedsports) {
-    condition = {"sportname": searchedsports};
-   }
-  connection((db) => {
-  let schedule = db.collection('schedule')
-          .find(condition); //$text: { $search: searchterm }
-          schedule.count(function (err, count) {
-          if(err) console.log(err);
-      const response = {};
-      let sportstotal = count;
-      // console.log(count);
-      schedule
-          // .skip(pageoffset)
-          // .limit(pagesize)
-          .sort({sportname:1})
-          .toArray()
-          .then((schedule) => {
-                      response.schedule = schedule;
-                      response.total = sportstotal;
-              res.status(200).json(response);
-              })
-              .catch((err) => {
-                  sendError(err, res);
-              });
-      });
-  });
+    let searchedsports = req.query.searchedsports;
+    let condition = {};
+    if(searchedsports) {
+        condition = {"sportname": searchedsports};
+    }
+    connection(async (db) => {
+        try {
+            const schedule = db.collection('schedule').find(condition).sort({sportname:1});
+            const sportstotal = await schedule.count();
+            const scheduleData = await schedule.toArray();
+            const response = { schedule: scheduleData, total: sportstotal };
+            res.status(200).json(response);
+        } catch (err) {
+            sendError(err, res);
+        }
+    });
 });
 router.get('/schedulebydate', (req, res) => {
-   let date = req.query.date;
-   console.log(date);
-   let condition = {};
-   if(date) {
-    condition = { "sportname" : date};
-   }
-  connection((db) => {
-  let schedule = db.collection('scheduleByDate')
-          .find(condition); //$text: { $search: searchterm }
-          schedule.count(function (err, count) {
-          if(err) console.log(err);
-      const response = {};
-      let sportstotal = count;
-      // console.log(count);
-      schedule
-          .sort({index:1})
-          .toArray()
-          .then((schedule) => {
-                      response.schedule = schedule;
-                      response.total = sportstotal;
-              res.status(200).json(response);
-              })
-              .catch((err) => {
-                  sendError(err, res);
-              });
-      });
-  });
+    let date = req.query.date;
+    let condition = {};
+    if(date) {
+        condition = { "sportname" : date};
+    }
+    connection(async (db) => {
+        try {
+            const schedule = db.collection('scheduleByDate').find(condition).sort({index:1});
+            const sportstotal = await schedule.count();
+            const scheduleData = await schedule.toArray();
+            const response = { schedule: scheduleData, total: sportstotal };
+            res.status(200).json(response);
+        } catch (err) {
+            sendError(err, res);
+        }
+    });
 });
 router.get('/calendar', (req, res) => {
-//console.log(req.query);
-   // let searchterm = req.query.searchterm;
-   let pageoffset = parseInt(req.query.pageIndex, 10);
-   let pagesize = parseInt(req.query.pageSize,10);
+    let pageoffset = parseInt(req.query.pageIndex, 10);
+    let pagesize = parseInt(req.query.pageSize,10);
 
-    connection((db) => {
-
-    let curFind = db.collection('calendar_new')
-            .find({"enddate":{ $gte: 1579894153}}); //$text: { $search: searchterm }
-    curFind.count(function (err, count) {
-        if(err) console.log(err);
-        const response = {};
-        let totalevents = count;
-        // console.log(count);
-            curFind
-            .sort({startdate:1})
-            .skip(pageoffset)
-            .limit(pagesize)
-            .toArray()
-            .then((calendar) => {
-                response.calendar = calendar;
-                response.total = totalevents;
-                res.status(200).json(response);
-                })
-                .catch((err) => {
-                    sendError(err, res);
-                });
-        });
-
+    connection(async (db) => {
+        try {
+            const curFind = db.collection('calendar_new')
+                .find({"enddate":{ $gte: 1579894153}})
+                .sort({startdate:1});
+            const totalevents = await curFind.count();
+            const calendar = await curFind
+                .skip(pageoffset)
+                .limit(pagesize)
+                .toArray();
+            const response = { calendar, total: totalevents };
+            res.status(200).json(response);
+        } catch (err) {
+            sendError(err, res);
+        }
     });
-
 });
 router.get('/athletes', (req, res) => {
-   // console.log(req.query.searchedsports, typeof req.query.searchedsports);
-   let searchedsports = [];
-   if(req.query.searchedsports && typeof req.query.searchedsports  === "string"){
-    searchedsports = req.query.searchedsports.split(',');
-  }
-   let condition = {};
-   // console.log(searchedsports,typeof searchedsports);
-   if(searchedsports.length === 0) {
-    condition = {};
-   } else if(searchedsports.length === 1) {
-    condition.sportname = {$all:searchedsports};
-   } else {
-    condition.sportname = {$in:searchedsports};
-   }
-   let pageoffset = parseInt(req.query.pageIndex, 10);
-   let pagesize = parseInt(req.query.pageSize,10);
+    let searchedsports = [];
+    if(req.query.searchedsports && typeof req.query.searchedsports  === "string"){
+        searchedsports = req.query.searchedsports.split(',');
+    }
+    let condition = {};
+    if(searchedsports.length === 0) {
+        condition = {};
+    } else if(searchedsports.length === 1) {
+        condition.sportname = {$all:searchedsports};
+    } else {
+        condition.sportname = {$in:searchedsports};
+    }
+    let pageoffset = parseInt(req.query.pageIndex, 10);
+    let pagesize = parseInt(req.query.pageSize,10);
 
-   connection((db) => {
-
-   let curFind = db.collection('qualified_athletes')
-           .find(condition); //$text: { $search: searchterm }
-   curFind.count(function (err, count) {
-    if(err) console.log(err);
-    const response = {};
-       let qualifiedathletes = count;
-        // console.log(count);
-           curFind
-           .sort({date_qualified:1})
-            .skip(pageoffset)
-            .limit(pagesize)
-           .toArray()
-           .then((athletes) => {
-                response.athletes = athletes;
-                response.total = qualifiedathletes;
-                res.status(200).json(response);
-               })
-               .catch((err) => {
-                   sendError(err, res);
-               });
-       });
-
-   });
-
+    connection(async (db) => {
+        try {
+            const curFind = db.collection('qualified_athletes')
+                .find(condition)
+                .sort({date_qualified:1});
+            const qualifiedathletes = await curFind.count();
+            const athletes = await curFind
+                .skip(pageoffset)
+                .limit(pagesize)
+                .toArray();
+            const response = { athletes, total: qualifiedathletes };
+            res.status(200).json(response);
+        } catch (err) {
+            sendError(err, res);
+        }
+    });
 });
 
 router.post('/feedback',function(req,res){
     let feedbackdata = {
-     name: req.body.name,
-     email:req.body.email,
-     created :+new Date(),
-     feedback:req.body.feedback
-  };
-     connection((db) => {
-        db.collection('feedback')
-        .insert(feedbackdata)
-        .then((feedbackdata) => {
-            response.data = feedbackdata;
-            res.json(feedbackdata);
-        })
-        .catch((err) => {
+        name: req.body.name,
+        email:req.body.email,
+        created :+new Date(),
+        feedback:req.body.feedback
+    };
+    connection(async (db) => {
+        try {
+            const feedbackResult = await db.collection('feedback').insertOne(feedbackdata);
+            response.data = feedbackResult;
+            res.json(feedbackResult);
+        } catch (err) {
             sendError(err, res);
-        });
-     });
-    }
- );
+        }
+    });
+});
 module.exports = router;
