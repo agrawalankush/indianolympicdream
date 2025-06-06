@@ -1,0 +1,48 @@
+# Dependencies
+node_modules
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Angular build artifacts
+/dist
+/.angular
+/tmp
+/out-tsc
+/bazel-out
+
+# Development files
+.env*
+.vscode
+.idea
+*.log
+coverage
+.nyc_output
+.sass-cache
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Git
+.git
+.gitignore
+README.md
+
+# Testing
+e2e
+src/**/*.spec.ts
+karma.conf.js
+protractor.conf.js
+
+# Other
+.editorconfig
+.browserslistrc
+angular.json
+tsconfig.*
+tslint.json
