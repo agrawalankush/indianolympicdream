@@ -14,10 +14,11 @@ const connection = async (closure) => {
       console.log(`🔗 Attempting MongoDB connection...`);
       
       const connectionOptions = {
-        useNewUrlParser: true, 
-        useUnifiedTopology: true,
+        maxPoolSize: 10,
         serverSelectionTimeoutMS: 5000,
-        connectTimeoutMS: 10000
+        connectTimeoutMS: 10000,
+        maxIdleTimeMS: 30000,
+        family: 4 // Force IPv4
       };
       
       // Add authSource only for production (when AUTH_SOURCE is provided)
@@ -66,6 +67,7 @@ router.get('/sports/:sportname', (req, res) => {
         }
     });
 });
+
 router.get('/allsports', (req, res) => {
     connection(async (db) => {
         try {
@@ -84,9 +86,10 @@ router.get('/shows', (req, res) => {
     let pagesize = parseInt(req.query.pageSize,10);
     connection(async (db) => {
         try {
-            const showsFind = db.collection('shows_data').find({});
-            const totalshows = await showsFind.count();
-            const shows = await showsFind
+            const collection = db.collection('shows_data');
+            const totalshows = await collection.countDocuments({});
+            const shows = await collection
+                .find({})
                 .skip(pageoffset)
                 .limit(pagesize)
                 .toArray();
@@ -97,6 +100,7 @@ router.get('/shows', (req, res) => {
         }
     });
 });
+
 router.get('/schedule', (req, res) => {
     let searchedsports = req.query.searchedsports;
     let condition = {};
@@ -105,9 +109,12 @@ router.get('/schedule', (req, res) => {
     }
     connection(async (db) => {
         try {
-            const schedule = db.collection('schedule').find(condition).sort({sportname:1});
-            const sportstotal = await schedule.count();
-            const scheduleData = await schedule.toArray();
+            const collection = db.collection('schedule');
+            const sportstotal = await collection.countDocuments(condition);
+            const scheduleData = await collection
+                .find(condition)
+                .sort({sportname:1})
+                .toArray();
             const response = { schedule: scheduleData, total: sportstotal };
             res.status(200).json(response);
         } catch (err) {
@@ -115,6 +122,7 @@ router.get('/schedule', (req, res) => {
         }
     });
 });
+
 router.get('/schedulebydate', (req, res) => {
     let date = req.query.date;
     let condition = {};
@@ -123,9 +131,12 @@ router.get('/schedulebydate', (req, res) => {
     }
     connection(async (db) => {
         try {
-            const schedule = db.collection('scheduleByDate').find(condition).sort({index:1});
-            const sportstotal = await schedule.count();
-            const scheduleData = await schedule.toArray();
+            const collection = db.collection('scheduleByDate');
+            const sportstotal = await collection.countDocuments(condition);
+            const scheduleData = await collection
+                .find(condition)
+                .sort({index:1})
+                .toArray();
             const response = { schedule: scheduleData, total: sportstotal };
             res.status(200).json(response);
         } catch (err) {
@@ -133,17 +144,19 @@ router.get('/schedulebydate', (req, res) => {
         }
     });
 });
+
 router.get('/calendar', (req, res) => {
     let pageoffset = parseInt(req.query.pageIndex, 10);
     let pagesize = parseInt(req.query.pageSize,10);
 
     connection(async (db) => {
         try {
-            const curFind = db.collection('calendar_new')
-                .find({"enddate":{ $gte: 1579894153}})
-                .sort({startdate:1});
-            const totalevents = await curFind.count();
-            const calendar = await curFind
+            const collection = db.collection('calendar_new');
+            const condition = {"enddate":{ $gte: 1579894153}};
+            const totalevents = await collection.countDocuments(condition);
+            const calendar = await collection
+                .find(condition)
+                .sort({startdate:1})
                 .skip(pageoffset)
                 .limit(pagesize)
                 .toArray();
@@ -154,6 +167,7 @@ router.get('/calendar', (req, res) => {
         }
     });
 });
+
 router.get('/athletes', (req, res) => {
     let searchedsports = [];
     if(req.query.searchedsports && typeof req.query.searchedsports  === "string"){
@@ -172,11 +186,11 @@ router.get('/athletes', (req, res) => {
 
     connection(async (db) => {
         try {
-            const curFind = db.collection('qualified_athletes')
+            const collection = db.collection('qualified_athletes');
+            const qualifiedathletes = await collection.countDocuments(condition);
+            const athletes = await collection
                 .find(condition)
-                .sort({date_qualified:1});
-            const qualifiedathletes = await curFind.count();
-            const athletes = await curFind
+                .sort({date_qualified:1})
                 .skip(pageoffset)
                 .limit(pagesize)
                 .toArray();
