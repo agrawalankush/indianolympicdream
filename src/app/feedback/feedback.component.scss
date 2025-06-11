@@ -8,9 +8,13 @@
   mat-card {
     background-color: var(--mat-toolbar-container-background-color);
     border-radius: 10px;
-    // @include mat.elevation(2);
+    box-shadow: var(--primary-color) 0px 0.5px 11px 0.5px;
     padding: 16px;
     max-width: 600px;
+    
+    &:hover {
+      box-shadow: gray 0px 0.1px 4px 2px;
+    }
 
     @media screen and (max-width: 600px) {
       padding: 24px 0px 0px 0px;
