@@ -6,6 +6,7 @@
     "start": "node server.js",
     "dev": "nodemon server.js",
     "build": "ng build --configuration production",
+    "build:clean": "ng build --configuration production --verbose=false",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

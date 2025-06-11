@@ -115,6 +115,8 @@ body {
   .mat-mdc-dialog-surface {
     border-radius: 8px;
   }
+  border-radius: 10px;
+  box-shadow: var(--primary-color) 0px 0.5px 11px 0.5px;
 }
 
 .logo-button {
