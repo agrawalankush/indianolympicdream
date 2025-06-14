@@ -44,3 +44,13 @@ protractor.conf.js
 .editorconfig
 .browserslistrc
 tslint.json
+
+# Docker
+node_modules
+npm-debug.log
+dist
+.env
+.nyc_output
+.coverage
+.cache
+.DS_Store
