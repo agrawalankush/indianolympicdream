@@ -32,8 +32,8 @@
       <!-- <mat-icon>calendar_month</mat-icon> -->
       Calendar
     </button>
-    <button class="nav-button" [routerLink]="['/schedule']" [queryParams]="{sport: ''}" mat-button
-      routerLinkActive="active-link">
+    <button class="nav-button" [routerLink]="['/schedule']" [queryParams]="{sport: ''}"
+      [routerLinkActiveOptions]="{exact: false}" mat-button routerLinkActive="active-link">
       <!-- <mat-icon>date_range</mat-icon> -->
       Schedule
     </button>
@@ -81,7 +81,7 @@
         <mat-icon>calendar_month</mat-icon>
         <span class="sidenav-menu">Calendar</span>
       </a>
-      <a mat-list-item routerLink="/schedule" routerLinkActive="mat-list-active">
+      <a mat-list-item [routerLink]="['/schedule']" [queryParams]="{sport: ''}" routerLinkActive="mat-list-active">
         <mat-icon>date_range</mat-icon>
         <span class="sidenav-menu">Schedule</span>
       </a>

@@ -6,14 +6,14 @@ import { MatListModule } from '@angular/material/list';
 import { CommonModule } from '@angular/common';
 
 interface DialogData {
-    events: any[];
-    category: string;
-    sportName: string;
+  events: any[];
+  category: string;
+  sportName: string;
 }
 
 @Component({
-    selector: 'app-events-dialog',
-    template: `
+  selector: 'app-events-dialog',
+  template: `
     <h2 mat-dialog-title>{{data.category | titlecase}} Events</h2>
     <mat-dialog-content>
       <ng-container [ngSwitch]="data.sportName">
@@ -22,6 +22,14 @@ interface DialogData {
             <th mat-header-cell *matHeaderCellDef>Event</th>
             <td mat-cell *matCellDef="let element">{{element.name}}</td>
           </ng-container>
+          <ng-container matColumnDef="WR">
+            <th mat-header-cell *matHeaderCellDef>NR</th>
+            <td mat-cell *matCellDef="let element">{{element.WR}}</td>
+          </ng-container>
+          <ng-container matColumnDef="WR_holder">
+            <th mat-header-cell *matHeaderCellDef>WR Holder</th>
+            <td mat-cell *matCellDef="let element">{{element.WR_holder}}</td>
+          </ng-container>
           <ng-container matColumnDef="EntryStandard">
             <th mat-header-cell *matHeaderCellDef>Entry Standard</th>
             <td mat-cell *matCellDef="let element">{{element.qualificationstandard}}</td>
@@ -29,6 +37,10 @@ interface DialogData {
           <ng-container matColumnDef="NR">
             <th mat-header-cell *matHeaderCellDef>NR</th>
             <td mat-cell *matCellDef="let element">{{element.NR}}</td>
+          </ng-container>
+          <ng-container matColumnDef="NR_holder">
+            <th mat-header-cell *matHeaderCellDef>NR Holder</th>
+            <td mat-cell *matCellDef="let element">{{element.NR_holder}}</td>
           </ng-container>
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
@@ -49,7 +61,7 @@ interface DialogData {
       <button mat-button mat-dialog-close>Close</button>
     </mat-dialog-actions>
   `,
-    styles: [`
+  styles: [`
     :host {
       display: block;
     }
@@ -61,18 +73,18 @@ interface DialogData {
       padding: 16px;
     }
   `],
-    standalone: true,
-    imports: [CommonModule, MatDialogModule, MatTableModule, MatButtonModule, MatListModule]
+  standalone: true,
+  imports: [CommonModule, MatDialogModule, MatTableModule, MatButtonModule, MatListModule]
 })
 export class EventsDialogComponent {
-    readonly displayedColumns = ['Event', 'EntryStandard', 'NR'];
+  readonly displayedColumns = ['Event', 'WR', 'WR_holder', 'EntryStandard', 'NR', 'NR_holder'];
 
-    constructor(
-        public dialogRef: MatDialogRef<EventsDialogComponent>,
-        @Inject(MAT_DIALOG_DATA) public data: DialogData
-    ) { }
+  constructor(
+    public dialogRef: MatDialogRef<EventsDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData
+  ) { }
 
-    private isJudoMixed(event: any): boolean {
-        return this.data.sportName === 'Judo' && this.data.category === 'mixed';
-    }
+  private isJudoMixed(event: any): boolean {
+    return this.data.sportName === 'Judo' && this.data.category === 'mixed';
+  }
 }
