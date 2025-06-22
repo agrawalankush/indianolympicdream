@@ -14,7 +14,7 @@
             <mat-card-subtitle>{{ showcontent.sport }}</mat-card-subtitle>
         </mat-card-header>
         <div class="video-container mat-card-image mat-elevation-z4">
-            <img [src]="videoStates[showcontent.youtube_id].thumbnailUrl + '?bypassSW=' + new Date().getTime()"
+            <img [src]="videoStates[showcontent.youtube_id].thumbnailUrl"
                 [class.fade-out]="videoStates[showcontent.youtube_id].isPlaying" class="video-thumbnail"
                 [alt]="showcontent.name">
 
