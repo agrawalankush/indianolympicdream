@@ -2,9 +2,10 @@ FROM node:24-alpine3.21 AS frontend-build
 
 WORKDIR /app
 COPY package.json package-lock.json ./
+RUN npm install -g @angular/cli
 RUN npm install
 
-COPY angular.json tsconfig*.json ./about:blank#blocked
+COPY angular.json tsconfig*.json ./
 COPY ngsw-config.json ./
 COPY src ./src
 
