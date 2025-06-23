@@ -7,7 +7,6 @@ interface VideoState {
   isPlaying: boolean;
   isLoading: boolean;
   thumbnailUrl: string;
-  fallbackUrl: string;
 }
 
 @Component({
@@ -44,8 +43,7 @@ export class ShowsComponent implements OnInit {
             this.videoStates[show.youtube_id] = {
               isPlaying: false,
               isLoading: false,  // Initialize loading state
-              thumbnailUrl: `https://img.youtube.com/vi/${show.youtube_id}/hqdefault.jpg`,
-              fallbackUrl: `https://img.youtube.com/vi/${show.youtube_id}/mqdefault.jpg` // fallback to medium quality
+              thumbnailUrl: `https://img.youtube.com/vi/${show.youtube_id}/hqdefault.jpg?ngsw-bypass=true`
             };
           });
         },
@@ -86,7 +84,7 @@ export class ShowsComponent implements OnInit {
 
   handleImageError(youtubeId: string) {
     if (this.videoStates[youtubeId]) {
-      this.videoStates[youtubeId].thumbnailUrl = this.videoStates[youtubeId].fallbackUrl;
+      console.log(`Image load error for YouTube ID: ${youtubeId}`);
     }
   }
 }
