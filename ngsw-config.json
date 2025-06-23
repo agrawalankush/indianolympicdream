@@ -31,11 +31,14 @@
     {
       "name": "external-resources",
       "installMode": "lazy",
-      "updateMode": "prefetch",
+      "updateMode": "lazy",
       "resources": {
         "urls": [
           "https://fonts.googleapis.com/**",
-          "https://fonts.gstatic.com/**"
+          "https://fonts.gstatic.com/**",
+          "https://img.youtube.com/vi/**",
+          "https://*.ytimg.com/**",
+          "https://*.googlevideo.com/**"
         ]
       }
     }
@@ -47,10 +50,10 @@
         "https://img.youtube.com/vi/**"
       ],
       "cacheConfig": {
-        "strategy": "freshness",
+        "strategy": "performance",
         "maxSize": 100,
-        "maxAge": "1d",
-        "timeout": "10s"
+        "maxAge": "7d",
+        "timeout": "5s"
       }
     },
     {
@@ -60,10 +63,10 @@
         "https://*.googlevideo.com/**"
       ],
       "cacheConfig": {
-        "strategy": "freshness",
+        "strategy": "performance",
         "maxSize": 100,
-        "maxAge": "1d",
-        "timeout": "0u"
+        "maxAge": "7d",
+        "timeout": "5s"
       }
     },
     {
@@ -72,10 +75,10 @@
         "/api/**"
       ],
       "cacheConfig": {
-        "strategy": "freshness",
+        "strategy": "performance",
         "maxSize": 50,
-        "maxAge": "1h",
-        "timeout": "0u"
+        "maxAge": "1d",
+        "timeout": "5s"
       }
     }
   ]
