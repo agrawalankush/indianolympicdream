@@ -22,6 +22,8 @@ server {
 
     location = /ngsw-worker.js {
     add_header Content-Security-Policy "connect-src 'self' https://img.youtube.com https://*.ytimg.com https://*.googlevideo.com";
+    proxy_pass http://app:$APP_PORT;
+    proxy_set_header Host $host;
     }
 
     location / {
