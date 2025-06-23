@@ -62,8 +62,8 @@
       "cacheConfig": {
         "strategy": "network-first",
         "maxSize": 100,
-        "maxAge": "7d",
-        "timeout": "10s"
+        "maxAge": "1d",
+        "timeout": "50s"
       }
     },
     {

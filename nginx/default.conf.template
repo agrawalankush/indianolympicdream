@@ -3,7 +3,7 @@ server {
     listen 80;
     listen [::]:80;
     server_name _;
-
+    
     # Increased timeouts for YouTube requests
     proxy_connect_timeout 60s;
     proxy_send_timeout 60s;
