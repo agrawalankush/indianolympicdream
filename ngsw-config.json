@@ -51,20 +51,6 @@
   ],
   "dataGroups": [
     {
-      "name": "youtube-thumbnails",
-      "urls": [
-        "https://img.youtube.com/vi/**",
-        "https://*.ytimg.com/**",
-        "https://*.googlevideo.com/**"
-      ],
-      "cacheConfig": {
-        "strategy": "freshness",
-        "maxSize": 100,
-        "maxAge": "7d",
-        "timeout": "10s"
-      }
-    },
-    {
       "name": "api-cache",
       "urls": [
         "/api/**"
