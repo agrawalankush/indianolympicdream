@@ -3,13 +3,19 @@ server {
     listen 80;
     listen [::]:80;
     server_name _;
+    
+    # Increased timeouts for YouTube requests
+    proxy_connect_timeout 60s;
+    proxy_send_timeout 60s;
+    proxy_read_timeout 60s;
 
     set $csp_policy "default-src 'self'; \
+                     worker-src 'self' blob:; \
                      script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.googletagmanager.com https://static.cloudflareinsights.com; \
                      style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; \
-                     img-src 'self' data: blob: https: https://*.youtube.com https://*.ytimg.com https://*.googlevideo.com; \
+                     img-src 'self' data: blob: https://img.youtube.com https://*.ytimg.com https://*.googlevideo.com; \
                      font-src 'self' https://fonts.gstatic.com; \
-                     connect-src 'self' https://*.youtube.com https://*.ytimg.com https://*.googlevideo.com wss: ws: https://*.google-analytics.com https://*.googletagmanager.com https://static.cloudflareinsights.com; \
+                     connect-src 'self' https://img.youtube.com https://*.ytimg.com https://*.googlevideo.com wss: ws: https://*.google-analytics.com https://*.googletagmanager.com https://static.cloudflareinsights.com; \
                      frame-src 'self' https://www.youtube-nocookie.com https://www.youtube.com;";
 
     add_header Content-Security-Policy $csp_policy always;
