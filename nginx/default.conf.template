@@ -4,7 +4,13 @@ server {
     listen [::]:80;
     server_name _;
 
-    add_header Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://.googletagmanager.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https: https://img.youtube.com https://*.ytimg.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' wss: ws: https://.google-analytics.com https://.googletagmanager.com https://static.cloudflareinsights.com; frame-src 'self' https://.youtube-nocookie.com https://www.youtube.com;";
+    add_header Content-Security-Policy "default-src 'self';
+    script-src 'self' 'unsafe-inline' https://.googletagmanager.com https://static.cloudflareinsights.com;
+    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; 
+    img-src 'self' data: https: https://img.youtube.com https://*.ytimg.com; 
+    font-src 'self' https://fonts.gstatic.com; 
+    connect-src 'self' wss: ws: https://.google-analytics.com https://.googletagmanager.com https://static.cloudflareinsights.com; 
+    frame-src 'self' https://.youtube-nocookie.com https://www.youtube.com;";
 
     location / {
         proxy_pass http://app:$APP_PORT;
