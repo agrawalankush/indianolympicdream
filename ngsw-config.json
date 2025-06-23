@@ -47,20 +47,6 @@
           "https://static.cloudflareinsights.com/**"
         ]
       }
-    },
-    {
-      "name": "youtube-resources",
-      "installMode": "lazy",
-      "updateMode": "lazy",
-      "resources": {
-        "urls": [
-          "https://img.youtube.com/**",
-          "https://*.ytimg.com/**",
-          "https://*.googlevideo.com/**",
-          "https://www.youtube.com/**",
-          "https://www.youtube-nocookie.com/**"
-        ]
-      }
     }
   ],
   "dataGroups": [
@@ -74,6 +60,20 @@
         "maxSize": 100,
         "maxAge": "1d",
         "timeout": "5s"
+      }
+    },
+    {
+      "name": "youtube-resources",
+      "urls": [
+        "https://img.youtube.com/vi/**",
+        "https://*.ytimg.com/**",
+        "https://*.googlevideo.com/**"
+      ],
+      "cacheConfig": {
+        "strategy": "freshness",
+        "maxSize": 100,
+        "maxAge": "7d",
+        "timeout": "10s"
       }
     }
   ]
