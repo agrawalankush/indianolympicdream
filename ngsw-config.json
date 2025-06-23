@@ -47,7 +47,7 @@
         "https://img.youtube.com/vi/**"
       ],
       "cacheConfig": {
-        "strategy": "network-first",
+        "strategy": "freshness",
         "maxSize": 100,
         "maxAge": "1d",
         "timeout": "10s"
@@ -60,10 +60,10 @@
         "https://*.googlevideo.com/**"
       ],
       "cacheConfig": {
-        "strategy": "network-first",
+        "strategy": "freshness",
         "maxSize": 100,
         "maxAge": "1d",
-        "timeout": "50s"
+        "timeout": "0u"
       }
     },
     {
@@ -75,7 +75,7 @@
         "strategy": "freshness",
         "maxSize": 50,
         "maxAge": "1h",
-        "timeout": "20s"
+        "timeout": "0u"
       }
     }
   ]
