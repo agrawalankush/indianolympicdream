@@ -70,7 +70,7 @@
         "https://*.googlevideo.com/**"
       ],
       "cacheConfig": {
-        "strategy": "freshness",
+        "strategy": "performance",
         "maxSize": 100,
         "maxAge": "7d",
         "timeout": "10s"
