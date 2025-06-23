@@ -61,20 +61,14 @@
         "maxAge": "1d",
         "timeout": "5s"
       }
-    },
-    {
-      "name": "youtube-resources",
-      "urls": [
-        "https://img.youtube.com/vi/**",
-        "https://*.ytimg.com/**",
-        "https://*.googlevideo.com/**"
-      ],
-      "cacheConfig": {
-        "strategy": "performance",
-        "maxSize": 100,
-        "maxAge": "7d",
-        "timeout": "10s"
-      }
     }
+  ],
+  "navigationUrls": [
+    "/**",
+    "!/**/*__*",
+    "!/**/*__*/**",
+    "!https://img.youtube.com/**",
+    "!https://*.ytimg.com/**",
+    "!https://*.googlevideo.com/**"
   ]
 }
