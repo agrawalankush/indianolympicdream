@@ -47,6 +47,18 @@
           "https://static.cloudflareinsights.com/**"
         ]
       }
+    },
+    {
+      "name": "youtube-assets",
+      "installMode": "lazy",
+      "updateMode": "lazy",
+      "resources": {
+        "urls": [
+          "https://img.youtube.com/vi/**/*.jpg",
+          "https://*.ytimg.com/**/*.jpg",
+          "https://*.googlevideo.com/**/*.jpg"
+        ]
+      }
     }
   ],
   "dataGroups": [
@@ -62,13 +74,5 @@
         "timeout": "5s"
       }
     }
-  ],
-  "navigationUrls": [
-    "/**",
-    "!/**/*__*",
-    "!/**/*__*/**",
-    "!https://img.youtube.com/**",
-    "!https://*.ytimg.com/**",
-    "!https://*.googlevideo.com/**"
   ]
 }
