@@ -52,6 +52,11 @@ export class ShowsComponent implements OnInit {
         (error: any) => {
           this.errmsg = error.error;
         });
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.addEventListener('message', event => {
+        console.log('SW Message:', event.data);
+      });
+    }
   }
 
   playVideo(youtubeId: string) {
