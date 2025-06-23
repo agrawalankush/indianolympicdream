@@ -47,13 +47,14 @@
       "name": "youtube-thumbnails",
       "urls": [
         "https://img.youtube.com/vi/**",
-        "https://*.ytimg.com/**"
+        "https://*.ytimg.com/**",
+        "https://*.googlevideo.com/**"
       ],
       "cacheConfig": {
-        "strategy": "performance",
+        "strategy": "freshness",
         "maxSize": 100,
-        "maxAge": "7d",
-        "timeout": "10s"
+        "maxAge": "1d",
+        "timeout": "50s"
       }
     },
     {
