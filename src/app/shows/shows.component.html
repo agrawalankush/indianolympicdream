@@ -15,6 +15,7 @@
         </mat-card-header>
         <div class="video-container mat-card-image mat-elevation-z4">
             <img [src]="videoStates[showcontent.youtube_id].thumbnailUrl"
+                (error)="handleImageError(showcontent.youtube_id)"
                 [class.fade-out]="videoStates[showcontent.youtube_id].isPlaying" class="video-thumbnail"
                 [alt]="showcontent.name">
 
