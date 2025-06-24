@@ -31,8 +31,6 @@
       "updateMode": "lazy",
       "resources": {
         "urls": [
-          "https://www.google-analytics.com/**",
-          "https://www.googletagmanager.com/**",
           "https://fonts.googleapis.com/**",
           "https://fonts.gstatic.com/**"
         ]
@@ -50,20 +48,6 @@
     }
   ],
   "dataGroups": [
-    {
-      "name": "youtube-thumbnails",
-      "urls": [
-        "https://img.youtube.com/vi/**",
-        "https://*.ytimg.com/**",
-        "https://*.googlevideo.com/**"
-      ],
-      "cacheConfig": {
-        "strategy": "freshness",
-        "maxSize": 100,
-        "maxAge": "7d",
-        "timeout": "10s"
-      }
-    },
     {
       "name": "api-cache",
       "urls": [
