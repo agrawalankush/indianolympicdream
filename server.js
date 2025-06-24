@@ -1,9 +1,16 @@
+// These are important and needed before anything else
+require('zone.js/node');
+
 const express = require('express');
 const path = require('path');
 const compression = require('compression');
 const http = require('http');
 const helmet = require('helmet');
 const config = require('./server/config/config');
+const { CommonEngine } = require('@angular/ssr/node');
+const { APP_BASE_HREF } = require('@angular/common');
+const { existsSync } = require('node:fs');
+const AppServerModule = require('./src/main.server').default;
 
 const app = express();
 
@@ -20,15 +27,38 @@ app.use(express.urlencoded({extended: true}));
 //gzip cpmpression
 app.use(compression());
 
-// Angular DIST output folder - update path to include project name
-app.use(express.static(path.join(__dirname, 'dist/indianolympicdream')));
+const distFolder = path.join(process.cwd(), 'dist/indianolympicdream/browser');
+const indexHtml = existsSync(path.join(distFolder, 'index.original.html'))
+  ? path.join(distFolder, 'index.original.html')
+  : path.join(distFolder, 'index.html');
+
+const commonEngine = new CommonEngine();
+
+app.set('view engine', 'html');
+app.set('views', distFolder);
+
+// Serve static files from /browser
+app.get('*.*', express.static(distFolder, {
+  maxAge: '1y'
+}));
 
 // API location
 app.use('/api', api);
 
-// Send all other requests to the Angular app - update path to include project name
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'dist/indianolympicdream/index.html'));
+// All regular routes use the Angular engine
+app.get('*', (req, res, next) => {
+  const { protocol, originalUrl, baseUrl, headers } = req;
+
+  commonEngine
+    .render({
+      bootstrap: AppServerModule,
+      documentFilePath: indexHtml,
+      url: `${protocol}://${headers.host}${originalUrl}`,
+      publicPath: distFolder,
+      providers: [{ provide: APP_BASE_HREF, useValue: baseUrl }],
+    })
+    .then((html) => res.send(html))
+    .catch((err) => next(err));
 });
 
 //Set Port

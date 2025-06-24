@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { MaterialModule } from './material/material.module';
@@ -58,7 +58,8 @@ import { AnalyticsService } from './services/analytics.service';
     ], providers: [
         httpInterceptorProviders,
         provideHttpClient(withInterceptorsFromDi()),
-        AnalyticsService
+        AnalyticsService,
+        provideClientHydration(withEventReplay())
     ]
 })
 export class AppModule { }

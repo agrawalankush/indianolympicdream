@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/indianolympicdream",
+            "outputPath": "dist/indianolympicdream/browser",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -70,6 +70,10 @@
                 }
               ],
               "serviceWorker": true
+            },
+            "appShell": {
+              "browserTarget": "indianolympicdream:build:production",
+              "serverTarget": "indianolympicdream:server:production"
             },
             "development": {
               "optimization": false,
@@ -142,6 +146,83 @@
             "production": {
               "devServerTarget": "indianolympicdream:serve:production"
             }
+          }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/indianolympicdream/server",
+            "main": "server.js",
+            "tsConfig": "tsconfig.server.json",
+            "buildOptimizer": false,
+            "optimization": false,
+            "sourceMap": false,
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "node_modules"
+              ]
+            },
+            "vendorChunk": true
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "media",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "sourceMap": false,
+              "extractLicenses": true
+            },
+            "development": {
+              "optimization": false,
+              "sourceMap": true,
+              "extractLicenses": false
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve-ssr": {
+          "builder": "@angular-devkit/build-angular:ssr-dev-server",
+          "configurations": {
+            "development": {
+              "browserTarget": "indianolympicdream:build:development",
+              "serverTarget": "indianolympicdream:server:development"
+            },
+            "production": {
+              "browserTarget": "indianolympicdream:build:production",
+              "serverTarget": "indianolympicdream:server:production"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "prerender": {
+          "builder": "@angular-devkit/build-angular:prerender",
+          "options": {
+            "routes": [
+              "/"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "indianolympicdream:build:production",
+              "serverTarget": "indianolympicdream:server:production"
+            },
+            "development": {
+              "browserTarget": "indianolympicdream:build:development",
+              "serverTarget": "indianolympicdream:server:development"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "render-test": {
+          "builder": "@angular-devkit/build-angular:ts-node",
+          "options": {
+            "tsConfig": "tsconfig.app.json",
+            "main": "render-test.ts"
           }
         }
       }
