@@ -2,6 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SportsdataService } from '../sportsdata.service';
 import { PageEvent } from '@angular/material/paginator';
+import { CommonModule, NgIf, NgFor } from '@angular/common';
+import { MatInputModule } from '@angular/material/input';
+import { MatCardModule } from '@angular/material/card';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { SafePipe } from '../safepipe';
 
 interface VideoState {
   isPlaying: boolean;
@@ -10,10 +16,18 @@ interface VideoState {
 }
 
 @Component({
-  selector: 'app-shows',
-  templateUrl: './shows.component.html',
-  styleUrls: ['./shows.component.scss'],
-  standalone: false
+    selector: 'app-shows',
+    standalone: true,
+    templateUrl: './shows.component.html',
+    styleUrls: ['./shows.component.scss'],
+    imports: [
+        CommonModule,
+        MatInputModule,
+        MatPaginatorModule,
+        MatCardModule,
+        MatProgressSpinnerModule,
+        SafePipe
+    ]
 })
 export class ShowsComponent implements OnInit {
   public showsdata: any;

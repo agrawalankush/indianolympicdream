@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
+import { CommonModule } from '@angular/common';
+
 @Component({
     selector: 'app-server-error',
+    standalone: true,
+    imports: [CommonModule],
     template: `
     <div class="wrapper">
 <div class="box">
@@ -46,8 +50,7 @@ import { Component, OnInit } from '@angular/core';
     }
     p > a:hover { text-shadow: 0 0 6px #216f79; }
     p img { vertical-align: bottom; }`
-    ],
-    standalone: false
+    ]
 })
 export class ServerErrorComponent implements OnInit {
 

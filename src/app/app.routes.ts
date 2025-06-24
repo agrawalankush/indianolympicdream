@@ -1,5 +1,4 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes } from '@angular/router';
 // components
 import { HomeComponent } from './home/home.component';
 import { ShowsComponent } from './shows/shows.component';
@@ -13,7 +12,8 @@ import { ServerErrorComponent } from './server-error/server-error.component';
 import { ScheduleComponent } from './schedule/schedule.component';
 import { StoriesComponent } from './stories/stories.component';
 import { FeedbackComponent } from './feedback/feedback.component';
-const routes: Routes = [
+
+export const routes: Routes = [
   {
     path: 'home', component: HomeComponent, data: { animation: 'HomePage' }
     // resolve: {
@@ -32,9 +32,3 @@ const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', component: PagenotfoundComponent }
 ];
-
-@NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
-})
-export class AppRoutingModule { }

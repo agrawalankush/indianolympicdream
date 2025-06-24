@@ -1,6 +1,8 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { trigger, state, style, transition, animate, AnimationEvent } from '@angular/animations';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { CommonModule, NgFor, NgIf } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
 
 interface QAPanel {
   question: string;
@@ -12,44 +14,45 @@ interface QAPanel {
 }
 
 @Component({
-  selector: 'app-about',
-  templateUrl: './about.component.html',
-  styleUrls: ['./about.component.scss'],
-  standalone: false,
-  animations: [
-    trigger('panelAnimation', [
-      state('closed', style({
-        height: '0',
-        minHeight: '0',
-        opacity: '0',
-        overflow: 'hidden'
-      })),
-      state('open', style({
-        height: '*',
-        opacity: '1',
-        overflow: 'hidden'
-      })),
-      transition('closed => open', [
-        animate('600ms cubic-bezier(0.17, 0.67, 0.43, 0.99)')
-      ]),
-      transition('open => closed', [
-        animate('600ms cubic-bezier(0.17, 0.67, 0.43, 0.99)')
-      ])
-    ]),
-    trigger('contentAnimation', [
-      state('visible', style({
-        opacity: 1,
-        transform: 'translateY(0)'
-      })),
-      state('void', style({
-        opacity: 0,
-        transform: 'translateY(10px)'
-      })),
-      transition('void => visible', [
-        animate('450ms 150ms ease-out')
-      ])
-    ])
-  ]
+    selector: 'app-about',
+    standalone: true,
+    templateUrl: './about.component.html',
+    styleUrls: ['./about.component.scss'],
+    animations: [
+        trigger('panelAnimation', [
+            state('closed', style({
+                height: '0',
+                minHeight: '0',
+                opacity: '0',
+                overflow: 'hidden'
+            })),
+            state('open', style({
+                height: '*',
+                opacity: '1',
+                overflow: 'hidden'
+            })),
+            transition('closed => open', [
+                animate('600ms cubic-bezier(0.17, 0.67, 0.43, 0.99)')
+            ]),
+            transition('open => closed', [
+                animate('600ms cubic-bezier(0.17, 0.67, 0.43, 0.99)')
+            ])
+        ]),
+        trigger('contentAnimation', [
+            state('visible', style({
+                opacity: 1,
+                transform: 'translateY(0)'
+            })),
+            state('void', style({
+                opacity: 0,
+                transform: 'translateY(10px)'
+            })),
+            transition('void => visible', [
+                animate('450ms 150ms ease-out')
+            ])
+        ])
+    ],
+    imports: [CommonModule, MatButtonModule]
 })
 export class AboutComponent implements OnInit {
   // QA panels data

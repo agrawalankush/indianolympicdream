@@ -1,9 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { SportsdataService } from '../sportsdata.service';
 import { MatDialog } from '@angular/material/dialog';
 import { EventsDialogComponent } from './events-dialog.component';
 import { map, switchMap } from 'rxjs/operators';
+import { CommonModule } from '@angular/common';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDialogModule } from '@angular/material/dialog'; // Added for MatDialog service
 
 interface SportEvents {
   key: string;
@@ -11,10 +17,21 @@ interface SportEvents {
 }
 
 @Component({
-  selector: 'app-sport-details',
-  templateUrl: './sport-details.component.html',
-  styleUrls: ['./sport-details.component.scss'],
-  standalone: false
+    selector: 'app-sport-details',
+    standalone: true, // Added
+    templateUrl: './sport-details.component.html',
+    styleUrls: ['./sport-details.component.scss'],
+    imports: [
+        CommonModule,
+        RouterLink,
+        MatToolbarModule,
+        MatButtonModule,
+        MatTooltipModule,
+        MatIconModule,
+        MatDialogModule
+        // EventsDialogComponent is not directly in the template, so not needed in imports here.
+        // Its TS import is sufficient for this.dialog.open(EventsDialogComponent)
+    ]
 })
 export class SportDetailsComponent implements OnInit {
   sportsdetails: any;
