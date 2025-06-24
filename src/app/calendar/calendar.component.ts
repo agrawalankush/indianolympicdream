@@ -4,11 +4,16 @@ import { MatPaginator } from '@angular/material/paginator';
 import { SportsdataService } from '../sportsdata.service';
 import { CalendarDataSource } from './datasource';
 import { tap } from 'rxjs/operators';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { CommonModule } from '@angular/common';
+
 @Component({
-  selector: 'app-calendar',
-  templateUrl: './calendar.component.html',
-  styleUrls: ['./calendar.component.scss'],
-  standalone: false
+    selector: 'app-calendar',
+    standalone: true,
+    templateUrl: './calendar.component.html',
+    styleUrls: ['./calendar.component.scss'],
+    imports: [CommonModule, MatPaginatorModule, MatTableModule]
 })
 export class CalendarComponent implements OnInit, AfterViewInit {
   public errmsg: string;

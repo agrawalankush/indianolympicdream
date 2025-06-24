@@ -1,13 +1,17 @@
 import { Component, OnInit, ElementRef, ViewChild, OnDestroy } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ActivatedRoute, Params, Router, RouterLinkActive, RouterLink } from '@angular/router';
 import { SportsdataService } from '../sportsdata.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { EventDetailsComponent } from '../event-details/event-details.component';
+import { MatToolbar } from '@angular/material/toolbar';
+import { NgIf, NgFor, KeyValuePipe } from '@angular/common';
+import { MatDivider } from '@angular/material/divider';
+import { HumanizePipe } from '../shared/components/loader/pipes/humanize';
 @Component({
-  selector: 'app-schedule',
-  templateUrl: './schedule.component.html',
-  styleUrls: ['./schedule.component.scss'],
-  standalone: false
+    selector: 'app-schedule',
+    templateUrl: './schedule.component.html',
+    styleUrls: ['./schedule.component.scss'],
+    imports: [MatToolbar, NgIf, RouterLinkActive, RouterLink, NgFor, MatDivider, KeyValuePipe, HumanizePipe]
 })
 export class ScheduleComponent implements OnInit, OnDestroy {
   schedule: any;

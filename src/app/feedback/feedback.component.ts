@@ -1,14 +1,19 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SportsdataService } from '../sportsdata.service';
 import { Router } from '@angular/router';
+import { MatCard, MatCardContent } from '@angular/material/card';
+import { MatAnchor, MatFabButton } from '@angular/material/button';
+import { MatFormField, MatLabel, MatInput, MatSuffix, MatHint } from '@angular/material/input';
+import { MatIcon } from '@angular/material/icon';
+import { MatRadioGroup, MatRadioButton } from '@angular/material/radio';
 
 @Component({
     selector: 'app-feedback',
     templateUrl: './feedback.component.html',
     styleUrls: ['./feedback.component.scss'],
-    standalone: false
+    imports: [MatCard, MatAnchor, MatCardContent, FormsModule, ReactiveFormsModule, MatFormField, MatLabel, MatInput, MatIcon, MatSuffix, MatHint, MatRadioGroup, MatRadioButton, MatFabButton]
 })
 export class FeedbackComponent {
     feedbackForm: FormGroup;

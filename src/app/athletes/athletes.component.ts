@@ -1,15 +1,18 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ActivatedRoute, Params, Router, RouterLink } from '@angular/router';
 import { SportsdataService } from '../sportsdata.service';
-import { MatPaginator } from '@angular/material/paginator';
-import { PageEvent } from '@angular/material/paginator';
+import { MatPaginatorModule, PageEvent, MatPaginator } from '@angular/material/paginator'; // Added MatPaginator type
 // import { Athletes} from '../models/app-models';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { UntypedFormControl } from '@angular/forms';
-import { MatAutocompleteSelectedEvent, MatAutocomplete } from '@angular/material/autocomplete';
+import { UntypedFormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatAutocompleteModule, MatAutocompleteSelectedEvent, MatAutocompleteTrigger, MatAutocomplete } from '@angular/material/autocomplete'; // Added MatAutocomplete type
 import { Observable, of as observableOf } from 'rxjs';
 import { map, startWith, catchError, finalize } from 'rxjs/operators';
-import { MatChipGrid } from '@angular/material/chips';
+import { MatChipsModule, MatChipGrid } from '@angular/material/chips'; // Added MatChipGrid type
+import { MatInputModule } from '@angular/material/input'; // Corrected to MatInputModule
+import { CommonModule } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon'; // Changed
+import { MatCardModule } from '@angular/material/card'; // Changed
 
 interface Athlete {
   name: string;
@@ -28,15 +31,27 @@ interface AthleteResponse {
 }
 
 @Component({
-  selector: 'app-athletes',
-  templateUrl: './athletes.component.html',
-  styleUrls: ['./athletes.component.scss'],
-  standalone: false
+    selector: 'app-athletes',
+    standalone: true, // Added
+    templateUrl: './athletes.component.html',
+    styleUrls: ['./athletes.component.scss'],
+    imports: [
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        RouterLink,
+        MatInputModule, // Corrected
+        MatChipsModule,
+        MatIconModule,
+        MatAutocompleteModule,
+        MatPaginatorModule,
+        MatCardModule
+    ]
 })
 export class AthletesComponent implements OnInit {
   public errmsg: string;
   public athletes: Athlete[];
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatPaginator) paginator: MatPaginator; // Types are now imported
   // MatPaginator Inputs
   length: number;
   pageSize = 24;
@@ -74,8 +89,8 @@ export class AthletesComponent implements OnInit {
   ];
 
   @ViewChild('sportInput') sportInput: ElementRef<HTMLInputElement>;
-  @ViewChild('auto') matAutocomplete: MatAutocomplete;
-  @ViewChild('chipGrid') chipGrid: MatChipGrid;
+  @ViewChild('auto') matAutocomplete: MatAutocomplete; // Types are now imported
+  @ViewChild('chipGrid') chipGrid: MatChipGrid; // Types are now imported
   constructor(private route: ActivatedRoute, private router: Router, private sportservice: SportsdataService) {
     this.filteredSports = this.sportCtrl.valueChanges.pipe(
       map((sport: string | null) => sport ? this._filter(sport) : this.getallsports()));

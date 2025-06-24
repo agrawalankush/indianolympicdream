@@ -3,11 +3,14 @@ import { Subscription } from 'rxjs';
 import { delay } from 'rxjs/operators';
 import { LoaderService } from './loader.service';
 import { LoaderState } from './loader';
+import { CommonModule } from '@angular/common'; // Changed
+import { MatProgressBarModule } from '@angular/material/progress-bar'; // Changed
 @Component({
     selector: 'app-loader',
+    standalone: true, // Added
     templateUrl: './loader.component.html',
     styleUrls: ['./loader.component.css'],
-    standalone: false
+    imports: [CommonModule, MatProgressBarModule] // Changed
 })
 export class LoaderComponent implements OnInit, OnDestroy {
   // show = false;

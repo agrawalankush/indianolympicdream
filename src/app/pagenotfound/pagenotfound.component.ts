@@ -1,15 +1,18 @@
 import { Component, OnInit } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-pagenotfound',
-  template: `
+    selector: 'app-pagenotfound',
+    standalone: true,
+    template: `
       <div class="error-container">
         <img class="errorimage" src="./assets/images/404errorpage.png">
         <button mat-button routerLink="/home">This will take you back home</button>
       </div>
   `,
-  styles: [
-    `
+    styles: [
+        `
         .error-container {
           display: flex;
           flex-direction: column;
@@ -31,8 +34,8 @@ import { Component, OnInit } from '@angular/core';
           font-size:2em;
         }
   `
-  ],
-  standalone: false
+    ],
+    imports: [MatButtonModule, RouterLink]
 })
 export class PagenotfoundComponent implements OnInit {
   constructor() { }
