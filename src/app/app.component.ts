@@ -3,8 +3,6 @@ import { SwupdateService } from './swupdate.service';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { Router, Event as RouterEvent, NavigationStart, NavigationEnd, NavigationCancel, NavigationError, RouterOutlet, ActivatedRoute, RouterLink, RouterLinkActive } from '@angular/router';
 import { slideInAnimation } from './animations';
-import { filter } from 'rxjs/operators';
-import { AnalyticsService } from './services/analytics.service';
 import { LoaderComponent } from './shared/components/loader/loader.component';
 import { CommonModule, NgClass, NgIf } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
@@ -18,28 +16,28 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 // LoaderComponent is imported below with other standalone components from './shared/components/loader/loader.component'
 
 @Component({
-    selector: 'app-root',
-    standalone: true,
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.scss'],
-    animations: [
-        slideInAnimation
-    ],
-    imports: [
-        CommonModule,
-        RouterOutlet,
-        RouterLink,
-        RouterLinkActive,
-        LoaderComponent,
-        MatToolbarModule,
-        MatButtonModule,
-        MatIconModule,
-        MatMenuModule,
-        MatSlideToggleModule,
-        MatProgressBarModule,
-        MatSidenavModule,
-        MatListModule
-    ]
+  selector: 'app-root',
+  standalone: true,
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss'],
+  animations: [
+    slideInAnimation
+  ],
+  imports: [
+    CommonModule,
+    RouterOutlet,
+    RouterLink,
+    RouterLinkActive,
+    LoaderComponent,
+    MatToolbarModule,
+    MatButtonModule,
+    MatIconModule,
+    MatMenuModule,
+    MatSlideToggleModule,
+    MatProgressBarModule,
+    MatSidenavModule,
+    MatListModule
+  ]
 })
 export class AppComponent implements OnInit {
   public loading = true;
@@ -61,8 +59,7 @@ export class AppComponent implements OnInit {
     public router: Router,
     private route: ActivatedRoute,
     private swupdateservice: SwupdateService,
-    public overlayContainer: OverlayContainer,
-    private analyticsService: AnalyticsService
+    public overlayContainer: OverlayContainer
   ) {
     this.loadThemePreference();
     this.swupdateservice.checkForUpdates();
@@ -79,12 +76,6 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    // Track page views when routes change
-    this.router.events.pipe(
-      filter((event: RouterEvent): event is NavigationEnd => event instanceof NavigationEnd)
-    ).subscribe((event: NavigationEnd) => {
-      this.analyticsService.pageView(event.urlAfterRedirects, document.title);
-    });
   }
 
   navigationInterceptor(event: RouterEvent): void {
