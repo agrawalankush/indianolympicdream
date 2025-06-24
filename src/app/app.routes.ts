@@ -1,34 +1,58 @@
 import { Routes } from '@angular/router';
-// components
-import { HomeComponent } from './home/home.component';
-import { ShowsComponent } from './shows/shows.component';
-import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
-import { AboutComponent } from './about/about.component';
-import { SportDetailsComponent } from './sport-details/sport-details.component';
-import { CalendarComponent } from './calendar/calendar.component';
-import { AthletesComponent } from './athletes/athletes.component';
-// import { AllSportsResolverService } from './home/all-sports-resolver.service';
-import { ServerErrorComponent } from './server-error/server-error.component';
-import { ScheduleComponent } from './schedule/schedule.component';
-import { StoriesComponent } from './stories/stories.component';
-import { FeedbackComponent } from './feedback/feedback.component';
 
 export const routes: Routes = [
   {
-    path: 'home', component: HomeComponent, data: { animation: 'HomePage' }
+    path: 'home',
+    loadComponent: () => import('./home/home.component').then(m => m.HomeComponent),
+    data: { animation: 'HomePage' }
     // resolve: {
-    //   allsportsdata: AllSportsResolverService
+    //   allsportsdata: AllSportsResolverService // This resolver would also need to be provided differently if used with standalone components, typically in the route's providers array or globally.
     // }
   },
-  { path: 'sports/:sportname', component: SportDetailsComponent, data: { animation: 'SportDetailsPage' } },
-  { path: 'calendar', component: CalendarComponent },
-  { path: 'athletes', component: AthletesComponent, data: { animation: 'AthletesPage' } },
-  { path: 'schedule', component: ScheduleComponent, data: { animation: 'SchedulePage' } },
-  { path: 'shows', component: ShowsComponent, data: { animation: 'ShowsPage' } },
-  { path: 'stories', component: StoriesComponent },
-  { path: 'about', component: AboutComponent, data: { animation: 'AboutPage' } },
-  { path: 'internal-error', component: ServerErrorComponent },
-  { path: 'feedback', component: FeedbackComponent },
+  {
+    path: 'sports/:sportname',
+    loadComponent: () => import('./sport-details/sport-details.component').then(m => m.SportDetailsComponent),
+    data: { animation: 'SportDetailsPage' }
+  },
+  {
+    path: 'calendar',
+    loadComponent: () => import('./calendar/calendar.component').then(m => m.CalendarComponent)
+  },
+  {
+    path: 'athletes',
+    loadComponent: () => import('./athletes/athletes.component').then(m => m.AthletesComponent),
+    data: { animation: 'AthletesPage' }
+  },
+  {
+    path: 'schedule',
+    loadComponent: () => import('./schedule/schedule.component').then(m => m.ScheduleComponent),
+    data: { animation: 'SchedulePage' }
+  },
+  {
+    path: 'shows',
+    loadComponent: () => import('./shows/shows.component').then(m => m.ShowsComponent),
+    data: { animation: 'ShowsPage' }
+  },
+  {
+    path: 'stories',
+    loadComponent: () => import('./stories/stories.component').then(m => m.StoriesComponent)
+  },
+  {
+    path: 'about',
+    loadComponent: () => import('./about/about.component').then(m => m.AboutComponent),
+    data: { animation: 'AboutPage' }
+  },
+  {
+    path: 'internal-error',
+    loadComponent: () => import('./server-error/server-error.component').then(m => m.ServerErrorComponent)
+  },
+  {
+    path: 'feedback',
+    loadComponent: () => import('./feedback/feedback.component').then(m => m.FeedbackComponent)
+  },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: '**', component: PagenotfoundComponent }
+  {
+    path: '**',
+    loadComponent: () => import('./pagenotfound/pagenotfound.component').then(m => m.PagenotfoundComponent)
+  }
 ];
