@@ -16,18 +16,18 @@ interface VideoState {
 }
 
 @Component({
-    selector: 'app-shows',
-    standalone: true,
-    templateUrl: './shows.component.html',
-    styleUrls: ['./shows.component.scss'],
-    imports: [
-        CommonModule,
-        MatInputModule,
-        MatPaginatorModule,
-        MatCardModule,
-        MatProgressSpinnerModule,
-        SafePipe
-    ]
+  selector: 'app-shows',
+  standalone: true,
+  templateUrl: './shows.component.html',
+  styleUrls: ['./shows.component.scss'],
+  imports: [
+    CommonModule,
+    MatInputModule,
+    MatPaginatorModule,
+    MatCardModule,
+    MatProgressSpinnerModule,
+    SafePipe
+  ]
 })
 export class ShowsComponent implements OnInit {
   public showsdata: any;
@@ -35,6 +35,7 @@ export class ShowsComponent implements OnInit {
   public videoyoutube = 'https://www.youtube.com/embed/';
   public videoParams = '?autoplay=1&mute=0&enablejsapi=1&rel=0';
   public videoStates: { [key: string]: VideoState } = {};
+  private edition: string;
   // MatPaginator Inputs
   length: number;
   pageSize = 100;
@@ -48,6 +49,10 @@ export class ShowsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.loadShowsData();
+  }
+
+  loadShowsData() {
     this.sportservice.getshowsdata(0, this.pageSize)
       .subscribe(
         (res: any) => {
@@ -56,7 +61,7 @@ export class ShowsComponent implements OnInit {
           this.showsdata.forEach((show: any) => {
             this.videoStates[show.youtube_id] = {
               isPlaying: false,
-              isLoading: false,  // Initialize loading state
+              isLoading: false,
               thumbnailUrl: `https://img.youtube.com/vi/${show.youtube_id}/hqdefault.jpg?ngsw-bypass=true`
             };
           });
@@ -64,11 +69,6 @@ export class ShowsComponent implements OnInit {
         (error: any) => {
           this.errmsg = error.error;
         });
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.addEventListener('message', event => {
-        console.log('SW Message:', event.data);
-      });
-    }
   }
 
   playVideo(youtubeId: string) {

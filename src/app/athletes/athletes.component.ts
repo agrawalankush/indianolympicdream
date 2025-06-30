@@ -31,26 +31,27 @@ interface AthleteResponse {
 }
 
 @Component({
-    selector: 'app-athletes',
-    standalone: true, // Added
-    templateUrl: './athletes.component.html',
-    styleUrls: ['./athletes.component.scss'],
-    imports: [
-        CommonModule,
-        FormsModule,
-        ReactiveFormsModule,
-        RouterLink,
-        MatInputModule, // Corrected
-        MatChipsModule,
-        MatIconModule,
-        MatAutocompleteModule,
-        MatPaginatorModule,
-        MatCardModule
-    ]
+  selector: 'app-athletes',
+  standalone: true,
+  templateUrl: './athletes.component.html',
+  styleUrls: ['./athletes.component.scss'],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    RouterLink,
+    MatInputModule,
+    MatChipsModule,
+    MatIconModule,
+    MatAutocompleteModule,
+    MatPaginatorModule,
+    MatCardModule
+  ]
 })
 export class AthletesComponent implements OnInit {
   public errmsg: string;
   public athletes: Athlete[];
+  public edition: string;
   @ViewChild(MatPaginator) paginator: MatPaginator; // Types are now imported
   // MatPaginator Inputs
   length: number;
@@ -99,24 +100,25 @@ export class AthletesComponent implements OnInit {
   ngOnInit() {
     this.route.queryParams
       .subscribe(params => {
-        // console.log(params);
-        if (Object.keys(params).length === 0 && params.constructor === Object) {
-          this.SearchAthletes("[]", "0", "24");
-        } else {
+        const newEdition = params.edition || '2028';
+        if (this.edition !== newEdition) {
+          this.edition = newEdition;
+          this.sports = []; // Reset sports when edition changes
+          this.SearchAthletes("[]", "0", "24", this.edition);
+
+        }
+        if (params.sports) {
           this.sports = JSON.parse(params.sports);
-          // this.pageIndex = parseInt(params.pageIndex);
-          // this.pageSize = parseInt(params.pazeSize);
-          this.SearchAthletes(params.sports, params.pageIndex, params.pazeSize);
+          this.SearchAthletes(params.sports, params.pageIndex, params.pazeSize, this.edition);
         }
       }
       );
-
   }
   get queryParams() {
     const index = this.paginator.pageIndex * this.paginator.pageSize;
     const size = this.paginator.pageSize;
     const sports = JSON.stringify(this.sports);
-    const queryParams: Params = { sports: sports, pageIndex: index, pazeSize: size };
+    const queryParams: Params = { sports: sports, pageIndex: index, pazeSize: size, edition: this.edition };
     return queryParams;
   }
   private _filter(value: string): string[] {
@@ -166,8 +168,8 @@ export class AthletesComponent implements OnInit {
       this.prepareQueryUrl();
     }
   }
-  public SearchAthletes(selectedsports: string, pageIndex: string, pageSize: string) {
-    this.sportservice.getathletes(selectedsports, pageIndex, pageSize)
+  public SearchAthletes(selectedsports: string, pageIndex: string, pageSize: string, edition: string) {
+    this.sportservice.getathletes(selectedsports, pageIndex, pageSize, edition)
       .pipe(
         catchError((error) => {
           this.errmsg = error.message || 'An error occurred';

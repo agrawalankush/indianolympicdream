@@ -4,7 +4,7 @@
                         <button class="toolbar-pictogram-button"
                                 [ngClass]="{'active-sport-button': sport === sportsdetails.name}" mat-icon-button
                                 *ngFor="let sport of allsports" [routerLink]="['/sports',sport]"
-                                [attr.data-sport]="sport | titlecase">
+                                [queryParams]="{ edition: edition }" [attr.data-sport]="sport | titlecase">
                                 <img class="pictogram-button-image" src="assets/images/pictograms/icons/{{sport}}.png"
                                         alt="{{sport}} pictogram" />
                         </button>

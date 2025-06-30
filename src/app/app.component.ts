@@ -53,13 +53,13 @@ export class AppComponent implements OnInit {
   currentTheme = 'default-theme';
   currentSport: string = '';
   olympicOptions = [
-    { id: 'tokyo2020', name: 'Tokyo 2020', logo: 'assets/images/olympics/tokyo2020_no_bg.png' },
-    // { id: 'paris2024', name: 'Paris 2024', logo: 'assets/images/olympics/paris2024.png' },
-    { id: 'la2028', name: 'LA 2028', logo: 'assets/images/olympics/la2028.png' }
+    { id: '2020', name: 'Tokyo 2020', logo: 'assets/images/olympics/tokyo2020_no_bg.png' },
+    // { id: '2024', name: 'Paris 2024', logo: 'assets/images/olympics/paris2024.png' },
+    { id: '2028', name: 'LA 2028', logo: 'assets/images/olympics/la2028.png' }
   ];
 
-  selectedOlympics = this.olympicOptions[0].name;
-  selectedOlympicsLogo: string = this.olympicOptions[0].logo;
+  selectedOlympics = this.olympicOptions[1].id;
+  selectedOlympicsLogo: string = this.olympicOptions[1].logo;
 
   constructor(
     public router: Router,
@@ -74,7 +74,7 @@ export class AppComponent implements OnInit {
     });
 
     this.route.queryParams.subscribe(params => {
-      this.selectedOlympics = params['edition'] || 'la2028';
+      this.selectedOlympics = params['edition'] || '2028';
       this.updateSelectedOlympicsLogo();
     });
   }
@@ -149,7 +149,7 @@ export class AppComponent implements OnInit {
   }
 
   navigateToAboutApp() {
-    this.router.navigate(['/about']);
+    this.router.navigate(['/about'], { queryParams: { edition: this.selectedOlympics } });
   }
 
   openAboutMe() {

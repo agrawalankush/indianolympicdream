@@ -2,11 +2,12 @@
   <h4> Full <span *ngIf="sport">{{sport}}</span> Schedule <span *ngIf="date">For {{date}}</span> </h4>
   <span class="fill-remaining-space"></span>
   <div class="filter-btns">
-    <div class="schedule-button" [routerLink]="['/schedule']" [queryParams]="{sport: ''}"
+    <div class="schedule-button" [routerLink]="['/schedule']" [queryParams]="{sport: '', edition: edition}"
       routerLinkActive="active-link">
       By Sports
     </div>
-    <div class="schedule-button" [routerLink]="['/schedule']" [queryParams]="{date: ''}" routerLinkActive="active-link">
+    <div class="schedule-button" [routerLink]="['/schedule']" [queryParams]="{date: '', edition: edition}"
+      routerLinkActive="active-link">
       By Dates
     </div>
   </div>

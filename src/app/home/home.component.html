@@ -1,7 +1,7 @@
 <div class="home-container">
     <div class="sports-container" *ngIf="allsports">
         <div class="pictogram-container" *ngFor="let sport of allsports">
-            <a [routerLink]="['/sports',sport.name]">
+            <a [routerLink]="['/sports',sport.name]" [queryParams]="{ edition: edition }">
                 <img [src]="'assets/images/pictograms/kinetic/' + sport.name + '.webp'" class="sports-icons"
                     [alt]="sport.name + ' pictogram'" loading="lazy" />
             </a>
@@ -15,15 +15,6 @@
             <mat-card-content>
                 Note: All the pictograms used are owned by the IOC. Pictograms used in the app were designed by Masaaki
                 Hiromura for Tokyo 2020.
-            </mat-card-content>
-        </mat-card>
-    </div>
-    <div class="bottom-note">
-        <mat-card>
-            <mat-card-content>
-                Note: Current V1.5 is Tokyo 2020 exclusive, V2.0 is in dev for the upcoming
-                LA2028 Olympic Qualification cycle; bit of patience, the app will be updated soon with more
-                features and support for LA 2028.
             </mat-card-content>
         </mat-card>
     </div>

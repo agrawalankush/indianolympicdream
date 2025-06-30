@@ -17,27 +17,28 @@ interface SportEvents {
 }
 
 @Component({
-    selector: 'app-sport-details',
-    standalone: true, // Added
-    templateUrl: './sport-details.component.html',
-    styleUrls: ['./sport-details.component.scss'],
-    imports: [
-        CommonModule,
-        RouterLink,
-        MatToolbarModule,
-        MatButtonModule,
-        MatTooltipModule,
-        MatIconModule,
-        MatDialogModule
-        // EventsDialogComponent is not directly in the template, so not needed in imports here.
-        // Its TS import is sufficient for this.dialog.open(EventsDialogComponent)
-    ]
+  selector: 'app-sport-details',
+  standalone: true, // Added
+  templateUrl: './sport-details.component.html',
+  styleUrls: ['./sport-details.component.scss'],
+  imports: [
+    CommonModule,
+    RouterLink,
+    MatToolbarModule,
+    MatButtonModule,
+    MatTooltipModule,
+    MatIconModule,
+    MatDialogModule
+    // EventsDialogComponent is not directly in the template, so not needed in imports here.
+    // Its TS import is sufficient for this.dialog.open(EventsDialogComponent)
+  ]
 })
 export class SportDetailsComponent implements OnInit {
   sportsdetails: any;
   qualifiedAthletesString: string;
   selectedCategory: string | null = null;
   selectedEvents: any[] = [];
+  edition: string;
 
   readonly allsports = ['Archery', 'Athletics', 'Badminton', 'Boxing', 'Equestrian',
     'Fencing', 'Golf', 'Gymnastics', 'Hockey', 'Judo', 'Rowing', 'Shooting',
@@ -59,7 +60,15 @@ export class SportDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.pipe(
       map(params => params.get('sportname')),
-      switchMap(sportname => this.sportservice.getsports(sportname))
+      switchMap(sportname => {
+        return this.route.queryParams.pipe(
+          map(queryParams => queryParams['edition'] || '2028'),
+          switchMap(edition => {
+            this.edition = edition;
+            return this.sportservice.getsports(sportname, this.edition);
+          })
+        );
+      })
     ).subscribe(res => {
       this.sportsdetails = res[0];
       this.qualifiedAthletesString = JSON.stringify([this.sportsdetails.name]);
