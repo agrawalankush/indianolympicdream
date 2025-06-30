@@ -13,6 +13,9 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule, MatSelectChange } from '@angular/material/select';
+import { FormsModule } from '@angular/forms';
 // LoaderComponent is imported below with other standalone components from './shared/components/loader/loader.component'
 
 @Component({
@@ -36,7 +39,10 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatSlideToggleModule,
     MatProgressBarModule,
     MatSidenavModule,
-    MatListModule
+    MatListModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    FormsModule
   ]
 })
 export class AppComponent implements OnInit {
@@ -49,7 +55,7 @@ export class AppComponent implements OnInit {
   olympicOptions = [
     { id: 'tokyo2020', name: 'Tokyo 2020', logo: 'assets/images/olympics/tokyo2020_no_bg.png' },
     // { id: 'paris2024', name: 'Paris 2024', logo: 'assets/images/olympics/paris2024.png' },
-    // { id: 'la2028', name: 'LA 2028', logo: 'assets/images/olympics/la2028.png' }
+    { id: 'la2028', name: 'LA 2028', logo: 'assets/images/olympics/la2028.png' }
   ];
 
   selectedOlympics = this.olympicOptions[0].name;
@@ -67,12 +73,10 @@ export class AppComponent implements OnInit {
       this.navigationInterceptor(event);
     });
 
-    /** TO DO: V2.0 feature to supoport multiple olympics
     this.route.queryParams.subscribe(params => {
-      this.selectedOlympics = params['olympics'] || 'la2028';
+      this.selectedOlympics = params['edition'] || 'la2028';
       this.updateSelectedOlympicsLogo();
     });
-     */
   }
 
   ngOnInit() {
@@ -127,22 +131,19 @@ export class AppComponent implements OnInit {
     this.componentCssClass = this.currentTheme;
   }
 
-  /* TO DO: V2.0 feature to supoport multiple olympics
-  onOlympicsChange(event: MatSelectChange) {
-    const selection = event.value;
+  onOlympicsChange(selection: string) {
     this.selectedOlympics = selection;
     this.updateSelectedOlympicsLogo();
     this.router.navigate([], {
       relativeTo: this.route,
-      queryParams: { olympics: selection },
+      queryParams: { edition: selection },
       queryParamsHandling: 'merge'
     });
   }
-    private updateSelectedOlympicsLogo(): void {
+  private updateSelectedOlympicsLogo(): void {
     const selected = this.olympicOptions.find(option => option.id === this.selectedOlympics);
     this.selectedOlympicsLogo = selected ? selected.logo : this.olympicOptions[0].logo;
   }
-  */
   prepareRoute(outlet: RouterOutlet) {
     return outlet && outlet.activatedRouteData && outlet.activatedRouteData.animation;
   }

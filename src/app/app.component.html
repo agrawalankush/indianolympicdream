@@ -9,19 +9,18 @@
       decoding="async" fetchpriority="high" width="60" height="24">
     <span>Dream</span>
   </div>
-  <!-- <mat-form-field appearance="outline" class="olympics-select">
-    <mat-select-trigger>
-      <img [src]="selectedOlympicsLogo" class="olympics-option-logo" [alt]="selectedOlympics + ' logo'" loading="lazy"
+  <div class="logo-container" [matMenuTriggerFor]="olympicsMenu">
+    <img [src]="selectedOlympicsLogo" class="olympics-option-logo" [alt]="selectedOlympics + ' logo'" loading="lazy"
+      decoding="async" fetchpriority="low" width="50" height="50">
+  </div>
+
+  <mat-menu #olympicsMenu="matMenu">
+    <button mat-menu-item *ngFor="let option of olympicOptions" (click)="onOlympicsChange(option.id)">
+      <img [src]="option.logo" class="olympics-option-logo" [alt]="option.name + ' logo'" loading="lazy"
         decoding="async" fetchpriority="low" width="24" height="24">
-    </mat-select-trigger>
-    <mat-select [(ngModel)]="selectedOlympics" (selectionChange)="onOlympicsChange($event)">
-      <mat-option *ngFor="let option of olympicOptions" [value]="option.id">
-        {{option.name}}
-      </mat-option>
-    </mat-select
-  </mat-form-field> -->
-  <img [src]="selectedOlympicsLogo" class="olympics-option-logo" [alt]="selectedOlympics + ' logo'" loading="lazy"
-    decoding="async" fetchpriority="low">
+      <!-- <span>{{option.name}}</span> -->
+    </button>
+  </mat-menu>
 
   <nav class="nav-links">
     <button class="nav-button" routerLink="/athletes" mat-button routerLinkActive="active-link">
