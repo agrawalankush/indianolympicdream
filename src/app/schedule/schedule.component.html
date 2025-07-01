@@ -1,4 +1,4 @@
-<mat-toolbar class="schedule-toolbar">
+<mat-toolbar *ngIf="edition !== '2028'" class="schedule-toolbar">
   <h4> Full <span *ngIf="sport">{{sport}}</span> Schedule <span *ngIf="date">For {{date}}</span> </h4>
   <span class="fill-remaining-space"></span>
   <div class="filter-btns">
@@ -11,31 +11,10 @@
       By Dates
     </div>
   </div>
-  <!-- <div>
-    <mat-menu #appMenu="matMenu">
-      <ng-template matMenuContent>
-        <button *ngFor="let sportname of allsports" mat-menu-item [routerLink]="['/schedule']"
-          [queryParams]="{sport: sportname}">
-          {{sportname}}
-        </button>
-      </ng-template>
-    </mat-menu>
-    <button mat-button [matMenuTriggerFor]="appMenu">
-      See By Sport<mat-icon>expand_more</mat-icon>
-    </button>
-    <mat-menu #appMenuDate="matMenu">
-      <ng-template matMenuContent>
-        <button *ngFor="let date of alldates" mat-menu-item [routerLink]="['/schedule']" [queryParams]="{date: date}">
-          {{date | humanize}}
-        </button>
-      </ng-template>
-    </mat-menu>
-    <button mat-button [matMenuTriggerFor]="appMenuDate">
-      See By Date<mat-icon>expand_more</mat-icon>
-    </button>
-  </div> -->
 </mat-toolbar>
-<div *ngIf="schedule" class="schedule-conatiner">
+<app-countdown *ngIf="edition === '2028'" [targetDate]="countdownTargetDate"
+  label="Time until LA2028 Olympic Games"></app-countdown>
+<div *ngIf="schedule && edition !== '2028'" class="schedule-conatiner">
   <section class="schedule-section" *ngFor="let sports of schedule">
     <div class="schedule-label">
       <div *ngIf="!getByDate" color="">
@@ -46,26 +25,19 @@
       <div *ngIf="getByDate" color="">{{sports.sportname | humanize}}</div>
     </div>
     <div class="schedule-button-row">
-      <!-- <div class="schedule-flex-container"> -->
       <div *ngFor="let event of sports.events | keyvalue:originalOrder">
         <div class="schedule-button" *ngIf="!getByDate" color="" (click)="showEvents(sports.sportname, event.value)"
           aria-label="Date schedule button">
-          <!-- <mat-icon>calendar_today</mat-icon> -->
           <img *ngIf="event.value[0]?.ismedalevent" class="medal-icon" src="assets/images/icons/medal.png" alt="medals">
           {{event.key | humanize}}
         </div>
         <div *ngIf="getByDate" color="" (click)="showEvents(sports.sportname, event.value, event.key)"
           aria-label="Date schedule button">
-          <!-- <mat-icon>calendar_today</mat-icon> -->
           <img src="assets/images/pictograms/icons/{{event?.key}}.png" class="pictogram-button-image"
             alt="{{event?.key}} pictogram" />
         </div>
       </div>
-      <!-- </div> -->
     </div>
     <mat-divider></mat-divider>
   </section>
-  <!-- <pre>
-    {{ schedule | json}}
-  </pre> -->
 </div>

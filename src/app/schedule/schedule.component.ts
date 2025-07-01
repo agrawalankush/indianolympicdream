@@ -7,11 +7,13 @@ import { MatToolbar } from '@angular/material/toolbar';
 import { NgIf, NgFor, KeyValuePipe } from '@angular/common';
 import { MatDivider } from '@angular/material/divider';
 import { HumanizePipe } from '../shared/components/loader/pipes/humanize';
+import { CountdownComponent } from '../countdown/countdown.component';
+
 @Component({
   selector: 'app-schedule',
   templateUrl: './schedule.component.html',
   styleUrls: ['./schedule.component.scss'],
-  imports: [MatToolbar, NgIf, RouterLinkActive, RouterLink, NgFor, MatDivider, KeyValuePipe, HumanizePipe]
+  imports: [MatToolbar, NgIf, RouterLinkActive, RouterLink, NgFor, MatDivider, KeyValuePipe, HumanizePipe, CountdownComponent]
 })
 export class ScheduleComponent implements OnInit, OnDestroy {
   schedule: any;
@@ -21,6 +23,7 @@ export class ScheduleComponent implements OnInit, OnDestroy {
   errmsg: string;
   sport: string;
   edition: string;
+  public countdownTargetDate: Date = new Date('2028-07-14T00:00:00'); // LA2028 Opening Ceremony
   allsports: string[] = [
     'Archery',
     'Athletics',

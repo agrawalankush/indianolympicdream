@@ -8,7 +8,7 @@ export interface Calendar {
   event: Array<{ name: string; startdate: number; enddate: number; venue: string }>;
 }
 export class CalendarDataSource implements DataSource<Calendar> {
-  private calendarSubject = new BehaviorSubject<Calendar[]>([]);
+  public calendarSubject = new BehaviorSubject<Calendar[]>([]);
   private loadingSubject = new BehaviorSubject<boolean>(false);
   public length: number;
   public loading$ = this.loadingSubject.asObservable();
