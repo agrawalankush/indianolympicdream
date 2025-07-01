@@ -60,7 +60,7 @@ router.get('/sports/:sportname', (req, res) => {
     connection(async (db) => {
         try {
             const sports = await db.collection('sports_new')
-                .find({"name":sportname, "edition": edition})
+                .find({"name":sportname, "editions": { $in: [edition] }})
                 .toArray();
             res.status(200).json(sports);
         } catch (err) {
@@ -74,7 +74,7 @@ router.get('/allsports', (req, res) => {
     connection(async (db) => {
         try {
             const allsports = await db.collection('all_sports')
-                .find({"isimportant": true, "edition": edition})
+                .find({"isimportant": true, "editions": { $in: [edition] }})
                 .toArray();
             res.status(200).json(allsports);
         } catch (err) {
@@ -106,7 +106,7 @@ router.get('/shows', (req, res) => {
 router.get('/schedule', (req, res) => {
     let searchedsports = req.query.searchedsports;
     const edition = req.query.edition || 'la2028';
-    let condition = {"edition": edition};
+    let condition = {"editions": { $in: [edition] }};
     if(searchedsports) {
         condition.sportname = searchedsports;
     }
@@ -129,7 +129,7 @@ router.get('/schedule', (req, res) => {
 router.get('/schedulebydate', (req, res) => {
     let date = req.query.date;
     const edition = req.query.edition || 'la2028';
-    let condition = {"edition": edition};
+    let condition = {"editions": { $in: [edition] }};
     if(date) {
         condition.sportname = date;
     }
@@ -157,7 +157,7 @@ router.get('/calendar', (req, res) => {
     connection(async (db) => {
         try {
             const collection = db.collection('calendar_new');
-            const condition = {"enddate":{ $gte: 1579894153}, "edition": edition};
+            const condition = {"enddate":{ $gte: 1579894153}, "editions": { $in: [edition] }};
             const totalevents = await collection.countDocuments(condition);
             const calendar = await collection
                 .find(condition)
@@ -178,7 +178,7 @@ router.get('/athletes', (req, res) => {
     if(req.query.searchedsports && typeof req.query.searchedsports  === "string"){
         searchedsports = req.query.searchedsports.split(',');
     }
-    let condition = {"edition": req.query.edition || 'la2028'};
+    let condition = {"editions": { $in: [req.query.edition || 'la2028'] }};
     if(searchedsports.length === 0) {
         // condition remains just edition
     } else if(searchedsports.length === 1) {
