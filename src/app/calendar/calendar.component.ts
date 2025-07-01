@@ -1,74 +1,113 @@
-import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 import { SportsdataService } from '../sportsdata.service';
-import { CalendarDataSource } from './datasource';
-import { tap } from 'rxjs/operators';
+import { Calendar } from '../models/app-models';
+import { tap, switchMap, startWith, distinctUntilChanged } from 'rxjs/operators';
+import { Subject, Subscription } from 'rxjs';
+import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { CommonModule } from '@angular/common';
-import { CountdownComponent } from '../countdown/countdown.component';
 
 @Component({
   selector: 'app-calendar',
   standalone: true,
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.scss'],
-  imports: [CommonModule, MatPaginatorModule, MatTableModule, CountdownComponent]
+  imports: [CommonModule, MatTableModule, MatPaginatorModule]
 })
-export class CalendarComponent implements OnInit, AfterViewInit {
-  public errmsg: string;
-  public calendar: any;
-  public searchquery = '';
-  public dataSource: CalendarDataSource;
+export class CalendarComponent implements OnInit, AfterViewInit, OnDestroy {
   public displayedColumns: string[] = ['EventName', 'Sport', 'StartDate', 'EndDate', 'Venue'];
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  public dataSource = new MatTableDataSource<Calendar>([]);
+  public totalRecords = 0;
   public edition: string;
-  public countdownTargetDate: Date;
+  public searchquery = '';
+
+  private _paginator: MatPaginator;
+  private dataLoadTrigger$ = new Subject<void>();
+  private paginatorSubscription: Subscription;
+  private queryParamsSubscription: Subscription;
+  private dataSubscription: Subscription;
+
+  @ViewChild(MatPaginator)
+  set paginator(paginator: MatPaginator) {
+    this._paginator = paginator;
+    if (this._paginator) {
+      // Unsubscribe from previous paginator subscription if it exists
+      if (this.paginatorSubscription) {
+        this.paginatorSubscription.unsubscribe();
+      }
+      // Only subscribe to page events once the paginator is available
+      this.paginatorSubscription = this._paginator.page.pipe(
+        tap(() => this.dataLoadTrigger$.next())
+      ).subscribe();
+    }
+  }
 
   constructor(
     private route: ActivatedRoute,
     private sportservice: SportsdataService
-  ) { }
+  ) {
+    // Initialize edition from snapshot for initial load
+    this.edition = this.route.snapshot.queryParams['edition'] || '2028';
+  }
 
   ngOnInit() {
-    this.dataSource = new CalendarDataSource(this.sportservice);
-    this.route.queryParams.subscribe(params => {
-      this.edition = params['edition'] || '2028';
-      // Only load data if paginator is available, otherwise it will be loaded in ngAfterViewInit
-      if (this.paginator) {
-        this.loadUCalendarPage();
-      }
-    });
-    // Subscribe to dataSource changes to find the earliest date
-    this.dataSource.calendarSubject.subscribe(calendarData => {
-      if (calendarData && calendarData.length > 0) {
-        // Find the earliest start date from the calendar data
-        const earliestEvent = calendarData.reduce((prev, curr) => {
-          const prevDate = new Date(prev.event[0].startdate).getTime();
-          const currDate = new Date(curr.event[0].startdate).getTime();
-          return (prevDate < currDate) ? prev : curr;
-        });
-        this.countdownTargetDate = new Date(earliestEvent.event[0].startdate); // Default to LA2028 Opening Ceremony
-      } else {
-        this.countdownTargetDate = new Date("2026-07-24T00:00:00");; // Clear countdown if no events
-      }
-    });
-  }
-  ngAfterViewInit() {
-    // Initial load when paginator is available
-    this.loadUCalendarPage();
-    this.paginator.page.pipe(tap(() => this.loadUCalendarPage())).subscribe();
-  }
-  public loadUCalendarPage() {
-    const pageIndex = this.paginator ? this.paginator.pageIndex : 0;
-    const pageSize = this.paginator ? this.paginator.pageSize : 10;
+    // Subscribe to queryParams changes to handle edition changes
+    this.queryParamsSubscription = this.route.queryParams.pipe(
+      distinctUntilChanged((prev, curr) => prev['edition'] === curr['edition']), // Only emit if edition changes
+      tap(params => {
+        const newEdition = params['edition'] || '2028';
+        if (newEdition !== this.edition) {
+          this.edition = newEdition;
+          if (this._paginator) {
+            this._paginator.pageIndex = 0; // Reset page when edition changes
+          }
+          this.dataLoadTrigger$.next(); // Trigger data load after edition potentially changes
+        }
+      })
+    ).subscribe();
 
-    this.dataSource.loadCalendar(
-      this.searchquery,
-      pageIndex,
-      pageSize,
-      this.edition
-    );
+    // Main data loading pipeline triggered by dataLoadTrigger$
+    this.dataSubscription = this.dataLoadTrigger$.pipe(
+      startWith(undefined), // Trigger initial load when dataLoadTrigger$ is subscribed
+      switchMap(() => {
+        const pageIndex = this._paginator ? this._paginator.pageIndex : 0;
+        const pageSize = this._paginator ? this._paginator.pageSize : 10;
+        return this.sportservice.getcalendar(this.searchquery, pageIndex, pageSize, this.edition);
+      })
+    ).subscribe((calendardata: any) => {
+      this.totalRecords = calendardata.total;
+      const formattedCalendar = calendardata.calendar.map(element => {
+        const sdate = new Date(element.startdate * 1000);
+        const edate = new Date(element.enddate * 1000);
+        element.startdate = sdate.toDateString();
+        element.enddate = edate.toDateString();
+        return element;
+      });
+      this.dataSource.data = formattedCalendar;
+    }, error => {
+      console.error('Error fetching calendar data:', error);
+      this.totalRecords = 0;
+      this.dataSource.data = [];
+    });
+  }
+
+  ngAfterViewInit() {
+    // Initial load is now handled by dataLoadTrigger$ in ngOnInit with startWith
+    // No explicit action needed here for initial load
+  }
+
+  ngOnDestroy() {
+    if (this.paginatorSubscription) {
+      this.paginatorSubscription.unsubscribe();
+    }
+    if (this.queryParamsSubscription) {
+      this.queryParamsSubscription.unsubscribe();
+    }
+    if (this.dataSubscription) {
+      this.dataSubscription.unsubscribe();
+    }
   }
 }

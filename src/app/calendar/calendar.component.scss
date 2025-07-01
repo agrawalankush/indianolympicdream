@@ -52,3 +52,17 @@
     @include mat.elevation(4);
     background-color: var(--mat-toolbar-container-background-color);
 }
+
+.no-data-message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px; /* Adjust as needed */
+    font-family: 'Geist Sans', sans-serif;
+    color: var(--color-text);
+    text-align: center;
+    padding: 20px;
+    margin: 24px;
+    border-radius: 8px;
+    background-color: var(--mat-toolbar-container-background-color);
+}
