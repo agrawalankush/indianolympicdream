@@ -60,7 +60,7 @@ router.get('/sports/:sportname', (req, res) => {
     connection(async (db) => {
         try {
             const sports = await db.collection('sports_new')
-                .find({"name":sportname, "editions": { $in: [edition] }})
+                .find({"name":sportname, "edition": edition})
                 .toArray();
             res.status(200).json(sports);
         } catch (err) {
