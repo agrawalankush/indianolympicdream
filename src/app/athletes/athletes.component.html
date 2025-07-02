@@ -32,8 +32,9 @@
   </span>
   <mat-card color="primary" class="athletes-card mat-elevation-z8" *ngFor="let athlete of athletes">
     <mat-card-header>
-      <img mat-card-avatar routerLink="/sports/{{athlete.sportname}}" class="pictogram-button-image"
-        src="assets/images/pictograms/icons/{{athlete.sportname}}.png" alt="{{athlete.sportname}} pictogram" />
+      <img mat-card-avatar [routerLink]="['/sports/' + athlete.sportname]" [queryParams]="{edition: edition}"
+        class="pictogram-button-image" src="assets/images/pictograms/icons/{{athlete.sportname}}.png"
+        alt="{{athlete.sportname}} pictogram" />
       <mat-card-title>{{ athlete.name }}</mat-card-title>
       <mat-card-subtitle>{{ athlete.event }}</mat-card-subtitle>
     </mat-card-header>

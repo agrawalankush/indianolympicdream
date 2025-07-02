@@ -38,13 +38,13 @@
                                                 <button mat-fab color="primary" [matTooltip]="'Qualified Athletes'"
                                                         matTooltipPosition="below" matTooltipClass="custom-tooltip"
                                                         [routerLink]="['/athletes']"
-                                                        [queryParams]="{sports: qualifiedAthletesString, pageIndex: '0', pazeSize: '8'}">
+                                                        [queryParams]="{sports: qualifiedAthletesString, pageIndex: '0', pazeSize: '8', edition: edition}">
                                                         <mat-icon>directions_run</mat-icon>
                                                 </button>
                                                 <button mat-fab color="primary" [matTooltip]="'Schedule'"
                                                         matTooltipPosition="below" matTooltipClass="custom-tooltip"
                                                         [routerLink]="['/schedule']"
-                                                        [queryParams]="{sport: sportsdetails.name}">
+                                                        [queryParams]="{sport: sportsdetails.name, edition: edition}">
                                                         <mat-icon>today</mat-icon>
                                                 </button>
                                         </div>

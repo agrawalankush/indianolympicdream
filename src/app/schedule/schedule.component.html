@@ -18,8 +18,8 @@
   <section class="schedule-section" *ngFor="let sports of schedule">
     <div class="schedule-label">
       <div *ngIf="!getByDate" color="">
-        <img *ngIf="sports?.sportname" routerLink="/sports/{{sports?.sportname}}"
-          class="pictogram-button-image pictogram-sport-schedule"
+        <img *ngIf="sports?.sportname" [routerLink]="['/sports/' + sports?.sportname]"
+          [queryParams]="{edition: edition}" class="pictogram-button-image pictogram-sport-schedule"
           src="assets/images/pictograms/icons/{{sports?.sportname}}.png" alt="{{sports.sportname}} pictogram" />
       </div>
       <div *ngIf="getByDate" color="">{{sports.sportname | humanize}}</div>
