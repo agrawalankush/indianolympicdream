@@ -18,7 +18,7 @@
       'arrow_drop_down' }}</mat-icon>
   </div>
 
-  <mat-menu #olympicsMenu="matMenu">
+  <mat-menu #olympicsMenu="matMenu" class="custom-menu">
     <button mat-menu-item *ngFor="let option of olympicOptions" (click)="onOlympicsChange(option.id)">
       <img [src]="option.logo" class="olympics-option-logo" [alt]="option.name + ' logo'" loading="lazy"
         decoding="async" fetchpriority="low" width="24" height="24">
@@ -122,7 +122,7 @@
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
-    <div [@routeAnimations]="prepareRoute(outlet)">
+    <div [@routeAnimations]="prepareRoute(outlet)" class="router-outlet-container">
       <router-outlet #outlet="outlet"></router-outlet>
     </div>
     <!-- <mat-toolbar  class="botton-toolbar"></mat-toolbar> -->
