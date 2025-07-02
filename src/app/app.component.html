@@ -3,15 +3,19 @@
   <button mat-icon-button (click)="drawer.toggle()">
     <mat-icon>menu</mat-icon>
   </button>
-  <div class="logo-container" [routerLink]="['/home']" [queryParams]="{ edition: selectedOlympics }" [class.active-logo]="isActivePath()">
+  <div class="logo-container" [routerLink]="['/home']" [queryParams]="{ edition: selectedOlympics }"
+    [class.active-logo]="isActivePath()">
     <span>Indian</span>
     <img src="assets/images/generic/logo.png" class="olympic-logo" alt="olympic rings logo" loading="lazy"
       decoding="async" fetchpriority="high" width="60" height="24">
     <span>Dream</span>
   </div>
-  <div class="logo-container" [matMenuTriggerFor]="olympicsMenu">
+  <div class="logo-container" [matMenuTriggerFor]="olympicsMenu" (menuOpened)="isOlympicsMenuOpen = true"
+    (menuClosed)="isOlympicsMenuOpen = false">
     <img [src]="selectedOlympicsLogo" class="olympics-option-logo" [alt]="selectedOlympics + ' logo'" loading="lazy"
       decoding="async" fetchpriority="low" width="50" height="50">
+    <mat-icon class="arrow-icon" [color]="isOlympicsMenuOpen ? '' : 'primary'">{{ isOlympicsMenuOpen ? 'arrow_drop_up' :
+      'arrow_drop_down' }}</mat-icon>
   </div>
 
   <mat-menu #olympicsMenu="matMenu">
@@ -23,11 +27,13 @@
   </mat-menu>
 
   <nav class="nav-links">
-    <button class="nav-button" [routerLink]="['/athletes']" [queryParams]="{ edition: selectedOlympics }" mat-button routerLinkActive="active-link">
+    <button class="nav-button" [routerLink]="['/athletes']" [queryParams]="{ edition: selectedOlympics }" mat-button
+      routerLinkActive="active-link">
       <!-- <mat-icon>directions_run</mat-icon> -->
       Quotas Earned
     </button>
-    <button class="nav-button" [routerLink]="['/calendar']" [queryParams]="{ edition: selectedOlympics }" mat-button routerLinkActive="active-link">
+    <button class="nav-button" [routerLink]="['/calendar']" [queryParams]="{ edition: selectedOlympics }" mat-button
+      routerLinkActive="active-link">
       <!-- <mat-icon>calendar_month</mat-icon> -->
       Calendar
     </button>
@@ -36,11 +42,13 @@
       <!-- <mat-icon>date_range</mat-icon> -->
       Schedule
     </button>
-    <button class="nav-button" [routerLink]="['/shows']" [queryParams]="{ edition: selectedOlympics }" mat-button routerLinkActive="active-link">
+    <button class="nav-button" [routerLink]="['/shows']" [queryParams]="{ edition: selectedOlympics }" mat-button
+      routerLinkActive="active-link">
       <!-- <mat-icon>movie</mat-icon> -->
       Shows I love
     </button>
-    <button class="nav-button" [routerLink]="['/stories']" [queryParams]="{ edition: selectedOlympics }" mat-button routerLinkActive="active-link">
+    <button class="nav-button" [routerLink]="['/stories']" [queryParams]="{ edition: selectedOlympics }" mat-button
+      routerLinkActive="active-link">
       <!-- <mat-icon>description</mat-icon> -->
       Stories
     </button>
@@ -52,7 +60,8 @@
       [ngClass]="{'active-link': router.url === '/about'}">
       About
     </button>
-    <button class="nav-button" [routerLink]="['/feedback']" [queryParams]="{ edition: selectedOlympics }" mat-button routerLinkActive="active-link">
+    <button class="nav-button" [routerLink]="['/feedback']" [queryParams]="{ edition: selectedOlympics }" mat-button
+      routerLinkActive="active-link">
       <!-- <mat-icon>feedback</mat-icon> -->
       Feedback
     </button>
@@ -76,23 +85,28 @@
         <mat-icon>directions_run</mat-icon>
         <span class="sidenav-menu">Quotas Earned</span>
       </a>
-      <a mat-list-item [routerLink]="['/calendar']" [queryParams]="{ edition: selectedOlympics }" routerLinkActive="mat-list-active">
+      <a mat-list-item [routerLink]="['/calendar']" [queryParams]="{ edition: selectedOlympics }"
+        routerLinkActive="mat-list-active">
         <mat-icon>calendar_month</mat-icon>
         <span class="sidenav-menu">Calendar</span>
       </a>
-      <a mat-list-item [routerLink]="['/schedule']" [queryParams]="{sport: '', edition: selectedOlympics}" routerLinkActive="mat-list-active">
+      <a mat-list-item [routerLink]="['/schedule']" [queryParams]="{sport: '', edition: selectedOlympics}"
+        routerLinkActive="mat-list-active">
         <mat-icon>date_range</mat-icon>
         <span class="sidenav-menu">Schedule</span>
       </a>
-      <a mat-list-item [routerLink]="['/shows']" [queryParams]="{ edition: selectedOlympics }" routerLinkActive="mat-list-active">
+      <a mat-list-item [routerLink]="['/shows']" [queryParams]="{ edition: selectedOlympics }"
+        routerLinkActive="mat-list-active">
         <mat-icon>movie</mat-icon>
         <span class="sidenav-menu">Shows I love</span>
       </a>
-      <a mat-list-item [routerLink]="['/stories']" [queryParams]="{ edition: selectedOlympics }" routerLinkActive="mat-list-active">
+      <a mat-list-item [routerLink]="['/stories']" [queryParams]="{ edition: selectedOlympics }"
+        routerLinkActive="mat-list-active">
         <mat-icon>description</mat-icon>
         <span class="sidenav-menu">Stories</span>
       </a>
-      <a mat-list-item [routerLink]="['/about']" [queryParams]="{ edition: selectedOlympics }" routerLinkActive="mat-list-active">
+      <a mat-list-item [routerLink]="['/about']" [queryParams]="{ edition: selectedOlympics }"
+        routerLinkActive="mat-list-active">
         <mat-icon>info</mat-icon>
         <span class="sidenav-menu">About</span>
       </a>
@@ -100,7 +114,8 @@
         <mat-icon>contact_page</mat-icon>
         <span class="sidenav-menu">About Me</span>
       </a>
-      <a mat-list-item [routerLink]="['/feedback']" [queryParams]="{ edition: selectedOlympics }" routerLinkActive="mat-list-active">
+      <a mat-list-item [routerLink]="['/feedback']" [queryParams]="{ edition: selectedOlympics }"
+        routerLinkActive="mat-list-active">
         <mat-icon>feedback</mat-icon>
         <span class="sidenav-menu">Feedback</span>
       </a>

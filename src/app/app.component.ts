@@ -46,6 +46,7 @@ import { FormsModule } from '@angular/forms';
   ]
 })
 export class AppComponent implements OnInit {
+  public isOlympicsMenuOpen = false;
   public loading = true;
   public isLightTheme = false;
   @HostBinding('class') componentCssClass;
