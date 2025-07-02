@@ -3,20 +3,16 @@ import { SwupdateService } from './swupdate.service';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { Router, Event as RouterEvent, NavigationStart, NavigationEnd, NavigationCancel, NavigationError, RouterOutlet, ActivatedRoute, RouterLink, RouterLinkActive } from '@angular/router';
 import { slideInAnimation } from './animations';
-import { LoaderComponent } from './shared/components/loader/loader.component';
 import { CommonModule, NgClass, NgIf } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatSelectModule, MatSelectChange } from '@angular/material/select';
-import { FormsModule } from '@angular/forms';
-// LoaderComponent is imported below with other standalone components from './shared/components/loader/loader.component'
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { LoaderService } from './shared/components/loader/loader.service';
 
 @Component({
   selector: 'app-root',
@@ -31,23 +27,19 @@ import { FormsModule } from '@angular/forms';
     RouterOutlet,
     RouterLink,
     RouterLinkActive,
-    LoaderComponent,
     MatToolbarModule,
     MatButtonModule,
     MatIconModule,
     MatMenuModule,
     MatSlideToggleModule,
-    MatProgressBarModule,
     MatSidenavModule,
     MatListModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    FormsModule
+    MatProgressSpinnerModule
   ]
 })
 export class AppComponent implements OnInit {
   public isOlympicsMenuOpen = false;
-  public loading = true;
+  public loading: boolean = false;
   public isLightTheme = false;
   @HostBinding('class') componentCssClass;
   selectedtheme: string;
@@ -55,7 +47,6 @@ export class AppComponent implements OnInit {
   currentSport: string = '';
   olympicOptions = [
     { id: '2020', name: 'Tokyo 2020', logo: 'assets/images/olympics/tokyo2020_no_bg.png' },
-    // { id: '2024', name: 'Paris 2024', logo: 'assets/images/olympics/paris2024.png' },
     { id: '2028', name: 'LA 2028', logo: 'assets/images/olympics/la2028.png' }
   ];
 
@@ -66,8 +57,12 @@ export class AppComponent implements OnInit {
     public router: Router,
     private route: ActivatedRoute,
     private swupdateservice: SwupdateService,
-    public overlayContainer: OverlayContainer
+    public overlayContainer: OverlayContainer,
+    private loaderService: LoaderService
   ) {
+    this.loaderService.loaderState.subscribe(state => {
+      this.loading = state.show;
+    });
     this.loadThemePreference();
     this.swupdateservice.checkForUpdates();
     this.router.events.subscribe((event: RouterEvent) => {
@@ -107,11 +102,9 @@ export class AppComponent implements OnInit {
   }
 
   loadThemePreference() {
-    // Load theme from localStorage or default to light theme
     const savedTheme = localStorage.getItem('selectedTheme');
     this.currentTheme = savedTheme || 'default-theme';
 
-    // Apply the theme
     if (this.componentCssClass) {
       this.overlayContainer.getContainerElement().classList.remove(this.componentCssClass);
     }
@@ -120,11 +113,9 @@ export class AppComponent implements OnInit {
   }
 
   onSetTheme() {
-    // Toggle theme
     this.currentTheme = this.currentTheme === "default-theme" ? "dark-theme" : "default-theme";
     localStorage.setItem('selectedTheme', this.currentTheme);
 
-    // Apply theme
     if (this.componentCssClass) {
       this.overlayContainer.getContainerElement().classList.remove(this.componentCssClass);
     }
@@ -146,7 +137,7 @@ export class AppComponent implements OnInit {
     this.selectedOlympicsLogo = selected ? selected.logo : this.olympicOptions[0].logo;
   }
   prepareRoute(outlet: RouterOutlet) {
-    return outlet && outlet.activatedRouteData && outlet.activatedRouteData.animation;
+    return outlet && outlet.activatedRouteData;
   }
 
   navigateToAboutApp() {

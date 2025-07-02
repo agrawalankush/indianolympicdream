@@ -256,3 +256,31 @@ mat-sidenav-content {
   display: flex;
   flex-direction: column;
 }
+
+.router-outlet-container {
+  flex: 1;
+  overflow: auto;
+}
+
+.loader-icon-container {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loader-icon-container mat-spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.loader-icon-container .mat-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
