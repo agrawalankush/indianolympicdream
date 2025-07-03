@@ -27,7 +27,7 @@ export const routes: Routes = [
   {
     path: 'schedule',
     loadComponent: () => import('./schedule/schedule.component').then(m => m.ScheduleComponent),
-    data: { animation: 'SchedulePage', order: 5 }
+    data: { animation: 'SchedulePage', order: 5, transitionType: 'bottom-to-top' }
   },
   {
     path: 'shows',
@@ -37,7 +37,7 @@ export const routes: Routes = [
   {
     path: 'stories',
     loadComponent: () => import('./stories/stories.component').then(m => m.StoriesComponent),
-    data: { animation: 'StoriesPage', order: 7, transitionType: 'top-to-bottom' }
+    data: { animation: 'StoriesPage', order: 7, transitionType: 'bottom-to-top' }
   },
   {
     path: 'about',
@@ -47,7 +47,7 @@ export const routes: Routes = [
   {
     path: 'feedback',
     loadComponent: () => import('./feedback/feedback.component').then(m => m.FeedbackComponent),
-    data: { animation: 'FeedbackPage', order: 10, transitionType: 'top-to-bottom' }
+    data: { animation: 'FeedbackPage', order: 10, transitionType: 'bottom-to-top' }
   },
   {
     path: 'internal-error',
