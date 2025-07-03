@@ -1,107 +1,106 @@
 @use '@angular/material' as mat;
+
 .cards-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  margin: 24px 0px 0px 24px;
+  margin: 0px 0px 0px 24px;
 }
 
 .athletes-card {
-  width: 300px;
-  min-width: 300px;
+  width: 320px;
+  min-width: 320px;
   margin-bottom: 16px;
   margin-right: 16px;
   height: 450px;
   background-color: var(--mat-toolbar-container-background-color);
 }
 
-.pictogram-button-image {
-  transform-origin: center bottom;
-    transform: translateY(0);
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-                box-shadow 0.3s ease;
-  &:hover {
-    transform: translateY(-16px);
-    @include mat.elevation(4);
-    box-shadow: gray 0px 0.1px 4px 2px;
-    cursor: pointer;
-  }
-}
-.mat-mdc-card-header{
-    height: 76px;
-}
-.athlete-image {
-    height:280px;
-    padding:0px;
-    width: 300px;
-    margin-bottom: 4px;
-    object-fit: cover;
-  }
-  .chip-list {
-    width: 80%;
-  }
- 
-.filter-options {
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  padding: 24px 24px 8px 24px;
-  background-color: var(--mat-toolbar-container-background-color);
-  @include mat.elevation(4);
-  min-height: 84px;
+
+.mat-mdc-card-header {
+  height: 76px;
 }
 
-.filter-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 56px; // Standard mat-paginator height
-  
-  @media screen and (max-width: 768px) {
-    flex-direction: column;
-    align-items: stretch;
-    min-height: auto;
-  }
+.athlete-image {
+  height: 280px;
+  padding: 0px;
+  width: 320px;
+  margin-bottom: 4px;
+  object-fit: cover;
+}
+
+.chip-list {
+  width: 80%;
 }
 
 .search-field {
   flex: 1;
-  max-width: 600px;
-  padding-right: 16px;
+  max-width: 100%;
+  margin: 16px 16px 0 16px;
   min-height: 56px;
   display: flex;
+  justify-content: center;
   align-items: center;
-  
-  @media screen and (max-width: 768px) {
-    max-width: 100%;
-    padding-right: 0;
-    padding-bottom: 16px;
-    height: auto;
-  }
-}
-
-.paginator {
-  background: transparent;
-  
-  @media screen and (max-width: 768px) {
-    width: 100%;
-  }
 }
 
 .mat-form-field {
-   width: 100%;
-   padding-bottom: 0;
-   height: auto;
-   font-family: "Geist Mono", system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  width: 100%;
+  padding-bottom: 0;
+  height: auto;
+  text-align: left;
+  font-family: "Geist Mono", system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 
-   mat-icon {
-     color: var(--mat-toolbar-container-text-color);
-     opacity: 0.7;
-     margin-right: 8px;
-   }
+  mat-icon {
+    color: var(--mat-toolbar-container-text-color);
+    opacity: 0.7;
+    margin-right: 8px;
+  }
 }
 
-.mat-mdc-paginator {
-  background-color: var(--mat-toolbar-container-background-color);
+.pictogram-chip {
+  &.mat-mdc-standard-chip {
+    padding: 0;
+    overflow: visible;
+
+    .mdc-evolution-chip__action--primary {
+      padding: 0;
+    }
+  }
+
+  .mdc-chip__media {
+    margin: 0;
+  }
+}
+
+.pictogram-button-image {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  cursor: pointer;
+}
+.dark-theme .pictogram-button-image {
+  filter: brightness(1) contrast(0.8) invert(1);
+}
+
+.pictogram-chip-remove-icon {
+  position: absolute;
+  top: -12px;
+  right: -10px;
+  background-color: white;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: scale(1.1);
+  }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params, Router, RouterLink } from '@angular/router';
 import { SportsdataService } from '../sportsdata.service';
-import { MatPaginatorModule, PageEvent, MatPaginator } from '@angular/material/paginator'; // Added MatPaginator type
+// import { MatPaginatorModule, PageEvent, MatPaginator } from '@angular/material/paginator'; // Added MatPaginator type
 // import { Athletes} from '../models/app-models';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { UntypedFormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -44,7 +44,7 @@ interface AthleteResponse {
     MatChipsModule,
     MatIconModule,
     MatAutocompleteModule,
-    MatPaginatorModule,
+    // MatPaginatorModule,
     MatCardModule
   ]
 })
@@ -52,14 +52,15 @@ export class AthletesComponent implements OnInit {
   public errmsg: string;
   public athletes: Athlete[];
   public edition: string;
-  @ViewChild(MatPaginator) paginator: MatPaginator; // Types are now imported
+  // @ViewChild(MatPaginator) paginator: MatPaginator; // Types are now imported
+  // TO DO: Replace pagination with Virtual Scrolling
   // MatPaginator Inputs
-  length: number;
-  pageSize = 24;
-  pageSizeOptions: number[] = [24, 48, 96];
+  // length: number;
+  // pageSize = 24;
+  // pageSizeOptions: number[] = [24, 48, 96];
   // MatPaginator Output
-  pageEvent: PageEvent;
-  pageIndex = 0;
+  // pageEvent: PageEvent;
+  // pageIndex = 0;
   // Search autocomplete Inputs
   visible = true;
   selectable = true;
@@ -104,7 +105,7 @@ export class AthletesComponent implements OnInit {
         if (this.edition !== newEdition) {
           this.edition = newEdition;
           this.sports = []; // Reset sports when edition changes
-          this.SearchAthletes("[]", "0", "24", this.edition);
+          this.SearchAthletes("[]", "0", "100", this.edition);
 
         }
         if (params.sports) {
@@ -115,10 +116,10 @@ export class AthletesComponent implements OnInit {
       );
   }
   get queryParams() {
-    const index = this.paginator.pageIndex * this.paginator.pageSize;
-    const size = this.paginator.pageSize;
+    // const index = this.paginator.pageIndex * this.paginator.pageSize;
+    // const size = this.paginator.pageSize;
     const sports = JSON.stringify(this.sports);
-    const queryParams: Params = { sports: sports, pageIndex: index, pazeSize: size, edition: this.edition };
+    const queryParams: Params = { sports: sports, pageIndex: 0, pazeSize: 100, edition: this.edition };
     return queryParams;
   }
   private _filter(value: string): string[] {
@@ -147,16 +148,16 @@ export class AthletesComponent implements OnInit {
         // queryParamsHandling: 'merge'
       });
   }
-  handlePageEvent(e: PageEvent) {
-    // console.log(e);
-    this.prepareQueryUrl();
-  }
+  // handlePageEvent(e: PageEvent) {
+  //   // console.log(e);
+  //   this.prepareQueryUrl();
+  // }
 
   selected(event: MatAutocompleteSelectedEvent): void {
     this.sports.push(event.option.viewValue);
     this.sportInput.nativeElement.value = '';
     this.sportCtrl.setValue(null);
-    this.paginator.pageIndex = 0;
+    // this.paginator.pageIndex = 0;
     this.prepareQueryUrl();
   }
 
@@ -164,7 +165,7 @@ export class AthletesComponent implements OnInit {
     const index = this.sports.indexOf(sport);
     if (index >= 0) {
       this.sports.splice(index, 1);
-      this.paginator.pageIndex = 0;
+      // this.paginator.pageIndex = 0;
       this.prepareQueryUrl();
     }
   }
@@ -178,7 +179,7 @@ export class AthletesComponent implements OnInit {
       )
       .subscribe((res: AthleteResponse) => {
         this.athletes = res.athletes;
-        this.length = res.total;
+        // this.length = res.total;
       });
   }
 }

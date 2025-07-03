@@ -78,22 +78,6 @@ body {
   filter: brightness(1) contrast(0.8) invert(1);
 }
 
-.mat-chip-category { 
-  background-color: var(--primary-color) !important; 
-}
-.mdc-evolution-chip__text-label {
-  color: var(--color-background) !important;
-}
-.mat-mdc-standard-chip:not(.mdc-evolution-chip--disabled) .mdc-evolution-chip__action--trailing {
-  color: var(--color-background) !important; 
-}
-
-.sticky-paginator {
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-}
-
 .pictogram-sport-details {
   height: 40px;
   width: 40px;
@@ -283,4 +267,19 @@ a {
   border-radius: 25px !important;
   min-width: 60px !important;
   max-width: 120px !important;
+}
+
+.mat-mdc-standard-chip {
+  padding: 0 !important;
+  overflow: visible;
+
+  .mdc-evolution-chip__action--primary {
+    padding: 0 !important;
+  }
+}
+.mat-mdc-standard-chip.mdc-evolution-chip--with-trailing-action .mdc-evolution-chip__action--trailing {
+  padding: 0 !important;
+}
+.mat-mdc-standard-chip:not(.mdc-evolution-chip--disabled) .mdc-evolution-chip__action--trailing {
+  color: var(--primary-color) !important;
 }

@@ -4,10 +4,10 @@
       <mat-form-field appearance="outline" class="chip-list">
         <mat-label>Search Sports</mat-label>
         <mat-chip-grid #chipGrid aria-label="Sport selection">
-          <mat-chip-row class="mat-chip-category" *ngFor="let sport of sports" [selectable]="selectable"
-            [removable]="removable" (removed)="remove(sport)">
-            {{sport}}
-            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+          <mat-chip-row class="pictogram-chip" *ngFor="let sport of sports" (removed)="remove(sport)">
+            <img mat-chip-avatar class="pictogram-button-image"
+              [src]="'assets/images/pictograms/icons/' + sport + '.png'" [alt]="sport + ' pictogram'">
+            <mat-icon matChipRemove color="primary" class="pictogram-chip-remove-icon">cancel</mat-icon>
           </mat-chip-row>
           <input #sportInput [formControl]="sportCtrl" [matAutocomplete]="auto" [matChipInputFor]="chipGrid"
             [matChipInputSeparatorKeyCodes]="separatorKeysCodes" placeholder="Search for a sport...">
@@ -20,14 +20,15 @@
         </mat-autocomplete>
       </mat-form-field>
     </div>
-    <mat-paginator class="paginator" [length]="length" [pageSize]="pageSize" [pageIndex]="pageIndex"
+    <!-- TO DO: Replace pagination with Virtual Scrolling -->
+    <!-- <mat-paginator class="paginator" [length]="length" [pageSize]="pageSize" [pageIndex]="pageIndex"
       [pageSizeOptions]="pageSizeOptions" (page)="handlePageEvent($event)">
-    </mat-paginator>
+    </mat-paginator> -->
   </div>
 </div>
 <div class="cards-container">
   <mat-error *ngIf="errmsg">{{errmsg}}</mat-error>
-  <span *ngIf="length === 0">
+  <span *ngIf="athletes?.length === 0">
     Our Athletes are trying hard, hopefully we'll see someone qualifying soon.
   </span>
   <mat-card color="primary" class="athletes-card mat-elevation-z8" *ngFor="let athlete of athletes">
@@ -52,7 +53,7 @@
   </mat-card>
 </div>
 <div class="bottom-note">
-  <mat-card *ngIf="!(length === 0)">
+  <mat-card *ngIf="!(athletes?.length === 0)">
     <mat-card-content>
       Note: The above athletes are the ones who has won quota places for India,
       the final decision to confirm their participation for Tokyo will be taken by our NOCs. There is
