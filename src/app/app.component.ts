@@ -140,10 +140,6 @@ export class AppComponent implements OnInit {
     return outlet && outlet.activatedRouteData;
   }
 
-  navigateToAboutApp() {
-    this.router.navigate(['/about'], { queryParams: { edition: this.selectedOlympics } });
-  }
-
   openAboutMe() {
     window.open('https://github.com/agrawalankush', '_blank');
   }
