@@ -1,54 +1,41 @@
 <div class="calendar-wrapper">
   <ng-container *ngIf="totalRecords > 0; else noData">
-    <mat-paginator class="sticky-paginator" #paginator [length]="totalRecords" [pageIndex]="0" [pageSize]="10"
-      [pageSizeOptions]="[5,10,25]">
-    </mat-paginator>
-    <div class="container">
-      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-        <ng-container matColumnDef="EventName">
-          <mat-header-cell *matHeaderCellDef>Event Name</mat-header-cell>
-          <mat-cell *matCellDef="let element">
-            <span class="mobile-label">Event Name:</span>
-            {{ element.name }}
-          </mat-cell>
-        </ng-container>
-        <ng-container matColumnDef="Sport">
-          <mat-header-cell *matHeaderCellDef>Sport</mat-header-cell>
-          <mat-cell *matCellDef="let element">
-            <span class="mobile-label">Sport Name:</span>
-            {{ element.sportname }}
-          </mat-cell>
-        </ng-container>
-        <ng-container matColumnDef="StartDate">
-          <mat-header-cell *matHeaderCellDef>StartDate</mat-header-cell>
-          <mat-cell *matCellDef="let element">
-            <span class="mobile-label">Start Date:</span>
-            {{ element.startdate }}
-          </mat-cell>
-        </ng-container>
-        <ng-container matColumnDef="EndDate">
-          <mat-header-cell *matHeaderCellDef>EndDate</mat-header-cell>
-          <mat-cell *matCellDef="let element">
-            <span class="mobile-label">End Date:</span>
-            {{ element.enddate }}
-          </mat-cell>
-        </ng-container>
-        <ng-container matColumnDef="Venue">
-          <mat-header-cell *matHeaderCellDef>Venue</mat-header-cell>
-          <mat-cell *matCellDef="let element">
-            <span class="mobile-label">Venue:</span>
-            {{ element.venue }}
-          </mat-cell>
-        </ng-container>
-        <mat-header-row *matHeaderRowDef="displayedColumns;sticky: true"></mat-header-row>
-        <mat-row mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
-      </table>
+    <!-- Add (scroll)="onScroll($event)" once more data is available-->
+    <div class="cards-container">
+      <mat-card *ngFor="let element of dataSource.data" class="calendar-card mat-elevation-z4">
+        <mat-card-content>
+          <div class="card-item">
+            <span class="label">Event:</span>
+            <span class="value event-name-value" title="{{ element.name }}">{{ element.name }}</span>
+          </div>
+          <div class="card-item">
+            <span class="label">Sport:</span>
+            <span class="value">{{ element.sportname }}</span>
+          </div>
+          <div class="card-item">
+            <span class="label">Start Date:</span>
+            <span class="value">{{ element.startdate }}</span>
+          </div>
+          <div class="card-item">
+            <span class="label">End Date:</span>
+            <span class="value">{{ element.enddate }}</span>
+          </div>
+          <div class="card-item">
+            <span class="label">Venue:</span>
+            <span class="value">{{ element.venue }}</span>
+          </div>
+        </mat-card-content>
+      </mat-card>
+      <div *ngIf="isLoading" class="loading-spinner">
+        <mat-spinner diameter="50"></mat-spinner>
+      </div>
     </div>
   </ng-container>
 
   <ng-template #noData>
     <div class="no-data-message">
-      NO LA 2028 calendar data available yet, this will get updated once the Qualification Pathway is released by respective federations.
+      Qualification Pathway for LA2028 isn't published yet. Once the Qualification Pathway is released by
+      respective sports federations the calendar will be updated.
     </div>
   </ng-template>
 </div>
