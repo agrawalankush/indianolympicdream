@@ -2,9 +2,10 @@
     {{errmsg}}
 </mat-error>
 <!-- <pre>{{showsdata}}</pre> -->
-<mat-paginator class="sticky-paginator" [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+<!-- TO DO: Replace pagination with Virtual Scrolling -->
+<!-- <mat-paginator class="sticky-paginator" [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
     (page)="handlePageEvent($event)">
-</mat-paginator>
+</mat-paginator> -->
 <div class="cards-container">
     <mat-card color="primary" class="movies-card" *ngFor="let showcontent of showsdata">
         <mat-card-header>
