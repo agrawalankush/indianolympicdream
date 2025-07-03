@@ -101,17 +101,9 @@ export class AthletesComponent implements OnInit {
   ngOnInit() {
     this.route.queryParams
       .subscribe(params => {
-        const newEdition = params.edition || '2028';
-        if (this.edition !== newEdition) {
-          this.edition = newEdition;
-          this.sports = []; // Reset sports when edition changes
-          this.SearchAthletes("[]", "0", "100", this.edition);
-
-        }
-        if (params.sports) {
-          this.sports = JSON.parse(params.sports);
-          this.SearchAthletes(params.sports, params.pageIndex, params.pazeSize, this.edition);
-        }
+        this.edition = params.edition || '2028';
+        this.sports = params.sports ? JSON.parse(params.sports) : [];
+        this.SearchAthletes(JSON.stringify(this.sports), "0", "100", this.edition);
       }
       );
   }
