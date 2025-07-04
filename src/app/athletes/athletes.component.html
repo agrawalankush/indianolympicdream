@@ -1,4 +1,4 @@
-<div class="filter-options mat-elevation-z1">
+<div *ngIf="total > 0" class="filter-options mat-elevation-z1">
   <div class="filter-container">
     <div class="search-field">
       <mat-form-field appearance="outline" class="chip-list">
@@ -26,7 +26,7 @@
     </mat-paginator> -->
   </div>
 </div>
-<div class="cards-container">
+<div *ngIf="total > 0" class="cards-container">
   <mat-error *ngIf="errmsg">{{errmsg}}</mat-error>
   <span *ngIf="athletes?.length === 0">
     Our Athletes are trying hard, hopefully we'll see someone qualifying soon.
@@ -52,7 +52,7 @@
     </mat-card-content>
   </mat-card>
 </div>
-<div class="bottom-note">
+<div *ngIf="total > 0" class="bottom-note">
   <mat-card *ngIf="!(athletes?.length === 0)">
     <mat-card-content>
       Note: The above athletes are the ones who has won quota places for India,
@@ -60,4 +60,17 @@
       full selection process in place where someone else may be sent by the National Fed. in lieu of the quota holder.
     </mat-card-content>
   </mat-card>
+</div>
+<div *ngIf="edition === '2028'" class="road-to-la-container">
+  <div *ngIf="total === 0" class="no-data-message">
+    The Central American and Caribbean Games, scheduled to take place in Santo Domingo, Dominican Republic, in 2026,
+    will
+    mark the beginning of the road to Los Angeles 2028.
+  </div>
+  <app-countdown *ngIf="total === 0" [targetDate]="countdownTargetDate" label="Road To Los Angeles 2028:">
+  </app-countdown>
+  <button mat-fab extended color="primary" class="view-all-button" (click)="onOlympicsChange('2020')">
+    <mat-icon>directions_run</mat-icon>
+    See Tokyo 2020 Athletes
+  </button>
 </div>

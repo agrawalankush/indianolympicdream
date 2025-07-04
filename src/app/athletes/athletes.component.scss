@@ -104,3 +104,9 @@
     transform: scale(1.1);
   }
 }
+.road-to-la-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}

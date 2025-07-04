@@ -40,6 +40,11 @@
       <!-- <mat-icon>calendar_month</mat-icon> -->
       Calendar
     </button>
+    <button class="nav-button" [routerLink]="['/schedule']" [queryParams]="{sport: '', edition: selectedOlympics}"
+      [routerLinkActiveOptions]="{exact: false}" mat-button routerLinkActive="active-link">
+      <!-- <mat-icon>date_range</mat-icon> -->
+      Schedule
+    </button>
     <button class="nav-button" [routerLink]="['/shows']" [queryParams]="{ edition: selectedOlympics }" mat-button
       routerLinkActive="active-link">
       <!-- <mat-icon>movie</mat-icon> -->
@@ -49,11 +54,6 @@
       routerLinkActive="active-link">
       <!-- <mat-icon>description</mat-icon> -->
       Stories
-    </button>
-    <button class="nav-button" [routerLink]="['/schedule']" [queryParams]="{sport: '', edition: selectedOlympics}"
-      [routerLinkActiveOptions]="{exact: false}" mat-button routerLinkActive="active-link">
-      <!-- <mat-icon>date_range</mat-icon> -->
-      Schedule
     </button>
     <button class="nav-button" [routerLink]="['/feedback']" [queryParams]="{ edition: selectedOlympics }" mat-button
       routerLinkActive="active-link">
@@ -88,6 +88,11 @@
         <mat-icon>calendar_month</mat-icon>
         <span class="sidenav-menu">Calendar</span>
       </a>
+      <a mat-list-item [routerLink]="['/schedule']" [queryParams]="{sport: '', edition: selectedOlympics}"
+        routerLinkActive="mat-list-active">
+        <mat-icon>date_range</mat-icon>
+        <span class="sidenav-menu">Schedule</span>
+      </a>
       <a mat-list-item [routerLink]="['/shows']" [queryParams]="{ edition: selectedOlympics }"
         routerLinkActive="mat-list-active">
         <mat-icon>movie</mat-icon>
@@ -97,11 +102,6 @@
         routerLinkActive="mat-list-active">
         <mat-icon>description</mat-icon>
         <span class="sidenav-menu">Stories</span>
-      </a>
-      <a mat-list-item [routerLink]="['/schedule']" [queryParams]="{sport: '', edition: selectedOlympics}"
-        routerLinkActive="mat-list-active">
-        <mat-icon>date_range</mat-icon>
-        <span class="sidenav-menu">Schedule</span>
       </a>
       <a mat-list-item [routerLink]="['/feedback']" [queryParams]="{ edition: selectedOlympics }"
         routerLinkActive="mat-list-active">

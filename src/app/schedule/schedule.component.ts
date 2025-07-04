@@ -8,12 +8,14 @@ import { NgIf, NgFor, KeyValuePipe } from '@angular/common';
 import { MatDivider } from '@angular/material/divider';
 import { HumanizePipe } from '../shared/components/loader/pipes/humanize';
 import { CountdownComponent } from '../countdown/countdown.component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-schedule',
   templateUrl: './schedule.component.html',
   styleUrls: ['./schedule.component.scss'],
-  imports: [MatToolbar, NgIf, RouterLinkActive, RouterLink, NgFor, MatDivider, KeyValuePipe, HumanizePipe, CountdownComponent]
+  imports: [MatToolbar, NgIf, RouterLinkActive, RouterLink, NgFor, MatDivider, KeyValuePipe, HumanizePipe, CountdownComponent, MatButtonModule, MatIconModule]
 })
 export class ScheduleComponent implements OnInit, OnDestroy {
   schedule: any;
@@ -149,4 +151,11 @@ export class ScheduleComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
   }
 
+  onOlympicsChange(selection: string) {
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { edition: selection },
+      queryParamsHandling: 'merge'
+    });
+  }
 }

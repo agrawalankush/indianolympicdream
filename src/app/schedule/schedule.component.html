@@ -12,8 +12,6 @@
     </div>
   </div>
 </mat-toolbar>
-<app-countdown *ngIf="edition === '2028'" [targetDate]="countdownTargetDate"
-  label="Time until LA2028 Olympic Games"></app-countdown>
 <div *ngIf="schedule && edition !== '2028'" class="schedule-conatiner">
   <section class="schedule-section" *ngFor="let sports of schedule">
     <div class="schedule-label">
@@ -40,4 +38,18 @@
     </div>
     <mat-divider></mat-divider>
   </section>
+</div>
+<div *ngIf="edition === '2028'" class="la-2028-container">
+  <div class="no-data-message">
+    The 2028 Los Angeles Olympic program (LA28) is scheduled to take place from 14-30 July 2028. It will
+    feature 35 sports, including five new additions: baseball/softball, cricket, flag football, lacrosse, and squash,
+    along with a total of 351 medal events, 22 more than Paris 2024. Schedule will be Updated as Quota places are earned
+    by Indian Athletes.
+  </div>
+  <app-countdown *ngIf="edition === '2028'" [targetDate]="countdownTargetDate" label="LA 2028 Opening Ceremony:">
+  </app-countdown>
+  <button mat-fab extended color="primary" class="view-all-button" (click)="onOlympicsChange('2020')">
+    <mat-icon>date_range</mat-icon>
+    See Tokyo 2020 Schedule
+  </button>
 </div>

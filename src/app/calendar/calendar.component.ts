@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ScrollingModule } from '@angular/cdk/scrolling';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
 import { SportsdataService } from '../sportsdata.service';
 import { Calendar } from '../models/app-models';
@@ -9,13 +9,15 @@ import { Subject, Subscription } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-calendar',
   standalone: true,
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.scss'],
-  imports: [CommonModule, ScrollingModule, MatProgressSpinnerModule, MatCardModule]
+  imports: [CommonModule, ScrollingModule, MatProgressSpinnerModule, MatCardModule, MatButtonModule, MatIconModule]
 })
 export class CalendarComponent implements OnInit, OnDestroy {
   public displayedColumns: string[] = ['EventName', 'Sport', 'StartDate', 'EndDate', 'Venue'];
@@ -35,6 +37,7 @@ export class CalendarComponent implements OnInit, OnDestroy {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private sportservice: SportsdataService
   ) {
     this.edition = this.route.snapshot.queryParams['edition'] || '2028';
@@ -117,5 +120,12 @@ export class CalendarComponent implements OnInit, OnDestroy {
     if (this.dataSubscription) {
       this.dataSubscription.unsubscribe();
     }
+  }
+  onOlympicsChange(selection: string) {
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { edition: selection },
+      queryParamsHandling: 'merge'
+    });
   }
 }

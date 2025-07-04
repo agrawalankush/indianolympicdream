@@ -1,5 +1,5 @@
 <div class="calendar-wrapper">
-  <ng-container *ngIf="totalRecords > 0; else noData">
+  <ng-container *ngIf="totalRecords > 0">
     <!-- Add (scroll)="onScroll($event)" once more data is available-->
     <div class="cards-container">
       <mat-card *ngFor="let element of dataSource.data" class="calendar-card mat-elevation-z4">
@@ -31,11 +31,15 @@
       </div>
     </div>
   </ng-container>
-
-  <ng-template #noData>
-    <div class="no-data-message">
-      Qualification Pathway for LA2028 isn't published yet. Once the Qualification Pathway is released by
-      respective sports federations the calendar will be updated.
+  <div class="LA2028-container">
+    <div *ngIf="totalRecords === 0" class="no-data-message">
+      Qualification pathway will be released by respective sports federations for each of the 18 sports. This page will
+      be updated as and when the official pathway is released.
     </div>
-  </ng-template>
+    <button *ngIf="totalRecords === 0" mat-fab extended color="primary" class="view-all-button"
+      (click)="onOlympicsChange('2020')">
+      <mat-icon>calendar_month</mat-icon>
+      See Tokyo 2020 Calendar
+    </button>
+  </div>
 </div>

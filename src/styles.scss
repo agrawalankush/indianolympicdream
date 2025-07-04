@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @use './styles/theme-manager';
+@use '@angular/material' as mat;
 
 /* Geist Font Face Declarations */
 /* Only include essential font weights to reduce bundle size */
@@ -280,6 +281,28 @@ a {
 .mat-mdc-standard-chip.mdc-evolution-chip--with-trailing-action .mdc-evolution-chip__action--trailing {
   padding: 0 !important;
 }
+
 .mat-mdc-standard-chip:not(.mdc-evolution-chip--disabled) .mdc-evolution-chip__action--trailing {
   color: var(--primary-color) !important;
+}
+
+.no-data-message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-self: center;
+  min-height: 100px;
+  font-family: 'Geist Sans', sans-serif;
+  color: var(--color-text);
+  text-align: center;
+  padding: 20px;
+  margin: 24px;
+  border-radius: 8px;
+  line-height: 24px;
+  background-color: var(--mat-toolbar-container-background-color);
+  @include mat.elevation(2);
+  max-width: 865px;
+  @media (max-width: 600px) {
+    text-align: left;
+  }
 }

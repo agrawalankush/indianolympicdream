@@ -11,8 +11,10 @@ import { map, startWith, catchError, finalize } from 'rxjs/operators';
 import { MatChipsModule, MatChipGrid } from '@angular/material/chips'; // Added MatChipGrid type
 import { MatInputModule } from '@angular/material/input'; // Corrected to MatInputModule
 import { CommonModule } from '@angular/common';
-import { MatIconModule } from '@angular/material/icon'; // Changed
-import { MatCardModule } from '@angular/material/card'; // Changed
+import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
+import { CountdownComponent } from '../countdown/countdown.component';
+import { MatButtonModule } from '@angular/material/button';
 
 interface Athlete {
   name: string;
@@ -45,13 +47,16 @@ interface AthleteResponse {
     MatIconModule,
     MatAutocompleteModule,
     // MatPaginatorModule,
-    MatCardModule
+    MatCardModule,
+    CountdownComponent,
+    MatButtonModule
   ]
 })
 export class AthletesComponent implements OnInit {
   public errmsg: string;
   public athletes: Athlete[];
   public edition: string;
+  public total: number;
   // @ViewChild(MatPaginator) paginator: MatPaginator; // Types are now imported
   // TO DO: Replace pagination with Virtual Scrolling
   // MatPaginator Inputs
@@ -89,6 +94,7 @@ export class AthletesComponent implements OnInit {
     'Weightlifting',
     'Wrestling'
   ];
+  public countdownTargetDate: Date = new Date('2026-07-24T00:00:00');
 
   @ViewChild('sportInput') sportInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete; // Types are now imported
@@ -171,7 +177,15 @@ export class AthletesComponent implements OnInit {
       )
       .subscribe((res: AthleteResponse) => {
         this.athletes = res.athletes;
-        // this.length = res.total;
+        this.total = res.total;
       });
+  }
+
+  onOlympicsChange(selection: string) {
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { edition: selection },
+      queryParamsHandling: 'merge'
+    });
   }
 }

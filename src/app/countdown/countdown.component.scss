@@ -1,28 +1,28 @@
 .countdown-container {
   display: flex;
   flex-direction: column;
+  text-align: center;
   align-items: center;
-  justify-content: center;
-  padding: 15px;
+  justify-self: center;
+  padding: 16px;
   border-radius: 8px;
   background-color: var(--mat-card-background-color, #f9f9f9); /* Use card background or default */
-  margin: 20px auto; /* Center the component */
+  margin: 0px 0px 24px 0px; /* Center the component */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-  max-width: 400px; /* Limit width for better appearance */
-  box-shadow: var(--primary-color) 0px 0.5px 11px 2px;
+  max-width: 600px; /* Limit width for better appearance */
 }
 
 .countdown-label {
   font-size: 1.3em;
   font-weight: bold;
   margin-bottom: 15px;
-  color: var(--primary-color, #333); /* Use primary color or default */
   text-align: center;
 }
 
 .countdown-timer {
   display: flex;
   gap: 20px;
+  min-height: 50px;
 }
 
 .countdown-item {
