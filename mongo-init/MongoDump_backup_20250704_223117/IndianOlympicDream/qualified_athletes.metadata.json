@@ -1,0 +1,1 @@
+{"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_"}],"uuid":"41636b8f2d02494ab97a568c0900f3d1","collectionName":"qualified_athletes","type":"collection"}
