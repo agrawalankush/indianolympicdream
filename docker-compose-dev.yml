@@ -23,10 +23,11 @@ services:
     environment:
       - MONGO_INITDB_ROOT_USERNAME=${MONGO_ROOT_USERNAME}
       - MONGO_INITDB_ROOT_PASSWORD=${MONGO_ROOT_PASSWORD}
+      - MONGO_DB_NAME=${MONGO_DB_NAME}
     volumes:
       - mongodb-configdb:/data/configdb
       - mongodb-db:/data/db
-      - ./mongo-init:/docker-entrypoint-initdb.d:ro
+      - ./mongo-init:/docker-entrypoint-initdb.d:rw
     expose:
       - "27017"
     networks:
