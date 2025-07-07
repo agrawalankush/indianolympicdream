@@ -43,7 +43,7 @@ export class AppComponent implements OnInit {
   public isLightTheme = false;
   @HostBinding('class') componentCssClass;
   selectedtheme: string;
-  currentTheme = 'default-theme';
+  currentTheme = 'dark-theme';
   currentSport: string = '';
   olympicOptions = [
     { id: '2020', name: 'Tokyo 2020', logo: 'assets/images/olympics/tokyo2020_no_bg.png' },
@@ -107,7 +107,7 @@ export class AppComponent implements OnInit {
 
   loadThemePreference() {
     const savedTheme = localStorage.getItem('selectedTheme');
-    this.currentTheme = savedTheme || 'default-theme';
+    this.currentTheme = savedTheme || 'dark-theme';
 
     if (this.componentCssClass) {
       this.overlayContainer.getContainerElement().classList.remove(this.componentCssClass);
