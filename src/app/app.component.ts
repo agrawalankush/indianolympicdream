@@ -101,6 +101,10 @@ export class AppComponent implements OnInit {
     return url.startsWith('/sports/') || url === '/' || url === '/home';
   }
 
+  isScheduleActive(): boolean {
+    return this.router.url.startsWith('/schedule');
+  }
+
   loadThemePreference() {
     const savedTheme = localStorage.getItem('selectedTheme');
     this.currentTheme = savedTheme || 'default-theme';
