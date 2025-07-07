@@ -117,6 +117,7 @@ export class ScheduleComponent implements OnInit, OnDestroy {
       });
   }
   getSchedule(selectedport: string, edition: string) {
+    this.schedule = null;
     this.sportservice.getschedule(selectedport, edition)
       .subscribe(
         (res: any) => {
@@ -129,6 +130,7 @@ export class ScheduleComponent implements OnInit, OnDestroy {
   }
   getScheduleByDate(date: string, edition: string) {
     this.getByDate = true;
+    this.schedule = null;
     this.sportservice.getschedulebydate(date, edition)
       .subscribe(
         (res: any) => {
