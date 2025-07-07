@@ -282,8 +282,8 @@ a {
   padding: 0 !important;
 }
 
-.mat-mdc-standard-chip:not(.mdc-evolution-chip--disabled) .mdc-evolution-chip__action--trailing {
-  color: var(--primary-color) !important;
+.mat-mdc-standard-chip:not(.mdc-evolution-chip--disabled)  {
+  background-color: transparent !important;
 }
 
 .no-data-message {
@@ -305,4 +305,7 @@ a {
   @media (max-width: 600px) {
     text-align: left;
   }
+}
+.mat-mdc-autocomplete-panel {
+  background-color: var(--mat-toolbar-container-background-color) !important;
 }

@@ -88,7 +88,7 @@
   position: absolute;
   top: -12px;
   right: -10px;
-  background-color: white;
+  // background-color: var(--primary-color);
   border-radius: 50%;
   width: 24px;
   height: 24px;
@@ -101,7 +101,7 @@
   transition: transform 0.2s ease;
 
   &:hover {
-    transform: scale(1.1);
+    transform: scale(1.25);
   }
 }
 .road-to-la-container {

@@ -5,8 +5,8 @@
         <mat-label>Search Sports</mat-label>
         <mat-chip-grid #chipGrid aria-label="Sport selection">
           <mat-chip-row class="pictogram-chip" *ngFor="let sport of sports" (removed)="remove(sport)">
-            <img mat-chip-avatar class="pictogram-button-image"
-              [src]="'assets/images/pictograms/icons/' + sport + '.png'" [alt]="sport + ' pictogram'">
+            <img class="pictogram-button-image" [src]="'assets/images/pictograms/icons/' + sport + '.png'"
+              [alt]="sport + ' pictogram'">
             <mat-icon matChipRemove color="primary" class="pictogram-chip-remove-icon">cancel</mat-icon>
           </mat-chip-row>
           <input #sportInput [formControl]="sportCtrl" [matAutocomplete]="auto" [matChipInputFor]="chipGrid"
