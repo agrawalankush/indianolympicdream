@@ -90,7 +90,8 @@ export class SportDetailsComponent implements OnInit {
         sportName: this.sportsdetails.name
       },
       width: '90%',
-      maxWidth: '800px'
+      maxWidth: '800px',
+      panelClass: 'custom-dialog'
     });
   }
 }
