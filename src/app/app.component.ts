@@ -114,6 +114,7 @@ export class AppComponent implements OnInit {
     }
     this.overlayContainer.getContainerElement().classList.add(this.currentTheme);
     this.componentCssClass = this.currentTheme;
+    this.updateThemeColorMetaTag();
   }
 
   onSetTheme() {
@@ -125,6 +126,18 @@ export class AppComponent implements OnInit {
     }
     this.overlayContainer.getContainerElement().classList.add(this.currentTheme);
     this.componentCssClass = this.currentTheme;
+    this.updateThemeColorMetaTag();
+  }
+
+  private updateThemeColorMetaTag() {
+    const themeColorMetaTag = document.querySelector('meta[name="theme-color"]');
+    if (themeColorMetaTag) {
+      if (this.currentTheme === 'dark-theme') {
+        themeColorMetaTag.setAttribute('content', '#212121'); // Dark theme color
+      } else {
+        themeColorMetaTag.setAttribute('content', '#F5F5F5'); // Light theme color
+      }
+    }
   }
 
   onOlympicsChange(selection: string) {
