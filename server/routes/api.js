@@ -208,4 +208,24 @@ router.get('/athletes', (req, res) => {
     );
 });
 
+router.post('/feedback', (req,res) =>{
+    let feedbackdata = {
+        name: req.body.name,
+        email:req.body.email,
+        created :+new Date(),
+        feedback:req.body.feedback
+    };
+    connection(async (db) => {
+        try {
+            const feedbackResult = await db.collection('feedback').insertOne(feedbackdata);
+            response.data = feedbackResult;
+            res.json(feedbackResult);
+        } catch (err) {
+
+
+            sendError(err, res);
+        }
+    });
+});
+
 module.exports = router;
