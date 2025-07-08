@@ -29,8 +29,7 @@
                                                 <span [matTooltip]="edition === '2028' ? 'Not Available Yet' : 'Read Qualification Guide'"
                                                         matTooltipPosition="above" matTooltipClass="custom-tooltip">
                                                         <a [attr.href]="edition === '2028' ? null : 'assets/docs/qualification/' + sportsdetails.name + '/' + sportsdetails.name + '.pdf'"
-                                                                target="_blank"
-                                                                (click)="edition === '2028' && $event.preventDefault()">
+                                                                target="_blank">
                                                                 <button mat-fab color="primary"
                                                                         [disabled]="edition === '2028'">
                                                                         <mat-icon>picture_as_pdf</mat-icon>
