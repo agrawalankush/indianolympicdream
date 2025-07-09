@@ -415,7 +415,7 @@ db.sports_new.insertMany([
   }
 ]);
 
-// Table Tennis (Men Women team event is replaced by Mixed  Team and Doubles Events are added.)
+// Table Tennis (Men Women team event is replaced by Mixed Team and Doubles Events are added.)
 db.sports_new.insertMany([
   {
     "name": "TableTennis",
