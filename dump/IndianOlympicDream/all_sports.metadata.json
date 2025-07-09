@@ -1,0 +1,1 @@
+{"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_"},{"v":{"$numberInt":"2"},"key":{"edition":{"$numberInt":"1"}},"name":"edition_1"}],"uuid":"797f788f2dba4da9937644a3e608f5b4","collectionName":"all_sports","type":"collection"}
