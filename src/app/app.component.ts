@@ -3,17 +3,16 @@ import { SwupdateService } from './swupdate.service';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { Router, Event as RouterEvent, NavigationStart, NavigationEnd, NavigationCancel, NavigationError, RouterOutlet, ActivatedRoute, RouterLink, RouterLinkActive } from '@angular/router';
 import { slideInAnimation } from './animations';
-import { LoaderComponent } from './shared/components/loader/loader.component';
 import { CommonModule, NgClass, NgIf } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatToolbarModule } from '@angular/material/toolbar';
-// LoaderComponent is imported below with other standalone components from './shared/components/loader/loader.component'
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { LoaderService } from './shared/components/loader/loader.service';
 
 @Component({
   selector: 'app-root',
@@ -28,51 +27,52 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     RouterOutlet,
     RouterLink,
     RouterLinkActive,
-    LoaderComponent,
     MatToolbarModule,
     MatButtonModule,
     MatIconModule,
     MatMenuModule,
     MatSlideToggleModule,
-    MatProgressBarModule,
     MatSidenavModule,
-    MatListModule
+    MatListModule,
+    MatProgressSpinnerModule
   ]
 })
 export class AppComponent implements OnInit {
-  public loading = true;
+  public isOlympicsMenuOpen = false;
+  public loading: boolean = false;
   public isLightTheme = false;
   @HostBinding('class') componentCssClass;
   selectedtheme: string;
-  currentTheme = 'default-theme';
+  currentTheme = 'dark-theme';
   currentSport: string = '';
   olympicOptions = [
-    { id: 'tokyo2020', name: 'Tokyo 2020', logo: 'assets/images/olympics/tokyo2020_no_bg.png' },
-    // { id: 'paris2024', name: 'Paris 2024', logo: 'assets/images/olympics/paris2024.png' },
-    // { id: 'la2028', name: 'LA 2028', logo: 'assets/images/olympics/la2028.png' }
+    { id: '2020', name: 'Tokyo 2020', logo: 'assets/images/olympics/tokyo2020_no_bg.png' },
+    { id: '2028', name: 'LA 2028', logo: 'assets/images/olympics/la2028.png' }
   ];
 
-  selectedOlympics = this.olympicOptions[0].name;
-  selectedOlympicsLogo: string = this.olympicOptions[0].logo;
+  selectedOlympics = this.olympicOptions[1].id;
+  selectedOlympicsLogo: string = this.olympicOptions[1].logo;
 
   constructor(
     public router: Router,
     private route: ActivatedRoute,
     private swupdateservice: SwupdateService,
-    public overlayContainer: OverlayContainer
+    public overlayContainer: OverlayContainer,
+    private loaderService: LoaderService
   ) {
+    this.loaderService.loaderState.subscribe(state => {
+      this.loading = state.show;
+    });
     this.loadThemePreference();
     this.swupdateservice.checkForUpdates();
     this.router.events.subscribe((event: RouterEvent) => {
       this.navigationInterceptor(event);
     });
 
-    /** TO DO: V2.0 feature to supoport multiple olympics
     this.route.queryParams.subscribe(params => {
-      this.selectedOlympics = params['olympics'] || 'la2028';
+      this.selectedOlympics = params['edition'] || '2028';
       this.updateSelectedOlympicsLogo();
     });
-     */
   }
 
   ngOnInit() {
@@ -101,54 +101,60 @@ export class AppComponent implements OnInit {
     return url.startsWith('/sports/') || url === '/' || url === '/home';
   }
 
-  loadThemePreference() {
-    // Load theme from localStorage or default to light theme
-    const savedTheme = localStorage.getItem('selectedTheme');
-    this.currentTheme = savedTheme || 'default-theme';
+  isScheduleActive(): boolean {
+    return this.router.url.startsWith('/schedule');
+  }
 
-    // Apply the theme
+  loadThemePreference() {
+    const savedTheme = localStorage.getItem('selectedTheme');
+    this.currentTheme = savedTheme || 'dark-theme';
+
     if (this.componentCssClass) {
       this.overlayContainer.getContainerElement().classList.remove(this.componentCssClass);
     }
     this.overlayContainer.getContainerElement().classList.add(this.currentTheme);
     this.componentCssClass = this.currentTheme;
+    this.updateThemeColorMetaTag();
   }
 
   onSetTheme() {
-    // Toggle theme
     this.currentTheme = this.currentTheme === "default-theme" ? "dark-theme" : "default-theme";
     localStorage.setItem('selectedTheme', this.currentTheme);
 
-    // Apply theme
     if (this.componentCssClass) {
       this.overlayContainer.getContainerElement().classList.remove(this.componentCssClass);
     }
     this.overlayContainer.getContainerElement().classList.add(this.currentTheme);
     this.componentCssClass = this.currentTheme;
+    this.updateThemeColorMetaTag();
   }
 
-  /* TO DO: V2.0 feature to supoport multiple olympics
-  onOlympicsChange(event: MatSelectChange) {
-    const selection = event.value;
+  private updateThemeColorMetaTag() {
+    const themeColorMetaTag = document.querySelector('meta[name="theme-color"]');
+    if (themeColorMetaTag) {
+      if (this.currentTheme === 'dark-theme') {
+        themeColorMetaTag.setAttribute('content', '#212121'); // Dark theme color
+      } else {
+        themeColorMetaTag.setAttribute('content', '#F5F5F5'); // Light theme color
+      }
+    }
+  }
+
+  onOlympicsChange(selection: string) {
     this.selectedOlympics = selection;
     this.updateSelectedOlympicsLogo();
     this.router.navigate([], {
       relativeTo: this.route,
-      queryParams: { olympics: selection },
+      queryParams: { edition: selection },
       queryParamsHandling: 'merge'
     });
   }
-    private updateSelectedOlympicsLogo(): void {
+  private updateSelectedOlympicsLogo(): void {
     const selected = this.olympicOptions.find(option => option.id === this.selectedOlympics);
     this.selectedOlympicsLogo = selected ? selected.logo : this.olympicOptions[0].logo;
   }
-  */
   prepareRoute(outlet: RouterOutlet) {
-    return outlet && outlet.activatedRouteData && outlet.activatedRouteData.animation;
-  }
-
-  navigateToAboutApp() {
-    this.router.navigate(['/about']);
+    return outlet && outlet.activatedRouteData;
   }
 
   openAboutMe() {

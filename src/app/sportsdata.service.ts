@@ -13,34 +13,40 @@ export class SportsdataService {
   };
   constructor(private http: HttpClient) { }
 
-  public getallsports() {
-    return this.http.get<AllSports[]>(`/api/allsports`)
+  public getallsports(edition: string) {
+    const params = new HttpParams()
+      .set('edition', edition);
+    return this.http.get<AllSports[]>(`/api/allsports`, { params })
       .pipe(
         retry(3),
         catchError(this.handleError)
       );
   }
-  public getsports(sportname: string) {
-    return this.http.get<any>(`/api/sports/${sportname}`)
+  public getsports(sportname: string, edition: string) {
+    const params = new HttpParams()
+      .set('edition', edition);
+    return this.http.get<any>(`/api/sports/${sportname}`, { params })
       .pipe(
         retry(2)
       );
   }
-  public getcalendar(filter: string, pageIndex: number, pageSize: number) {
+  public getcalendar(filter: string, pageIndex: number, pageSize: number, edition: string) {
     const params = new HttpParams()
       .set('searchterm', filter)
       .set('pageIndex', pageIndex.toString())
-      .set('pageSize', pageSize.toString());
+      .set('pageSize', pageSize.toString())
+      .set('edition', edition);
     return this.http.get<Calendar[]>(`/api/calendar`, { params })
       .pipe(
         retry(2),
         catchError(this.handleError)
       );
   }
-  public getathletes(sports: any, pageIndex: string, pageSize: string) {
+  public getathletes(sports: any, pageIndex: string, pageSize: string, edition: string) {
     let params = new HttpParams()
       .set('pageIndex', pageIndex)
-      .set('pageSize', pageSize);
+      .set('pageSize', pageSize)
+      .set('edition', edition);
     params = params.append('searchedsports', JSON.parse(sports));
     return this.http.get<any>(`/api/athletes`, { params })
       .pipe(
@@ -48,22 +54,24 @@ export class SportsdataService {
         catchError(this.handleError)
       );
   }
-  public getschedule(sport: string) {
+  public getschedule(sport: string, edition: string) {
     let params = new HttpParams()
     // .set('pageIndex', pageIndex)
     // .set('pageSize', pageSize);
     params = params.append('searchedsports', sport);
+    params = params.append('edition', edition);
     return this.http.get<any>(`/api/schedule`, { params })
       .pipe(
         retry(1),
         catchError(this.handleError)
       );
   }
-  public getschedulebydate(date: string) {
+  public getschedulebydate(date: string, edition: string) {
     let params = new HttpParams()
     // .set('pageIndex', pageIndex)
     // .set('pageSize', pageSize);
     params = params.append('date', date);
+    params = params.append('edition', edition);
     return this.http.get<any>(`/api/schedulebydate`, { params })
       .pipe(
         retry(1),
@@ -73,7 +81,7 @@ export class SportsdataService {
   public getshowsdata(pageIndex: number, pageSize: number) {
     const params = new HttpParams()
       .set('pageIndex', pageIndex.toString())
-      .set('pageSize', pageSize.toString());
+      .set('pageSize', pageSize.toString())
     return this.http.get<any>(`/api/shows`, { params })
       .pipe(
         retry(2),

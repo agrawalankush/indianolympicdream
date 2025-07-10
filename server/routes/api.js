@@ -55,11 +55,12 @@ const sendError = (err, res) => {
 
 // Get users
 router.get('/sports/:sportname', (req, res) => {
-    sportname=req.params.sportname;
+    const sportname = req.params.sportname;
+    const edition = req.query.edition || 'la2028';
     connection(async (db) => {
         try {
             const sports = await db.collection('sports_new')
-                .find({"name":sportname})
+                .find({"name":sportname, "edition": edition})
                 .toArray();
             res.status(200).json(sports);
         } catch (err) {
@@ -69,10 +70,11 @@ router.get('/sports/:sportname', (req, res) => {
 });
 
 router.get('/allsports', (req, res) => {
+    const edition = req.query.edition || 'la2028';
     connection(async (db) => {
         try {
             const allsports = await db.collection('all_sports')
-                .find({"isimportant": true})
+                .find({"isimportant": true, "editions": { $in: [edition] }})
                 .toArray();
             res.status(200).json(allsports);
         } catch (err) {
@@ -89,7 +91,7 @@ router.get('/shows', (req, res) => {
             const collection = db.collection('shows_data');
             const totalshows = await collection.countDocuments({});
             const shows = await collection
-                .find({})
+                .find({})                
                 .skip(pageoffset)
                 .limit(pagesize)
                 .toArray();
@@ -103,9 +105,10 @@ router.get('/shows', (req, res) => {
 
 router.get('/schedule', (req, res) => {
     let searchedsports = req.query.searchedsports;
-    let condition = {};
+    const edition = req.query.edition || 'la2028';
+    let condition = {"editions": { $in: [edition] }};
     if(searchedsports) {
-        condition = {"sportname": searchedsports};
+        condition.sportname = searchedsports;
     }
     connection(async (db) => {
         try {
@@ -125,9 +128,10 @@ router.get('/schedule', (req, res) => {
 
 router.get('/schedulebydate', (req, res) => {
     let date = req.query.date;
-    let condition = {};
+    const edition = req.query.edition || 'la2028';
+    let condition = {"editions": { $in: [edition] }};
     if(date) {
-        condition = { "sportname" : date};
+        condition.sportname = date;
     }
     connection(async (db) => {
         try {
@@ -148,11 +152,12 @@ router.get('/schedulebydate', (req, res) => {
 router.get('/calendar', (req, res) => {
     let pageoffset = parseInt(req.query.pageIndex, 10);
     let pagesize = parseInt(req.query.pageSize,10);
+    const edition = req.query.edition || 'la2028';
 
     connection(async (db) => {
         try {
             const collection = db.collection('calendar_new');
-            const condition = {"enddate":{ $gte: 1579894153}};
+            const condition = {"enddate":{ $gte: 1579894153}, "editions": { $in: [edition] }};
             const totalevents = await collection.countDocuments(condition);
             const calendar = await collection
                 .find(condition)
@@ -173,9 +178,9 @@ router.get('/athletes', (req, res) => {
     if(req.query.searchedsports && typeof req.query.searchedsports  === "string"){
         searchedsports = req.query.searchedsports.split(',');
     }
-    let condition = {};
+    let condition = {"editions": { $in: [req.query.edition || 'la2028'] }};
     if(searchedsports.length === 0) {
-        condition = {};
+        // condition remains just edition
     } else if(searchedsports.length === 1) {
         condition.sportname = {$all:searchedsports};
     } else {
@@ -197,6 +202,27 @@ router.get('/athletes', (req, res) => {
             const response = { athletes, total: qualifiedathletes };
             res.status(200).json(response);
         } catch (err) {
+            sendError(err, res);
+        }
+    }
+    );
+});
+
+router.post('/feedback', (req,res) =>{
+    let feedbackdata = {
+        name: req.body.name,
+        email:req.body.email,
+        created :+new Date(),
+        feedback:req.body.feedback
+    };
+    connection(async (db) => {
+        try {
+            const feedbackResult = await db.collection('feedback').insertOne(feedbackdata);
+            response.data = feedbackResult;
+            res.json(feedbackResult);
+        } catch (err) {
+
+
             sendError(err, res);
         }
     });

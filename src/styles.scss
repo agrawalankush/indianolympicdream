@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @use './styles/theme-manager';
+@use '@angular/material' as mat;
 
 /* Geist Font Face Declarations */
 /* Only include essential font weights to reduce bundle size */
@@ -78,22 +79,6 @@ body {
   filter: brightness(1) contrast(0.8) invert(1);
 }
 
-.mat-chip-category { 
-  background-color: var(--primary-color) !important; 
-}
-.mdc-evolution-chip__text-label {
-  color: var(--color-background) !important;
-}
-.mat-mdc-standard-chip:not(.mdc-evolution-chip--disabled) .mdc-evolution-chip__action--trailing {
-  color: var(--color-background) !important; 
-}
-
-.sticky-paginator {
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-}
-
 .pictogram-sport-details {
   height: 40px;
   width: 40px;
@@ -116,7 +101,7 @@ body {
     border-radius: 8px;
   }
   border-radius: 10px;
-  box-shadow: var(--primary-color) 0px 0.5px 11px 0.5px;
+  box-shadow: var(--primary-color) 0px 0.5px 4px 0.5px;
 }
 
 .logo-button {
@@ -283,4 +268,44 @@ a {
   border-radius: 25px !important;
   min-width: 60px !important;
   max-width: 120px !important;
+}
+
+.mat-mdc-standard-chip {
+  padding: 0 !important;
+  overflow: visible;
+
+  .mdc-evolution-chip__action--primary {
+    padding: 0 !important;
+  }
+}
+.mat-mdc-standard-chip.mdc-evolution-chip--with-trailing-action .mdc-evolution-chip__action--trailing {
+  padding: 0 !important;
+}
+
+.mat-mdc-standard-chip:not(.mdc-evolution-chip--disabled)  {
+  background-color: transparent !important;
+}
+
+.no-data-message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-self: center;
+  min-height: 100px;
+  font-family: 'Geist Sans', sans-serif;
+  color: var(--color-text);
+  text-align: center;
+  padding: 20px;
+  margin: 24px;
+  border-radius: 8px;
+  line-height: 24px;
+  background-color: var(--mat-toolbar-container-background-color);
+  @include mat.elevation(2);
+  max-width: 865px;
+  @media (max-width: 600px) {
+    text-align: left;
+  }
+}
+.mat-mdc-autocomplete-panel {
+  background-color: var(--mat-toolbar-container-background-color) !important;
 }

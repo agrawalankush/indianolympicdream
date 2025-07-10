@@ -2,7 +2,7 @@
   "name": "Indian Olympic Dream",
   "short_name": "IOD",
   "theme_color": "#212121",
-  "background_color": "#fafafa",
+  "background_color": "#212121",
   "display": "standalone",
   "scope": "./",
   "start_url": "./",

@@ -1,7 +1,7 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params, Router, RouterLink } from '@angular/router';
 import { SportsdataService } from '../sportsdata.service';
-import { MatPaginatorModule, PageEvent, MatPaginator } from '@angular/material/paginator'; // Added MatPaginator type
+// import { MatPaginatorModule, PageEvent, MatPaginator } from '@angular/material/paginator'; // Added MatPaginator type
 // import { Athletes} from '../models/app-models';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { UntypedFormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -11,8 +11,10 @@ import { map, startWith, catchError, finalize } from 'rxjs/operators';
 import { MatChipsModule, MatChipGrid } from '@angular/material/chips'; // Added MatChipGrid type
 import { MatInputModule } from '@angular/material/input'; // Corrected to MatInputModule
 import { CommonModule } from '@angular/common';
-import { MatIconModule } from '@angular/material/icon'; // Changed
-import { MatCardModule } from '@angular/material/card'; // Changed
+import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
+import { CountdownComponent } from '../countdown/countdown.component';
+import { MatButtonModule } from '@angular/material/button';
 
 interface Athlete {
   name: string;
@@ -31,34 +33,39 @@ interface AthleteResponse {
 }
 
 @Component({
-    selector: 'app-athletes',
-    standalone: true, // Added
-    templateUrl: './athletes.component.html',
-    styleUrls: ['./athletes.component.scss'],
-    imports: [
-        CommonModule,
-        FormsModule,
-        ReactiveFormsModule,
-        RouterLink,
-        MatInputModule, // Corrected
-        MatChipsModule,
-        MatIconModule,
-        MatAutocompleteModule,
-        MatPaginatorModule,
-        MatCardModule
-    ]
+  selector: 'app-athletes',
+  standalone: true,
+  templateUrl: './athletes.component.html',
+  styleUrls: ['./athletes.component.scss'],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    RouterLink,
+    MatInputModule,
+    MatChipsModule,
+    MatIconModule,
+    MatAutocompleteModule,
+    // MatPaginatorModule,
+    MatCardModule,
+    CountdownComponent,
+    MatButtonModule
+  ]
 })
 export class AthletesComponent implements OnInit {
   public errmsg: string;
   public athletes: Athlete[];
-  @ViewChild(MatPaginator) paginator: MatPaginator; // Types are now imported
+  public edition: string;
+  public total: number;
+  // @ViewChild(MatPaginator) paginator: MatPaginator; // Types are now imported
+  // TO DO: Replace pagination with Virtual Scrolling
   // MatPaginator Inputs
-  length: number;
-  pageSize = 24;
-  pageSizeOptions: number[] = [24, 48, 96];
+  // length: number;
+  // pageSize = 24;
+  // pageSizeOptions: number[] = [24, 48, 96];
   // MatPaginator Output
-  pageEvent: PageEvent;
-  pageIndex = 0;
+  // pageEvent: PageEvent;
+  // pageIndex = 0;
   // Search autocomplete Inputs
   visible = true;
   selectable = true;
@@ -87,6 +94,7 @@ export class AthletesComponent implements OnInit {
     'Weightlifting',
     'Wrestling'
   ];
+  public countdownTargetDate: Date = new Date('2026-07-24T00:00:00');
 
   @ViewChild('sportInput') sportInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete; // Types are now imported
@@ -99,24 +107,17 @@ export class AthletesComponent implements OnInit {
   ngOnInit() {
     this.route.queryParams
       .subscribe(params => {
-        // console.log(params);
-        if (Object.keys(params).length === 0 && params.constructor === Object) {
-          this.SearchAthletes("[]", "0", "24");
-        } else {
-          this.sports = JSON.parse(params.sports);
-          // this.pageIndex = parseInt(params.pageIndex);
-          // this.pageSize = parseInt(params.pazeSize);
-          this.SearchAthletes(params.sports, params.pageIndex, params.pazeSize);
-        }
+        this.edition = params.edition || '2028';
+        this.sports = params.sports ? JSON.parse(params.sports) : [];
+        this.SearchAthletes(JSON.stringify(this.sports), "0", "100", this.edition);
       }
       );
-
   }
   get queryParams() {
-    const index = this.paginator.pageIndex * this.paginator.pageSize;
-    const size = this.paginator.pageSize;
+    // const index = this.paginator.pageIndex * this.paginator.pageSize;
+    // const size = this.paginator.pageSize;
     const sports = JSON.stringify(this.sports);
-    const queryParams: Params = { sports: sports, pageIndex: index, pazeSize: size };
+    const queryParams: Params = { sports: sports, pageIndex: 0, pazeSize: 100, edition: this.edition };
     return queryParams;
   }
   private _filter(value: string): string[] {
@@ -145,16 +146,16 @@ export class AthletesComponent implements OnInit {
         // queryParamsHandling: 'merge'
       });
   }
-  handlePageEvent(e: PageEvent) {
-    // console.log(e);
-    this.prepareQueryUrl();
-  }
+  // handlePageEvent(e: PageEvent) {
+  //   // console.log(e);
+  //   this.prepareQueryUrl();
+  // }
 
   selected(event: MatAutocompleteSelectedEvent): void {
     this.sports.push(event.option.viewValue);
     this.sportInput.nativeElement.value = '';
     this.sportCtrl.setValue(null);
-    this.paginator.pageIndex = 0;
+    // this.paginator.pageIndex = 0;
     this.prepareQueryUrl();
   }
 
@@ -162,12 +163,12 @@ export class AthletesComponent implements OnInit {
     const index = this.sports.indexOf(sport);
     if (index >= 0) {
       this.sports.splice(index, 1);
-      this.paginator.pageIndex = 0;
+      // this.paginator.pageIndex = 0;
       this.prepareQueryUrl();
     }
   }
-  public SearchAthletes(selectedsports: string, pageIndex: string, pageSize: string) {
-    this.sportservice.getathletes(selectedsports, pageIndex, pageSize)
+  public SearchAthletes(selectedsports: string, pageIndex: string, pageSize: string, edition: string) {
+    this.sportservice.getathletes(selectedsports, pageIndex, pageSize, edition)
       .pipe(
         catchError((error) => {
           this.errmsg = error.message || 'An error occurred';
@@ -176,7 +177,15 @@ export class AthletesComponent implements OnInit {
       )
       .subscribe((res: AthleteResponse) => {
         this.athletes = res.athletes;
-        this.length = res.total;
+        this.total = res.total;
       });
+  }
+
+  onOlympicsChange(selection: string) {
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { edition: selection },
+      queryParamsHandling: 'merge'
+    });
   }
 }

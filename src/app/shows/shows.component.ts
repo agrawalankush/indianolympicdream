@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SportsdataService } from '../sportsdata.service';
-import { PageEvent } from '@angular/material/paginator';
+// import { PageEvent } from '@angular/material/paginator';
 import { CommonModule, NgIf, NgFor } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatPaginatorModule } from '@angular/material/paginator';
+// import { MatPaginatorModule } from '@angular/material/paginator';
 import { SafePipe } from '../safepipe';
 
 interface VideoState {
@@ -16,18 +16,18 @@ interface VideoState {
 }
 
 @Component({
-    selector: 'app-shows',
-    standalone: true,
-    templateUrl: './shows.component.html',
-    styleUrls: ['./shows.component.scss'],
-    imports: [
-        CommonModule,
-        MatInputModule,
-        MatPaginatorModule,
-        MatCardModule,
-        MatProgressSpinnerModule,
-        SafePipe
-    ]
+  selector: 'app-shows',
+  standalone: true,
+  templateUrl: './shows.component.html',
+  styleUrls: ['./shows.component.scss'],
+  imports: [
+    CommonModule,
+    MatInputModule,
+    // MatPaginatorModule,
+    MatCardModule,
+    MatProgressSpinnerModule,
+    SafePipe
+  ]
 })
 export class ShowsComponent implements OnInit {
   public showsdata: any;
@@ -35,12 +35,14 @@ export class ShowsComponent implements OnInit {
   public videoyoutube = 'https://www.youtube.com/embed/';
   public videoParams = '?autoplay=1&mute=0&enablejsapi=1&rel=0';
   public videoStates: { [key: string]: VideoState } = {};
+  private edition: string;
+  // TO DO: Replace pagination with Virtual Scrolling
   // MatPaginator Inputs
-  length: number;
-  pageSize = 100;
-  pageSizeOptions: number[] = [15, 30, 50, 100];
+  // length: number;
+  // pageSize = 100;
+  // pageSizeOptions: number[] = [15, 30, 50, 100];
   // MatPaginator Output
-  pageEvent: PageEvent;
+  // pageEvent: PageEvent;
 
   constructor(
     private route: ActivatedRoute,
@@ -48,15 +50,19 @@ export class ShowsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.sportservice.getshowsdata(0, this.pageSize)
+    this.loadShowsData();
+  }
+
+  loadShowsData() {
+    this.sportservice.getshowsdata(0, 50)
       .subscribe(
         (res: any) => {
           this.showsdata = res.shows;
-          this.length = res.total;
+          // this.length = res.total;
           this.showsdata.forEach((show: any) => {
             this.videoStates[show.youtube_id] = {
               isPlaying: false,
-              isLoading: false,  // Initialize loading state
+              isLoading: false,
               thumbnailUrl: `https://img.youtube.com/vi/${show.youtube_id}/hqdefault.jpg?ngsw-bypass=true`
             };
           });
@@ -64,11 +70,6 @@ export class ShowsComponent implements OnInit {
         (error: any) => {
           this.errmsg = error.error;
         });
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.addEventListener('message', event => {
-        console.log('SW Message:', event.data);
-      });
-    }
   }
 
   playVideo(youtubeId: string) {
@@ -82,19 +83,19 @@ export class ShowsComponent implements OnInit {
     this.videoStates[youtubeId].isLoading = false;
   }
 
-  handlePageEvent(e: PageEvent) {
-    const index = e.pageIndex * e.pageSize;
-    const size = e.pageSize;
-    this.sportservice.getshowsdata(index, size)
-      .subscribe(
-        (res: any) => {
-          this.showsdata = res.shows;
-          this.length = res.total;
-        },
-        (error) => {
-          this.errmsg = error;
-        });
-  }
+  // handlePageEvent(e: PageEvent) {
+  //   const index = e.pageIndex * e.pageSize;
+  //   const size = e.pageSize;
+  //   this.sportservice.getshowsdata(index, size)
+  //     .subscribe(
+  //       (res: any) => {
+  //         this.showsdata = res.shows;
+  //         this.length = res.total;
+  //       },
+  //       (error) => {
+  //         this.errmsg = error;
+  //       });
+  // }
 
   handleImageError(youtubeId: string) {
     if (this.videoStates[youtubeId]) {

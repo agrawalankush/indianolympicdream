@@ -17,13 +17,12 @@
 
       // Input element styles
       .mat-mdc-input-element {
-        text-align: center;
+        text-align: left;
         font-family: 'Montserrat', sans-serif;
         letter-spacing: 0.5px;
 
         &::placeholder {
-          opacity: 0.5;
-          color: var(--primary-color);
+          opacity: 1;
         }
       }
 

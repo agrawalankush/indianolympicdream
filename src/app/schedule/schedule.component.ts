@@ -7,11 +7,15 @@ import { MatToolbar } from '@angular/material/toolbar';
 import { NgIf, NgFor, KeyValuePipe } from '@angular/common';
 import { MatDivider } from '@angular/material/divider';
 import { HumanizePipe } from '../shared/components/loader/pipes/humanize';
+import { CountdownComponent } from '../countdown/countdown.component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+
 @Component({
-    selector: 'app-schedule',
-    templateUrl: './schedule.component.html',
-    styleUrls: ['./schedule.component.scss'],
-    imports: [MatToolbar, NgIf, RouterLinkActive, RouterLink, NgFor, MatDivider, KeyValuePipe, HumanizePipe]
+  selector: 'app-schedule',
+  templateUrl: './schedule.component.html',
+  styleUrls: ['./schedule.component.scss'],
+  imports: [MatToolbar, NgIf, RouterLinkActive, RouterLink, NgFor, MatDivider, KeyValuePipe, HumanizePipe, CountdownComponent, MatButtonModule, MatIconModule]
 })
 export class ScheduleComponent implements OnInit, OnDestroy {
   schedule: any;
@@ -20,6 +24,8 @@ export class ScheduleComponent implements OnInit, OnDestroy {
   length: number;
   errmsg: string;
   sport: string;
+  edition: string;
+  public countdownTargetDate: Date = new Date('2028-07-14T00:00:00'); // LA2028 Opening Ceremony
   allsports: string[] = [
     'Archery',
     'Athletics',
@@ -68,25 +74,33 @@ export class ScheduleComponent implements OnInit, OnDestroy {
 
     this.route.queryParams
       .subscribe(params => {
-        // console.log(params);
-        if (Object.keys(params).length === 0 && params.constructor === Object) {
-          this.getSchedule('');
-        } else {
-          // console.log(params, params.date, params.sport);
+        const newEdition = params.edition || '2028';
+        if (this.edition !== newEdition) {
+          this.edition = newEdition;
+          // Re-fetch data when edition changes
           if (params.sport === undefined) {
             this.getByDate = true;
             this.sport = '';
             this.date = params.date;
-            this.getScheduleByDate(params.date);
+            this.getScheduleByDate(params.date, this.edition);
           } else if (params.date === undefined) {
             this.getByDate = false;
             this.date = '';
             this.sport = params.sport;
-            this.getSchedule(params.sport);
+            this.getSchedule(params.sport, this.edition);
           }
-          // this.pageIndex = parseInt(params.pageIndex);
-          // this.pageSize = parseInt(params.pazeSize);
-
+        } else if (this.edition === newEdition) { // Initial load or other query param changes
+          if (params.sport === undefined) {
+            this.getByDate = true;
+            this.sport = '';
+            this.date = params.date;
+            this.getScheduleByDate(params.date, this.edition);
+          } else if (params.date === undefined) {
+            this.getByDate = false;
+            this.date = '';
+            this.sport = params.sport;
+            this.getSchedule(params.sport, this.edition);
+          }
         }
       }
       );
@@ -98,34 +112,32 @@ export class ScheduleComponent implements OnInit, OnDestroy {
       [],
       {
         relativeTo: this.route,
-        queryParams: { sport: sport },
+        queryParams: { sport: sport, edition: this.edition },
         queryParamsHandling: 'merge'
       });
   }
-  getSchedule(selectedport: string) {
-    this.sportservice.getschedule(selectedport)
+  getSchedule(selectedport: string, edition: string) {
+    this.schedule = null;
+    this.sportservice.getschedule(selectedport, edition)
       .subscribe(
         (res: any) => {
-          // console.log(res);
           this.schedule = res.schedule;
           this.length = res.total;
         },
         (error: any) => {
-          // console.log(error);
           this.errmsg = error.error;
         });
   }
-  getScheduleByDate(date: string) {
+  getScheduleByDate(date: string, edition: string) {
     this.getByDate = true;
-    this.sportservice.getschedulebydate(date)
+    this.schedule = null;
+    this.sportservice.getschedulebydate(date, edition)
       .subscribe(
         (res: any) => {
-          // console.log(res);
           this.schedule = res.schedule;
           this.length = res.total;
         },
         (error: any) => {
-          // console.log(error);
           this.errmsg = error.error;
         });
   }
@@ -134,16 +146,18 @@ export class ScheduleComponent implements OnInit, OnDestroy {
       sport = Bydate;
     }
     const dialogRef = this.dialog.open(EventDetailsComponent, {
-      // width: '80%',
-      // height: '50%',
       data: { sportname: sport, events: events },
       panelClass: 'custom-dialog'
     });
-    // dialogRef.afterClosed().subscribe(result => {
-    //   console.log('The dialog was closed');
-    // });
   }
   ngOnDestroy() {
   }
 
+  onOlympicsChange(selection: string) {
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { edition: selection },
+      queryParamsHandling: 'merge'
+    });
+  }
 }

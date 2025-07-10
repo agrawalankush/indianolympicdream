@@ -1,54 +1,93 @@
 @use '@angular/material' as mat;
 
-.container {
-    margin: 88px 24px 24px 24px; // 64px toolbar + 24px spacing
+.calendar-wrapper {
+  margin: 8px 12px 24px 12px;
 }
 
 @media (min-width: 960px) {
-    .container {
-        margin: 24px;
-        max-width: 100%;
-    }
+  .calendar-wrapper {
+    margin: 8px 24px 24px 24px;
+    max-width: 100%;
+  }
 }
 
-// By default, the mobile label shouldn't show
-.mobile-label {
-    display: none;
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+  padding: 16px 0;
+  max-height: calc(100vh - 64px);
+  overflow-y: auto;
 }
 
-@media (max-width: 600px) {
-    .mobile-label {
-        width: 100px;
-        display: inline-block;
-        font-weight: bold;
-        margin-right: 8px;
+.calendar-card {
+  flex: 1 1 calc(100% - 32px); /* Default to full width minus gap for mobile */
+  max-width: calc(100% - 32px);
+  @include mat.elevation(4);
+  background-color: var(--mat-toolbar-container-background-color);
+  color: var(--color-text);
+  font-family: 'Geist Sans', sans-serif;
+  border-radius: 8px; /* Slightly rounded corners */
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;/* Subtle shadow for depth */
+  &:hover {
+    transform: translateY(-3px); /* Subtle lift effect on hover */
+    box-shadow: gray 0px 0.1px 4px 2px; /* Enhanced shadow on hover */
+  }
+  .card-item {
+    display: flex;
+    flex-direction: row; /* Always display horizontally */
+    align-items: start; /* Align text nicely */
+    padding: 4px 24px;
+    flex-wrap: wrap; /* Allow items to wrap if content is too long */
+    justify-content: space-between; /* Distribute space between label and value */
+
+    .label {
+      font-weight: 500; /* Slightly bolder label */
+      margin-right: 8px; /* Space between label and value */
+      color: var(--color-text-secondary);
+      min-width: 90px; /* Give labels a minimum width for alignment */
     }
 
-    .mat-mdc-header-row {
-        display: none;
+    .value {
+      word-break: break-word;
+      flex-grow: 1; /* Allow value to take remaining space */
+      text-align: right; /* Align value to the right */
+      color: var(--color-text);
     }
 
-    .mat-mdc-cell {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        padding: 8px 0;
-        min-height: 24px;
-        border-bottom: none;
+    .event-name-value {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: calc(100% - 100px); /* Adjust based on label width + margin */
     }
-
-    .mat-mdc-row {
-        flex-direction: column;
-        align-items: start;
-        padding: 12px 24px;
-        &:not(:last-child) {
-            border-bottom: 1px solid rgba(0, 0, 0, 0.12);
-        }
-    }
+  }
 }
 
-.mat-mdc-paginator, .mat-mdc-table {
-    width: 100%;
-    @include mat.elevation(4);
-    background-color: var(--mat-toolbar-container-background-color);
+@media (min-width: 600px) {
+  .calendar-card {
+    flex: 1 1 calc(50% - 32px); /* Two cards per row on medium screens */
+    max-width: calc(50% - 32px);
+  }
+}
+
+@media (min-width: 960px) {
+  .calendar-card {
+    flex: 1 1 calc(33.333% - 32px); /* Three cards per row on large screens */
+    max-width: calc(33.333% - 32px);
+  }
+}
+
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  width: 100%;
+}
+.LA2028-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
