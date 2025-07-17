@@ -25,7 +25,7 @@
     "@angular/router": "^19.2.3",
     "@angular/service-worker": "^19.2.3",
     "@vercel/style-guide": "^6.0.0",
-    "compression": "^1.7.4",
+    "compression": "^1.8.1",
     "express": "^4.17.1",
     "geist": "^1.4.2",
     "helmet": "^3.21.2",
