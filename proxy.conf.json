@@ -1,7 +1,8 @@
 {
-    "/api": {
-        "target": "http://localhost:3000",
-        "secure": false,
-        "changeOrigin": true
-    }
+  "/api": {
+    "target": "http://api.iod-community.com",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  }
 }
