@@ -1,17 +1,12 @@
-name: Docker Image CI
+name: Frontend Docker Image CI
 
 on:
   push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
+    branches: [ "refactor/decouple-frontend" ] # Trigger on our working branch
 
 jobs:
-
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - 
       name: Checkout code
@@ -33,6 +28,7 @@ jobs:
         file: Dockerfile
         platforms: linux/arm64
         push: true
-        tags: ${{ secrets.DOCKERHUB_USERNAME }}/iod:latest
-        cache-from: type=registry,ref=${{ secrets.DOCKERHUB_USERNAME }}/iod:cache
-        cache-to: type=registry,ref=${{ secrets.DOCKERHUB_USERNAME }}/iod:cache,mode=max 
+        # Use a new tag for the frontend image
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/iod-frontend:latest
+        cache-from: type=registry,ref=${{ secrets.DOCKERHUB_USERNAME }}/iod-frontend:cache
+        cache-to: type=registry,ref=${{ secrets.DOCKERHUB_USERNAME }}/iod-frontend:cache,mode=max
