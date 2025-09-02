@@ -110,36 +110,6 @@ This project includes Docker configurations for building and running the applica
 
     The application will typically be accessible at `http://localhost` (or the port configured in `nginx/default.conf.template`).
 
-## Running Tests
-
-### Unit Tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io/).
-
-```bash
-ng test
-```
-
-### End-to-End Tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-```bash
-ng e2e
-```
-
-## Linting
-
-Run `ng lint` to check for code style and quality issues.
-
-```bash
-ng lint
-```
-
-## Further Help
-
-To get more help on the Angular CLI, use `ng help` or check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
-
 ## Contributing
 
 Contributions are welcome! Please feel free to open issues or submit pull requests.
