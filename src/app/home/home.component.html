@@ -1,4 +1,22 @@
 <div class="home-container">
+    <div class="home-banner" routerLink="/schedule/tokyo2025">
+        <div class="side-images-container">
+            <img class="men-image" src="assets/images/qualified_athletes/Athletics_24.jpeg">
+            <img class="men-image" src="assets/images/qualified_athletes/Athletics_19.jpeg">
+            <img class="men-image" src="assets/images/qualified_athletes/Athletics_18.jpeg">
+            <img class="men-image" src="assets/images/qualified_athletes/Athletics_30.jpeg">
+            <!--<img class="men-image" src="assets/images/qualified_athletes/Athletics_27.jpeg">
+            <img class="men-image" src="assets/images/qualified_athletes/Athletics_25.jpeg"> -->
+        </div>
+        <img src="assets/images/home/banner_tokyo_2025_desktop.png" width="100%" class="home-banner-image"
+            alt="Tokyo 2025 World Championship" />
+        <div class="side-images-container">
+            <img class="women-image" src="assets/images/qualified_athletes/Athletics_29.jpeg">
+            <img class="women-image" src="assets/images/qualified_athletes/Athletics_08.jpeg">
+            <img class="women-image" src="assets/images/qualified_athletes/Athletics_20.jpeg">
+            <img class="women-image" src="assets/images/qualified_athletes/Athletics_31.jpeg">
+        </div>
+    </div>
     <div class="sports-container" *ngIf="allsports">
         <div class="pictogram-container" *ngFor="let sport of allsports">
             <a [routerLink]="['/sports',sport.name]" [queryParams]="{ edition: edition }">
