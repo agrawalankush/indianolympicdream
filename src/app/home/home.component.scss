@@ -87,11 +87,25 @@
     margin: 16px;
   }
 }
-.home-banner {
+.home-banner-card {
+  margin: 24px 16px 0px 16px; /* Removed margin to allow full width */
+  padding: 16px;
+  border-radius: 8px; /* Consistent with sports-container */
+  overflow: hidden;
+  cursor: pointer;
+  background-color: var(--mat-toolbar-container-background-color); /* Consistent background */
+  @include mat.elevation(2); /* Consistent initial elevation */
+  transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1); /* Consistent transition */
+  // box-shadow: gray 0px 0.1px 4px 2px;
+  &:hover {
+    @include mat.elevation(8);
+  }
+
+  .home-banner {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 16px;
+    /* Remove margin from here as it's now on the mat-card */
     .side-images-container {
         .image-wrapper {
           display: flex;
@@ -102,34 +116,46 @@
         }
         display: flex;
         flex-direction: row;
-        gap: 8px;
-        .men-image {
-          width: 128px;
-        }
-        .women-image {
-          width: 136px;
-        }
+        gap: 16px;
         img{
+            width: 100px;
             height: auto;
             border-radius: 8px;
             @include mat.elevation(4);
             &:hover {
-                transform: translateY(-8px) scale(1.5);
+                // transform: translateY(-8px) scale(1.5);
                 @include mat.elevation(24);
-                transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
+                // transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
             }
         }
     }
 }
 .home-banner-image {
     width: 100%;
-    max-width: 1200px;
+    max-width: 668px;
     margin: 16px;
     border-radius: 8px;
 }
 
-@media screen and (max-width: 1300px) {
+@media screen and (max-width: 1023px) {
   .home-banner .side-images-container {
     display: none;
   }
+}
+
+@media screen and (max-width: 600px) {
+  .home-banner-card {
+    margin: 0; /* Removed margin to allow full width */
+    border-radius: 8px;
+  }
+  .home-banner-image {
+    margin: 8px;
+  }
+}
+.banner-action-btns {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 16px;
+}
 }
