@@ -44,11 +44,11 @@ export const routes: Routes = [
     loadComponent: () => import('./about/about.component').then(m => m.AboutComponent),
     data: { animation: 'AboutPage', order: 8, transitionType: 'bottom-to-top' }
   },
-  {
-    path: 'feedback',
-    loadComponent: () => import('./feedback/feedback.component').then(m => m.FeedbackComponent),
-    data: { animation: 'FeedbackPage', order: 10, transitionType: 'bottom-to-top' }
-  },
+  // {
+  //   path: 'feedback',
+  //   loadComponent: () => import('./feedback/feedback.component').then(m => m.FeedbackComponent),
+  //   data: { animation: 'FeedbackPage', order: 10, transitionType: 'bottom-to-top' }
+  // },
   {
     path: 'internal-error',
     loadComponent: () => import('./server-error/server-error.component').then(m => m.ServerErrorComponent),
