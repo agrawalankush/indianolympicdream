@@ -1,0 +1,21 @@
+
+<mat-toolbar class="schedule-toolbar">
+  <div class="wc-logo-container">
+  <img src="assets/images/generic/tokyo_2025_logo.jpg" alt="Tokyo 2025 World Championship Logo" class="wc-logo">
+  </div>
+  <span class="fill-remaining-space"></span>
+  <div class="filter-btns">
+    <!-- <div class="schedule-button" [routerLink]="['./athletes']"
+      routerLinkActive="active-link">
+      Athletes
+    </div>
+    <div class="schedule-button" [routerLink]="['./schedule']" [queryParams]="{indiaOnly: false}"
+      routerLinkActive="active-link">
+      Schedule
+    </div> -->
+  </div>
+</mat-toolbar>
+
+<div class="wc-content">
+  <router-outlet></router-outlet>
+</div>

@@ -1,0 +1,61 @@
+@use '@angular/material' as mat;
+
+.mat-toolbar {
+  height: 84px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  @include mat.elevation(4);
+}
+
+.wc-logo-container {
+  display: flex;
+  align-items: center;
+
+  img {
+    height: 48px;
+    width: 180px;
+    border-radius: 24px;
+    box-shadow: var(--primary-color) 0px 0.5px 11px 0.5px;
+  }
+}
+
+.filter-btns {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.schedule-button {
+  display: block;
+  border-radius: 35px;
+  transform-origin: center bottom;
+  transform: translateY(0);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 0.3s ease,
+    box-shadow 0.3s ease;
+  padding: 12px;
+  margin: 0 4px;
+  @include mat.elevation(2);
+  cursor: pointer;
+
+  &:hover {
+    transform: translateY(-4px);
+    background-color: var(--mat-card-background-color);
+    @include mat.elevation(4);
+    box-shadow: gray 0px 0.1px 4px 2px;
+  }
+
+  &.active-link {
+    background-color: var(--mat-card-background-color);
+    @include mat.elevation(4);
+    box-shadow: var(--primary-color) 0px 0.5px 11px 0.5px;
+  }
+
+}

@@ -54,6 +54,14 @@ export const routes: Routes = [
     loadComponent: () => import('./server-error/server-error.component').then(m => m.ServerErrorComponent),
     data: { animation: 'InternalErrorPage', order: 10 }
   },
+  {
+    path: 'tokyo-2025-wc',
+    loadComponent: () => import('./tokyo-2025-wc/tokyo-2025-wc.component').then(m => m.Tokyo2025WcComponent),
+    children: [
+      { path: 'athletes', loadComponent: () => import('./tokyo-2025-wc/tokyo-2025-wc-athletes/tokyo-2025-wc-athletes.component').then(m => m.Tokyo2025WcAthletesComponent) },
+      { path: '', redirectTo: 'athletes', pathMatch: 'full' }
+    ]
+  },
   { path: '', redirectTo: '/home?edition=2028', pathMatch: 'full' },
   {
     path: '**',
