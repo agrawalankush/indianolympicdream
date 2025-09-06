@@ -36,10 +36,7 @@ export class Tokyo2025WcDataService {
 
   public getSchedule() {
     let params = new HttpParams()
-    // .set('pageIndex', pageIndex)
-    // .set('pageSize', pageSize);
-    // params = params.append('indiaOnly', sport);
-    // params = params.append('edition', edition);
-    return this.http.get<any>(`/api/tokyo_2025_schedule`)
+    params = params.append('indiaOnly', true);
+    return this.http.get<any>(`/api/tokyo_2025_schedule`,{params})
   }
 }

@@ -1,0 +1,13 @@
+<button mat-stroked-button [matMenuTriggerFor]="dayMenu" color="primary" class="day-select-button">
+  <span class="label">{{ selectedDayLabel }}</span>
+  <mat-icon>arrow_drop_down</mat-icon>
+</button>
+
+<mat-menu #dayMenu="matMenu" class="custom-day-menu">
+  <button mat-menu-item (click)="onDaySelected(null)">
+    <span>All Days</span>
+  </button>
+  <button mat-menu-item *ngFor="let date of availableDates" (click)="onDaySelected(date)">
+    <span>{{ date | date:'MMM d' }}</span>
+  </button>
+</mat-menu>

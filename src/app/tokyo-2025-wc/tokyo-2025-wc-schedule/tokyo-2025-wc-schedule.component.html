@@ -1,0 +1,34 @@
+<div class="schedule-container">
+  <mat-error *ngIf="errmsg">{{errmsg}}</mat-error>
+
+  <div class="schedule-cards-wrapper">
+    <div *ngFor="let event of schedule" class="schedule-card">
+      <div class="card-header">
+        <span class="phase-name"> {{ event.discipline.name }}
+        </span>
+        
+        <span class="discipline-name">
+
+          <button mat-icon-button color="primary"><mat-icon>{{event.sexCode === 'M' ? 'man' : 'woman'}}</mat-icon></button>
+          {{ event.phaseName }}
+          <img height="24px" width="24px" *ngIf="event.phaseName === 'Final'" class="medal-icon" src="assets/images/icons/medal.png" alt="medals">
+        </span>
+      </div>
+      <div class="card-body">
+        
+        <div class="date-time">
+          {{event.phaseSessionName}}
+        </div>
+        <div class="date-time">
+          {{ event.phaseDateAndTime | date:'medium' }}
+        </div>
+        <div class="athletes">
+          <!-- <span class="athletes-label">Athletes:</span> -->
+          <span *ngFor="let athlete of event.indianAthletes" class="athlete-name">
+            <button mat-stroked-button color="primary">{{ athlete.name }}</button>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

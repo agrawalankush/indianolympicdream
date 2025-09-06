@@ -1,21 +1,18 @@
 
 <mat-toolbar class="schedule-toolbar">
-  <div class="wc-logo-container">
-  <img src="assets/images/generic/tokyo_2025_logo.jpg" alt="Tokyo 2025 World Championship Logo" class="wc-logo">
-  </div>
-  <span class="fill-remaining-space"></span>
-  <div class="filter-btns">
-    <!-- <div class="schedule-button" [routerLink]="['./athletes']"
-      routerLinkActive="active-link">
-      Athletes
-    </div>
-    <div class="schedule-button" [routerLink]="['./schedule']" [queryParams]="{indiaOnly: false}"
-      routerLinkActive="active-link">
-      Schedule
-    </div> -->
+  <div class="nav-btns">
+  <img class="wc-logo" routerLink="/home" height="32px" width="128px" src="assets/images/generic/tokyo_2025_logo.jpg" alt="Tokyo 2025 World Championships Logo" />
+  <button mat-stroked-button [color]="isScheduleActive() ? '' : 'primary'" routerLink="./athletes" routerLinkActive="active-link">
+    <mat-icon>directions_run</mat-icon>
+     Athletes
+  </button>
+  <button mat-stroked-button [color]="isScheduleActive() ? 'primary' : ''"  routerLink="./schedule" routerLinkActive="active-link">
+    <mat-icon>today</mat-icon>
+     Schedule
+  </button>
+  <app-custom-day-select [hidden]="!isScheduleActive()"></app-custom-day-select>
   </div>
 </mat-toolbar>
-
 <div class="wc-content">
   <router-outlet></router-outlet>
 </div>

@@ -312,3 +312,8 @@ a {
 .mat-mdc-autocomplete-panel {
   background-color: var(--mat-toolbar-container-background-color) !important;
 }
+
+.custom-day-menu.mat-mdc-menu-panel {
+  box-shadow: none !important;
+  border: 1px solid var(--mdc-outlined-button-outline-color) !important;
+}
