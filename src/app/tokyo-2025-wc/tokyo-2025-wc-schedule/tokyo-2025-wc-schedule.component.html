@@ -2,14 +2,16 @@
   <mat-error *ngIf="errmsg">{{errmsg}}</mat-error>
 
   <div class="schedule-cards-wrapper">
-    <div *ngFor="let event of schedule" class="schedule-card">
+    <div *ngFor="let event of schedule" class="schedule-card" (click)="showEvents(event)">
       <div class="card-header">
         <span class="phase-name"> {{ event.discipline.name }}
         </span>
         
         <span class="discipline-name">
-
-          <button mat-icon-button color="primary"><mat-icon>{{event.sexCode === 'M' ? 'man' : 'woman'}}</mat-icon></button>
+          <div class="sex-name">
+            <div><mat-icon color="primary">{{event.sexCode === 'M' ? 'man' : 'woman'}}</mat-icon></div>
+            <div>{{event.sexCode === 'M' ? 'Man' : 'Woman'}}</div>
+          </div>
           {{ event.phaseName }}
           <img height="24px" width="24px" *ngIf="event.phaseName === 'Final'" class="medal-icon" src="assets/images/icons/medal.png" alt="medals">
         </span>
@@ -23,9 +25,9 @@
           {{ event.phaseDateAndTime | date:'medium' }}
         </div>
         <div class="athletes">
-          <!-- <span class="athletes-label">Athletes:</span> -->
-          <span *ngFor="let athlete of event.indianAthletes" class="athlete-name">
-            <button mat-stroked-button color="primary">{{ athlete.name }}</button>
+          <!-- <span class="athletes-label">Indian Athletes:</span> -->
+          <span *ngFor="let athlete of event.indianAthletes; let i = index" class="athlete-name">
+            <ng-container *ngIf="i > 0">& </ng-container>{{ athlete.name }}
           </span>
         </div>
       </div>

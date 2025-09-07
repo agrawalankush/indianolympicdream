@@ -1,23 +1,23 @@
 
 <mat-toolbar class="schedule-toolbar">
   <div class="nav-btns">
-  <a href="https://worldathletics.org/competitions/world-athletics-championships/tokyo25" target="_blank" rel="noopener"
-    class="wc-logo-link">
-    <span class="external-link-indicator"><mat-icon>open_in_new</mat-icon></span>
-    <button mat-stroked-button color="">
-      <mat-icon>currency_yen</mat-icon>
-      Tokyo 2025
-    </button>
-  </a>
-  <button mat-stroked-button [color]="isScheduleActive() ? '' : 'primary'" routerLink="./athletes" routerLinkActive="active-link">
-    <mat-icon>directions_run</mat-icon>
-     Athletes
-  </button>
   <button mat-stroked-button [color]="isScheduleActive() ? 'primary' : ''"  routerLink="./schedule" routerLinkActive="active-link">
     <mat-icon>today</mat-icon>
      Schedule
   </button>
+  <button mat-stroked-button [color]="isScheduleActive() ? '' : 'primary'" routerLink="./athletes" routerLinkActive="active-link">
+    <mat-icon>directions_run</mat-icon>
+     Athletes
+  </button>
   <app-custom-day-select [hidden]="!isScheduleActive()"></app-custom-day-select>
+  <a href="https://worldathletics.org/competitions/world-athletics-championships/tokyo25/timetable" target="_blank" rel="noopener"
+    class="wc-logo-link">
+    <span class="external-link-indicator"><mat-icon>open_in_new</mat-icon></span>
+    <button mat-stroked-button color="">
+      <mat-icon>currency_yen</mat-icon>
+      Official
+    </button>
+  </a>
   </div>
 </mat-toolbar>
 <div class="wc-content">

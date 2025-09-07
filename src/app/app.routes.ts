@@ -60,7 +60,8 @@ export const routes: Routes = [
     children: [
       { path: 'athletes', loadComponent: () => import('./tokyo-2025-wc/tokyo-2025-wc-athletes/tokyo-2025-wc-athletes.component').then(m => m.Tokyo2025WcAthletesComponent) },
       { path: 'schedule', loadComponent: () => import('./tokyo-2025-wc/tokyo-2025-wc-schedule/tokyo-2025-wc-schedule.component').then(m => m.Tokyo2025WcScheduleComponent) },
-      { path: '', redirectTo: 'athletes', pathMatch: 'full' }
+      { path: 'event-details/:eventId', loadComponent: () => import('./event-details/event-details.component').then(m => m.EventDetailsComponent) },
+      { path: '', redirectTo: 'schedule', pathMatch: 'full' }
     ]
   },
   { path: '', redirectTo: '/home?edition=2028', pathMatch: 'full' },

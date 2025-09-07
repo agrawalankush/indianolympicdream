@@ -22,6 +22,7 @@
   overflow: hidden;
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
   display: flex;
+  cursor: pointer;
   flex-direction: column;
 
   &:hover {
@@ -85,5 +86,16 @@
 }
 
 .athlete-name {
-  margin: 4px;
+  margin-right: 4px;
+  pointer-events: none;
+  color: var(--primary-color);
+}
+.sex-name{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-right: 8px;
+  font-size: 0.75em;
+  color: var(--mat-primary-text-color);
 }

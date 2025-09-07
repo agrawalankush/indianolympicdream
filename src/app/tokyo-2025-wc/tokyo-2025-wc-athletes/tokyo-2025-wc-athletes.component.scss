@@ -90,6 +90,8 @@
     font-size: 0.9em;
     line-height: 1.5;
     color: var(--mat-body-text-color);
+    height: auto;
+    overflow: visible;
 
     strong {
       font-weight: 500;

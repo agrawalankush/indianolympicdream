@@ -12,6 +12,7 @@ import { of as observableOf } from 'rxjs';
 import { Tokyo2025WcDataService } from '../tokyo-2025-wc-data.service';
 import { DateFilterService } from '../../shared/services/date-filter.service';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router'; // Import Router
 
 // Define interfaces based on the provided schedule data structure
 interface Discipline {
@@ -88,7 +89,8 @@ export class Tokyo2025WcScheduleComponent implements OnInit, OnDestroy {
   constructor(
     private tokyo2025WcDataService: Tokyo2025WcDataService,
     public dialog: MatDialog,
-    private dateFilterService: DateFilterService
+    private dateFilterService: DateFilterService,
+    private router: Router // Inject Router
   ) { }
 
   ngOnInit(): void {
@@ -105,7 +107,7 @@ export class Tokyo2025WcScheduleComponent implements OnInit, OnDestroy {
       .pipe(
         catchError((error) => {
           this.errmsg = error.message || 'An error occurred';
-          return observableOf({ schedule: [], total: 0 }); // Return an object matching ScheduleApiResponse
+          return observableOf({ schedule: [], total: 0 });
         })
       )
       .subscribe((res: ScheduleApiResponse) => {
@@ -138,10 +140,8 @@ export class Tokyo2025WcScheduleComponent implements OnInit, OnDestroy {
   }
 
   showEvents(eventPhase: EventPhase): void {
-    const dialogRef = this.dialog.open(EventDetailsComponent, {
-      data: { eventPhase: eventPhase }, // Pass the entire event phase object
-      panelClass: 'custom-dialog'
-    });
+    const eventId = eventPhase.discipline._id;
+    this.router.navigate(['tokyo-2025-wc/event-details', eventId]);
   }
 
   ngOnDestroy() {
