@@ -1,6 +1,6 @@
 <div *ngIf="total > 0" class="cards-container">
   <mat-error *ngIf="errmsg">{{errmsg}}</mat-error>
-  <mat-card color="primary" class="athletes-card mat-elevation-z8" *ngFor="let athlete of athletes">
+  <mat-card color="primary" class="athletes-card mat-elevation-z8" *ngFor="let athlete of athletes" (click)="navigateToProfile(athlete.profileUrl)" [class.clickable]="athlete.profileUrl">
     <div class="image-overlay-container">
       <picture>
         <source *ngIf="athlete.webpimage" type="image/webp" srcset="assets/images/{{athlete.webpimage}}">
