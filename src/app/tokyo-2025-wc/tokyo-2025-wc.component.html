@@ -1,7 +1,14 @@
 
 <mat-toolbar class="schedule-toolbar">
   <div class="nav-btns">
-  <img class="wc-logo" routerLink="/home" height="32px" width="128px" src="assets/images/generic/tokyo_2025_logo.jpg" alt="Tokyo 2025 World Championships Logo" />
+  <a href="https://worldathletics.org/competitions/world-athletics-championships/tokyo25" target="_blank" rel="noopener"
+    class="wc-logo-link">
+    <span class="external-link-indicator"><mat-icon>open_in_new</mat-icon></span>
+    <button mat-stroked-button color="">
+      <mat-icon>currency_yen</mat-icon>
+      Tokyo 2025
+    </button>
+  </a>
   <button mat-stroked-button [color]="isScheduleActive() ? '' : 'primary'" routerLink="./athletes" routerLinkActive="active-link">
     <mat-icon>directions_run</mat-icon>
      Athletes
