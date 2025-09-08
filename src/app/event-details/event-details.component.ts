@@ -1,43 +1,32 @@
-
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
-import { CommonModule } from '@angular/common';
-import { MatTableModule } from '@angular/material/table';
-
-interface Athlete {
-  federation: string;
-  date_of_birth: string;
-  id: string;
-  name: string;
-  personal_best: string;
-  world_ranking: string;
-  season_best: string;
-}
-
-interface EventData {
-  athletes: Athlete[];
-  summary: string;
-}
-
+import { Component, OnInit, Inject } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatMiniFabButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+import { NgFor, NgIf, DatePipe } from '@angular/common';
 @Component({
-  selector: 'app-event-details',
-  standalone: true,
-  imports: [CommonModule, MatTableModule],
-  templateUrl: './event-details.component.html',
-  styleUrls: ['./event-details.component.scss']
+    selector: 'app-event-details',
+    templateUrl: './event-details.component.html',
+    styleUrls: ['./event-details.component.scss'],
+    imports: [
+        MatMiniFabButton,
+        MatIcon,
+        NgFor,
+        NgIf,
+        DatePipe,
+    ],
 })
 export class EventDetailsComponent implements OnInit {
-  eventId: string;
-  eventData: EventData;
-  displayedColumns: string[] = ['name', 'federation', 'personal_best', 'season_best', 'world_ranking'];
 
-  constructor(private route: ActivatedRoute, private http: HttpClient) { }
+  constructor(
+    public dialogRef: MatDialogRef<EventDetailsComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) { }
 
   ngOnInit(): void {
-    this.eventId = this.route.snapshot.paramMap.get('eventId');
-    // this.http.get<any>('/assets/docs/entry_list.json').subscribe(data => {
-    //   this.eventData = data[this.eventId];
-    // });
+
+    // console.log(typeof this.data.events[0].starttime, this.data.events[0].starttime)
+  }
+  close(): void {
+    this.dialogRef.close();
   }
 }

@@ -1,3 +1,33 @@
-<div class="text-center">
-Coming Soon
+<div class="event-details-container">
+  <div class="event-details-header">
+    <div class="sport-title">
+      <img class="pictogram-button-image" src="assets/images/pictograms/icons/{{data?.sportname}}.png"
+        alt="{{data.sportname}} pictogram" />
+      <div>{{data?.sportname}}</div>
+    </div>
+    <button mat-mini-fab color="primary" class="close-btn" (click)="close()">
+      <mat-icon>clear</mat-icon>
+    </button>
+  </div>
+  <ul class="event-list">
+    <li class="event-list-item" *ngFor="let event of data.events">
+      <div class="event-list-title">
+        <!-- <img class="pictogram-button-image" src="assets/images/pictograms/icons/{{data.sportname}}.png"
+          alt="{{data.sportname}} pictogram" /> -->
+        <span class="event-name">{{ event?.eventname }}</span>
+      </div>
+      <div class="event-list-content">
+        <div>Athletes Competing: {{event?.athletes }}</div>
+        <div>
+          Start Time(Estimated):
+          <span *ngIf="event.starttime; else notime;">
+            {{event.starttime * 1000 | date: "MMM d, y, h:mm:ss a" }}
+          </span>
+          <ng-template #notime>
+            No Time Available Yet!
+          </ng-template>
+        </div>
+      </div>
+    </li>
+  </ul>
 </div>
