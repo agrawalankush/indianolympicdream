@@ -30,13 +30,33 @@
     border-radius: 4px;
     cursor: pointer;
   }
+    .event-name {
+       display: flex;
+        align-items: center;
+      .sex-name {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-right: 8px;
+        font-size: 0.75em;
+        color: var(--mat-primary-text-color);
+      }
+  
+      color: var(--primary-color);
+    }
+  .back-button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
 
 }
 
 .external-link-indicator {
   position: absolute;
   top: -4px; /* Adjust as needed */
-  right: -12px; /* Adjust as needed */
+  right: -5px; /* Adjust as needed */
   font-size: 10px; /* Adjust size of the icon */
   color: var(--primary-color); /* Use a theme color */
   background-color: var(--mat-toolbar-container-background-color);
@@ -48,5 +68,7 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   .mat-icon {
     font-size: 16px; /* Slightly smaller than the container */
+    height: 16px;
+    width: 16px;
   }
 }

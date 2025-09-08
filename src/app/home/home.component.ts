@@ -6,6 +6,7 @@ import { CommonModule, NgIf, NgFor } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import {  MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { DateFilterService } from '../shared/services/date-filter.service';
 
 @Component({
   selector: 'app-home',
@@ -21,10 +22,12 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private sportservice: SportsdataService
+    private sportservice: SportsdataService,
+    private dateFilterService: DateFilterService
   ) { }
 
   ngOnInit() {
+    this.dateFilterService.setDate(null);
     this.route.queryParams.subscribe(params => {
       const newEdition = params['edition'] || '2028';
       if (this.edition !== newEdition) {

@@ -39,4 +39,11 @@ export class Tokyo2025WcDataService {
     params = params.append('indiaOnly', true);
     return this.http.get<any>(`/api/tokyo_2025_schedule`,{params})
   }
+
+   public getEventDetails(eventId: string, stage?: string, unitName?: string) {
+    let params = new HttpParams()
+    params = params.append('stage', stage);
+    if(unitName) params = params.append('unitName', unitName);
+    return this.http.get<any>(`/api/eventdetails/${eventId}`, { params });
+  }
 }

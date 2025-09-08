@@ -114,6 +114,9 @@ export class Tokyo2025WcScheduleComponent implements OnInit, OnDestroy {
         this.fullSchedule = res.schedule; // Store the full schedule
         this.schedule = res.schedule; // Initially display the full schedule
         this.length = res.total;
+        this.dateFilterService.selectedDate$.subscribe(selectedDate => {
+          this.filterScheduleByDate(selectedDate);
+        });
       });
   }
 
@@ -140,15 +143,14 @@ export class Tokyo2025WcScheduleComponent implements OnInit, OnDestroy {
   }
 
   showEvents(eventPhase: EventPhase): void {
+    const sexCode = eventPhase.sexCode;
     const eventId = eventPhase.discipline._id;
-    this.router.navigate(['tokyo-2025-wc/event-details', eventId]);
+    this.router.navigate([`/tokyo-2025-wc/event-details/${sexCode}${eventId}`, { eventName: eventPhase.discipline.name, sex: sexCode, stage: eventPhase?.phaseNameUrlSlug, unitName: eventPhase?.unitName }]);
   }
 
   ngOnDestroy() {
     if (this.dateFilterSubscription) {
       this.dateFilterSubscription.unsubscribe();
     }
-    // Clear the selected date state when navigating away
-    this.dateFilterService.setDate(null);
   }
 }
