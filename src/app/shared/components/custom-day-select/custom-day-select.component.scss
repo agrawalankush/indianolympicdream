@@ -1,0 +1,39 @@
+.day-select-button {
+  display: flex;
+  align-items: center;
+  transform-origin: center bottom;
+  transform: translateY(0);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              background-color 0.3s ease,
+              box-shadow 0.3s ease;
+  margin: 0 4px;
+
+  &:hover {
+    transform: translateY(-4px);
+    background-color: var(--mat-card-background-color);
+    /* @include mat.elevation(2); */ /* Cannot use mixins directly in standalone component SCSS */
+    box-shadow: gray 0px 0.1px 4px 1px;
+  }
+  &.label{
+    color: var(--primary-color);
+  }
+  /* Active state - similar to active-link */
+  &.mat-menu-trigger-for[aria-expanded="true"] {
+    background-color: var(--mat-card-background-color);
+     color: var(--primary-color);
+    /* @include mat.elevation(4); */
+    // box-shadow: var(--primary-color) 0px 0.5px 11px 0.5px;
+  }
+
+  span {
+    margin-right: 8px; /* Space between text and icon */
+  }
+
+  mat-icon {
+    transition: transform 0.3s ease; /* Smooth rotation for arrow */
+  }
+
+  &[aria-expanded="true"] mat-icon {
+    transform: rotate(180deg); /* Rotate arrow when menu is open */
+  }
+}

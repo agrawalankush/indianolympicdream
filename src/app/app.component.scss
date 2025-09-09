@@ -156,16 +156,8 @@ gap: 4px;
   display: flex;
   align-items: center;
 
-  @media (max-width: 1024px) {
-    margin: 0px 0px 0px 12px;
-    gap: 2px;
-  }
-
-  @media (min-width: 600px) and (max-width: 992px) {
-    margin: 0px 0px 0px 8px;
-    gap: 1px;
-    flex-wrap: wrap;
-    padding: 4px 0;
+  @media (max-width: 1023px) {
+    display: none;
   }
 }
 
@@ -234,11 +226,7 @@ gap: 4px;
   }
 }
 
-@media (max-width: 699px) {
-  .nav-button {
-    display: none;
-  }
-}
+
 
 ::ng-deep .custom-menu {
   .mat-mdc-menu-item {

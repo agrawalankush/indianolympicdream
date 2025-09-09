@@ -107,7 +107,7 @@ export class ScheduleComponent implements OnInit, OnDestroy {
   }
   originalOrder() { return 0; }
   selectedSport(sport: string) {
-    console.log(sport);
+    // console.log(sport);
     this.router.navigate(
       [],
       {

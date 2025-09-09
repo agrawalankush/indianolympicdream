@@ -78,6 +78,9 @@ body {
 .dark-theme .pictogram-button-image {
   filter: brightness(1) contrast(0.8) invert(1);
 }
+.dark-theme .pictogram-overlay-image {
+  filter: brightness(1) contrast(0.8) invert(1);
+}
 
 .pictogram-sport-details {
   height: 40px;
@@ -308,4 +311,9 @@ a {
 }
 .mat-mdc-autocomplete-panel {
   background-color: var(--mat-toolbar-container-background-color) !important;
+}
+
+.custom-day-menu.mat-mdc-menu-panel {
+  box-shadow: none !important;
+  border: 1px solid var(--mdc-outlined-button-outline-color) !important;
 }

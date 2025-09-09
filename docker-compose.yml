@@ -1,58 +1,18 @@
 services:
-  # Backend Application Service
-  app:
-    image: ${DOCKERHUB_USERNAME}/${IMAGE_NAME}:${IMAGE_TAG}
-    container_name: iod-app
-    environment:
-      - NODE_ENV=production
-      - MONGO_URI=mongodb://${MONGO_ROOT_USERNAME}:${MONGO_ROOT_PASSWORD}@mongodb:27017/${MONGO_DB_NAME}?authSource=admin&directConnection=true
-      - MONGO_DB_NAME=${MONGO_DB_NAME}
-      - PORT=${APP_PORT}
-    expose:
-      - "${APP_PORT}"
-    networks:
-      - app-network
-    depends_on:
-      - mongodb
-    restart: unless-stopped
-
-  mongodb:
-    image: mongo:4.4.18
-    container_name: iod-mongodb
-    environment:
-      - MONGO_INITDB_ROOT_USERNAME=${MONGO_ROOT_USERNAME}
-      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_ROOT_PASSWORD}
-    volumes:
-      - mongodb-configdb:/data/configdb
-      - mongodb-db:/data/db
-      - ./mongo-init:/docker-entrypoint-initdb.d:ro
-    expose:
-      - "27017"
-    networks:
-      - app-network
-    restart: unless-stopped
-
-  # Nginx Reverse Proxy Service
-  nginx:
-    image: nginx:latest
-    container_name: iod-nginx
-    volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
-      - ./nginx/default.conf.template:/etc/nginx/templates/default.conf.template:ro
-    environment:
-      - APP_PORT=${APP_PORT}
+  frontend:
+    # Build the image from the Dockerfile in the current directory
+    build: .
+    container_name: iod-frontend
     ports:
+      # Map the host port (from an env variable) to the container's port 80
       - "${NGINX_EXTERNAL_PORT}:80"
-    networks:
-      - app-network
-    depends_on:
-      - app
+    environment:
+      # These variables will be used by the entrypoint script in Nginx
+      - API_HOST=${API_HOST}
+      - API_PORT=${API_PORT}
     restart: unless-stopped
 
 networks:
+  # The frontend can optionally connect to a network to reach the backend
   app-network:
     driver: bridge
-
-volumes:
-  mongodb-configdb:
-  mongodb-db:

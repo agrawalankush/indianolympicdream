@@ -1,51 +1,32 @@
-FROM node:24-alpine3.21 AS frontend-build
+# Stage 1: Build the Angular application
+FROM node:20-alpine AS builder
 
 WORKDIR /app
+
+# Copy package files and install dependencies
 COPY package.json package-lock.json ./
-RUN npm install -g @angular/cli
-RUN npm install
+RUN npm install 
+# Copy the rest of the application source code
+COPY . .
 
-COPY angular.json tsconfig*.json ./
-COPY ngsw-config.json ./
-COPY src ./src
+# Build the application for production
+RUN npm run build
 
-# Build Angular app for production
-RUN npm run build 
+# Stage 2: Set up the production Nginx server
+FROM nginx:1.25-alpine
 
-# --- Stage 2: Build backend ---
-FROM node:18-alpine AS backend-build
+# Copy the compiled application from the builder stage
+COPY --from=builder /app/dist/indianolympicdream /usr/share/nginx/html
 
-WORKDIR /app
+# Copy the Nginx configuration template
+COPY nginx/default.conf.template /etc/nginx/templates/default.conf.template
 
-# Install backend dependencies
-COPY package.json package-lock.json ./
-RUN npm install --omit=dev
+# Copy and grant execution rights to the entrypoint script
+COPY nginx/entrypoint.sh /docker-entrypoint.sh
+RUN chmod +x /docker-entrypoint.sh
 
-# Copy backend source
-COPY server ./server
-COPY server.js ./
-# COPY server/config ./server/config
-# COPY server/routes ./server/routes
+# Set the entrypoint
+ENTRYPOINT ["/docker-entrypoint.sh"]
 
-# --- Stage 3: Production image ---
-FROM node:18-alpine
-
-WORKDIR /app
-
-# Copy backend code and dependencies
-COPY --from=backend-build /app/node_modules ./node_modules
-COPY --from=backend-build /app/server ./server
-COPY --from=backend-build /app/server.js ./
-COPY --from=backend-build /app/package.json ./package.json
-# COPY --from=backend-build /app/server/config ./server/config
-# COPY --from=backend-build /app/server/routes ./server/routes
-
-# Copy Angular production build
-COPY --from=frontend-build /app/dist/indianolympicdream ./dist/indianolympicdream
-
-# Expose the port your app runs on
-EXPOSE 3000
-
-# Start the server
-CMD ["node", "server.js"]
-
+# Expose port 80
+EXPOSE 80
